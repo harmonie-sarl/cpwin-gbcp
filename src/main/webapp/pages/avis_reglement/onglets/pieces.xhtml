@@ -1,0 +1,104 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:subview id="pieceSbv">
+		<div align="center"><p:dataTable id="piece_dtt" var="piece"
+			style="width:100%; text-align: center;" rendered="#{avisReglementBean.piecesNSList!=null}"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{avisReglementBean.piecesNSList}" paginator="true" rows="10">
+			<p:column headerText="#{msgs['cpwin.tiers.origine']}" style="width:10%">
+				<h:outputText value="#{piece.tiersOrig}"/>
+			</p:column>
+			<p:column style="width:5%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.exercice']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.piece.debitrice']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.non.soldee']}"/>
+				</f:facet>
+				<h:outputText value="#{piece.exercicePiece}"/>
+			</p:column>
+			<p:column style="width:10%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.budget']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.piece.debitrice']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.non.soldee']}"/>
+				</f:facet>
+				<h:outputText value="#{piece.codeBudgetPiece}"/>
+			</p:column>
+			<p:column style="width:5%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.type']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.piece.debitrice']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.non.soldee']}"/>
+				</f:facet>
+				<h:outputText value="#{piece.typePiece}"/>
+			</p:column>
+			<p:column style="width:10%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.numero']} #{msgs['cpwin.piece.debitrice']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.non.soldee']}"/>
+				</f:facet>
+				<h:outputText value="#{piece.numPieceNS}"/>
+			</p:column>
+			<p:column style="width:10%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.objet']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.piece.debitrice']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.non.soldee']}"/>
+				</f:facet>
+				<h:outputText value="#{piece.libelle}"/>
+			</p:column>
+			<p:column style="width:10%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.montant.initial']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.piece.debitrice']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.non.soldee']}"/>
+				</f:facet>
+				<h:outputText value="#{piece.montantInit}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			</p:column>
+			<p:column style="width:10%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.piece.credit']}"/>
+				</f:facet>
+				<h:outputText value="#{piece.credit}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			</p:column>
+			<p:column style="width:10%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.piece.debit']}"/>
+				</f:facet>
+				<h:outputText value="#{piece.debit}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			</p:column>
+		</p:dataTable> <br />
+		<h:panelGroup id="btnPG">
+			<p:commandButton id="printPdfBTN2" ajax="false" rendered="#{(avisReglementBean.piecesNSList!=null)and (not empty avisReglementBean.piecesNSList)}"
+				value="#{msgs['cpwin.btn.imprimer']}"
+				action="#{avisReglementBean.printPiecesDebitrices}">
+			</p:commandButton>
+		</h:panelGroup>
+		</div>
+	</f:subview>
+
+</ui:composition>

@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<style type="text/css">
+.col11 {
+	width: 17%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col21 {
+	width: 33%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col31 {
+	width: 20%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col41 {
+	width: 30%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+</style>
+	<h:panelGrid columns="3" style="width:100%; vertical-align:top;"
+		columnClasses="col11,col21,col31,col41">
+		<h:panelGroup>
+			<h:outputText value="#{msgs['etablissement.absorbe']}"></h:outputText>
+			<h:outputText value=" *" styleClass="required"></h:outputText>
+		</h:panelGroup>
+		<p:autoComplete tabindex="9" id="etabAbsbe"  
+			value="#{agentCptBean.absorption.absorbe}" style="width: 89%;"
+			size="40" required="true" requiredMessage="#{errorMsgs['required']}"
+			completeMethod="#{agentCptBean.autoCompleteEtablissementAbsorbe}" var="etab"
+			itemLabel="#{etab.code} - #{etab.designation}"	itemValue="#{etab}">
+		</p:autoComplete>
+		<p:message for="etabAbsbe" styleClass="error" />
+						
+		<h:panelGroup>
+			<h:outputText value="#{msgs['etablissement.absorbant']}"></h:outputText>
+			<h:outputText value=" *" styleClass="required"></h:outputText>
+		</h:panelGroup>
+		<p:autoComplete tabindex="9" id="etabAbsbant"  
+			value="#{agentCptBean.absorption.absorbant}" style="width: 89%;"
+			size="40" required="true" requiredMessage="#{errorMsgs['required']}"
+			completeMethod="#{agentCptBean.autoCompleteEtablissementAbsorbant}" var="etab"
+			itemLabel="#{etab.code} - #{etab.designation}"	itemValue="#{etab}">
+		</p:autoComplete>
+		<p:message for="etabAbsbant" styleClass="error" />
+		<h:panelGroup>
+			<h:outputText value="#{msgs['etablissement.absorbant']}"></h:outputText>
+			<h:outputText value=" *" styleClass="required"></h:outputText>
+		</h:panelGroup>
+		<p:calendar tabindex="7" id="dateDu" pattern="dd/MM/yyyy" navigator="true"
+						converterMessage="#{errorMsgs['date.format.invalide']}" 
+						required="true" requiredMessage="#{errorMsgs['required']}"
+						rendered="#{!dossierBean.consGenOnglet}"					
+						value="#{agentCptBean.absorption.finDiffusion}" showOn="button">						
+		</p:calendar>
+		<p:message for="etabAbsbant" styleClass="error" />
+	</h:panelGrid>
+</ui:composition>

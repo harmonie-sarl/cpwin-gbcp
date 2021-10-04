@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+
+
+	<h:panelGrid columns="4" cellspacing="20">
+		<h:outputText value="#{msgs['tiers']}" />
+		<h:outputText value="#{dasBean.selectedHonoraire.beneficiaire.numero}" />
+		<h:outputText value="#{msgs['cpwin.type']}" />
+		<h:outputText value="#{dasBean.selectedHonoraire.beneficiaire.type}" />
+		<h:outputText value="#{msgs['raison.sociale']}" />
+		<h:outputText value="#{dasBean.selectedHonoraire.beneficiaire.rs}" />
+		<h:outputText value="#{msgs['login.lastname']}" />
+		<h:outputText value="#{dasBean.selectedHonoraire.beneficiaire.nom}" />
+		<h:outputText value="#{msgs['login.firstname']}" />
+		<h:outputText value="#{dasBean.selectedHonoraire.beneficiaire.prenom}" />
+	</h:panelGrid>
+
+</ui:composition>

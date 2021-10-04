@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+			<h:outputLabel  value="#{msgs['cpwin.exercice']}" />
+			<p:selectOneMenu styleClass="ReadOnlyText" 
+				value="#{crcBean.exercice}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{loaderBean.withClosedExercises}" var="exec"
+					itemLabel="#{exec}" itemValue="#{exec}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{crcBean.onExerciceChange}" 
+					update="budgetCodeList,modeList,:enteteForm,:detailsForm" />
+			</p:selectOneMenu>
+         
+         <h:outputLabel 	 value="#{msgs['budget.code']}" />
+			
+			<p:selectOneMenu id="budgetCodeList" styleClass="ReadOnlyText"
+				value="#{crcBean.codeBudget}">
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{crcBean.listBudgets}" var="budg"
+					itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{crcBean.reset}" global="false"
+					update=":enteteForm,:detailsForm"/>
+			</p:selectOneMenu>
+			
+				
+			<h:panelGrid columns="2" rendered="false">
+		<h:outputLabel value="#{msgs['compte']}"
+			style="display:block;width:80px" />
+		<h:panelGroup>
+			<p:selectOneMenu id="modeList" styleClass="ReadOnlyText"
+				value="#{crcBean.selectedMode}" 
+                  disabled="#{!crcBean.commonRequiredDone}" >
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{crcBean.printingMode}" var="mode"
+					itemLabel="#{mode.libelle}" itemValue="#{mode}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{crcBean.onModeChange}"
+					update=":detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+		</h:panelGroup>
+	</h:panelGrid>
+      
+			
+			<h:panelGrid columns="2">
+			<h:outputText value="#{msgs['crc.compte.compt']}"  />
+
+			<h:panelGroup id="comptablePG">
+			<p:selectOneMenu styleClass="ReadOnlyText" 
+				value="#{crcBean.selectedCompteComptable}" style="display:block;width:400px"
+                  disabled="#{!crcBean.compteEnabled}" >
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{crcBean.comptableList}" var="compte"
+					itemLabel="#{compte.description}" itemValue="#{compte.code}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{crcBean.onCompteChange}"
+					update=":detailsForm,:enteteForm,affichBtn" />
+			</p:selectOneMenu>
+			</h:panelGroup>
+			</h:panelGrid>
+			
+			
+			
+
+</ui:composition>

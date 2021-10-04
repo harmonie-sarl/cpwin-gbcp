@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+
+
+	<div align="center">
+		<h:panelGroup>
+
+		</h:panelGroup>
+	</div>
+        	<p:dataTable id="recet_code_article_dtt"
+		rendered="#{gtsBean.recetteArticLeList!=null}" var="recetArtc"
+		style="width:100%;text-align:center" rowIndexVar="recetArtcIndex"
+		emptyMessage="#{msgs['datatable.empty']}"
+		value="#{gtsBean.recetteArticLeList}">
+		<p:columnGroup type="header">
+
+			<p:row style="text-align: center;">
+				<p:column headerText="#{msgs['article']}" />
+				<p:column headerText="#{msgs['montant.total']}" />
+				<p:column headerText="#{msgs['dont.regisseur']}" />
+				<p:column headerText="#{msgs['dont.clients']}" />
+
+			</p:row>
+		</p:columnGroup>
+		<p:column style="width:10%">
+			<h:outputText value="#{recetArtc.codeArticle}" />
+		</p:column>
+		<p:column style="width:10%">
+			<h:outputText value="#{recetArtc.mntTotal}" styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+		<p:column style="width:10%">
+			<h:outputText value="#{recetArtc.dontRegisseur}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+		<p:column style="width:10%">
+			<h:outputText value="#{recetArtc.dontClient}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+<p:columnGroup type="footer" >
+<p:row style="text-align: center;">
+				<p:column  style="font-size: 75%" >
+					<f:facet name="footer">
+						<h:outputText value="#{msgs['totaux']}">
+						</h:outputText>
+					</f:facet>
+				</p:column>				
+				<p:column style="font-size: 75%"  >				
+				<f:facet name="footer">
+						<h:outputText value="#{gtsBean.totalMntRecArtic}"
+							styleClass="montantStyle">
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+				</p:column>				
+				<p:column style="font-size: 75%"  >				
+				<f:facet name="footer">
+						<h:outputText value="#{gtsBean.totalDontRegisRecArtic}"
+							styleClass="montantStyle">
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+				</p:column>				
+				<p:column style="font-size: 75%"  >				
+				<f:facet name="footer">
+						<h:outputText value="#{gtsBean.totalDontCltRecArtic}"
+							styleClass="montantStyle">
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+				</p:column>
+			</p:row>			
+		</p:columnGroup>			
+			  	</p:dataTable>   
+			<div align="center" style="width: 100%;">
+				    <p:commandButton title=" " value="#{msgs['budget.btn.export']}"
+						immediate="true" 
+						rendered="#{not empty gtsBean.recetteArticLeList}" ajax="false">
+						<p:fileDownload value="#{gtsBean.xlsRecetCodeArticl}" />
+					</p:commandButton>
+				</div>
+</ui:composition>

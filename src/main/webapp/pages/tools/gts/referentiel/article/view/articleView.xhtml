@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>#{msgs['add.modif.article']}</title>
+	<style type="text/css">
+
+
+
+</style>
+</h:head>
+
+<h:body>
+	<h:form id="articleForm">
+		<p:messages id="articleMsg" showDetail="true" autoUpdate="true"
+			styleClass="error" globalOnly="true" />
+
+
+				<div align="center" style="width: 100%;">
+					<p:commandButton value="#{msgs['btn.valider']}" 
+				   actionListener="#{gtsRefBean.addOrUpdate}"
+						>
+					</p:commandButton>
+
+					<p:commandButton value="#{msgs['btn.fermer']}" 
+						actionListener="#{gtsRefBean.closeCurrentDialog}"
+					immediate="true" >
+					
+					
+					</p:commandButton>
+				</div>
+			<p:panel  style="width:100%;">
+
+		<h:panelGrid columns="4"
+			style="width:100%; vertical-align:top;align: left;"
+			columnClasses="colDataTable">
+			<h:panelGroup>
+			<h:outputLabel styleClass="espace_entre_label_value"
+				style="font-weight:bold" value="#{msgs['code']}" />
+				<h:outputText rendered="#{!gtsRefBean.updateMode}" 
+			 value=" *" styleClass="required"></h:outputText>
+		</h:panelGroup>
+				<p:inputText rendered="#{!gtsRefBean.updateMode}"
+					value="#{gtsRefBean.selectedArticle.code}">
+					<p:ajax process="@this"
+						update="detailsView" />
+				</p:inputText>
+				<h:outputText rendered="#{gtsRefBean.updateMode}" value="#{gtsRefBean.selectedArticle.code}" />
+	<h:panelGroup>
+
+			<h:outputLabel styleClass="espace_entre_label_value"
+				style="font-weight:bold" value="#{msgs['libelle']}" />
+<h:outputText 	 value=" *" styleClass="required"></h:outputText>
+		</h:panelGroup>
+				<p:inputText value="#{gtsRefBean.selectedArticle.libelle}">
+					<p:ajax process="@this"
+						update="detailsView" />
+				</p:inputText>
+
+
+
+			</h:panelGrid>
+</p:panel>
+		<br />
+<p:tabView id="detailsView" style="width:100%;"  
+			cache="false" >
+			
+			
+			<p:tab id="detailsArticleTab" 
+			title="#{msgs['details.article']}" >
+					<ui:include src="./onglets/detailsArticle.xhtml" />
+				</p:tab>	
+							
+		
+				
+		</p:tabView>
+		<div align="left"><h:outputText
+					value="(*) #{msgs['required']}" styleClass="required" /></div>
+
+	
+	</h:form>
+</h:body>
+
+</html>

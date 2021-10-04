@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+
+.noneStyle {
+	color: #000000;
+	background-color: none;
+}
+
+.redStyle {
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+</style>
+
+
+
+	</ui:define>
+	<ui:define name="pageTitle">#{msgs['buget.pluri.deploiement']}</ui:define>
+	<ui:define name="entetePage">
+		<ui:include src="/snippets/budget/enteteDeploi.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="search">
+
+	</ui:define>
+
+	<ui:define name="enteteAction">
+		
+	</ui:define>
+	<ui:define name="details">
+
+<p:tabView id="transfertPanel" style="width:100%;" 
+			rendered="#{bpBean.commonRequiredDone}"
+			header="#{msgs['deploi.transfert']}">
+			
+			<p:tab id="transfert" title="#{msgs['virement']}" >
+					<ui:include src="/pages/budgetPluri/deploiement/onglets/transfert.xhtml" />
+				</p:tab>	
+					<p:tab id="recap" title="#{msgs['deploi.recap']}" >
+					<ui:include src="/pages/budgetPluri/deploiement/onglets/recap.xhtml" />
+				</p:tab>	
+		</p:tabView>
+		<br />
+			
+			<div align="left"><h:outputText
+					value="(*) #{msgs['required']}" styleClass="required" /></div>
+	</ui:define>
+</ui:composition>

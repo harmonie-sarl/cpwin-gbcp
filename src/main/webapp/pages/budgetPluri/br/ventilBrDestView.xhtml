@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>#{msgs['datatable.buget.pluri.annuel.adressage.cp.dest']}</title>
+		<style type="text/css">
+.redStyle {
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+</style>
+	</h:head>
+
+	<h:body>
+		<h:form id="detailsForm">
+			<p:messages id="ventilMsg" showDetail="true" autoUpdate="true"
+				styleClass="error" globalOnly="true" />
+				<p:panel>
+			<h:panelGrid columns="4" cellspacing = "20">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="#{msgs['cpwin.exercice']}"
+						style="Font-Weight: Bold;" />
+					<h:outputText value="#{searchBean.exerciceBR}" />
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="#{msgs['budget.code']}"
+							style="Font-Weight: Bold;" />
+					<h:outputText 
+						value="#{searchBean.codeBudget}" />
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msgs['menu.budg.pluri.br']}" style="Font-Weight: Bold;"  />
+					<h:outputText
+						value="#{bpBean.selectedBudgModif.description} 
+		- #{bpBean.selectedBudgModif.etatCp}" />
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msgs['import.nature']}" style="Font-Weight: Bold;"  />
+					<h:outputText value="#{bpBean.selectedBr.codeAndLibGroupNat}" />
+				</h:panelGrid>
+				
+					<h:panelGrid columns="2">
+					<h:outputText value="#{msgs['depense.niv.dest']}" style="Font-Weight: Bold;"  />
+					<h:outputText value="#{bpBean.firstNiveauDest}" />
+				</h:panelGrid>
+				
+			</h:panelGrid>
+				</p:panel>
+			<p:panel id="listBudgetPanel" style="width:100%;"	rendered="#{bpBean.listBudgetCpDest!=null}">
+			<h:panelGroup id="creditdest_Btn">
+					<div align="center" style="width: 100%;">
+						<p:commandButton title=" "
+							rendered="#{not empty bpBean.listBudgetCpDest}"
+							value="#{msgs['btn.enregistrer']}"
+							actionListener="#{bpBean.saveVentBrParDest}"
+							disabled="#{!bpBean.saveVentBrDestAutrsed}"
+							update="ventilMsg,:detailsForm" immediate="true" process="@this">
+						</p:commandButton>
+						<p:commandButton value="#{msgs['btn.fermer']}" immediate="true"
+							actionListener="#{bpBean.closeVentilBrCpDestDialog}">
+						</p:commandButton>
+					</div>
+				</h:panelGroup>
+
+				<ui:include	src="/pages/budgetPluri/br/common/ventil_cp_dest_details.xhtml"></ui:include>
+				
+			</p:panel>
+
+		</h:form>
+	</h:body>
+</ui:composition>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:jee="http://www.springframework.org/schema/jee" xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
+
+	<context:property-placeholder location="classpath:config.properties"/>
+	<!-- JNDI DataSource for JEE environments -->
+		 <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/${jpa.datasource}"/>
+	<!-- Enable Spring Annotation Configuration -->
+	<context:annotation-config/>
+	<!-- Scan for all of Spring components such as Spring Service -->
+    <context:component-scan base-package="fr.symphonie.budget,fr.symphonie.util.dao,fr.symphonie.tools,fr.symphonie.common.core,fr.symphonie.cpwin.core"/>
+	
+	<context:load-time-weaver/>
+	
+	<!-- JPA EntityManagerFactory -->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+			p:dataSource-ref="dataSource">
+		<property name="jpaVendorAdapter">
+		 <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+					p:databasePlatform="org.hibernate.dialect.SybaseDialect" p:showSql="false"/>
+		</property>
+		
+		<property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
+		<property name="jpaPropertyMap" ref="jpaPropertyMap" />
+
+	</bean>
+	
+	<util:map id="jpaPropertyMap">
+    <entry key="hibernate.show_sql" value="false" />
+    <entry key="hibernate.dialect" value="org.hibernate.dialect.SybaseDialect" />
+    <entry key="hibernate.jdbc.batch_size" value="30"/>
+    <entry key="hibernate.order_inserts" value="true" />
+    <entry key="hibernate.order_updates" value="true" />
+    <entry key="hibernate.jdbc.batch_versioned_data" value="true" />
+</util:map>
+	
+  <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<!-- Transaction manager for a single JPA EntityManagerFactory (alternative to JTA) -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+			p:entityManagerFactory-ref="entityManagerFactory" p:dataSource-ref="dataSource" />
+ <!-- Detect @Transactional -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- ========================= BUSINESS OBJECT DEFINITIONS ========================= -->
+	
+
+	<!--
+		Post-processor to perform exception translation on @Repository classes (from native
+		exceptions such as JPA PersistenceExceptions to Spring's DataAccessException hierarchy).
+	-->
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+<bean id="utilCommonService" class="fr.symphonie.util.CommonService">
+  <property name="userType" ref="userType"></property>
+</bean>	
+<bean id="userType" class="fr.symphonie.util.model.User" scope="prototype"/>
+</beans>

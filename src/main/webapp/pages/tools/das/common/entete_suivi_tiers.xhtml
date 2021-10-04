@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGrid columns="2">
+		<h:outputLabel value="#{msgs['cpwin.exercice']}"
+			style="display:block;width:80px" />
+		<h:panelGroup>
+			<p:selectOneMenu id="exercList" styleClass="ReadOnlyText"
+				value="#{searchBean.exercice}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{loaderBean.exercicAeList}" var="exerc"
+					itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax listener="#{dasBean.onExerciceChange}" process="@this" global="false"
+					update=":detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+		</h:panelGroup>
+	</h:panelGrid>
+
+	<h:panelGrid columns="2">
+		<h:outputText style="display:block;width:80px"
+			value="#{msgs['tiers']}" />
+
+		<h:panelGroup>
+			<p:autoComplete id="tiers" value="#{dasBean.tiersForSearch}"
+				required="false" requiredMessage="#{errorMsgs['cpwin.required']}"
+				style="width: 98%;" size="50"
+				completeMethod="#{dasBean.searchLightTiers}"
+				converter="convert.tiersDas" var="tiers"
+				itemLabel="#{tiers.description}" itemValue="#{tiers}"
+				minQueryLength="#{gestionTiersBean.minAjaxQL}"
+				maxResults="#{gestionTiersBean.maxAjaxResult}"
+				title="#{gestionTiersBean.ajaxTitleMsg}">
+				<p:ajax event="itemSelect" process="@this"
+					listener="#{dasBean.onTiersSelect}" 
+					update=":detailsForm" />
+				<p:ajax event="blur" process="@this" 					
+					update=":detailsForm" />	
+			</p:autoComplete>
+			<p:message for="tiers" styleClass="error" />
+				</h:panelGroup>
+
+	</h:panelGrid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ui:composition>

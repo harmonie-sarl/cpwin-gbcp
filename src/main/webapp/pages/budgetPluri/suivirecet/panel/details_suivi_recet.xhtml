@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+  
+<!--       <ui:param name="suiviRecetList" value="null" /> -->
+			
+			
+	<p:dataTable  style="width:100%; text-align: center;" scrollable="true" scrollHeight="400" 
+		value="#{suiviRecetList}" rendered="#{suiviRecetList!=null}" var="suivi" 
+		emptyMessage="#{msgs['datatable.empty']}" >
+		
+		<p:column   style="width:7%;" filterBy="#{suivi.execOrigin}" filterMatchMode="contains"
+			 headerText="#{msgs['exec.orig']}" filterStyle="width: 30px">
+			<h:outputText value="#{suivi.execOrigin}" />
+		</p:column>
+		<p:column  style="width:6%;" headerText="#{msgs['no.titrec']}">
+			<h:outputText value="#{suivi.noTitrec}" />
+		</p:column>
+		
+		<p:column   style="width:9%;" 
+		  headerText="#{msgs['rar.ini.ht']}"  >
+            <h:outputText value="#{suivi.initial.ht}" >
+            <f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+        </p:column>        	
+		<p:column  style="width:9%;"  headerText="#{rarNetHtColumn}">
+			<h:outputText value="#{suivi.rar.ht}" >
+			 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			 </h:outputText>	
+		</p:column>
+		<p:column style="width:9%;" headerText="#{rarNetTtcColumn}">
+			<h:outputText value="#{suivi.rar.ttc}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+		<p:column  style="width:9%;" headerText="#{msgs['recet.ht']}">
+			<h:outputText value="#{suivi.rec_ht}" >
+			 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			 </h:outputText>
+		</p:column>
+		<p:column style="width:9%;" headerText="#{msgs['solde.ttc']}">
+			<h:outputText value="#{suivi.solde.ttc}" >
+			 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			 </h:outputText>
+		</p:column>
+		
+		<p:column rendered="#{isExec}" style="width:9%;" headerText="#{msgs['ar.ht']}">
+			<h:outputText value="#{suivi.ar.ht}" >
+			 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			 </h:outputText>
+		</p:column>
+		<p:column rendered="#{isExec}" style="width:9%;" headerText="#{msgs['ar.ttc']}">
+			<h:outputText value="#{suivi.ar.ttc}" >
+			 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			 </h:outputText>
+		</p:column>
+		<p:column  rendered="#{isAnt}" style="width:9%;" headerText="#{msgs['onb.ht']}">
+			<h:outputText value="#{suivi.onb.ht}" >
+			 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			 </h:outputText>
+		</p:column>
+		<p:column rendered="#{isAnt}" style="width:9%;" headerText="#{msgs['onb.ttc']}">
+			<h:outputText value="#{suivi.onb.ttc}" >
+			 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			 </h:outputText>
+		</p:column>
+		<p:column filterBy="#{suivi.tiers.code}" filterMatchMode="contains"  style="width:7%;" headerText="#{msgs['tiers']}"
+		filterStyle="width: 30px;">
+			<h:outputText value="#{suivi.tiers.code}" />
+		</p:column>
+		<p:column filterBy="#{suivi.tiers.nom}" 
+		filterMatchMode="contains"  style="width:10%;" headerText="#{msgs['nom.tiers']}"
+		filterStyle="width: 50px;">
+			<h:outputText value="#{suivi.tiers.nom}" />
+		</p:column>
+		
+		
+		<p:column filterBy="#{suivi.objet}" filterMatchMode="contains" style="width:12%;"
+		filterStyle="width: 50px;" headerText="#{msgs['cpwin.objet']}">
+			<h:outputText value="#{suivi.objet}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+		<p:column filterBy="#{suivi.origin.codeAndLibelle}" filterMatchMode="contains" style="width:10%;"
+		filterStyle="width: 50px;" headerText="#{msgs['origine']}">
+			<h:outputText value="#{suivi.origin.codeAndLibelle}">
+				
+			</h:outputText>
+		</p:column>
+		<p:column filterBy="#{suivi.service.codeAndLibelle}" filterMatchMode="contains" style="width:10%;"
+		filterStyle="width: 50px;" headerText="#{msgs['service']}">
+			<h:outputText value="#{suivi.service.codeAndLibelle}">
+				
+			</h:outputText>
+		</p:column>
+		<p:column filterBy="#{suivi.natGrp.codeAndLibelle}" filterMatchMode="contains" style="width:10%;"
+		filterStyle="width: 50px;" headerText="#{msgs['nat.grp1']}">
+			<h:outputText value="#{suivi.natGrp.codeAndLibelle}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+		<p:column filterBy="#{suivi.programme.codeAndLibelle}" filterMatchMode="contains" style="width:10%;" 
+		filterStyle="width: 50px;" headerText="#{msgs['programme']}">
+			<h:outputText value="#{suivi.programme.codeAndLibelle}"/>
+		</p:column>
+	
+	</p:dataTable>
+	
+</ui:composition>

@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">		
+	<h:panelGroup id="exerciceListPG">
+	<h:panelGrid columns="2">
+		<h:outputLabel value="#{msgs['cpwin.exercice']}" for="exerciceList" styleClass="espace_entre_label_value" />
+		<p:selectOneMenu id="exerciceList"
+			styleClass="ReadOnlyText" value="#{avisReglementBean.exercice}">
+			<f:selectItem itemValue="" itemLabel="-----"  />
+			<f:selectItems value="#{loaderBean.exercicAeList}" var="exercise"
+				itemLabel="#{exercise}" itemValue="#{exercise}">
+			</f:selectItems>
+			<p:ajax  process="@this"  actionListener="#{avisReglementBean.onExerciceChange}"
+			 update=":detailsForm:bordPG,:detailsForm:budgetPG,:detailsForm:searchTable,:detailsForm:ongletsAvis,:detailsForm:ongletsTB,globalMessage" />
+		</p:selectOneMenu>
+		<p:message for="exerciceList" styleClass="error" />
+		</h:panelGrid>
+	</h:panelGroup>
+	<h:panelGroup id="bordPG">
+		<h:panelGrid columns="2">
+		<h:outputLabel value="#{msgs['cpwin.bordereau.reglement']}" for="bordList" styleClass="espace_entre_label_value" />
+		<p:selectOneMenu id="bordList" disabled="#{avisReglementBean.sansReglement}"
+			styleClass="ReadOnlyText" value="#{avisReglementBean.codeBordereau}">
+			<f:selectItem itemValue="" itemLabel="-----"  />
+			<f:selectItems value="#{avisReglementBean.bordereauList}" var="bord"
+				itemLabel="#{bord}" itemValue="#{bord}">
+			</f:selectItems>
+			<p:ajax event="change"
+				actionListener="#{avisReglementBean.onBordereauBudgetChange}"
+				update="detailsForm:ongletsAvis,detailsForm:searchPanel,globalMessage" />	
+		</p:selectOneMenu>
+		<p:message for="bordList" styleClass="error" />
+		</h:panelGrid>
+	</h:panelGroup>
+	<h:panelGroup id="sansReglementPG">
+		<h:panelGrid columns="2">
+		<h:selectBooleanCheckbox id="sansReglement"
+			value="#{avisReglementBean.sansReglement}" styleClass="boutonRadio">
+			<p:ajax actionListener="#{avisReglementBean.onEtatReglementChange}" 
+				update="detailsForm:ongletsAvis,detailsForm:searchPanel,globalMessage"/>			
+		</h:selectBooleanCheckbox>
+		<h:outputLabel value="#{msgs['cpwin.mandats.sans.reglement']}" styleClass="espace_entre_label_value" />
+		</h:panelGrid>
+	</h:panelGroup>
+	<h:panelGroup id="budgetPG">
+		<h:panelGrid columns="2">
+		<h:outputLabel value="#{msgs['cpwin.budget']}" for="budgetList" styleClass="espace_entre_label_value" />
+		<p:selectOneMenu id="budgetList"  disabled="#{!avisReglementBean.sansReglement}"
+			styleClass="ReadOnlyText" value="#{avisReglementBean.codeBudget}">
+		<f:selectItem itemValue="" itemLabel="-----"  />
+			<f:selectItems value="#{loaderBean.listBudgets}" var="budget"
+				itemLabel="#{budget}" itemValue="#{budget}">
+			</f:selectItems>
+				<p:ajax  process="@this" actionListener="#{avisReglementBean.onBordereauBudgetChange}" update="detailsForm:ongletsAvis,detailsForm:searchPanel,globalMessage" />
+		</p:selectOneMenu>
+		<p:message for="budgetList" styleClass="error" />
+		</h:panelGrid>
+	</h:panelGroup>
+	<h:panelGroup id="dejaTraitePG">
+		<h:panelGrid columns="2">
+		<h:selectBooleanCheckbox id="dejaTraite"
+			value="#{avisReglementBean.dejaTraite}" styleClass="boutonRadio">
+			<p:ajax actionListener="#{avisReglementBean.onEtatTraiteChange}" 
+				update="detailsForm:ongletsAvis,detailsForm:searchPanel,globalMessage"/>		
+		</h:selectBooleanCheckbox>
+		<h:outputLabel value="#{msgs['cpwin.deja.traite']}" styleClass="espace_entre_label_value" />
+		</h:panelGrid>
+	</h:panelGroup>		
+</ui:composition>

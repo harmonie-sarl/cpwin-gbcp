@@ -1,0 +1,219 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+
+
+
+
+
+	<p:panel style="width:100%;" id="tab5Panel">
+		<f:facet name="header">
+			<h:outputText value="#{msgs['tab5']}"
+				style="font-weight: bold; text-align: center;" />
+		</f:facet>
+		<div align="center">
+			<h:outputText value="#{msgs['op.pour.compte.tiers']}"
+				style="font-weight: bold; text-align: center;color:#008000;" />
+		</div>
+		<br />
+		<br />
+
+
+		<p:dataTable id="operationsBudg_dtt" sortBy="#{opBudg.designation}"
+			rendered="#{not empty editionBean.editionBi.tab5.operationsBudg}"
+			var="opBudg" style="width:100%; text-align: center;"
+			rowIndexVar="opBudgIndex" emptyMessage="#{msgs['datatable.empty']}"
+			value="#{editionBean.editionBi.tab5.operationsBudg}" paginator="true"
+			rows="10">
+			<f:facet name="header"
+				style="font-weight: bold; text-align: left;background-color: #008000;color: #FFFFFF;">
+				<h:outputText value="#{msgs['pour.info.org']}"
+					style="font-weight: bold; text-align: center;" />
+			</f:facet>
+
+
+			<p:column style="width:30%;" groupRow="true">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['op.reg.op.meme.nat']}" />
+				</f:facet>
+				<h:outputText value="#{opBudg.designation}" />
+				<f:facet name="footer">
+
+				</f:facet>
+			</p:column>
+			<p:column style="width:15%;">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['comptes']}" />
+				</f:facet>
+
+
+				<p:inputText size="20" value="#{opBudg.compte}"  onfocus="select();" >
+					<p:ajax  process="@this" />
+				</p:inputText>
+
+				<f:facet name="footer">
+
+				</f:facet>
+			</p:column>
+
+			<p:column style="width:15%;">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['libelle']}" />
+				</f:facet>
+
+
+				<p:inputText size="20" value="#{opBudg.libelle}"  onfocus="select();" >
+					<p:ajax  process="@this" />
+				</p:inputText>
+
+
+				<f:facet name="footer">
+					<h:outputLabel value="#{msgs['total.majus']}"
+						style="font-weight: bold;" />
+				</f:facet>
+			</p:column>
+
+			<p:column style="width:15%;">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['debit.c1']}" />
+				</f:facet>				
+					<p:inputNumber id="debitC1" inputStyle="text-align: center" size="20" 
+					value="#{opBudg.debit}"  onfocus="select();" >					
+						<p:ajax process="@this" global="false"
+							update=":detailsForm:ongletsEditionBi:tab5Panel"></p:ajax>
+					</p:inputNumber>
+				<f:facet name="footer">
+					<h:outputText value="#{editionBean.editionBi.tab5.totDebitBudg}"
+						style="background-color: #F5DEB3;"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</f:facet>
+			</p:column>
+			<p:column style="width:15%;">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['credit.c2']}" />
+				</f:facet>			
+					<p:inputNumber id="creditC2" inputStyle="text-align: center" size="20" value="#{opBudg.credit}"
+					 onfocus="select();" >						
+						<p:ajax process="@this" global="false"
+							update=":detailsForm:ongletsEditionBi:tab5Panel"></p:ajax>
+					</p:inputNumber>					
+				<f:facet name="footer">
+					<h:outputText value="#{editionBean.editionBi.tab5.totCreditBudg}"
+						style="background-color: #F5DEB3;"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</f:facet>
+			</p:column>
+
+		</p:dataTable>
+		<div align="right">
+			<h:outputText value="#{msgs['c1.c2.repris.tableau']}"
+				style="font-style: italic;" />
+		</div>
+		<br />
+		<br />
+		<div align="left">
+			<h:outputText value="#{msgs['nb.hypothese.ecrant']}" />
+		</div>
+		<br />
+		
+		<p:dataTable id="operationsNoBudg_dtt"
+			sortBy="#{opNoBudg.designation}"
+			rendered="#{not empty editionBean.editionBi.tab5.operationsnoBudg}"
+			var="opNoBudg" style="width:100%; text-align: center;"
+			rowIndexVar="opNoBudgIndex" emptyMessage="#{msgs['datatable.empty']}"
+			value="#{editionBean.editionBi.tab5.operationsnoBudg}"
+			paginator="true" rows="10">
+			<f:facet name="header"
+				style="font-weight: bold; text-align: left;background-color: #008000;color: #FFFFFF;">
+				<h:outputText value="#{msgs['pour.info.organe.delib']}"
+					style="font-weight: bold; text-align: center;" />
+			</f:facet>
+
+
+			<p:column style="width:30%;" groupRow="true">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['op.reg.op.meme.nat']}" />
+				</f:facet>
+				<h:outputText value="#{opNoBudg.designation}" />
+				<f:facet name="footer">
+
+				</f:facet>
+			</p:column>
+			<p:column style="width:15%;">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['comptes']}" />
+				</f:facet>
+
+
+				<p:inputText size="20" value="#{opNoBudg.compte}"  onfocus="select();" >
+					<p:ajax  process="@this" />
+				</p:inputText>
+
+				<f:facet name="footer">
+
+				</f:facet>
+			</p:column>
+
+			<p:column style="width:15%;">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['libelle']}" />
+				</f:facet>
+
+
+				<p:inputText size="20" value="#{opNoBudg.libelle}"  onfocus="select();" >
+					<p:ajax  process="@this" />
+				</p:inputText>
+
+
+				<f:facet name="footer">
+					<h:outputLabel value="#{msgs['total.majus']}"
+						style="font-weight: bold;" />
+				</f:facet>
+			</p:column>
+
+			<p:column style="width:15%;">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['debit.c1']}" />
+				</f:facet>
+					<p:inputNumber id="debitC1" inputStyle="text-align: center" size="20" 
+					value="#{opNoBudg.debit}"  onfocus="select();" >						
+						<p:ajax process="@this" global="false"
+							update=":detailsForm:ongletsEditionBi:tab5Panel"></p:ajax>
+					</p:inputNumber>
+				<f:facet name="footer">
+					<h:outputText value="#{editionBean.editionBi.tab5.totDebitNoBudg}"
+						style="background-color: #F5DEB3;" styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</f:facet>
+			</p:column>
+			<p:column style="width:15%;">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['credit.c2']}" />
+				</f:facet>			
+					<p:inputNumber id="creditC2" size="20" inputStyle="text-align: center"
+						value="#{opNoBudg.credit}"  onfocus="select();" >					
+						<p:ajax process="@this" global="false"
+							update=":detailsForm:ongletsEditionBi:tab5Panel"></p:ajax>
+					</p:inputNumber>				
+				<f:facet name="footer">
+					<h:outputText value="#{editionBean.editionBi.tab5.totCreditNoBudg}"
+						style="background-color: #F5DEB3;" styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</f:facet>
+			</p:column>
+
+		</p:dataTable>
+	</p:panel>
+
+</ui:composition>

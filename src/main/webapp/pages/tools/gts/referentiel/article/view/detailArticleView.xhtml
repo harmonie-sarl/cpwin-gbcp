@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>#{msgs['add.modif.detail.article']}</title>
+	<style type="text/css">
+</style>
+</h:head>
+
+<h:body>
+	<h:form id="detailArticleForm">
+		<p:messages id="detailArticleMsg" showDetail="true" autoUpdate="true"
+			styleClass="error" globalOnly="true" />
+
+
+		<div align="center" style="width: 100%;">
+			<p:commandButton value="#{msgs['btn.valider']}"
+				actionListener="#{gtsRefBean.addOrUpdateArticleDetail}"
+				>
+			</p:commandButton>
+
+			<p:commandButton value="#{msgs['btn.fermer']}"
+				actionListener="#{gtsRefBean.closeCurrentDialog}" immediate="true">
+
+
+			</p:commandButton>
+		</div>
+		<p:panel style="width:100%;" header="#{msgs['article']}">
+			<h:panelGrid columns="4"
+				style="width:100%;vertical-align:top;align: left;">
+				<h:outputLabel styleClass="espace_entre_label_value"
+					style="font-weight:bold" value="#{msgs['code']}" />
+
+
+
+
+				<h:outputText value="#{gtsRefBean.selectedArticle.code}" size="7" />
+				<h:outputLabel styleClass="espace_entre_label_value"
+					style="font-weight:bold" value="#{msgs['libelle']}" />
+				<h:outputText value="#{gtsRefBean.selectedArticle.libelle}" size="7" />
+			</h:panelGrid>
+		</p:panel>
+		<br />
+		<p:panel style="width:100%;">
+			<h:panelGrid columns="4"
+				style="width:100%;vertical-align:top;align: left;">
+				<h:panelGroup>
+					<h:outputLabel styleClass="espace_entre_label_value"
+						style="font-weight:bold" value="#{msgs['cpwin.exercice']}" />
+
+					<h:outputText value=" *" rendered="#{!gtsRefBean.updateDetailMode}" styleClass="required"></h:outputText>
+				</h:panelGroup>
+				<p:selectOneMenu styleClass="ReadOnlyText"  rendered="#{!gtsRefBean.updateDetailMode}"
+					value="#{dataListBean.exec}">
+
+					<f:selectItem itemValue="" itemLabel="-----" />
+					<f:selectItems value="#{loaderBean.allExecList}" var="exec"
+						itemLabel="#{exec}" itemValue="#{exec}">
+					</f:selectItems>
+					<p:ajax process="@this" update="cptProd,destPg,natPg,srvPg,progPg" />
+				</p:selectOneMenu>
+	<h:outputText value="#{gtsRefBean.selectedDetailArtc.exercice}" rendered="#{gtsRefBean.updateDetailMode}" styleClass="required"></h:outputText>
+				
+				<h:panelGroup />
+				<h:panelGroup />
+
+				<h:outputLabel styleClass="espace_entre_label_value"
+					style="font-weight:bold" value="#{msgs['prix.unitaire']}" />
+				<p:inputNumber inputStyle="text-align: left"
+					value="#{gtsRefBean.selectedDetailArtc.pu}" onfocus="select();">
+
+           
+				</p:inputNumber>
+
+
+
+
+
+				<h:outputLabel styleClass="espace_entre_label_value"
+					style="font-weight:bold" value="#{msgs['tva']}" />
+				<h:panelGroup id="tvaPg">
+						<p:selectOneMenu 
+						styleClass="ReadOnlyText" 
+						rendered="#{!gtsRefBean.tvaArticleAutre}" 
+						value="#{gtsRefBean.tvaArticle}" >
+
+						<f:selectItems value="#{gtsRefBean.listTvaArtcile}" var="tva"
+							itemLabel="#{tva}" itemValue="#{tva}">
+						</f:selectItems>
+					<p:ajax process="@this" update="tvaPg"></p:ajax>
+					</p:selectOneMenu>
+					
+					
+					<p:commandButton title="#{msgs['activate.select.list']}" icon="fa fa-list" 
+						rendered="#{gtsRefBean.tvaArticleAutre}"
+						actionListener="#{gtsRefBean.resetTvaArticle}" update="tvaPg">
+						<f:param name="cpDestIndex" value="#{cpDestIndex}" />
+					</p:commandButton>
+					<p:inputNumber rendered="#{gtsRefBean.tvaArticleAutre}"
+						inputStyle="text-align: left"
+						value="#{gtsRefBean.selectedDetailArtc.tva}" onfocus="select();">
+ 
+
+					</p:inputNumber>
+
+
+				</h:panelGroup>
+			</h:panelGrid>
+			<p:panel style="width:100%;" header="#{msgs['adresse.budgetaire']}">
+
+				<h:panelGrid columns="8"
+					style="width:100%;vertical-align:top;align: left;">
+					<h:panelGroup>
+
+						<h:outputLabel styleClass="espace_entre_label_value"
+							style="font-weight:bold" value="#{msgs['import.destination']}" />
+						<h:outputText value=" *" styleClass="required"></h:outputText>
+					</h:panelGroup>
+
+					<p:selectOneMenu id="destPg" styleClass="ReadOnlyText"
+						value="#{dataListBean.codeDest}">
+
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{dataListBean.destinationList}" var="dest"
+							itemLabel="#{dest.code}" itemValue="#{dest.code}">
+						</f:selectItems>
+						<p:ajax process="@this" update="cptProd,natPg,srvPg,progPg" />
+
+					</p:selectOneMenu>
+					<h:panelGroup>
+						<h:outputLabel styleClass="espace_entre_label_value"
+							style="font-weight:bold" value="#{msgs['import.nature']}" />
+
+						<h:outputText value=" *" styleClass="required"></h:outputText>
+					</h:panelGroup>
+					<p:selectOneMenu id="natPg" styleClass="ReadOnlyText"
+						value="#{dataListBean.codeNature}">
+
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{dataListBean.natureList}" var="nature"
+							itemLabel="#{nature.code}" itemValue="#{nature.code}">
+						</f:selectItems>
+						<p:ajax process="@this" update="cptProd,srvPg,progPg" />
+
+					</p:selectOneMenu>
+					<h:panelGroup>
+						<h:outputLabel styleClass="espace_entre_label_value"
+							style="font-weight:bold" value="#{msgs['service']}" />
+						<h:outputText value=" *" styleClass="required"></h:outputText>
+					</h:panelGroup>
+					<p:selectOneMenu id="srvPg" styleClass="ReadOnlyText"
+						value="#{dataListBean.codeService}">
+
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{dataListBean.serviceList}" var="service"
+							itemLabel="#{service.code}" itemValue="#{service.code}">
+						</f:selectItems>
+						<p:ajax process="@this" update="progPg" />
+					</p:selectOneMenu>
+					<h:panelGroup>
+						<h:outputLabel styleClass="espace_entre_label_value"
+							style="font-weight:bold" value="#{msgs['programme']}" />
+
+						<h:outputText value=" *" styleClass="required"></h:outputText>
+					</h:panelGroup>
+					<p:selectOneMenu id="progPg" styleClass="ReadOnlyText"
+						value="#{dataListBean.codeProg}">
+
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{dataListBean.programmeList}" var="prog"
+							itemLabel="#{prog.code}" itemValue="#{prog.code}">
+						</f:selectItems>
+						<p:ajax process="@this" update="cptProd" />
+					</p:selectOneMenu>
+
+				</h:panelGrid>
+			</p:panel>
+			<h:panelGrid columns="2"
+				style="width:34%;vertical-align:top;align: left;">
+				<h:panelGroup>
+					<h:outputLabel styleClass="espace_entre_label_value"
+						style="font-weight:bold" value="#{msgs['compte.produit']}" />
+					<h:outputText value=" *" styleClass="required"></h:outputText>
+				</h:panelGroup>
+				<p:selectOneMenu styleClass="ReadOnlyText" id="cptProd"
+					value="#{dataListBean.compteProduit}">
+
+					<f:selectItem itemValue="" itemLabel="-----" />
+					<f:selectItems value="#{dataListBean.compteProduitList}" var="cpt"
+						itemLabel="#{cpt.code}" itemValue="#{cpt.code}">
+					</f:selectItems>
+				</p:selectOneMenu>
+
+			</h:panelGrid>
+		</p:panel>
+
+
+		<div align="left">
+			<h:outputText value="(*) #{msgs['required']}" styleClass="required" />
+		</div>
+
+	</h:form>
+</h:body>
+
+</html>

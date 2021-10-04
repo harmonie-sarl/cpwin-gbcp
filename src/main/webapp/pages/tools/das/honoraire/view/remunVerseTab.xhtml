@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+	
+		<h:panelGrid columns="4" cellspacing="20" style="width:100%;" >
+			<h:outputText value="#{msgs['honoraires']}" />
+			<h:outputText value="#{dasBean.selectedHonoraire.honoraires}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<h:outputText value="#{msgs['commissions']}" />
+			<h:outputText value="#{dasBean.selectedHonoraire.commissions}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<h:outputText value="#{msgs['courtage']}" />
+			<h:outputText value="#{dasBean.selectedHonoraire.courtages}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<h:outputText value="#{msgs['ristournes']}" />
+			<h:outputText value="#{dasBean.selectedHonoraire.ristournes}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<h:outputText value="#{msgs['jetons.presence']}" />
+			<h:outputText value="#{dasBean.selectedHonoraire.jetonsPresence}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<h:outputText value="#{msgs['droit.auteur']}" />
+			<h:outputText value="#{dasBean.selectedHonoraire.droitsAuteur}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<h:outputText value="#{msgs['droit.invent']}" />
+			<h:outputText value="#{dasBean.selectedHonoraire.droitsInventeur}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<h:outputText value="#{msgs['autres.remun']}" />
+			<h:outputText
+				value="#{dasBean.selectedHonoraire.autresRemunerations}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<h:outputText value="#{msgs['indemnites.remboursements']}" />
+			<h:outputText value="#{dasBean.selectedHonoraire.indemnitesRemb}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<h:outputText value="#{msgs['avantetages.nature']}" />
+			<h:outputText value="#{dasBean.selectedHonoraire.avantagesEnNature}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<h:outputText value="#{msgs['retenue.source']}" />
+			<h:outputText value="#{dasBean.selectedHonoraire.retenueAlaSource}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</h:panelGrid>
+	
+</ui:composition>

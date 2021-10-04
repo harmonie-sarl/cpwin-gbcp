@@ -1,0 +1,107 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+
+	<ui:define name="lastPrefexedTitle" />
+	<ui:define name="entetePage">
+		<ui:include src="./common/enteteConsult.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="enteteAction" />
+
+	<ui:define name="search">
+		<p:panel style="width:100%;" rendered="#{sctBean.commonRequiredDone}">
+			<h:panelGrid columns="3" style="width:60%; vertical-align:top;">
+
+				<h:selectOneRadio layout="pageDirection"
+					rendered="#{sctBean.commonRequiredDone}"
+					valueChangeListener="#{sctBean.vagueClientChangeListener}"
+					value="#{sctBean.vagueOrClient}" styleClass="boutonRadio">
+
+					<f:selectItem itemLabel="#{msgs['rembours.vague']}" itemValue="1" />
+					<f:selectItem itemLabel="#{msgs['rembours.client']}" itemValue="0" />
+					<p:ajax process="@this"	update="vaguePG,clientPG,:enteteForm,:detailsForm" global="false" />
+
+				</h:selectOneRadio>
+
+				<h:panelGrid id="vaguePG" columns="4" cellspacing="10"
+					rendered="#{sctBean.consultationByVague}">
+					<h:outputLabel styleClass="espace_entre_label_value"
+						value="#{msgs['num.vague']}" />
+					<p:selectOneMenu id="numVagList" styleClass="ReadOnlyText"
+						value="#{sctBean.noVague}">
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{sctBean.vagueIds}" var="numVag"
+							itemLabel="#{numVag}" itemValue="#{numVag}">
+						</f:selectItems>
+						<p:ajax process="@this" listener="#{sctBean.onConsultChange}"	update="globalMessage,:detailsForm" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+				<h:panelGrid id="clientPG" columns="2" cellspacing="10"
+					rendered="#{!sctBean.consultationByVague}">
+					<h:panelGroup>
+						<h:outputLabel styleClass="espace_entre_label_value"
+							value="#{msgs['rembours.nom.client']}" />
+
+					</h:panelGroup>
+					<h:panelGroup>
+						<p:autoComplete id="client" converter="convert.sct.actor"
+							value="#{sctBean.selectedCustomer}" required="false"
+							requiredMessage="#{errorMsgs['cpwin.required']}"
+							style="width: 30%;" size="30"
+							completeMethod="#{sctBean.autoCompleteTiers}"
+							var="tiers"	itemLabel="#{tiers.fullName}" itemValue="#{tiers.name}"
+							minQueryLength="#{gestionTiersBean.minAjaxQL}"
+							maxResults="#{gestionTiersBean.maxAjaxResult}"
+							title="#{gestionTiersBean.ajaxTitleMsg}">
+							<p:ajax event="itemSelect" listener="#{sctBean.onConsultChange}" update="globalMessage,:detailsForm"  process="@this" global="false" />
+
+						</p:autoComplete>
+						<p:message for="client" styleClass="error" />
+					</h:panelGroup>
+				</h:panelGrid>
+
+				<p:commandButton title=" " immediate="true"
+					value="#{msgs['cpwin.btn.afficher']}"
+					actionListener="#{sctBean.consultRembours}"
+					update=":detailsForm,globalMessage"
+					rendered="#{sctBean.commonRequiredDone}">
+				</p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+	</ui:define>
+
+
+	<ui:define name="details">
+		<p:panel id="consultRemboursPanel" style="width:100%;">
+
+			<p:tabView id="ongletsRemboursConsult" style="width:100%;"
+				cache="false" rendered="#{sctBean.enabledConsultData}">
+
+				<p:tab id="tabVague" rendered="#{sctBean.consultationByVague}"
+					title="#{msgs['rembours.consult.vague']}">
+
+					<ui:include src="./onglets/vague.xhtml" />
+
+				</p:tab>
+				<p:tab id="tabVagueDetails" rendered="#{sctBean.consultationByVague}"
+					title="#{msgs['rembours.vague.details']}">
+
+					<ui:include src="./onglets/vagueDetails.xhtml" />
+
+				</p:tab>
+				<p:tab id="tabClient" rendered="#{!sctBean.consultationByVague}"
+					title="#{msgs['rembours.consult.client']}">
+
+					<ui:include src="./onglets/client.xhtml" />
+
+				</p:tab>
+
+			</p:tabView>
+		</p:panel>
+
+	</ui:define>
+	
+</ui:composition>

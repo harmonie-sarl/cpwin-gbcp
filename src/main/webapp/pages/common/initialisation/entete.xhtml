@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	<h:outputLabel  value="#{msgs['exercice.init']}" />
+			<p:selectOneMenu styleClass="ReadOnlyText" 
+				value="#{initBean.newExercice}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{initBean.initExercices}" var="exec"
+					itemLabel="#{exec}" itemValue="#{exec}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{initBean.onExerciceChange}" 
+					update="budgetCodeList,origExerc,:enteteForm,:detailsForm" />
+			</p:selectOneMenu>
+         
+         <h:outputLabel 	 value="#{msgs['budget.code']}" />
+			
+			<p:selectOneMenu id="budgetCodeList" styleClass="ReadOnlyText"
+				value="#{initBean.codeBudget}">
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{initBean.listBudgets}" var="budg"
+					itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{initBean.onCodeBudgChange}" global="false"
+					update=":enteteForm,:detailsForm"/>
+			</p:selectOneMenu>
+			
+			<h:panelGrid rendered="#{initBean.commonRequiredDone}" id="origExerc" columns="2" cellpadding="0" cellspacing="10">
+		<h:outputLabel value="#{msgs['exercice.origine']}" />
+		<h:outputLabel value="#{initBean.origineExercice}"  />
+		
+	</h:panelGrid>
+	
+	
+	
+	</ui:composition>

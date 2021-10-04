@@ -1,0 +1,244 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>web-common</artifactId>
+    <groupId>tn.harmonie</groupId>
+    <version>4.3.0</version>
+  </parent>
+  <groupId>fr.symphonie</groupId>
+  <artifactId>budget</artifactId>
+  <version>2.8.0</version> 
+  <packaging>war</packaging>
+  <name>budget pluriannuel</name>
+  <description>Le module Web budget pluriannuel:
+Contient les interfaces utilisateur et l'accés à la base de données CPWin
+</description> 
+
+  <properties>
+		<web-com.version>3.5.0</web-com.version>
+		<cpwin-model.version>3.4.5</cpwin-model.version>
+		<cpwin-core.version>1.0</cpwin-core.version>
+ 		<maven-war-plugin-version>2.1.1</maven-war-plugin-version>
+ 		<interne-scope>compile</interne-scope> 
+<!-- 		 <externe-scope>compile</externe-scope> -->
+		 <primefaces.version>6.1</primefaces.version>
+		   <tomcat-deploy.url>http://localhost:8080/manager/text</tomcat-deploy.url>
+		   <maven.compiler.source>1.8</maven.compiler.source>
+    	<maven.compiler.target>1.8</maven.compiler.target>
+
+  </properties>
+  
+  <dependencies>
+<dependency>
+    <groupId>com.sun.mail</groupId>
+    <artifactId>javax.mail</artifactId>
+    <version>1.6.2</version>
+     <scope>${externe-scope}</scope>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-tomcat-weaver</artifactId>
+    <version>2.5.6.SEC02</version>
+     <scope>${externe-scope}</scope>
+</dependency>
+
+  <!-- Compatibilité avec java 11 -->
+  <dependency>
+    <groupId>javax.xml.bind</groupId>
+    <artifactId>jaxb-api</artifactId>
+    <version>2.2.11</version>
+    <scope>${externe-scope}</scope>
+</dependency>
+<dependency>
+    <groupId>javax.annotation</groupId>
+    <artifactId>javax.annotation-api</artifactId>
+    <version>1.3.2</version>
+     <scope>${externe-scope}</scope>
+</dependency>
+<dependency>
+    <groupId>com.sun.xml.bind</groupId>
+    <artifactId>jaxb-core</artifactId>
+    <version>2.2.11</version>
+    <scope>${externe-scope}</scope>
+</dependency>
+<dependency>
+    <groupId>com.sun.xml.bind</groupId>
+    <artifactId>jaxb-impl</artifactId>
+    <version>2.2.11</version>
+    <scope>${externe-scope}</scope>
+</dependency>
+<dependency>
+    <groupId>javax.activation</groupId>
+    <artifactId>activation</artifactId>
+    <version>1.1.1</version>
+    <scope>${externe-scope}</scope>
+</dependency>
+<!-- Json parser -->
+  <dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>2.6.3</version>
+		<scope>${externe-scope}</scope>
+	</dependency>
+  <!-- Module Interne -->
+  <dependency>
+  <groupId>fr.symphonie</groupId>
+  <artifactId>cpwin-core</artifactId>
+  <version>${cpwin-core.version}</version>
+  </dependency>
+    <dependency>     
+  <groupId>fr.symphonie</groupId>
+  <artifactId>web-com</artifactId>
+  </dependency>
+    <dependency>     
+  <groupId>fr.symphonie</groupId>
+  <artifactId>cpwin-model</artifactId>
+  </dependency>
+      <dependency>     
+  <groupId>fr.symphonie</groupId>
+  <artifactId>sepa</artifactId>
+  <version>2.0.0</version>
+  </dependency>
+  
+  <!-- DOCX et Excel -->
+  <dependency>
+			<groupId>fr.opensagres.xdocreport</groupId>
+			<artifactId>fr.opensagres.xdocreport.document.docx</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>fr.opensagres.xdocreport</groupId>
+			<artifactId>fr.opensagres.xdocreport.template.freemarker</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>fr.opensagres.xdocreport</groupId>
+		  <artifactId>org.apache.poi.xwpf.converter.core</artifactId>
+	
+	  </dependency>
+	  <dependency>
+		  <groupId>fr.opensagres.xdocreport</groupId>
+		  <artifactId>org.apache.poi.xwpf.converter.pdf.itext5</artifactId>
+	  </dependency>
+ 
+<dependency>
+		<groupId>net.sf.jxls</groupId>
+        <artifactId>jxls-core</artifactId>
+	</dependency>
+ <dependency>
+      <groupId>org.glassfish.web</groupId>
+      <artifactId>el-impl</artifactId>
+      <version>2.2</version>
+      <scope>${externe-scope}</scope>
+ </dependency>
+ <dependency>
+    <groupId>org.iban4j</groupId>
+    <artifactId>iban4j</artifactId>
+    <version>3.2.1</version>
+    <scope>${externe-scope}</scope>
+</dependency>
+ <dependency>
+    <groupId>org.apache.pdfbox</groupId>
+    <artifactId>pdfbox</artifactId>
+    <version>2.0.22</version>
+    <scope>${externe-scope}</scope>
+</dependency>
+  </dependencies>
+  <developers>
+    <developer>
+      <id>chokri</id>
+      <name>Chokri BEN SALEM</name>
+      <email>chokri.bs@gmail.com</email>
+      <organization>Harmonie SARL</organization>
+      <organizationUrl></organizationUrl>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>Tunisia</timezone>
+    </developer>
+     <developer>
+      <id>sahbi</id>
+      <name>Sahbi ABED</name>
+      <email>sahbi.harmonie@gmail.com</email>
+      <organization>Harmonie SARL</organization>
+      <organizationUrl></organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>Tunisia</timezone>
+    </developer>
+     <developer>
+      <id>souhaib</id>
+      <name>Souhaib JEDIDI</name>
+      <email>souhaib45@yahoo.fr</email>
+      <organization>Harmonie SARL</organization>
+      <organizationUrl></organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>Tunisia</timezone>
+    </developer>
+  </developers>
+  <organization>
+  	<name>Groupe SNEG</name>
+  	<url>https://www.sneg.fr/</url>
+  </organization>
+  <build>
+	<finalName>${app.name}</finalName>
+	<plugins>
+	<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>${maven-war-plugin-version}</version>
+            <configuration>
+                <failOnMissingWebXml>false</failOnMissingWebXml>    
+            </configuration>
+        </plugin>
+	</plugins>
+</build>
+<profiles>
+  <profile>
+  <id>GBCP</id>
+   <activation>
+  <activeByDefault>true</activeByDefault>
+  </activation>
+  <properties>
+  <app.name>${project.artifactId}</app.name>
+  <app.version>${project.version}</app.version>
+   <app.datasource>budgDS</app.datasource>
+   <gbcp.module>true</gbcp.module>
+   <das.module>true</das.module>
+   <gts.module>false</gts.module>
+   <specific-mapping>
+   </specific-mapping>
+  </properties>
+  </profile>
+  <profile>
+  <id>GTS</id>
+   <activation>
+  <activeByDefault>false</activeByDefault>
+  </activation>
+  <properties>
+  <app.name>gts</app.name>
+  <app.version>1.1.0</app.version> 
+   <app.datasource>gtsDS</app.datasource>
+   <gbcp.module>false</gbcp.module>
+   <das.module>false</das.module>
+   <gts.module>true</gts.module>
+   <specific-mapping>
+   </specific-mapping>
+  </properties> 
+  </profile>
+ 
+  </profiles>
+
+</project>

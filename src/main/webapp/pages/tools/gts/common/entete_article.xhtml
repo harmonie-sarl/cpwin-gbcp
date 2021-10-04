@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	<h:panelGrid columns="3">
+		<h:outputLabel value="#{msgs['code.article']}" for="code_article"
+			styleClass="espace_entre_label_value" />
+		<p:inputText id="code_article" value="#{gtsRefBean.codeArticle}" size="7">
+			<p:ajax event="keyup"
+				process="@this"
+				update=":detailsForm:articlesPanel" />
+		</p:inputText>
+		<p:message for="code_article" styleClass="error" />
+	
+	
+		
+		</h:panelGrid>
+
+
+	
+
+</ui:composition>
+
+
+
+
+
+

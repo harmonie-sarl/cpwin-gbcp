@@ -1,0 +1,240 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+  
+        <style type="text/css">
+
+
+
+
+
+.detailTitle {	
+		text-align: center;
+		font-size: 9px;
+		color: black !important;
+}
+
+.detailValue {	
+	text-align: center;	
+	
+	background: white !important;
+	color: black !important;
+	font-weight: bold;
+	font-size: 8px;
+}
+
+.globalTitle {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+	text-align: left;
+	font-style: italic;
+}
+
+.globalValue {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+	text-align: center;
+	font-style: italic;
+}
+
+.th {
+	
+	background: grey !important;
+		border-color: grey !important;
+
+	
+}
+
+.td {
+		
+	color: black !important;
+    text-align: center;
+    font-size: 8px;
+	
+}
+
+
+
+
+</style>
+	<p:dataTable style="width:100%; text-align: center;"  scrollable="true" scrollHeight="250" scrollRows="15"   
+		value="#{bpBean.suiviEjPluri}"
+		emptyMessage="#{msgs['datatable.empty']}"
+	 var="pluri">
+			<p:columnGroup type="header">
+				<p:row>	              
+				  <p:column  colspan="1" rowspan="2"
+						 headerText="#{msgs['dest']}">
+					</p:column>	
+					  <p:column  colspan="1" rowspan="2"
+						 headerText="#{msgs['import.nature']}">
+					</p:column>
+					  <p:column  colspan="1" rowspan="2"
+						headerText="#{msgs['service']}">
+					</p:column>	
+					  <p:column  colspan="1" rowspan="2"
+						 headerText="#{msgs['prog']}">
+					</p:column>	
+					  <p:column  colspan="1" rowspan="2"
+						 headerText="Fléchées/&lt;br/&gt;Globalisées">
+					</p:column>	
+						  <p:column colspan="1" rowspan="2"
+						 headerText="#{msgs['noej']}">
+					</p:column>	
+					  <p:column   colspan="1" rowspan="2"
+						 headerText="#{msgs['cpwin.objet']}">
+					</p:column>	
+						  <p:column  colspan="2" rowspan="1"
+					 headerText="#{msgs['tiers']}">
+					</p:column>		
+					  <p:column   colspan="1" rowspan="2"
+						 headerText="#{msgs['montant.total']}">
+					</p:column>	
+					 <p:column   colspan="2" rowspan="1"
+						 headerText="#{msgs['plan.cp']}">
+					</p:column>	
+					 
+					        </p:row>
+				<p:row >
+				    	  <p:column  colspan="1" rowspan="1"
+						 headerText="#{msgs['code']}">
+						
+					</p:column>	
+					 <p:column  colspan="1" rowspan="1"
+					 headerText="#{msgs['nom']}">
+					</p:column>	
+					 <p:column  colspan="1" rowspan="1"
+						 headerText="#{(searchBean.exercice)}"> 
+					</p:column>	
+					 <p:column  colspan="1" rowspan="1"
+						 headerText=">#{(searchBean.exercice)}">
+					</p:column>	
+					
+					
+					  </p:row>
+				
+			</p:columnGroup>
+		
+			
+		<p:column  >
+			<h:outputText styleClass="detailTitle"  value="#{pluri.codeDest}" />
+				
+		</p:column>
+		<p:column  >
+			
+			<h:outputText styleClass="detailTitle"  value="#{pluri.codeNature}" />
+			
+          
+		</p:column>
+		<p:column  >
+			<h:outputText styleClass="detailTitle"  value="#{pluri.codeService}" />
+		
+		</p:column>
+		<p:column>
+            <h:outputText styleClass="detailTitle" value="#{pluri.codeProg}" />
+        
+        </p:column>
+        <p:column>
+            <h:outputText styleClass="detailTitle" value="#{pluri.flechGlob}" />
+        
+        </p:column>
+        <p:column>
+            <h:outputText styleClass="detailTitle" value="#{pluri.numEj}" />
+        
+        </p:column>
+            <p:column>
+            <h:outputText styleClass="detailTitle" value="#{pluri.objet}" />
+        
+        </p:column>
+         <p:column>
+            <h:outputText styleClass="detailTitle" value="#{pluri.codeTiers}" />
+        
+        </p:column>
+           <p:column>
+            <h:outputText styleClass="detailTitle" value="#{pluri.nomTiers}" />
+        
+        </p:column>
+        	
+	
+		<p:column>
+			
+			<h:outputText styleClass="detailTitle"  value="#{pluri.mntTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			
+		</p:column>
+			<p:column>
+			
+			<h:outputText styleClass="detailTitle"  value="#{pluri.planCpCourant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			
+		</p:column>
+		<p:column>
+			
+			<h:outputText styleClass="detailTitle"  value="#{pluri.planCpSup}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			
+		</p:column>
+			
+		
+		<p:columnGroup type="footer"  >
+		
+		<p:row >
+		</p:row>
+				<p:row>	              
+				    <p:column   colspan="9" style="text-align:right" footerText="#{msgs['totaux']}" />
+                   
+                    <p:column  >
+              <f:facet name="footer"  >
+                     
+                     <h:outputText styleClass="td" value="#{bpBean.mntTotalTot}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                           <p:column  >
+              <f:facet name="footer"  >
+                     
+                     <h:outputText styleClass="td" value="#{bpBean.planCpCourantTot}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                           <p:column  >
+              <f:facet name="footer"  >
+                     
+                     <h:outputText styleClass="td" value="#{bpBean.planCpSupTot}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                
+		</p:row>
+		
+		</p:columnGroup>
+
+
+	</p:dataTable>
+	<br />
+		<div align="center">
+		<h:panelGroup>
+
+					<p:commandButton id="export_pluri_btn" title=" " value="#{msgs['budget.btn.export']}" rendered="#{(not empty bpBean.suiviEjPluri)and(bpBean.suiviEjPluri!=null)}"
+					 ajax="false">
+						<p:fileDownload value="#{bpBean.xlsEjPluri}" />
+					</p:commandButton>	
+					
+								
+				</h:panelGroup>
+				</div>
+				</ui:composition>

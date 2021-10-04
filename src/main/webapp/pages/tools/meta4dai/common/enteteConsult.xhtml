@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+		
+			<h:outputLabel  value="#{msgs['cpwin.exercice']}" />
+			<p:selectOneMenu styleClass="ReadOnlyText" 
+				value="#{daiBean.exercice}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{daiBean.periodExerciseList}" var="exec"
+					itemLabel="#{exec}" itemValue="#{exec}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{daiBean.onExerciceChange}" 
+					update="budgetCodeList,:enteteForm,:detailsForm" />
+			</p:selectOneMenu>
+         
+         <h:outputLabel 	 value="#{msgs['budget.code']}" />
+			
+			<p:selectOneMenu id="budgetCodeList" styleClass="ReadOnlyText"
+				value="#{daiBean.codeBudget}">
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{daiBean.listBudgets}" var="budg"
+					itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{daiBean.reset}" global="false"
+					update=":enteteForm,:detailsForm"/>
+			</p:selectOneMenu>
+			
+		
+</ui:composition>

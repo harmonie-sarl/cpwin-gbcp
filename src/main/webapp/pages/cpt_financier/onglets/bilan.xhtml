@@ -1,0 +1,2561 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<style type="text/css">
+
+</style>
+
+	<p:panel style="width:100%;" id="bilanPanel">
+
+		<f:facet name="header">
+			<h:outputText value="#{msgs['bilan']}"
+				style="font-weight: bold; text-align: center;" />
+		</f:facet>
+
+		<div align="center">
+			<h:outputText value="#{msgs['bilan']} #{searchBean.exercice}"
+				style="font-weight: bold; text-align: center;color:#008000;" />
+
+		</div>
+
+		<p:panelGrid style="width:100%; vertical-align:top;"  >	
+		 <p:row>
+	
+            <p:column colspan="6" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #008000;color: #FFFFFF;">
+					<h:outputText value="#{msgs['actif']}"
+						style="font-weight: bold; text-align: center;" />
+				</p:column>
+				
+        </p:row>
+    <p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+
+
+			<p:row  >
+			
+            <p:column colspan="2" rowspan="2" 	style="width: 40%;background-color: #D3D3D3;font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['actif.immob']}" />
+				</p:column>
+				<p:column colspan="3" rowspan="1" style="width: 45%;background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['n']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="width: 15%;background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['n.ant']}" />
+				</p:column>				
+        </p:row>
+
+			<p:row>
+			
+            <p:column colspan="1" rowspan="1" style="width: 15%;background-color: #D3D3D3;font-weight: bold; text-align: center;" >
+					<h:outputText value="#{msgs['brut']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="width: 15%;background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['amortiss.deprec']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="width: 15%;background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['net']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="width: 15%;background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['net']}" />
+				</p:column>				
+        </p:row>
+
+     <p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+
+  
+<p:row>
+
+          			 <p:column colspan="2" rowspan="1" style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['immobil.incorp']}" />
+
+				</p:column>
+				
+   <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immIncorp.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immIncorp.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immIncorp.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immIncorp.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+
+          			<p:column colspan="2" rowspan="1" style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['immobil.corp']}" />
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+
+			<p:row>
+				<p:column>
+
+				</p:column>
+          			<p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['terrains']}" />
+
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.terrains.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+					 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.terrains.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.terrains.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.terrains.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+          		<p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['construct']}" />
+
+				</p:column>
+						 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.constrcut.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.constrcut.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.constrcut.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.constrcut.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+          		<p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['install.tech.mater.outil']}" />
+
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.installTech.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.installTech.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.installTech.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.installTech.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+          	<p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['collects']}" />
+
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.collection.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.collection.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.collection.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.collection.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+          	<p:column colspan="1" rowspan="1" style="text-align: left;" >
+					<h:outputText value="#{msgs['biens.hist.cultur']}" />
+
+				</p:column>
+				<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.biensHist.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.biensHist.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.biensHist.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.biensHist.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+          	<p:column colspan="1" rowspan="1" style="text-align: left;" >
+					<h:outputText value="#{msgs['autr.immobil.corp']}" />
+
+				</p:column>
+				
+				<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.autreImmobCorp.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.autreImmobCorp.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.autreImmobCorp.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.autreImmobCorp.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+          	<p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['immobil.mis.conces']}" />
+
+				</p:column>
+			
+				<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobMisConc.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobMisConc.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobMisConc.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobMisConc.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+          	<p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['immobil.corp.en.cours']}" />
+
+				</p:column>
+
+				<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobCorpEnC.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobCorpEnC.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobCorpEnC.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobCorpEnC.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+           <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['avanc.acomt.cmd']}" />
+
+				</p:column>
+					<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.avanceAcmptCmd.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.avanceAcmptCmd.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.avanceAcmptCmd.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.avanceAcmptCmd.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+           <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['immobil.grev.droit']}" />
+
+				</p:column>
+					<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobGreve.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobGreve.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobGreve.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobGreve.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+           <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['immobil.corp.bien']}" />
+
+				</p:column>
+				<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobCorp.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobCorp.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobCorp.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobCorp.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;" >
+					<h:outputText value="#{msgs['immobil.financ']}" />
+
+				</p:column>
+				<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobFinanc.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobFinanc.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobFinanc.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.immobFinanc.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+       <p:row>
+
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['total.act.immob']}" />
+
+				</p:column>
+				<p:column  style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.totalActif.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.totalActif.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.totalActif.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ai.totalActif.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="background-color: #D3D3D3;font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['actif.circul']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+
+				</p:column>		
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['stocks']}" />
+
+				</p:column>
+					<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.stocks.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.stocks.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.stocks.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.stocks.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['creanc']}" />
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+
+			<p:row>
+				<p:column>
+
+				</p:column>
+          			<p:column colspan="1" rowspan="1"  style="text-align: left;">
+					<h:outputText value="#{msgs['creanc.entit.pub']}" />
+
+				</p:column>
+				<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceEP.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceEP.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceEP.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceEP.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+          			<p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['creanc.cmpt.ratt']}" />
+
+				</p:column>
+			<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceCCR.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceCCR.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceCCR.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceCCR.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+          			<p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['creanc.redevabl']}" />
+
+				</p:column>
+					<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceRedev.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceRedev.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceRedev.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceRedev.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+          			<p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['avanc.acompt.vers']}" />
+
+				</p:column>
+				<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.avanceAcmptCmd.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.avanceAcmptCmd.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.avanceAcmptCmd.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.avanceAcmptCmd.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+          			<p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['creanc.corresp.op']}" />
+
+				</p:column>
+					<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceCorrespOp.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceCorrespOp.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceCorrespOp.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceCorrespOp.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+          			<p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['crean.sur.autr']}" />
+
+				</p:column>
+				<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceAutreDebit.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceAutreDebit.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceAutreDebit.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.creanceAutreDebit.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;" >
+					<h:outputText value="#{msgs['charg.constat.avance']}" />
+
+				</p:column>
+				<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.chargeConstat.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.chargeConstat.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.chargeConstat.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.chargeConstat.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['total.circulant']}" />
+
+				</p:column>
+				<p:column   style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.totalActifCric.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column   style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.totalActifCric.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column   style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.totalActifCric.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column   style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.ac.totalActifCric.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="background-color: #D3D3D3;font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['tres']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+
+				</p:column>		
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['valeurs.mobil.plac']}" />
+
+				</p:column>
+					<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.valMobPlac.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.valMobPlac.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.valMobPlac.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.valMobPlac.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['disponibilites']}" />
+
+				</p:column>
+				<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.disponibilit.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.disponibilit.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.disponibilit.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.disponibilit.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['autres']}" />
+
+				</p:column>
+				<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.autre.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.autre.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.autre.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.autre.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['total.tres']}" />
+
+				</p:column>
+				<p:column  style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.totalTres.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column   style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.totalTres.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column   style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.totalTres.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column   style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.totalTres.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['cmpt.regular']}" />
+
+				</p:column>
+				<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.compteReg.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.compteReg.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.compteReg.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.compteReg.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['ecart.convers.act']}" />
+
+				</p:column>
+			<p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.ecartConvers.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.ecartConvers.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.ecartConvers.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.ecartConvers.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;" >
+					<h:outputText value="#{msgs['total.gen.act']}" />
+
+				</p:column>
+				<p:column style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.totalGenActif.brutN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			
+				 <p:column  style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.totalGenActif.amortDeprN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+							 <p:column  style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.totalGenActif.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column  style="font-weight: bold; text-align: center;">
+                      <h:outputText value="#{cfBean.bilan.tresA.totalGenActif.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+        </p:row>
+		
+
+
+
+
+
+</p:panelGrid >	
+
+	<p:panelGrid style="width:70%; vertical-align:top;"  >
+	 <p:row>	
+            <p:column colspan="4" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #008000;color: #FFFFFF;">
+					<h:outputText value="#{msgs['passif']}"
+						style="font-weight: bold; text-align: center;" />
+				</p:column>
+				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="width: 40%;background-color: #D3D3D3;font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['fond.pro']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="width: 15%;background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['n']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1"  style="width: 15%;background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['n.ant']}" />
+				</p:column>				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1" style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['financ.recu']}" />
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column colspan="1" rowspan="1" style=" text-align: left;">
+					<h:outputText value="#{msgs['financ.act.etat']}" />
+
+				</p:column>	
+				
+							 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.financActEtat.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.financActEtat.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column colspan="1" rowspan="1" style=" text-align: left;">
+					<h:outputText value="#{msgs['financ.act.tiers']}" />
+
+				</p:column>
+			 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.financActTiers.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.financActTiers.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column colspan="1" rowspan="1" style=" text-align: left;">
+					<h:outputText value="#{msgs['fond.propr.fond']}" />
+
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.fondProp.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.fondProp.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column colspan="1" rowspan="1" style=" text-align: left;" >
+					<h:outputText value="#{msgs['ecart.reeval']}" />
+
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.ecartReeval.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.ecartReeval.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['reserves']}" />
+
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.reserve.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.reserve.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['report.nouv']}" />
+
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.reportNouv.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.reportNouv.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['result.exec']}" />
+
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.resultExec.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.resultExec.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['prov.regl']}" />
+
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.provReg.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.provReg.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['total.fond.prop']}" />
+
+				</p:column>
+				<p:column style="font-weight: bold; text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.totalFondProp.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="font-weight: bold; text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.fp.totalFondProp.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="background-color: #D3D3D3;font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['prov.risq.charge']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['n']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['n.ant']}" />
+				</p:column>				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column colspan="1" rowspan="1"  style="text-align: left;">
+					<h:outputText value="#{msgs['pov.risq']}" />
+
+				</p:column>
+				<p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.prc.provRisq.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.prc.provRisq.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+				<p:column>
+
+				</p:column>
+            <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputText value="#{msgs['prov.charg']}" />
+
+				</p:column>
+				<p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.prc.provCharg.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.prc.provCharg.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['total.prov.risq']}" />
+
+				</p:column>
+					<p:column style="font-weight: bold; text-align: center;" >
+					<h:outputText
+						value="#{cfBean.bilan.prc.totalProv.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="font-weight: bold; text-align: center;" >
+					<h:outputText
+						value="#{cfBean.bilan.prc.totalProv.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="background-color: #D3D3D3;font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['det.financ']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['n']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['n.ant']}" />
+				</p:column>				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['emp.oblig']}" />
+
+				</p:column>
+				<p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.df.empOblig.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.df.empOblig.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['emp.souscr.autre']}" />
+
+				</p:column>
+				<p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.df.empSouscrit.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.df.empSouscrit.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['det.financ.autre']}" />
+
+				</p:column>
+				<p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.df.detFinanc.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.df.detFinanc.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['total.det.financ']}" />
+
+				</p:column>
+				<p:column  style="font-weight: bold; text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.df.totalDetFinanc.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="font-weight: bold; text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.df.totalDetFinanc.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="background-color: #D3D3D3;font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['det.non.financ']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['n']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['n.ant']}" />
+				</p:column>				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['det.fourn.cmpt.ratt']}" />
+
+				</p:column>
+				<p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.dnf.detFournisCmptRatt.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.dnf.detFournisCmptRatt.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['det.fisc.soc']}" />
+
+				</p:column>
+					<p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.dnf.detFiscSocial.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.dnf.detFiscSocial.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['avanc.acmpt.recu']}" />
+
+				</p:column>
+			<p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.dnf.avanceAcmptRecu.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.dnf.avanceAcmptRecu.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['det.corrsp.op.cmpt.tiers']}" />
+
+				</p:column>
+				<p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.dnf.detCorrespOp.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.dnf.detCorrespOp.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['autre.det.non.financ']}" />
+
+				</p:column>
+			<p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.dnf.autreDetFinanc.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.dnf.autreDetFinanc.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['prod.constat.avance']}" />
+
+				</p:column>
+			<p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.dnf.produiConstAvanc.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.dnf.produiConstAvanc.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['total.det.non.financ']}" />
+
+				</p:column>
+				<p:column style="font-weight: bold; text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.dnf.totalDetFinanc.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="font-weight: bold; text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.dnf.totalDetFinanc.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+			
+            <p:column colspan="2" rowspan="1"  style="background-color: #D3D3D3;font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['tres']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['n']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['n.ant']}" />
+				</p:column>				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['autre.elemnt.tres']}" />
+
+				</p:column>
+			<p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.tresP.autreElement.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.tresP.autreElement.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['total.tres']}" />
+
+				</p:column>
+				<p:column style="font-weight: bold; text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.tresP.totalTres.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="font-weight: bold; text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.tresP.totalTres.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['cmpt.regular']}" />
+
+				</p:column>
+				<p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.tresP.compteRegl.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.tresP.compteRegl.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['ecart.conesrv.passif']}" />
+
+				</p:column>
+				<p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.tresP.ecartConvert.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.tresP.ecartConvert.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+			<p:row>
+
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+        </p:row>
+
+			<p:row>
+				
+            <p:column colspan="2" rowspan="1"  style="font-weight: bold; text-align: left;">
+					<h:outputText value="#{msgs['total.gen.passif']}" />
+
+				</p:column>
+				<p:column style="font-weight: bold; text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.tresP.totalGenPassif.netN.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				 <p:column style="font-weight: bold; text-align: center;">
+					<h:outputText
+						value="#{cfBean.bilan.tresP.totalGenPassif.netAnt.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+
+
+		</p:panelGrid>
+	</p:panel>
+
+
+
+
+
+
+
+
+
+</ui:composition>

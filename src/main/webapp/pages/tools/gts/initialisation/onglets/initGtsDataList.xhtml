@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	
+	<div align="center" style="width: 100%;">
+					<p:commandButton id="valid_btn" value="#{msgs['btn.valider']}" rendered="#{initBean.initDataVisible}}"
+				  update="globalMessage,:detailsForm:initPanel,:enteteForm" actionListener="#{initBean.executeValidation}"  />
+				</div>
+	<p:dataTable id="detail_list_dtt" var="detail" rendered="#{initBean.detailList!=null}"
+				scrollable="true"	scrollHeight="300" scrollRows="20" 
+				style="width:100%;text-align:center" rowIndexVar="creditIndex"
+				emptyMessage="#{msgs['datatable.empty']}"
+				value="#{initBean.detailList}"  >
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msgs['cpwin.exercice']}" />
+					</f:facet>
+					<h:outputText value="#{initBean.newExercice}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msgs['no.lbi']}" />
+					</f:facet>
+					<h:outputText value="#{detail.noLbi}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msgs['code.article']}" />
+					</f:facet>
+					<h:outputText value="#{detail.code}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msgs['prix.unitaire']}" />
+					</f:facet>
+					<h:outputText value="#{detail.pu}" />
+				</p:column>
+					<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msgs['tva']}" />
+					</f:facet>
+					<h:outputText value="#{detail.tva}" />
+				</p:column>
+					<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msgs['gts.destination']}" />
+					</f:facet>
+					<h:outputText value="#{detail.destination.codeAndLibelle}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msgs['gts.nature']}" />
+					</f:facet>
+					<h:outputText value="#{detail.nature.codeAndLibelle}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msgs['service']}" />
+					</f:facet>
+					<h:outputText value="#{detail.service.codeAndLibelle}" />
+				</p:column>
+					<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msgs['programme']}" />
+					</f:facet>
+					<h:outputText value="#{detail.programme.codeAndLibelle}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msgs['input.ttc']}" />
+					</f:facet>
+					<h:outputText value="#{detail.imputTtc}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msgs['input.tva']}" />
+					</f:facet>
+					<h:outputText value="#{detail.imputTva}" />
+				</p:column>
+				</p:dataTable>
+	</ui:composition>

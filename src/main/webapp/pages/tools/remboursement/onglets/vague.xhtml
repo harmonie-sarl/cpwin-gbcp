@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<br/>
+	<p:dataTable id="byVagueList_dtt"  var="item" rendered="#{sctBean.vague!=null}"
+		style="width:50%;text-align:center" rowIndexVar="itemIndex"
+		emptyMessage="#{msgs['datatable.empty']}" value="#{sctBean.vague.items}">
+		<f:facet name="header">
+			<h:outputText value="#{msgs['num.vague']} #{sctBean.noVague}" />
+		</f:facet>
+
+		<p:column headerText="#{msgs['mode.paiement']}"	style="text-align:left;width:20%">
+			<h:outputText value="#{item.displayedPaymentMode.label}" />
+		</p:column>
+		<p:column headerText="#{msgs['rembours.montnat']}"	style="text-align:left;width:10%">
+			<h:outputText value="#{item.amount}" >
+             <f:convertNumber type="currency" currencySymbol="" />
+            </h:outputText>
+            <f:facet name="footer" >
+			<h:outputText style="vertical-align:top;align: left"
+				value="#{sctBean.vague.total}">
+				 <f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+		</f:facet>
+		</p:column>
+		<p:column headerText="#{msgs['numero.ecriture']}" style="text-align:left;width:10%">
+			<h:outputText value="#{item.noEcriture}" />
+		</p:column>
+		<p:column headerText="#{msgs['cpwin.num.bordereau']}" style="text-align:left;width:10%">
+			<h:outputText value="#{item.noBordereau}" />
+		</p:column>
+		<p:column headerText="#{msgs['rembours.date.bord']}" style="text-align:left;width:10%">
+			<h:outputText value="#{item.dateBordereau}">
+			<f:convertDateTime pattern="dd/MM/yyyy" type="date" timeZone="Europe/Paris" />
+			</h:outputText>
+
+		</p:column>
+		
+		</p:dataTable>
+
+</ui:composition>

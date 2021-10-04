@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:subview id="opSbv">
+		<div align="center"><p:dataTable id="op_dtt" var="op"
+			style="width:100%; text-align: center;" rendered="#{avisReglementBean.operationsList!=null}"
+			emptyMessage="#{msgs['datatable.empty']}" 
+			value="#{avisReglementBean.operationsList}" paginator="true" rows="10">
+			<p:column headerText="#{msgs['cpwin.exercice']}" style="width:5%">
+				<h:outputText value="#{op.exercice}" />
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.budget']}" style="width:5%">
+				<h:outputText value="#{op.codeBudget}"/>
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.type.piece']}" style="width:5%">
+				<h:outputText value="#{op.typePiece}"/>
+			</p:column>
+			<p:column style="width:5%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.num.mandat']}"/>
+					<br/>
+					<h:outputText value="/"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.op']}"/>
+				</f:facet>
+				<h:outputText value="#{op.numPiece}"/>
+			</p:column>
+			<p:column style="width:5%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.exercice']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.du.mandat']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.dorigine']}"/>
+				</f:facet>
+				<h:outputText value="#{op.exerciceMdtOrig}"/>
+			</p:column>
+			<p:column style="width:5%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.num.mandat']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.dorigine']}"/>
+				</f:facet>
+				<h:outputText value="#{op.numMdtOrig}"/>
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.tiers.origine']}" style="width:10%">
+				<h:outputText value="#{op.tiersOrig}"/>
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.tiers.cessionnaire']}" style="width:10%">
+				<h:outputText value="#{op.tiersCess}"/>
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.type.operation']}" style="width:10%">
+				<h:outputText value="#{op.typeOper}"/>
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.exercice.operation']}" style="width:5%">
+				<h:outputText value="#{op.exerciceOper}"/>
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.num.operation']}" style="width:5%">
+				<h:outputText value="#{op.numOper}"/>
+			</p:column>
+			<p:column style="width:5%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.num.mouvement']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.dopposition']}"/>
+				</f:facet>
+				<h:outputText value="#{op.numMvtOpp}"/>
+			</p:column>
+			<p:column headerText="#{msgs['libelle']}" style="width:15%">
+				<h:outputText value="#{op.libelle}"/>
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.montant']}" style="width:10%">
+				<h:outputText value="#{op.montant}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			</p:column>
+		</p:dataTable> <br />
+		</div>
+	</f:subview>
+
+</ui:composition>

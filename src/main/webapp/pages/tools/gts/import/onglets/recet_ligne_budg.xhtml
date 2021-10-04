@@ -1,0 +1,104 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+
+
+	<div align="center">
+		<h:panelGroup>
+
+		</h:panelGroup>
+	</div>
+        	<p:dataTable id="recet_ligne_budg_dtt"
+		rendered="#{gtsBean.recetteLigneBudgList!=null}" var="recetLb"
+		style="width:100%;text-align:center" rowIndexVar="recetLbIndex"
+		emptyMessage="#{msgs['datatable.empty']}"
+		value="#{gtsBean.recetteLigneBudgList}">
+		<p:columnGroup type="header">
+			<p:row style="text-align: center;">
+				<p:column headerText="#{msgs['gts.destination']}" />
+				<p:column headerText="#{msgs['service']}" />
+				<p:column headerText="#{msgs['gts.nature']}" />
+				<p:column headerText="#{msgs['programme']}" />
+				<p:column headerText="#{msgs['montant.total']}" />
+				<p:column headerText="#{msgs['dont.regisseur']}" />
+				<p:column headerText="#{msgs['dont.clients']}" />
+			</p:row>
+		</p:columnGroup>
+		<p:column style="width:10%">
+			<h:outputText value="#{recetLb.destination}" />
+		</p:column>
+		<p:column style="width:10%">
+			<h:outputText value="#{recetLb.service}" />
+		</p:column>
+
+		<p:column style="width:10%">
+			<h:outputText value="#{recetLb.nature}" />
+		</p:column>
+		<p:column style="width:10%">
+			<h:outputText value="#{recetLb.programme}" />
+		</p:column>
+		<p:column style="width:10%">
+			<h:outputText value="#{recetLb.mntTotal}" styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+		<p:column style="width:10%">
+			<h:outputText value="#{recetLb.dontRegisseur}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+		<p:column style="width:10%">
+			<h:outputText value="#{recetLb.dontClient}" styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+				<p:columnGroup type="footer" >
+<p:row style="text-align: center;">
+				<p:column  style="font-size: 75%" colspan="4" >
+					<f:facet name="footer">
+						<h:outputText value="#{msgs['totaux']}">
+						</h:outputText>
+					</f:facet>
+				</p:column>				
+				<p:column style="font-size: 75%"  >				
+				<f:facet name="footer">
+						<h:outputText value="#{gtsBean.totalMntRecLb}"
+							styleClass="montantStyle">
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+				</p:column>				
+				<p:column style="font-size: 75%" >				
+				<f:facet name="footer">
+						<h:outputText value="#{gtsBean.totalDontRegisRecLb}"
+							styleClass="montantStyle">
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+				</p:column>				
+				<p:column style="font-size: 75%"  >				
+				<f:facet name="footer">
+						<h:outputText value="#{gtsBean.totalDontCltRecLb}"
+							styleClass="montantStyle">
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+				</p:column>
+			</p:row>			
+		</p:columnGroup>			
+			  	</p:dataTable>   
+				 	<div align="center" style="width: 100%;">
+				   <p:commandButton title=" " value="#{msgs['budget.btn.export']}"
+						immediate="true"
+						rendered="#{not empty gtsBean.recetteLigneBudgList}" ajax="false">
+						<p:fileDownload value="#{gtsBean.xlsRecetLignBudg}" />
+					</p:commandButton>
+                     </div>
+
+</ui:composition>

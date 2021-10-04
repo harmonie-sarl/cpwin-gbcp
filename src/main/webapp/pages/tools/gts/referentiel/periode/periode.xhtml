@@ -1,0 +1,121 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+	<ui:define name="lastPrefexedTitle">
+					
+					</ui:define>
+	<ui:define name="entetePage">
+							<ui:include src="/pages/tools/gts/common/entete_periode.xhtml" />
+	
+	</ui:define>
+	<ui:define name="search">
+
+	</ui:define>
+		<ui:define name="enteteAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}" immediate="true" disabled="#{!gtsRefBean.requiredDataDone}"
+		actionListener="#{gtsRefBean.search}" update=":detailsForm" ></p:commandButton>
+		<ui:param name="statusRendered" value="true" />	
+	</ui:define>
+	
+	<ui:define name="details">
+		
+		<p:panel id="periodesPanel" style="width:100%;" header="#{msgs['liste.periodes']}">
+		<p:messages id="articleErrorMsg" showDetail="true" autoUpdate="true"
+			styleClass="error" globalOnly="true" />
+			<div align="center" style="width: 70%;">
+			
+				<p:dataTable id="periodes_dtt" rendered="#{gtsRefBean.listPeriodes!=null}"
+					var="periode" style="width:100%; text-align: center;" rowIndexVar="selectedIndex"
+					emptyMessage="#{msgs['datatable.empty']}" 
+					value="#{gtsRefBean.listPeriodes}" paginator="true" rows="10">
+					<p:column headerText="#{msgs['cpwin.exercice']}" style="width:20%">
+				
+						<h:outputText value="#{periode.exercice}"/>
+							
+						
+					</p:column>
+					<p:column headerText="#{msgs['numero']}" style="width:20%">
+				
+						<h:outputText value="#{periode.numero}"/>
+							
+						
+					</p:column>
+					<p:column headerText="#{msgs['cpwin.etat']}" style="width:20%">
+				
+						<h:outputText value="#{periode.etat}"/>
+							
+						
+					</p:column>
+					<p:column headerText="#{msgs['ferme']}" style="width:20%">
+				
+						<h:outputText value="#{periode.ferme}"/>
+							
+						
+					</p:column>
+				
+					
+					
+					
+					<p:column style="width:10%;" headerText="#{msgs['btn.modifier']}" >						
+
+
+						<p:commandButton title="#{msgs['btn.modifier']}" 
+						icon="fa fa-fw fa-edit"
+							actionListener="#{gtsRefBean.gotoUpdatePeriode}">
+							<f:setPropertyActionListener target="#{gtsRefBean.selectedPeriode}"
+								value="#{periode}" />
+
+							<p:ajax event="dialogReturn" update=":detailsForm:periodesPanel" />
+						</p:commandButton>
+
+					</p:column>
+						<p:column style="width:13%;" headerText="#{msgs['btn.supprimer']}" >					
+					<p:commandButton title=" " icon="fa fa-fw fa-remove" 
+					onclick="PF('confSupprPeriode').show();" style="height:20px">
+							<f:setPropertyActionListener target="#{gtsRefBean.selectedPeriode}"
+								value="#{periode}" />
+				<p:ajax event="dialogReturn" update=":detailsForm:periodesPanel" />
+						</p:commandButton>
+				</p:column>
+				</p:dataTable>
+				
+			<br/>
+			<h:panelGroup>
+					<p:commandButton title=" " disabled="#{!gtsRefBean.requiredDataDone}"
+					actionListener="#{gtsRefBean.gotoAddPeriode}"
+						value="#{msgs['btn.add']}" >
+
+						<p:ajax event="dialogReturn" update=":detailsForm:periodesPanel" />
+
+					</p:commandButton>
+
+				</h:panelGroup></div>
+		</p:panel>
+		<p:confirmDialog message="#{msgs['confirm.suppression.periode']}"
+			header="" widgetVar="confSupprPeriode" modal="true">
+			<h:panelGrid width="100%" style="text-align: center;">
+				<h:panelGroup>
+					<p:commandButton value="#{msgs['btn.valider']}"
+						oncomplete="PF('confSupprPeriode').hide();"
+						actionListener="#{gtsRefBean.delete}"
+						update="detailsForm:periodesPanel" />
+					<p:commandButton value="#{msgs['btn.annuler']}"
+						onclick="PF('confSupprPeriode').hide();" type="button" />
+				</h:panelGroup>
+			</h:panelGrid>
+		</p:confirmDialog>
+	</ui:define>
+	
+</ui:composition>

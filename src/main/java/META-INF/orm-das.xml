@@ -1,0 +1,127 @@
+<entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+  version="2.0">
+	<entity class="fr.symphonie.tools.das.model.TiersDas">
+		<table name="tiersDas">
+		</table>
+		<attributes>
+			<id name="numero">
+				<column name="code_tiers"></column>
+			</id>
+			<basic name="type">
+				<column name="type_tiers"></column>
+			</basic>
+			<basic name="rs">
+			</basic>
+			<basic name="nom">
+			</basic>
+			<basic name="prenom">
+			</basic>
+			<basic name="siret">
+			</basic>
+			
+			<basic name="profession">
+			</basic>
+			<embedded name="adresse">
+			</embedded>
+			<embedded name="trace">
+			</embedded>
+		</attributes>
+	</entity>
+	<entity class="fr.symphonie.tools.das.model.Honoraire">
+		<table name="HonoraireDas">
+		</table>
+		<id-class class="fr.symphonie.tools.das.model.pk.HonoraireID"></id-class>
+		<attributes>
+			<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="codeTiers">
+				<column name="code_tiers"></column>
+			</id>
+			<basic name="honoraires">
+			</basic>
+			<basic name="commissions">
+			</basic>
+			<basic name="courtages">
+			</basic>
+			<basic name="ristournes">
+			</basic>
+			<basic name="jetonsPresence">
+			</basic>
+			<basic name="droitsAuteur">
+			</basic>
+			<basic name="droitsInventeur">
+			</basic>
+			<basic name="autresRemunerations">
+			</basic>
+			<basic name="indemnitesRemb">
+			</basic>
+			<basic name="avantagesEnNature">
+			</basic>
+			<basic name="retenueAlaSource">
+			</basic>
+			<basic name="nourriture">
+			</basic>
+			<basic name="logement">
+			</basic>
+			<basic name="voiture">
+			</basic>
+			<basic name="autres">
+			</basic>
+			<basic name="outilsNTIC">
+			</basic>
+			<basic name="allocForfaitaire">
+			</basic>
+			<basic name="remboursements">
+			</basic>
+			<basic name="priseEnChargeDirecteEmployeur">
+			</basic>
+			<basic name="tauxReduit">
+			</basic>
+			<basic name="dispense">
+			</basic>
+			<basic name="tvaNetteDroitsAuteur">
+			</basic>
+			<embedded name="trace">
+			</embedded>
+			<transient name="beneficiaire"></transient>
+		</attributes>
+	</entity>
+	<embeddable class="fr.symphonie.tools.das.model.VoieDas">
+		<attributes>
+			<basic name="numero">
+				<column name="num_voie" length="4"></column>
+			</basic>
+			<basic name="type">
+				<column name="type_voie" length="1"></column>
+			</basic>
+			<basic name="natureEtNom">
+				<column name="natureNom_voie" length="26"></column>
+			</basic>
+		</attributes>
+	</embeddable>
+	<embeddable class="fr.symphonie.tools.das.model.AdresseDas">
+		<attributes>
+			<basic name="bureau" fetch="EAGER">
+				<column name="bureau_dist" length="26"></column>
+			</basic>
+			<basic name="complement">
+				<column name="compl_adr" length="32"></column>
+			</basic>
+			<basic name="codePostale">
+				<column name="code_post" length="5"></column>
+			</basic>
+			<basic name="codeINSEE">
+				<column name="code_insee"></column>
+			</basic>
+			<basic name="commune">
+			</basic>
+			<embedded name="voie">
+			</embedded>
+		</attributes>
+	</embeddable>
+  
+  </entity-mappings>

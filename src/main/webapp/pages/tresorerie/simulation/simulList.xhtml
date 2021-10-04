@@ -1,0 +1,1281 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+.totalTitle {
+	text-align: left;
+	font-weight: bold;
+	background: #feeebd !important;
+	font-size: 9.5px;
+}
+
+.totalFooter {
+	color: #383838 !important;
+	background: #F0E68C !important;
+	border-color: grey !important;
+	font-size: 9.5px;
+	text-align: right;
+}
+
+.totalValue {
+	font-weight: bold;
+	background: #feeebd !important;
+}
+.detailTitle {	
+		text-align: left;
+}
+
+.detailValue {	
+	text-align: center;	
+}
+
+.globalTitle {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+	text-align: left;
+	font-style: italic;
+}
+
+.globalValue {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+	text-align: center;
+	font-style: italic;
+}
+
+.th {
+	color: #383838 !important;
+	background: #D19275 !important;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+}
+
+.td {
+	color: #383838 !important;
+	background: #F0E68C !important;
+	border-color: grey !important;
+	font-size: 9.5px;
+}
+.ui-datatable .ui-datatable-data td {
+    font-size: 65% !important;
+}
+
+.ui-datatable thead {
+    font-size: 65% !important;
+}
+
+</style>
+	<h:panelGroup style="width:100%;">
+
+		<p:dataTable sortBy="#{encaiss.ligne.ordre}"
+			rendered="#{pltBean.plan!=null}" var="encaiss" style="width:100%;"
+			rowIndexVar="encaissIndex" emptyMessage="#{msgs['datatable.empty']}"
+			value="#{pltBean.encaissements}">
+			<p:columnGroup type="header">
+				<p:row styleClass="th" style="font-weight: bold;text-align: center;">	              
+				  <p:column styleClass="th" colspan="1" style="width:12%;">
+					</p:column>			
+				 <p:column styleClass="th" colspan="1" style="width:7%;"
+						headerText="#{msgs['janvier']}">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" style="width:7%;"
+						headerText="#{msgs['fevrier']}">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['mars']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['avril']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['mai']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['juin']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['juillet']}" style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['aout']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['septembre']}" style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['octobre']}" style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['novembre']}" style="width:8%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['decembre']}" style="width:8%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['total.majus']} #{msgs['variation.tresorerie.annuelle']}"
+						style="width:7%;">
+				</p:column>
+
+        </p:row>
+          <p:row>
+           	 <p:column styleClass="totalTitle" colspan="1"
+						headerText="#{msgs['solde.initial']}">
+					</p:column>
+				  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{pltBean.plan.soldeInitial.montant01}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0" ></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					
+					</p:column>
+					
+					  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{pltBean.plan.soldeInitial.montant02}">
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0" ></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{pltBean.plan.soldeInitial.montant03}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{pltBean.plan.soldeInitial.montant04}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{pltBean.plan.soldeInitial.montant05}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{pltBean.plan.soldeInitial.montant06}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+							  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{pltBean.plan.soldeInitial.montant07}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{pltBean.plan.soldeInitial.montant08}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{pltBean.plan.soldeInitial.montant09}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+						  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{pltBean.plan.soldeInitial.montant10}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{pltBean.plan.soldeInitial.montant11}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+
+						  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{pltBean.plan.soldeInitial.montant12}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+
+							  <p:column styleClass="totalValue" colspan="1">
+
+					</p:column>
+					
+						 <p:column styleClass="totalValue" colspan="1"/>
+					
+						
+        </p:row>
+				<p:row>
+           	 <p:column style="text-align: left;font-weight: bold;"
+						colspan="1" headerText="#{msgs['encaissements']}" styleClass="th">
+					</p:column>
+						  <p:column styleClass="th" colspan="1">
+
+					</p:column>			
+				 <p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+						 
+				 
+        </p:row>
+			</p:columnGroup>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalTitle':'detailTitle'}">
+
+				<h:outputText value="#{encaiss.ligne.libelle}" />
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+				
+				<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+					rendered="#{(encaiss.ecritureEnabled(1))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{encaiss.montant01}">
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{encaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{encaiss.montant01}"
+				rendered="#{((!encaiss.ecritureEnabled(1))or(!pltBean.updateEcritureAutorized))}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+					rendered="#{(encaiss.ecritureEnabled(2))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{encaiss.montant02}" >
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{encaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{encaiss.montant02}"
+					rendered="#{(!encaiss.ecritureEnabled(2))or(!pltBean.updateEcritureAutorized)}">
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+				
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+					rendered="#{(encaiss.ecritureEnabled(3))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{encaiss.montant03}" >
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{encaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{encaiss.montant03}"
+					rendered="#{(!encaiss.ecritureEnabled(3))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+				
+
+			
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+						rendered="#{(encaiss.ecritureEnabled(4))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{encaiss.montant04}" >
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{encaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{encaiss.montant04}"
+						rendered="#{(!encaiss.ecritureEnabled(4))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+				
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+						rendered="#{(encaiss.ecritureEnabled(5))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{encaiss.montant05}" >
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{encaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{encaiss.montant05}"
+						rendered="#{(!encaiss.ecritureEnabled(5))or(!pltBean.updateEcritureAutorized)}"   >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+			
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+						rendered="#{(encaiss.ecritureEnabled(6))and(pltBean.updateEcritureAutorized)}"  
+					disabled="#{encaiss.periode!=pltBean.periode}">
+					<h:outputText value="#{encaiss.montant06}" >
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{encaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{encaiss.montant06}"
+						rendered="#{(!encaiss.ecritureEnabled(6))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+				
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+						rendered="#{(encaiss.ecritureEnabled(7))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{encaiss.montant07}" >
+						<f:convertNumber type="currency" currencySymbol=""  maxFractionDigits="0" ></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{encaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{encaiss.montant07}"
+					rendered="#{(!encaiss.ecritureEnabled(7))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+				
+		
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+					rendered="#{(encaiss.ecritureEnabled(8))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{encaiss.montant08}" >
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{encaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{encaiss.montant08}"
+				rendered="#{(!encaiss.ecritureEnabled(8))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+		
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+					rendered="#{(encaiss.ecritureEnabled(9))and(pltBean.updateEcritureAutorized)}"  >
+					<h:outputText value="#{encaiss.montant09}" >
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{encaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{encaiss.montant09}"
+						rendered="#{(!encaiss.ecritureEnabled(9))or(!pltBean.updateEcritureAutorized)}"   >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+				
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+					rendered="#{(encaiss.ecritureEnabled(10))and(pltBean.updateEcritureAutorized)}"  >
+					<h:outputText value="#{encaiss.montant10}" >
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{encaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{encaiss.montant10}"
+						rendered="#{(!encaiss.ecritureEnabled(10))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+			
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+					rendered="#{(encaiss.ecritureEnabled(11))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{encaiss.montant11}" >
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{encaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{encaiss.montant11}"
+				rendered="#{(!encaiss.ecritureEnabled(11))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+				
+
+				
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+						rendered="#{(encaiss.ecritureEnabled(12))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{encaiss.montant12}" >
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{encaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{encaiss.montant12}"
+					rendered="#{(!encaiss.ecritureEnabled(12))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+			
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<h:outputText value="#{encaiss.totaleVariationAnnuelle}">
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			
+
+			<p:columnGroup type="footer">
+
+				<p:row style="font-weight: bold;">
+	              
+				  <p:column styleClass="totalFooter">
+						<f:facet name="footer">
+							<h:outputLabel value="#{msgs['a.total']}" />
+						</f:facet>
+					</p:column>			
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleEncaiss.montant01}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleEncaiss.montant02}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleEncaiss.montant03}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleEncaiss.montant04}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleEncaiss.montant05}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleEncaiss.montant06}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleEncaiss.montant07}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleEncaiss.montant08}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+
+						</f:facet>
+					</p:column>
+		  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleEncaiss.montant09}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleEncaiss.montant10}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleEncaiss.montant11}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleEncaiss.montant12}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText
+								value="#{pltBean.plan.totaleEncaiss.totaleVariationAnnuelle}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+
+					</p:column>
+				
+        </p:row>
+			</p:columnGroup>
+		</p:dataTable>
+		<p:dataTable  sortBy="#{decaiss.ligne.ordre}"
+			var="decaiss" style="width:100%; text-align: center;"
+			rendered="#{pltBean.plan!=null}" rowIndexVar="decaissIndex"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{pltBean.decaissements}">
+
+			<p:columnGroup type="header">
+					
+        
+					<p:row>
+           	 <p:column
+						style="text-align: left;font-weight: bold; width:12%;" colspan="1"
+						headerText="#{msgs['decaissements']}" styleClass="th">
+					</p:column>
+						  <p:column styleClass="th" colspan="1" style="width:7%;">
+
+					</p:column>			
+				 <p:column styleClass="th" colspan="1" style="width:7%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:7%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:7%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:7%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:7%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:7%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:7%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:7%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:7%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:8%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:8%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:7%;">
+					</p:column>
+						 
+				
+        </p:row>
+			</p:columnGroup>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalTitle':'detailTitle'}">
+
+				<h:outputText value="#{decaiss.ligne.libelle}" />
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+				<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+					rendered="#{(decaiss.ecritureEnabled(1))and(pltBean.updateEcritureAutorized)}" 	 >
+					<h:outputText value="#{decaiss.montant01}">
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{decaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{decaiss.montant01}"
+						rendered="#{(!decaiss.ecritureEnabled(1))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+
+
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+					rendered="#{(decaiss.ecritureEnabled(2))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{decaiss.montant02}">
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{decaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{decaiss.montant02}"
+				rendered="#{(!decaiss.ecritureEnabled(2))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+			
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+					rendered="#{(decaiss.ecritureEnabled(3))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{decaiss.montant03}">
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{decaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{decaiss.montant03}"
+						rendered="#{(!decaiss.ecritureEnabled(3))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+				
+
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+								rendered="#{(decaiss.ecritureEnabled(4))and(pltBean.updateEcritureAutorized)}"  >
+					<h:outputText value="#{decaiss.montant04}">
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{decaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{decaiss.montant04}"
+						rendered="#{(!decaiss.ecritureEnabled(4))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+		
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+					rendered="#{(decaiss.ecritureEnabled(5))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{decaiss.montant05}">
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{decaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{decaiss.montant05}"
+					rendered="#{(!decaiss.ecritureEnabled(5))or(!pltBean.updateEcritureAutorized)}"  >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+		
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+						rendered="#{(decaiss.ecritureEnabled(6))and(pltBean.updateEcritureAutorized)}"  >
+					<h:outputText value="#{decaiss.montant06}">
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{decaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{decaiss.montant06}"
+						rendered="#{(!decaiss.ecritureEnabled(6))or(!pltBean.updateEcritureAutorized)}"  >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+			
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+						rendered="#{(decaiss.ecritureEnabled(7))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{decaiss.montant07}">
+						<f:convertNumber type="currency" currencySymbol=""  maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{decaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{decaiss.montant07}"
+						rendered="#{(!decaiss.ecritureEnabled(7))or(!pltBean.updateEcritureAutorized)}" >
+				<f:convertNumber type="currency" currencySymbol=""  maxFractionDigits="0" ></f:convertNumber>
+				</h:outputText>
+
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+
+				<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+						rendered="#{(decaiss.ecritureEnabled(8))and(pltBean.updateEcritureAutorized)}"  >
+					<h:outputText value="#{decaiss.montant08}">
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{decaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{decaiss.montant08}"
+							rendered="#{(!decaiss.ecritureEnabled(8))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+
+
+			<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+						rendered="#{(decaiss.ecritureEnabled(9))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{decaiss.montant09}">
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{decaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{decaiss.montant09}"
+						rendered="#{(!decaiss.ecritureEnabled(9))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+
+
+					<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+						rendered="#{(decaiss.ecritureEnabled(10))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{decaiss.montant10}">
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{decaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{decaiss.montant10}"
+							rendered="#{(!decaiss.ecritureEnabled(10))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+
+		<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+							rendered="#{(decaiss.ecritureEnabled(11))and(pltBean.updateEcritureAutorized)}" >
+					<h:outputText value="#{decaiss.montant11}">
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{decaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{decaiss.montant11}"
+					rendered="#{(!decaiss.ecritureEnabled(11))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+
+	<p:commandLink actionListener="#{pltBean.openEcrituresDialog}"
+					rendered="#{(decaiss.ecritureEnabled(12))and(pltBean.updateEcritureAutorized)}">
+					<h:outputText value="#{decaiss.montant12}">
+						<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+					<f:setPropertyActionListener target="#{pltBean.selectedLigne}"
+						value="#{decaiss}" />
+					<p:ajax event="dialogReturn" update="detailsForm:simulPanel" />
+				</p:commandLink>
+				<h:outputText value="#{decaiss.montant12}"
+					rendered="#{(!decaiss.ecritureEnabled(12))or(!pltBean.updateEcritureAutorized)}" >
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+				</h:outputText>
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<h:outputText value="#{decaiss.totaleVariationAnnuelle}">
+					<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+					</h:outputText>
+			</p:column>
+		
+
+			<p:columnGroup type="footer">
+
+				<p:row style="font-weight: bold;text-align: center;">
+	              
+				  <p:column styleClass="totalFooter">
+						<f:facet name="footer">
+							<h:outputLabel value="#{msgs['b.total']}" />
+						</f:facet>
+					</p:column>			
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleDecaiss.montant01}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleDecaiss.montant02}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleDecaiss.montant03}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleDecaiss.montant04}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleDecaiss.montant05}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleDecaiss.montant06}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleDecaiss.montant07}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleDecaiss.montant08}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+		  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleDecaiss.montant09}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleDecaiss.montant10}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleDecaiss.montant11}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.totaleDecaiss.montant12}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText
+								value="#{pltBean.plan.totaleDecaiss.totaleVariationAnnuelle}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+
+					</p:column>
+					
+        </p:row>
+
+              
+				  
+
+<p:row styleClass="th" style="font-weight: bold;text-align: center;">	
+	              
+				  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputLabel value="#{msgs['2.solde.mois.a.b']}" />
+						</f:facet>
+					</p:column>			
+				  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeMois.montant01}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+
+					</p:column>
+				  <p:column styleClass="th">
+
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeMois.montant02}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeMois.montant03}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeMois.montant04}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="th">
+
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeMois.montant05}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+		  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeMois.montant06}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+		  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeMois.montant07}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeMois.montant08}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+		  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeMois.montant09}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+	  <p:column styleClass="th">
+
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeMois.montant10}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+		  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeMois.montant11}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeMois.montant12}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeMois.totaleVariationAnnuelle}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					
+        </p:row>
+				<p:row style="font-weight: bold;text-align: center;">
+	              
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputLabel value="#{msgs['solde.cumul1.2']}" />
+						</f:facet>
+					</p:column>			
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeCumule.montant01}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeCumule.montant02}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeCumule.montant03}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeCumule.montant04}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeCumule.montant05}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeCumule.montant06}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeCumule.montant07}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeCumule.montant08}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+		  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeCumule.montant09}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeCumule.montant10}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeCumule.montant11}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{pltBean.plan.soldeCumule.montant12}">
+								<f:convertNumber type="currency" currencySymbol="" maxFractionDigits="0"></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+
+						</f:facet>
+
+					</p:column>
+					
+        </p:row>
+			</p:columnGroup>
+		</p:dataTable>
+	</h:panelGroup>
+
+
+	
+
+
+</ui:composition>

@@ -1,0 +1,203 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<style type="text/css">
+	
+	.globalTitle {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 7px;
+	text-align: center;
+	
+}
+	.detailTitle {	
+		text-align: center;
+}
+</style>	
+        		
+
+		
+			<p:treeTable  rendered="#{gtsBean.liqRecetteList!=null}" expandMode="self"
+			var="detail" style="width:100%; text-align: center;"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{gtsBean.liqRecetteTree}"  >
+			
+	<p:columnGroup type="header" >
+			<p:row style="text-align: center;">
+			   <p:column style="width:5%;font-size: 75%" headerText="#{msgs['dest']}" />
+                <p:column style="width:5%;font-size: 75%" headerText="#{msgs['service']}" />
+                <p:column style="width:5%;font-size: 75%" headerText="#{msgs['gts.nature']}" />
+                <p:column style="width:5%;font-size: 75%" headerText="#{msgs['prog']}" />
+
+                <p:column style="width:5%;font-size: 75%" headerText="#{msgs['no.lrec']}" />
+                <p:column style="width:7%;font-size: 75%" headerText="#{msgs['cpwin.tiers.orig']}" />
+                <p:column style="width:5%;font-size: 75%" headerText="#{msgs['ref.commande']}" />
+                
+				
+					<p:column style="width:5%;font-size: 75%" headerText="#{msgs['numero']}" />
+				<p:column style="width:8%;font-size: 75%" headerText="#{msgs['prestation']}" />
+				<p:column style="width:6%;font-size: 75%" headerText="#{msgs['quantite']}" />
+				<p:column style="width:6%;font-size: 75%" headerText="#{msgs['prix.unit']}" />
+				<p:column style="width:7%;font-size: 75%" headerText="#{msgs['taux.remise']}" />
+				<p:column style="width:7%;font-size: 75%" headerText="#{msgs['mnt.remise']}" />
+				<p:column style="width:6%;font-size: 75%" headerText="#{msgs['taux.tva']}" />
+				<p:column style="width:6%;font-size: 75%" headerText="#{msgs['mnt.tva']}" />
+				<p:column style="width:6%;font-size: 75%" headerText="#{msgs['mnt.ht']}" />
+				<p:column style="width:6%;font-size: 75%" headerText="#{msgs['mnt.ttc']}" />
+			</p:row>
+		</p:columnGroup>
+			
+
+<p:column style="width:5%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.destOfParent}" />
+		</p:column>
+		<p:column style="width:5%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.servOfParent}" />
+
+		</p:column>
+
+	<p:column style="width:5%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.natOfParent}" />
+		</p:column>
+
+		<p:column style="width:5%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.progOfParent}" />
+		</p:column>
+
+<p:column style="width:5%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.numeroOfParent}" />
+		</p:column>
+
+
+<p:column style="width:7%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.tiersOrigOfParent}" />
+		</p:column>
+		
+		<p:column style="width:5%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.refCmdOfParent}" />
+		</p:column>
+
+
+
+
+
+
+
+			
+		
+			<p:column style="width:5%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+		
+				<h:outputText value="#{detail.numeroOfChild}" />
+					
+		</p:column>
+			<p:column style="width:8%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+				<h:outputText value="#{detail.prestationOfChild}" />			
+		</p:column>
+		<p:column style="width:6%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+					<h:outputText value="#{detail.quantiteOfChild}" />		
+		</p:column>
+		<p:column style="width:6%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+		
+				<h:outputText value="#{detail.puOfChild}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>			
+		</p:column>
+		<p:column style="width:7%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+		
+				<h:outputText value="#{detail.tauxRemiseOfChild}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>				
+		</p:column>
+		<p:column style="width:7%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.mntRemiseOfChild}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>			
+		</p:column>
+		<p:column style="width:6%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+		
+				<h:outputText value="#{detail.tauxTvaOfChild}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>		
+		</p:column>
+		<p:column style="width:6%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+		
+				<h:outputText value="#{detail.mntTvaOfChild}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>		
+		</p:column>
+		<p:column style="width:6%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			
+				<h:outputText value="#{detail.mntHtOfChild}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>				
+		</p:column>
+		<p:column style="width:6%;font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			
+				<h:outputText value="#{detail.mntTtcOfChild}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>			
+		</p:column>	
+		<p:columnGroup type="footer" >
+			<p:row style="text-align: center;">
+
+				<p:column style="width:5%;font-size: 75%" colspan="12">
+					<f:facet name="footer">
+						<h:outputText value="#{msgs['totaux']}">
+						</h:outputText>
+					</f:facet>
+				</p:column>
+				<p:column style="width:7%;font-size: 75%">
+					<f:facet name="footer">
+						<h:outputText value="#{gtsBean.totalMntRemiseLiqReq}"
+							styleClass="montantStyle">
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+				</p:column>
+				<p:column style="width:6%;font-size: 75%" />
+				<p:column style="width:6%;font-size: 75%">
+					<f:facet name="footer">
+						<h:outputText value="#{gtsBean.totalMntTvaLiqReq}"
+							styleClass="montantStyle">
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+				</p:column>
+				<p:column style="width:6%;font-size: 75%">
+					<f:facet name="footer">
+						<h:outputText value="#{gtsBean.totalMntHtLiqReq}"
+							styleClass="montantStyle">
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+				</p:column>
+				<p:column style="width:6%;font-size: 75%">
+					<f:facet name="footer">
+						<h:outputText value="#{gtsBean.totalMntTtcLiqReq}"
+							styleClass="montantStyle">
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+				</p:column>
+			</p:row>
+		</p:columnGroup>										
+	</p:treeTable> 
+				 	<div align="center" style="width: 100%;">
+		<p:commandButton title=" " value="#{msgs['budget.btn.export']}"
+			immediate="true" rendered="#{not empty gtsBean.liqRecetteList}"
+			ajax="false">
+			<p:fileDownload value="#{gtsBean.xlsLiqRecetteConsult}" /> 
+		</p:commandButton>
+	</div>
+</ui:composition>

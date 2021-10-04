@@ -1,0 +1,179 @@
+  <entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+  version="2.0">
+<mapped-superclass class="fr.symphonie.budget.core.model.demat.GenericDemat">
+	<id-class class="fr.symphonie.budget.core.model.demat.pk.DematPK"></id-class>
+	<attributes>
+		<id name="exercice">
+			<column name="num_exec"></column>
+		</id>
+		<id name="codeBudget">
+			<column name="code_budg"></column>
+		</id>
+		<id name="code">
+			<column name="code_export"></column>
+		</id>
+		<id name="reference">
+			<column name="no_ligne"></column>
+		</id>
+		<basic name="libelle">
+		</basic>
+		<basic name="montant">
+		</basic>
+		<basic name="auteurMaj">
+				<column name="aut_maj" length="8" nullable="false"/>
+			</basic>
+			<basic name="dateMaj">
+				<column name="date_maj" nullable="false"/>
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+	</attributes>
+</mapped-superclass>
+<entity class="fr.symphonie.budget.core.model.demat.Export">
+	<table name="GbcpDematExport ">
+	</table>
+	<id-class class="fr.symphonie.budget.core.model.demat.pk.ExportPK"></id-class>
+	<attributes>
+		<id name="exercice">
+			<column name="num_exec"></column>
+		</id>
+		<id name="codeBudget">
+			<column name="code_budg"></column>
+		</id>
+		<id name="code">
+			<column name="code_export"></column>
+		</id>
+		<basic name="status">
+			<column name="status"></column>
+		</basic>
+		<embedded name="trace">
+		</embedded>
+	</attributes>
+</entity>
+<entity class="fr.symphonie.budget.core.model.demat.ExportInfo">
+	<table name="GbcpInfoMinefi">
+	</table>
+	<attributes>
+		<id name="code">
+			<column name="code_export"></column>
+		</id>
+		<basic name="libelle">
+			<column name="lib_export"></column>
+		</basic>
+		<basic name="maskDate">
+			<column name="date_mask"></column>
+		</basic>
+		<basic name="order">
+			<column name="no_order"></column>
+		</basic>
+	</attributes>
+</entity>
+<entity class="fr.symphonie.budget.core.model.demat.DematABP">
+	<table name="GbcpDematABP">
+	</table>
+	<inheritance strategy="TABLE_PER_CLASS"></inheritance>
+</entity>
+<entity class="fr.symphonie.budget.core.model.demat.DematCRP">
+	<table name="GbcpDematCRP">
+	</table>
+	<inheritance strategy="TABLE_PER_CLASS"></inheritance>
+</entity>
+<entity class="fr.symphonie.budget.core.model.demat.DematCAFP">
+	<table name="GbcpDematCAFP">
+	</table>
+	<inheritance strategy="TABLE_PER_CLASS"></inheritance>
+</entity>
+<entity class="fr.symphonie.budget.core.model.demat.DematTFP">
+	<table name="GbcpDematTFP">
+	</table>
+	<inheritance strategy="TABLE_PER_CLASS"></inheritance>
+</entity>
+<entity class="fr.symphonie.budget.core.model.demat.DematEFP">
+	<table name="GbcpDematEFP">
+	</table>
+	<inheritance strategy="TABLE_PER_CLASS"></inheritance>
+</entity>
+<entity class="fr.symphonie.budget.core.model.demat.DematABE">
+	<table name="GbcpDematABE">
+	</table>
+	<inheritance strategy="TABLE_PER_CLASS"></inheritance>
+</entity>
+<entity class="fr.symphonie.budget.core.model.demat.DematEFE">
+	<table name="GbcpDematEFE">
+	</table>
+	<inheritance strategy="TABLE_PER_CLASS"></inheritance>
+</entity>
+<entity class="fr.symphonie.budget.core.model.demat.DematSPP2">
+	<table name="GbcpDematSPP2">
+	</table>
+	<inheritance strategy="TABLE_PER_CLASS"></inheritance>
+</entity>
+<entity class="fr.symphonie.budget.core.model.demat.DematTSBCE">
+	<table name="GbcpDematTSBCE">
+	</table>
+	<inheritance strategy="TABLE_PER_CLASS"></inheritance>
+</entity>
+<entity class="fr.symphonie.budget.core.model.edition.EditionBiBr">
+	<table name="GbcpDematBIBR">
+	</table>
+	<id-class class="fr.symphonie.budget.core.model.demat.pk.BiBrPK"></id-class>
+	<attributes>
+		<id name="exercice">
+			<column name="num_exec"></column>
+		</id>
+		<id name="codeBudget">
+			<column name="code_budg"></column>
+		</id>
+		<id name="noMouvement">
+			<column name="no_mvt"></column>
+		</id>
+		<id name="typeData">
+			<column name="type_lib"></column>
+		</id>
+		<id name="refData">
+			<column name="code_lib"></column>
+		</id>
+		<basic name="montant">
+		</basic>
+		<embedded name="trace">
+		</embedded>
+	</attributes>
+</entity>
+<entity class="fr.symphonie.budget.core.model.edition.util.Operation">
+	<table name="GbcpDematBIBR_tab5">
+	</table>
+	<id-class class="fr.symphonie.budget.core.model.edition.pk.OperationPK"></id-class>
+	<attributes>
+		<id name="exercice">
+			<column name="num_exec"></column>
+		</id>
+		<id name="codeBudget">
+			<column name="code_budg"></column>
+		</id>
+		<id name="noMouvement">
+			<column name="no_mvt"></column>
+		</id>
+		<id name="code">
+			<column name="code_op"></column>
+		</id>
+		<basic name="designation">
+			<column name="op_desc"></column>
+		</basic>
+		<basic name="type">
+			<column name="op_budg"></column>
+		</basic>
+		<basic name="compte">
+		</basic>
+		<basic name="libelle">
+		</basic>
+		<basic name="debit">
+		</basic>
+		<basic name="credit">
+		</basic>
+		<transient name="trace"></transient>
+	</attributes>
+</entity>
+  
+  </entity-mappings>

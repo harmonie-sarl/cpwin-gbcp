@@ -1,0 +1,1352 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+	<p:panel style="width:150%;">
+		<f:facet name="header">
+			<h:outputText value="#{msgs['tableau']}"
+				style="font-weight: bold; text-align: center;" />
+		</f:facet>
+		<div align="center">
+			<h:outputText value="#{msgs['op.pluriannul.nat.previs']}"
+				style="font-weight: bold; text-align: center;color:#008000;" />
+		</div>
+		<br />
+		<p:panelGrid style="width:100%; vertical-align:top;">	
+		 <p:row>
+            <p:column colspan="21" rowspan="1"
+					style="font-weight: bold; text-align: left;background-color: #008000;color: #FFFFFF;">
+					<h:outputText value="#{msgs['pour.info.org']}"
+						style="font-weight: bold; text-align: center;" />
+				</p:column>				
+        </p:row>
+ <p:row>
+            <p:column colspan="21" rowspan="1">
+
+				</p:column>				
+        </p:row>
+	 <p:row>
+            <p:column colspan="21" rowspan="1"
+					style="font-weight: bold; text-align: left;color:#008000;">
+					<h:outputText value="#{msgs['suivi.oper.autoris.engag']}"
+						style="font-weight: bold; text-align: center;" />
+				</p:column>				
+        </p:row>
+ <p:row>
+            <p:column colspan="21" rowspan="1">
+
+				</p:column>				
+        </p:row>
+ <p:row>
+            <p:column colspan="21" rowspan="1"
+					style="font-weight: bold; text-align: left;color:#008000;">
+					<h:outputText value="#{msgs['previs.autoris.engag.credit']}"
+						style="font-weight: bold; text-align: center;" />
+				</p:column>				
+        </p:row>
+	 <p:row>
+            <p:column colspan="21">
+				</p:column>
+        </p:row>
+	 <p:row style="text-align: Center;font-weight: bold;">
+            <p:column colspan="2" rowspan="1">
+				</p:column>
+			    <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['prevision']}" />
+				</p:column>	
+				   <p:column colspan="1" rowspan="1">
+				</p:column>	
+  <p:column colspan="10" rowspan="1">
+					<h:outputLabel value="#{msgs['prevision.n']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>		
+				  <p:column colspan="6" rowspan="1">
+					<h:outputLabel value="#{msgs['prevision.n.suivnt']}" />
+				</p:column>	
+        </p:row>
+			 <p:row style="text-align: Center;">           
+			    <p:column colspan="1" rowspan="2"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['operation']}" />
+				</p:column>	
+				    <p:column colspan="1" rowspan="2"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['import.nature']}" />
+				</p:column> 
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['cout.total.op']}" />
+				</p:column>
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['ae.ouvert.ann.ant.n']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['ae.cons.ann.ant.n']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['ae.reprog.report.n']}*" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['ae.nouvl.ouvert.n']}" />
+				</p:column> 
+				 <p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['total.ae.ouvert.n']}" />
+				</p:column> 
+				 <p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['cp.ouvert.ann.ant.n']}" />
+				</p:column> 
+				 <p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['cp.cons.ann.ant.n']}" />
+				</p:column> 
+				 <p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['cp.reprog.report.n']}*" />
+				</p:column> 
+				 <p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['cp.nouv.ouvert.n']}" />
+				</p:column> 
+				 <p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['total.cp.ouvert.n']}" />
+				</p:column> 
+				 <p:column colspan="1" rowspan="1">
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['ae.prev.n1']}" />
+				</p:column> 
+				<p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['cp.prev.n1']}" />
+				</p:column> 
+				<p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['ae.prev.n2']}" />
+				</p:column> 
+				<p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['cp.prev.n2']}" />
+				</p:column> 
+				<p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['ae.prev.sup.n2']}" />
+				</p:column> 
+				<p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['cp.prev.sup.n2']}" />
+				</p:column> 
+        </p:row> 
+ <p:row style="text-align: Center;">           
+			    <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.1']}" />
+				</p:column>					
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				   <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.2']}" />
+				</p:column>	
+				   <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.3']}" />
+				</p:column>	
+				   <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.4']}" />
+				</p:column>	
+				   <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.5']}" />
+				</p:column>	
+				   <p:column colspan="1" rowspan="1">
+					<h:outputLabel
+						value="#{msgs['code.6']}=#{msgs['code.4']}+#{msgs['code.5']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.7']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.8']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.9']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.10']}" />
+				</p:column>				
+				 <p:column colspan="1" rowspan="1">
+					<h:outputLabel
+						value="#{msgs['code.11']}=#{msgs['code.9']}+#{msgs['code.10']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+				</p:column>				
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.12']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.13']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.14']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.15']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.16']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.17']}" />
+				</p:column>
+			</p:row>
+			<p:row>         
+			    <p:column colspan="1" rowspan="4" style="text-align: left;">
+					<h:outputLabel value="#{msgs['op.1']}" />
+				</p:column>					   
+  <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['personnel']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+        </p:row>
+			<p:row>         
+			    				   
+  <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['fonctionnement']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+        </p:row>
+			<p:row>         
+			    				   
+  <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['intervention']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+        </p:row>
+
+			<p:row>         
+			    				   
+  <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['invest']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+        </p:row>
+			<p:row style="font-weight: bold;">      
+			    				   
+  <p:column colspan="2" rowspan="1" style="text-align: Center;background-color: #D3D3D3;">
+					<h:outputLabel value="#{msgs['total.op.1']}" />
+				</p:column>				 
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;" >
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  style="background-color: #D3D3D3;">
+				</p:column>
+        </p:row>
+			<p:row>         
+			    <p:column colspan="1" rowspan="4" style="text-align: left;">
+					<h:outputLabel value="#{msgs['op.2']}" />
+				</p:column>					   
+  <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['personnel']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+        </p:row>
+			<p:row>         
+			    				   
+  <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['fonctionnement']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+        </p:row>
+			<p:row>         
+			    				   
+  <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['intervention']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+        </p:row>
+			<p:row>
+  <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['invest']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+        </p:row>
+			<p:row style="font-weight: bold;"> 
+  <p:column colspan="2" rowspan="1" style="text-align: Center;background-color: #D3D3D3;">
+					<h:outputLabel value="#{msgs['total.op.2']}" />
+				</p:column>				 
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>
+        </p:row>
+			<p:row style="text-align: right;font-weight: bold;">         
+			     <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column> 				   
+  <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+					<h:outputLabel value="#{msgs['ss.total.pers']}" />
+				</p:column>				 
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+        </p:row>
+			<p:row style="text-align: right;font-weight: bold;">        
+			     <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column> 				   
+  <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+					<h:outputLabel value="#{msgs['ss.total.fonct']}" />
+				</p:column>				 
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+        </p:row>
+			<p:row style="text-align: right;font-weight: bold;">          
+			     <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column> 				   
+  <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+					<h:outputLabel value="#{msgs['ss.total.interv']}" />
+				</p:column>				 
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+        </p:row>
+			<p:row style="text-align: right;font-weight: bold;">          
+			     <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column> 				   
+  <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+					<h:outputLabel value="#{msgs['ss.total.invest']}" />
+				</p:column>				 
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+				</p:column>
+        </p:row>
+			<p:row style="text-align: right;font-weight: bold;">          
+			     <p:column colspan="1" rowspan="1"
+					style="background-color:#000000">
+				</p:column> 				   
+  <p:column colspan="1" rowspan="1" style="background-color:#000000">
+				</p:column>				 
+				  <p:column colspan="1" rowspan="1" style="background-color:#000000">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+				</p:column>
+        </p:row>
+		</p:panelGrid>
+		<br />
+		<div align="left">
+			<h:outputText value="* #{msgs['occas.budget.init.n.coln.enreg']}" />
+		</div>
+		<br />
+		<p:panelGrid style="width:70%; vertical-align:top;">	
+		 <p:row>
+            <p:column colspan="10" rowspan="1"
+					style="font-weight: bold; text-align: left;color:#008000;">
+					<h:outputText value="#{msgs['previs.recet']}" />
+				</p:column>				
+        </p:row>
+			<p:row style="text-align: Center;">         
+			     <p:column colspan="10" rowspan="1">
+				</p:column> 				   
+                		
+        </p:row>
+			<p:row style="text-align: Center;font-weight: bold;">
+            <p:column colspan="2" rowspan="1">
+				</p:column>
+			    <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['prevision']}" />
+				</p:column>	
+				   <p:column colspan="1" rowspan="1">
+				</p:column>	
+  <p:column colspan="2" rowspan="1">
+					<h:outputLabel value="#{msgs['prevision.n']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+				</p:column>		
+				  <p:column colspan="3" rowspan="1">
+					<h:outputLabel value="#{msgs['prevision.n.suivnt']}" />
+				</p:column>	
+        </p:row>
+ <p:row style="text-align: Center;">           
+			    <p:column colspan="1" rowspan="2"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['operation']}" />
+				</p:column>	
+				    <p:column colspan="1" rowspan="2"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['import.nature']}" />
+				</p:column> 
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['financ.operation']}" />
+				</p:column>
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['ensaiss.prev.ant.n']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['ensaiss.prev.n']}" />
+				</p:column>
+					 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['ensaiss.prev.n1']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['ensaiss.prev.n2']}" />
+				</p:column> 
+				 <p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['ensaiss.prev.sup.n2']}" />
+				</p:column> 				 
+        </p:row> 
+<p:row style="text-align: Center;">  
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.18']}" />
+				</p:column>
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.19']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.20']}" />
+				</p:column>
+					 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.21']}" />
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.22']}" />
+				</p:column> 
+				 <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['code.23']}" />
+				</p:column> 
+        </p:row> 
+<p:row>         
+			    <p:column colspan="1" rowspan="3" style="text-align: left;">
+					<h:outputLabel value="#{msgs['op.1']}" />
+				</p:column>					   
+ <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['financ.etat']}*" />
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>				
+				    </p:row>
+			<p:row>         
+			    <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['autre.financ.pub']}**" />
+				</p:column>		   
+ <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				    </p:row>
+			<p:row>         
+			    <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['autre.financ']}***" />
+				</p:column>					   
+ <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				    </p:row>
+			<p:row style="font-weight: bold;">         
+			    <p:column colspan="2" rowspan="1" style="text-align: Center;background-color: #D3D3D3;">
+					<h:outputLabel value="#{msgs['total.op.1']}" />
+				</p:column>		   
+ <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+				</p:column>				
+				    </p:row>
+			<p:row>         
+			    <p:column colspan="1" rowspan="3" style="text-align: left;">
+					<h:outputLabel value="#{msgs['op.2']}" />
+				</p:column>					   
+ <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['financ.etat']}*" />
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>				
+				    </p:row>
+			<p:row>         
+			    <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['autre.financ.pub']}**" />
+				</p:column>		   
+ <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				    </p:row>
+			<p:row>         
+			    <p:column colspan="1" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['autre.financ']}***" />
+				</p:column>					   
+ <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				    </p:row>
+
+			<p:row style="font-weight: bold;">         
+			    <p:column colspan="2" rowspan="1" style="text-align: Center;background-color: #D3D3D3;">
+					<h:outputLabel value="#{msgs['total.op.2']}" />
+				</p:column>		   
+ <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;"> 
+				</p:column>				
+				    </p:row>
+
+			<p:row style="text-align: right;font-weight: bold;">          
+			    <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+					<h:outputLabel value="#{msgs['ss.tot.autr.financ.etat']}" />
+				</p:column>	   
+ <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>				
+				    </p:row>
+			<p:row style="text-align: right;font-weight: bold;">         
+			    <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+					<h:outputLabel value="#{msgs['ss.tot.autr.financ.pub']}" />
+				</p:column>	   
+ <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>				
+				    </p:row>
+
+			<p:row style="text-align: right;font-weight: bold;">         
+			    <p:column colspan="1" rowspan="1"
+					style="background-color:#FFA500;">
+
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+					<h:outputLabel value="#{msgs['ss.tot.autr.financ']}" />
+				</p:column>	   
+ <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#FFA500;">
+				</p:column>				
+				    </p:row>
+			<p:row style="text-align: Center;">  
+					 <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+					<h:outputLabel value="#{msgs['total.majus']}" />
+				</p:column>	        
+			    <p:column colspan="1" rowspan="1"
+					style="background-color:#3CB371;">
+
+				</p:column>	
+			  
+ <p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+				</p:column>	
+				 <p:column colspan="1" rowspan="1" style="background-color:#3CB371;">
+				</p:column>				
+				    </p:row>
+
+		</p:panelGrid>
+		<br />
+		<div align="left">
+			<h:outputText style="text-align: left;color: #2F4F4F;" 
+				value="* #{msgs['subv.charg.serv.pub.autre.financ']}" />
+		</div>
+		<div align="left">
+			<h:outputText style="text-align: left;color: #2F4F4F;"
+				value="** #{msgs['autre.financ.pub.glob.flech']}" />
+		</div>
+		<div align="left">
+			<h:outputText style="text-align: left;color: #2F4F4F;"
+				value="*** #{msgs['recet.propr.autr.recet']}" />
+		</div>
+
+	</p:panel>
+
+
+</ui:composition>

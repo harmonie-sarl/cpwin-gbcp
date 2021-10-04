@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	
+	<ui:define name="lastPrefexedTitle" />
+	<ui:define name="entetePage">
+		<ui:include src="/pages/common/initialisation/entete.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="enteteAction" >
+	<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}" 
+			id="affichBtn" update="detailsForm"
+			immediate="true" actionListener="#{initBean.executeSearch}" 
+			disabled="#{!initBean.commonRequiredDone}">
+		</p:commandButton>
+	</ui:define>
+	
+	<ui:define name="search">
+	</ui:define>
+	<ui:define name="details">
+	<p:panel id="initPanel" style="width:100%;" >
+	<p:tabView id="ongletsImport" style="width:100%;" cache="false"	rendered="#{initBean.dataVisible}">
+
+				<p:tab id="tabInitlist" rendered="#{initBean.initDataVisible}"
+					title="#{msgs['donnees.chargees']}">
+
+					<ui:include src="./onglets/initDataList.xhtml">
+					</ui:include>
+				</p:tab>
+			
+				<p:tab id="tabErreurs" rendered="#{initBean.errorReportVisible}"
+					title="#{msgs['budget.data.error.tab']} (#{initBean.errorReport.stream().count()})">
+
+					<ui:include src="/pages/common/initialisation/rapport_erreurs.xhtml" />
+
+				</p:tab>
+
+			</p:tabView>
+	
+			
+	
+	
+	</p:panel>
+
+	</ui:define>
+	
+	
+	</ui:composition>
+	
+	

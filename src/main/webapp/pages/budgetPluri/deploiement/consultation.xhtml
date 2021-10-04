@@ -1,0 +1,128 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+
+.noneStyle {
+	color: #000000;
+	background-color: none;
+}
+
+.redStyle {
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+</style>
+
+
+
+	</ui:define> 
+	<ui:define name="pageTitle">#{msgs['details.virement']}</ui:define>
+	<ui:define name="entetePage">
+		<ui:include src="/snippets/budget/enteteConsultDeploi.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="search">
+
+	</ui:define>
+		<ui:define name="enteteAction">
+		<h:panelGrid columns="2">
+		<p:spacer width="30"/>
+		<p:commandButton title=" " id="searchBtn" value="#{msgs['cpwin.btn.afficher']}" rendered="#{bpBean.commonRequiredDone}" disabled="#{!bpBean.requiredDataDone}"
+			update="globalMessage,:detailsForm" immediate="true" actionListener="#{bpBean.consultDeploiement}" >
+                 
+		</p:commandButton>
+		</h:panelGrid>
+			</ui:define>
+				<ui:define name="details">
+				<p:panel id="consultDeploiPanel" style="width:100%;"
+			rendered="#{bpBean.cpItemModifList!=null}"
+			header="#{msgs['details.virement']}">
+			
+			<div align="center" style="width: 100%;">
+			
+			<p:dataTable id="cpModif_dtt"
+			rendered="#{bpBean.cpItemModifList!=null}" var="item"
+					style="width:100%; text-align: center;" rowIndexVar="index"
+					emptyMessage="#{msgs['datatable.empty']}"
+					value="#{bpBean.cpItemModifList}" paginator="true" rows="10">
+					
+					
+			
+						<p:column style="width:7%;">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['gestionnaire']}" />
+				</f:facet>
+				<h:outputText value="#{item.cpGest.codeAndLib}" />
+				<f:facet name="footer">
+							<h:outputText value="#{msgs['total']}" />
+						</f:facet>
+			       </p:column>
+			
+						<p:column style="width:7%;">
+				<f:facet name="header">
+					<h:outputText value="1- #{bpBean.getModifNatGrp(0)}" />
+				</f:facet>
+				<h:outputText value="#{item.getMontant('1')}" />
+					<f:facet name="footer">
+							<h:outputText value="#{bpBean.getTotalMntNatGrp('1')}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+			</p:column>
+						<p:column style="width:7%;">
+				<f:facet name="header">
+					<h:outputText value="2- #{bpBean.getModifNatGrp(1)}" />
+				</f:facet>
+				<h:outputText value="#{item.getMontant('2')}" />
+				<f:facet name="footer">
+							<h:outputText value="#{bpBean.getTotalMntNatGrp('2')}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+			</p:column>
+			<p:column style="width:7%;">
+				<f:facet name="header">
+					<h:outputText value="3- #{bpBean.getModifNatGrp(2)}" />
+				</f:facet>
+				<h:outputText value="#{item.getMontant('3')}" />
+				<f:facet name="footer">
+							<h:outputText value="#{bpBean.getTotalMntNatGrp('3')}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+			</p:column>
+				<p:column style="width:7%;">
+				<f:facet name="header">
+					<h:outputText value="4- #{bpBean.getModifNatGrp(3)}" />
+				</f:facet>
+				<h:outputText value="#{item.getMontant('4')}" />
+				<f:facet name="footer">
+							<h:outputText value="#{bpBean.getTotalMntNatGrp('4')}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+			</p:column>
+			
+				
+			
+			</p:dataTable>
+			</div>
+			</p:panel>
+				
+				</ui:define>
+	
+	
+	
+	
+	
+	
+	</ui:composition>

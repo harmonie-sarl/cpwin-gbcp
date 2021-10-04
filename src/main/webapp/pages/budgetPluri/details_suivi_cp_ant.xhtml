@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<p:dataTable style="width:100%; text-align: center;" value="#{bpBean.suiviCpAeAnt}" 
+			 var="suivi" paginator="true"
+					rows="5" >
+					
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['noej']}" />
+						</f:facet>
+
+						<h:outputText value="#{suivi.exerciceCP} - #{suivi.ej}"  />
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['rap.cp']}" />
+						</f:facet>
+
+						<h:outputText value="#{suivi.rap}"  />
+					</p:column>
+				
+					<p:column style="width:8%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['tiers']}" />
+						</f:facet>
+
+						<h:outputText value="#{suivi.tiers}"  />
+					</p:column>
+					<p:column style="width:9%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['cpwin.objet']}" />
+						</f:facet>
+
+						<h:outputText value="#{suivi.libelle}"  />
+					</p:column>
+					<p:column style="width:9%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['cp.ei']}" />
+						</f:facet>
+
+						<h:outputText value="#{suivi.ei}"  />
+					</p:column>
+					
+					
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['dp.emises']}" />
+						</f:facet>
+
+					<h:outputText value="#{suivi.dpEmise}"  />
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['cp.dp.pec']}" />
+						</f:facet>
+
+						<h:outputText value="#{suivi.dpPec}"  />
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['credits.annul']}" />
+						</f:facet>
+
+						<h:outputText value="#{suivi.ca}"  />
+					</p:column>
+				
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['reste.apayer']}" />
+						</f:facet>
+
+						<h:outputText value="#{suivi.rap}"  />
+					</p:column>
+			</p:dataTable>
+			</ui:composition>

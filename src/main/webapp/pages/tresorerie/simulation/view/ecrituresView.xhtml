@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>#{msgs['liste.ecritures']}</title>
+		<style type="text/css">
+.redStyle {
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+</style>
+	</h:head>
+
+	<h:body>
+		<h:form id="ecrituresForm">
+			<p:messages id="ecrituresMsg" showDetail="true" autoUpdate="true"
+				styleClass="error" globalOnly="true" />
+				
+			<p:panel id="listEcrituresPanel" style="width:100%;"	rendered="#{pltBean.selectedLigne.ecritureList!=null}">
+			<h:panelGroup id="ecritures_Btn">
+					<div align="center" style="width: 100%;">						
+						<p:commandButton value="#{msgs['btn.fermer']}" immediate="true"
+							actionListener="#{pltBean.closeEcrituresDialog}">
+						</p:commandButton>
+					</div>
+				</h:panelGroup>
+
+				<ui:include	src="./ecrituresList.xhtml"></ui:include>
+				
+			</p:panel>
+
+		</h:form>
+	</h:body>
+</ui:composition>

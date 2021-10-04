@@ -1,0 +1,245 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<style  type="text/css"   >
+	
+.col11 {
+	width: 10%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col21 {
+	width: 90%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+</style>
+	<p:panel  style="width:100%;">
+
+		<div
+			style="margin-left: auto; margin-right: auto; text-align: left;vertical-align: top;">
+
+		<h:panelGrid columns="6" style="width:60%; vertical-align:top;" >
+			<h:selectBooleanCheckbox disabled="#{!gestionTiersBean.active}" value="#{gestionTiersBean.tiers.confidentielB}" />
+
+			<h:panelGroup>
+				<h:outputText  styleClass="Label" value="#{msgs['confidentiel']}" />
+				<h:outputText value=" *" rendered="#{gestionTiersBean.active}"
+					styleClass="required"></h:outputText>
+			</h:panelGroup>
+
+			<h:selectBooleanCheckbox disabled="#{!gestionTiersBean.active}" value="#{gestionTiersBean.tiers.soumisCmpB}" />
+			<h:panelGroup>
+				<h:outputText  styleClass="Label" value="#{msgs['soumis.cmp']}" />			
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<h:outputText  styleClass="Label" value="#{msgs['liquidation.redressement']}" />				
+			</h:panelGroup>
+			<h:outputText value="#{gestionTiersBean.tiers.flagJudiciaire}"
+				rendered="#{!gestionTiersBean.active}" />
+			<h:selectOneMenu styleClass="ReadOnlyText"
+				rendered="#{gestionTiersBean.active}"
+				value="#{gestionTiersBean.tiers.flagJudiciaire}">
+				<f:selectItem itemValue="" itemLabel="" />
+				<f:selectItems value="#{gestionTiersBean.etatsTiersList}" var="etat"
+					itemLabel="#{etat.code}- #{etat.designation}"
+					itemValue="#{etat.code}">
+				</f:selectItems>
+			</h:selectOneMenu>
+
+
+		</h:panelGrid></div>
+
+	</p:panel>
+
+
+
+	<div style="margin-left: auto; margin-right: auto; text-align: left;vertical-align: top;">
+	<h:panelGrid columns="4" style="width:100%; vertical-align:top;" >
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['sigle']}" />		
+		</h:panelGroup>
+		<h:outputText value="#{gestionTiersBean.tiers.sigle}" 
+			rendered="#{!gestionTiersBean.active}" />
+		<p:inputText value="#{gestionTiersBean.tiers.sigle}" size="51"
+			maxlength="255" rendered="#{gestionTiersBean.active}" />
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['delai.usuel']}" />			
+		</h:panelGroup>
+		<h:outputText value="#{gestionTiersBean.tiers.delai}"
+			rendered="#{!gestionTiersBean.active}" />
+		<h:panelGroup  rendered="#{gestionTiersBean.active}"  >
+			<p:inputText id="delai" onfocus="select();" required="false"  converterMessage="#{errorMsgs['valeur.invalide']}"
+				value="#{gestionTiersBean.tiers.delai}" size="30" >
+				<p:ajax event="keyup" update="delaiMsg" process="delai"></p:ajax>
+				<f:convertNumber integerOnly="true" maxIntegerDigits="4" pattern="####" ></f:convertNumber>				
+				</p:inputText>
+			<p:message id="delaiMsg" for="delai" styleClass="error" />
+		</h:panelGroup>
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['cpwin.enseigne']}" />
+			<h:outputText value=" *" rendered="#{gestionTiersBean.active}"
+				styleClass="required"></h:outputText>
+		</h:panelGroup>
+		<h:outputText value="#{gestionTiersBean.tiers.enseigne}"
+			rendered="#{!gestionTiersBean.active}" />
+		<p:inputText value="#{gestionTiersBean.tiers.enseigne}" size="51"
+			maxlength="255" rendered="#{gestionTiersBean.active}" />
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['mode.paiement']}" />
+			<h:outputText value=" *" rendered="#{gestionTiersBean.active}"
+					styleClass="required"></h:outputText>			
+		</h:panelGroup>
+		
+		<h:selectOneMenu styleClass="ReadOnlyText" disabled="#{!gestionTiersBean.active}"
+			value="#{gestionTiersBean.tiers.modepaie}">
+			<f:selectItem itemValue="" itemLabel="" />
+			<f:selectItems value="#{gestionTiersBean.modePaiementList}" var="mode"
+				itemLabel="#{mode.code}- #{mode.nom}"
+				itemValue="#{mode.code}">
+			</f:selectItems>
+		</h:selectOneMenu>
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['responsable']}" />		
+		</h:panelGroup>
+		<h:outputText value="#{gestionTiersBean.tiers.nomResp}"
+			rendered="#{!gestionTiersBean.active}" />
+		<p:inputText value="#{gestionTiersBean.tiers.nomResp}" size="51"
+			maxlength="255" rendered="#{gestionTiersBean.active}" />
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['cpwin.num.siren']}" />
+			<h:outputText value=" *" rendered="#{gestionTiersBean.active}"
+				styleClass="required"></h:outputText>
+		</h:panelGroup>
+		<h:outputText value="#{gestionTiersBean.tiers.numSiren}"
+			rendered="#{!gestionTiersBean.active}" />
+		<p:inputText value="#{gestionTiersBean.tiers.numSiren}" maxlength="32"
+			size="30" rendered="#{gestionTiersBean.active}" />
+
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['contact']}" />		
+		</h:panelGroup>
+		<h:outputText value="#{gestionTiersBean.tiers.nomContact}"
+			rendered="#{!gestionTiersBean.active}" />
+		<p:inputText value="#{gestionTiersBean.tiers.nomContact}" size="51"
+			maxlength="255" rendered="#{gestionTiersBean.active}" />
+
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['code.ape']}" />			
+		</h:panelGroup>
+		<h:outputText value="#{gestionTiersBean.tiers.codeApe}"
+			rendered="#{!gestionTiersBean.active}" />
+		<p:inputText value="#{gestionTiersBean.tiers.codeApe}" size="30"
+			maxlength="10" rendered="#{gestionTiersBean.active}" />
+
+
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['contact.tel']}" />		
+		</h:panelGroup>
+
+		<h:panelGroup>
+			<h:panelGrid columns="3" style="width:80%; vertical-align:top;" >
+				<h:outputText value="#{gestionTiersBean.tiers.contact.telephone}"
+					rendered="#{!gestionTiersBean.active}" />
+				<p:inputText value="#{gestionTiersBean.tiers.contact.telephone}"
+					maxlength="32" rendered="#{gestionTiersBean.active}" />
+
+				<h:panelGroup>
+					<h:outputText  styleClass="Label" value="#{msgs['contact.fax']}" />					
+				</h:panelGroup>
+				<h:outputText value="#{gestionTiersBean.tiers.contact.fax}"
+					rendered="#{!gestionTiersBean.active}" />
+				<p:inputText value="#{gestionTiersBean.tiers.contact.fax}"
+					maxlength="32" rendered="#{gestionTiersBean.active}" />
+			</h:panelGrid>
+		</h:panelGroup>
+
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['num.tva']}" />		
+		</h:panelGroup>
+		<h:outputText value="-non défini-harmonie-"
+			rendered="#{!gestionTiersBean.active}" />
+		<p:inputText value="non défini-harmonie" size="30"
+			maxlength="255" rendered="#{gestionTiersBean.active}" />
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['icon.email']}" />			
+		</h:panelGroup>
+		<h:outputText value="#{gestionTiersBean.tiers.mail}"
+			rendered="#{!gestionTiersBean.active}" />
+		<p:inputText id="email" value="#{gestionTiersBean.tiers.mail}"
+			size="51" maxlength="255" rendered="#{gestionTiersBean.active}" />
+
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['capital.social']}" />		
+		</h:panelGroup>
+		<h:outputText value="#{gestionTiersBean.tiers.capital}"
+			rendered="#{!gestionTiersBean.active}" />
+		<p:inputText value="#{gestionTiersBean.tiers.capital}" size="30"
+			maxlength="255" rendered="#{gestionTiersBean.active}" />
+
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['forme.social']}" />		
+		</h:panelGroup>
+		<h:outputText value="#{gestionTiersBean.tiers.libFormeSociale}"
+			rendered="#{!gestionTiersBean.active}" />
+		<p:selectOneMenu styleClass="ReadOnlyText" 
+			rendered="#{gestionTiersBean.active}"
+			value="#{gestionTiersBean.tiers.formeSociale}">
+			<f:selectItem itemValue="" itemLabel="" />
+			<f:selectItems value="#{gestionTiersBean.formeSocialeList}" var="forme"
+				itemLabel="#{forme.codeAndLibelle}"
+				itemValue="#{forme.code}">
+			</f:selectItems>
+		</p:selectOneMenu>
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['gere.par']}" />
+			<h:outputText value=" *" rendered="#{gestionTiersBean.active}"
+					styleClass="required"></h:outputText>		
+		</h:panelGroup>
+			<h:panelGroup>
+				<p:selectOneMenu id="services" required="false"
+					styleClass="ReadOnlyText" disabled="#{!gestionTiersBean.active}" 
+					requiredMessage="#{errorMsgs['required']}"
+					value="#{gestionTiersBean.tiers.codeService}"
+					>
+					<f:selectItem itemValue="" itemLabel="---------------------"
+						noSelectionOption="true" />
+					<f:selectItems value="#{loaderBean.listService}" var="serv"
+						itemLabel="#{serv.codeAndLibelle}" itemValue="#{serv.code}">
+					</f:selectItems>
+					<p:ajax process="@this" update="servicesMsg"></p:ajax>
+				</p:selectOneMenu>
+				<p:message id="servicesMsg" for="services" styleClass="error" />
+			
+			</h:panelGroup>
+		</h:panelGrid>
+		<h:panelGrid columns="2"  style="width:100%; vertical-align:top;" columnClasses="col11,col21" >
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['comment']}" />			
+		</h:panelGroup>
+		<h:inputTextarea rows="5" id="commentaire"
+			value="#{gestionTiersBean.tiers.commentaire}" cols="132"
+			rendered="#{gestionTiersBean.active}">
+
+		</h:inputTextarea>
+
+		<h:outputText value="#{gestionTiersBean.tiers.commentaire}"
+			rendered="#{!gestionTiersBean.active}" />
+
+		<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['doublon']}" />			
+		</h:panelGroup>
+		<h:outputText value="#{gestionTiersBean.tiers.doublon}"
+			rendered="#{!gestionTiersBean.active}" />
+		<p:inputText value="#{gestionTiersBean.tiers.doublon}" size="149"
+			maxlength="255" rendered="#{gestionTiersBean.active}" />
+	</h:panelGrid></div>
+
+</ui:composition>

@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+	
+				<h:outputLabel value="#{msgs['cpwin.exercice']}" 	 />
+				
+				<p:selectOneMenu  id="exercList"  styleClass="ReadOnlyText" value="#{searchBean.exercice}" >					 
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.exercicAeList}" var="exerc" 
+				itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax  listener="#{editionBean.onExerciceChange}"  process="@this" update="budgetCodeList,:detailsForm,:enteteForm" />
+				</p:selectOneMenu>
+	
+				<h:outputLabel value="#{msgs['budget.code']}"	 />
+				
+				<p:selectOneMenu id="budgetCodeList"  styleClass="ReadOnlyText" value="#{searchBean.codeBudget}" >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.listBudgets}" var="budg"
+				itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax  process="@this" update=":detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+			
+	<h:outputLabel value="#{msgs['gbcp.regenerate']}"	 rendered="#{editionBean.editionGenerated}" />
+	<p:selectBooleanCheckbox value="#{editionBean.regenerate}" rendered="#{editionBean.editionGenerated}">
+	<p:ajax  process="@this" update=":detailsForm,:enteteForm" />
+	</p:selectBooleanCheckbox>
+	
+	<p:outputLabel value="#{errorMsgs['gbcp.edition.notpermitted']}" styleClass="error" rendered="#{ false  and (!editionBean.editable) and (!editionBean.editionGenerated) and (editionBean.commonRequiredDone)}"></p:outputLabel>
+
+			 
+		</ui:composition>

@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+  
+        
+	<p:dataTable style="width:100%; text-align: center;" scrollable="true" scrollHeight="450"
+		value="#{bpBean.suiviCpAeAnt}"
+		emptyMessage="#{msgs['datatable.empty']}"
+		rendered="#{bpBean.suiviCpAeAnt!=null}" var="suivi">
+		
+			
+		<p:column filterBy="#{suivi.codeDest}" filterMatchMode="contains" style="width:7%;"
+			filterStyle="width: 40px;" headerText="#{msgs['dest']}">
+			<h:outputText value="#{suivi.codeDest}" />
+		</p:column>
+		<p:column  style="width:6%;">
+			<f:facet name="header">
+				<h:outputText value="#{msgs['import.nature']}" />
+			</f:facet>
+			<h:outputText value="#{suivi.codeNature}" />
+		</p:column>
+		<p:column filterBy="#{suivi.codeService}" filterMatchMode="contains" style="width:8%;"
+			filterStyle="width: 46px;" headerText="#{msgs['service']}">
+			<h:outputText value="#{suivi.codeService}" />
+		</p:column>
+		<p:column filterBy="#{suivi.codeProg}" filterMatchMode="contains" style="width:8%;" filterStyle="width: 46px;"
+		  headerText="#{msgs['prog']}"  >
+            <h:outputText value="#{suivi.codeProg}" />
+        </p:column>
+        	<p:column  style="width:12%;" >
+        	<f:facet name="header">
+				<h:outputText value="#{msgs['nom.prog']}" />
+			</f:facet>
+            <h:outputText value="#{suivi.nomProg}" />
+        </p:column>
+		<p:column filterBy="#{suivi.ej}" filterMatchMode="contains" style="width:8%;"
+			filterStyle="width: 46px;">
+				<f:facet name="header">
+				<h:outputText value="#{msgs['noej']}" />
+			</f:facet>
+			<h:outputText value="#{suivi.ej}" />
+		</p:column>
+		<p:column style="width:7%;">
+			<f:facet name="header">
+				<h:outputText value="#{msgs['rap.cp']}" />
+			</f:facet>
+			<h:outputText value="#{suivi.ejReserve}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+		<p:column filterBy="#{suivi.tiers}" filterMatchMode="contains" style="width:12%;"
+			filterStyle="width: 46px;" headerText="#{msgs['tiers']}">
+			<h:outputText value="#{suivi.tiers}" />
+		</p:column>
+		<p:column style="width:9%;">
+			<f:facet name="header">
+				<h:outputText value="#{msgs['cpwin.objet']}" />
+			</f:facet>
+			<h:outputText value="#{suivi.libelle}" />
+		</p:column>
+		<p:column filterBy="#{suivi.ei}" filterMatchMode="contains" style="width:12%;"
+			filterStyle="width: 46px;" headerText="#{msgs['cp.ei']}">
+			<h:outputText value="#{suivi.ei}" />
+		</p:column>
+		<p:column style="width:7%;">
+			<f:facet name="header">
+				<h:outputText value="#{msgs['dp.saisie']}" />
+			</f:facet>
+			<h:outputText value="#{suivi.dpSaisie}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+		<p:column style="width:7%;">
+			<f:facet name="header">
+				<h:outputText value="#{msgs['dp.emises']}" />
+			</f:facet>
+			<h:outputText value="#{suivi.dpEmise}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+		<p:column style="width:7%;">
+			<f:facet name="header">
+				<h:outputText value="#{msgs['cp.dp.pec']}" />
+			</f:facet>
+			<h:outputText value="#{suivi.dpPec}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+		<p:column filterBy="#{suivi.ca}" filterMatchMode="contains" style="width:8%;"
+			filterStyle="width: 46px;" >
+				<f:facet name="header">
+				<h:outputText value="#{msgs['cred.annul']}" />
+			</f:facet>
+			<h:outputText value="#{suivi.ca}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+		<p:column filterBy="#{suivi.rap}" filterMatchMode="contains" style="width:8%;"
+			filterStyle="width: 46px;" headerText="#{msgs['rap']}">
+			<h:outputText value="#{suivi.rap}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+
+
+	</p:dataTable>
+</ui:composition>

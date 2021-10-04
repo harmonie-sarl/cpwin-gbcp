@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+  version="2.0">
+   
+	
+	<entity class="fr.symphonie.cpwin.model.Adresse">
+		<table name="TiersAdresse">
+		</table>
+		<id-class class="fr.symphonie.cpwin.model.pk.CodeAndOrdrePK"></id-class>
+		<attributes>
+			<id name="ordre">
+				<column name="no_adr" length="1"></column>
+			</id>
+			<id name="codeTiers">
+				<column name="code_tiers" length="10"></column>
+			</id>
+			<basic name="adresse1">
+			<column name="adr1" />
+			</basic>
+			<basic name="adresse2">
+			<column name="adr2"/>
+			</basic>
+			<basic name="ville">
+			</basic>
+			<basic name="codePostale">
+				<column name="code_post" length="10"/>
+			</basic>
+	
+			<basic name="bureauPostale">
+				<column name="bur_post" length="27"></column>
+			</basic>
+			<basic name="type">
+				<column name="type_adr" length="1"></column>
+			</basic>
+			<many-to-one name="tiers" fetch="LAZY">
+				<join-column name="code_tiers" referenced-column-name="code_tiers" insertable="false" updatable="false"></join-column>
+			</many-to-one>			
+			<embedded name="pays">
+			<attribute-override name="code">
+					<column name="pays" length="3"/>
+				</attribute-override>
+			
+			</embedded>
+			<embedded name="trace">
+			
+			</embedded>
+			<transient name="typeTiers"></transient>
+		</attributes>
+		
+	</entity>
+	<entity class="fr.symphonie.cpwin.model.Tiers">
+		<table name="Tiers">
+		</table>
+		<attributes>
+			<id name="code">
+				<column name="code_tiers" length="10"></column>
+			</id>
+			<basic name="nom">
+				<column name="nom_tiers" length="255"></column>
+			</basic>
+			<basic name="sigle">
+				<column name="sigle" length="255"></column>
+			</basic>
+			<basic name="numSiren">
+				<column name="no_siren"></column>
+			</basic>
+			<basic name="etat">
+				<column name="etat"></column>
+			</basic>
+			<basic name="enseigne">
+				<column name="enseigne"  length="255"></column>
+			</basic>
+			<basic name="nomContact">
+				<column name="nom_contact" length="255"></column>
+			</basic>
+			<basic name="nomResp">
+				<column name="nom_resp" length="255"></column>
+			</basic>
+			<basic name="commentaire">
+				<column name="observations" length="255"></column>
+			</basic>
+				<basic name="doublon">
+				<column name="doublon" length="255"></column>
+			</basic>
+			<basic name="capital">
+				<column name="capital" length="255"></column>
+			</basic>
+			<basic name="formeSociale">
+				<column name="forme_soc" length="10" ></column>
+			</basic>
+			<basic name="confidentiel">
+			<column name="est_confidentiel" length="10"></column>
+			</basic>
+			<basic name="soumisCmp">
+			<column name="est_soumis_cmp" length="1"></column>
+			</basic>
+			<basic name="delai">	
+			</basic>	
+			<basic name="codeApe">
+				<column name="code_ape" length="10" ></column>
+			</basic>
+			<basic name="flagJudiciaire">
+			<column name="flag_judiciaire" ></column>
+			</basic>	
+			<basic name="codeService">
+			<column name="code_service" ></column>
+			</basic>
+			<basic name="modepaie">
+			<column name="mode_paie" ></column>
+			</basic>
+			<basic name="siret">
+				<column name="no_siret_ep"></column>
+			</basic>
+			<basic name="prenom">
+			</basic>
+			<basic name="nomPersonne">
+				<column name="nom_pers_phys"></column>
+			</basic>
+			<one-to-many name="ibans" mapped-by="tiers" fetch="LAZY">
+				<cascade>
+					<cascade-merge ></cascade-merge>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="adresses" fetch="EAGER" mapped-by="tiers">
+				<cascade>
+					<cascade-all ></cascade-all>
+				</cascade>
+			</one-to-many>
+			<embedded name="trace">
+			</embedded>
+			<embedded name="contact">
+				<attribute-override name="fax">
+					<column name="fax_contact"></column>
+				</attribute-override>
+				<attribute-override name="telephone">
+					<column name="tel_contact"></column>
+				</attribute-override>
+				<attribute-override name="mail">
+					<column name="mail_contact"></column>
+				</attribute-override>
+			</embedded>
+			<transient name="documents"></transient>
+			<transient name="notifications"></transient>
+				<transient name="adresse"></transient>
+				<transient name="ribs"></transient>
+		</attributes>
+	</entity>
+	<entity class="fr.symphonie.cpwin.model.Iban">
+		<table name="TiersIban">
+		</table>
+		<id-class class="fr.symphonie.cpwin.model.pk.CodeAndOrdrePK"></id-class>
+		<attributes>
+			<id name="codeTiers">
+				<column name="code_tiers" length="10"></column>
+			</id>
+				<id name="ordre">
+				<column name="no_iban" length="1"></column>
+			</id>
+			<basic name="iban">
+				<column length="34"></column>
+			</basic>
+			<basic name="detenteur">
+			</basic>
+			<basic name="bic">
+				<column length="11"></column>
+			</basic>
+			<basic name="banque">
+			</basic>
+			<basic name="ouvert">
+			<column name="ouvert" length="1"></column>
+				</basic>
+			<basic name="valide">
+			<column name="cle_valide" length="1"></column>
+			</basic>
+			
+			<many-to-one name="tiers" id="false" fetch="LAZY">
+				<join-column name="code_tiers" referenced-column-name="code_tiers" insertable="false" updatable="false"></join-column>
+			</many-to-one>
+			<embedded name="trace">
+			</embedded>
+			<transient name="finDiffusion"></transient>
+			<transient name="calculatedRib"></transient>
+			<transient name="newIban"></transient>
+			<transient name="checked"></transient>		
+			<transient name="used"></transient>
+		</attributes>
+	</entity>
+	<entity class="fr.symphonie.cpwin.model.Rib">
+		<table name="tiersrib">
+		</table>
+		<id-class class="fr.symphonie.cpwin.model.pk.CodeAndOrdrePK"></id-class>
+		<attributes>
+			<id name="codeTiers">
+				<column name="code_Tiers" length="10"></column>
+			</id>
+			<id name="ordre">
+				<column name="no_rib" length="1"></column>
+			</id>
+			<basic name="detenteur">
+				<column name="lib_rib" length="80"></column>
+			</basic>
+			<basic name="domiciliation">
+				<column name="dom_banc" length="40"></column>
+			</basic>
+			<basic name="codeBanque">
+				<column name="code_banque" length="8"></column>
+			</basic>
+			<basic name="numeroCompte">
+				<column name="no_cpt" length="14"></column>
+			</basic>
+			<basic name="codeGuichet">
+				<column name="code_gui" length="5"></column>
+			</basic>
+			<basic name="cle">
+				<column name="cle_rib" length="2"></column>
+			</basic>
+			<basic name="valide">
+			<column name="cle_valide" length="1"></column>
+			</basic>
+			<many-to-one name="tiers" id="false">
+				<join-column name="code_tiers" referenced-column-name="code_tiers" insertable="false" updatable="false"></join-column>
+			</many-to-one>
+			<embedded name="trace">
+			</embedded>
+			<transient name="codePays"></transient>
+			<transient name="calculatedIban"></transient>
+			<transient name="newRib"></transient>
+			<transient name="updated"></transient>
+			<transient name="copyBeforeUpdate"></transient>
+			<transient name="etat"></transient>
+			<transient name="active"></transient>
+		</attributes>
+	</entity>
+	<entity class="fr.symphonie.cpwin.model.Banque">
+		<table name="Tiersbanque">
+		</table>
+		<id-class class="fr.symphonie.cpwin.model.pk.BanquePK"></id-class>
+		<named-query name="getCodepaysFromBanque">
+			<query>SELECT DISTINCT b.codePays FROM Banque b</query>
+		</named-query>
+		<attributes>
+			<id name="codePays">
+				<column name="code_pays" length="2"></column>
+			</id>
+			<id name="codeBanque">
+				<column name="code_banque" length="5"></column>
+			</id>
+			<basic name="nom">
+				<column name="nom_banque" length="255" nullable="false"></column>
+			</basic>
+			<basic name="finDiffusion">
+				<column name="date_fin_Diffusion"></column>
+				<temporal>DATE</temporal>
+			</basic>
+			<embedded name="trace">
+			</embedded>
+		</attributes>
+	</entity>
+	
+	<entity class="fr.symphonie.cpwin.model.FormeSociale">
+		<table name="TiersFormeSoc">
+		</table>
+		<attributes>
+			<id name="code">
+				<column name="forme_soc" />
+			</id>
+			<basic name="nom">
+				<column name="nom_forme_soc" length="255"></column>
+			</basic>
+			<basic name="soumisCmp">
+				<column name="est_soumis_cmp" length="1"></column>
+			</basic>
+			<basic name="confidentiel">
+				<column name="est_confidentiel" length="1"></column>
+			</basic>
+
+			<embedded name="trace">
+			</embedded>
+		</attributes>
+	</entity>
+	
+	<entity class="fr.symphonie.cpwin.model.ModePaiement">
+		<table name="CtaModePaie">
+		</table>
+		<attributes>
+			<id name="code">
+				<column name="mode_paie" />
+			</id>
+			<basic name="nom">
+				<column name="nom_paie" length="255"></column>
+			</basic>
+			<embedded name="trace">
+			</embedded>
+		</attributes>
+	</entity>
+	<entity class="fr.symphonie.cpwin.model.Service">
+		<table name="DroitService">
+		</table>
+		<attributes>
+			<id name="code">
+				<column name="code_service" />
+			</id>
+			<basic name="nom">
+				<column name="nom_service" length="255"></column>
+			</basic>
+			<embedded name="trace">
+			</embedded>
+		</attributes>
+	</entity>
+	
+  </entity-mappings>

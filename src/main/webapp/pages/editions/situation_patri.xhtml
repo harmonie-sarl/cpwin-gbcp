@@ -1,0 +1,88 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+</ui:define>
+
+<ui:define name="entetePage">
+	</ui:define>
+	<ui:define name="search">
+
+	</ui:define>
+	<ui:define name="details">
+	<div style="margin-left: auto; margin-right: auto; text-align: left;vertical-align: top;">
+	<p:panel id="DataNonBudgPanel" style="width:100%;" header="#{msgs['data.no.budg']}">
+	<h:panelGrid columns="4" style="width:100%; vertical-align:top;" >
+	<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['dotation.amortiss']}"  />		
+		</h:panelGroup>
+	<h:outputText  value="#{bpBean.data.dotation}" style="display:block;width:100px"
+			maxlength="255" />
+			<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['reprises.amortiss']}" />
+			</h:panelGroup>
+				<h:outputText  value="#{bpBean.data.reprise}"
+			maxlength="255" />	
+			<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['valeur.nette.comptable']}" />	
+			</h:panelGroup>
+			<h:outputText value="#{bpBean.data.valeur_compt}" 
+			maxlength="255" />	
+			<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['produit.cess.actif']}" />	
+			</h:panelGroup>
+			<h:outputText  value="#{bpBean.data.produit_cession}"
+			maxlength="255" />	
+			<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['subv.invest.vire']}" />	
+			</h:panelGroup>
+			<h:outputText  value="#{bpBean.data.subv_inves}"
+			maxlength="255" />	
+			<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['rembours.cautions']}" />	
+			</h:panelGroup>
+			<h:outputText value="#{bpBean.data.rembours_caution}" 
+			maxlength="255" />	
+			<h:panelGroup>
+			<h:outputText  styleClass="Label" value="#{msgs['caution.recu']}" />	
+			</h:panelGroup>
+			<h:outputText  value="#{bpBean.data.cautio_recu}" 
+			maxlength="255" />	
+		
+	</h:panelGrid>
+	<br />
+	<div align="center">
+	<h:panelGroup>	
+					
+					<p:commandButton  title=" " value="#{msgs['btn.enregistrer']}" ajax="false" rendered=""
+					  actionListener="#{bpBean.saveNoDataBudg}">
+					</p:commandButton>
+					
+						<p:commandButton title=" " value="#{msgs['btn.edition.bi']}" rendered="#{not empty bpBean.budget.listEnvBudg}" immediate="true"
+					ajax="false">
+						<p:fileDownload value="#{bpBean.xlsEditionBi}" />	
+						</p:commandButton>
+						 <p:commandButton title=" " value="#{msgs['btn.fermer']}" action="#{bpBean.fermer}" immediate="true" rendered="false"
+					ajax="false">
+					
+						</p:commandButton>
+					
+					
+        	</h:panelGroup>
+        	</div>
+	</p:panel>
+	</div>
+	</ui:define>
+	
+	
+	</ui:composition>

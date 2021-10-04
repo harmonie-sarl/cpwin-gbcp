@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<style type="text/css">
+.col1 {
+	width: 40%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col2 {
+	width: 60%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+</style>
+	<h:panelGrid columns="2" style="width:100%; vertical-align:top;"
+		columnClasses="col1,col2">
+		<h:panelGroup>
+			<h:outputText value="#{msgs['code.pays']}"></h:outputText>
+			<h:outputText value=" *" styleClass="required"></h:outputText>
+		</h:panelGroup>
+		<p:inputText id="pays" value="#{agentCptBean.banque.codePays}" size="2" maxlength="2"></p:inputText>
+		
+		
+		<h:panelGroup>
+			<h:outputText value="#{msgs['code.banque.absorbe']}"></h:outputText>
+			<h:outputText value=" *" styleClass="required"></h:outputText>
+		</h:panelGroup>
+		<p:inputText id="codeBanque" value="#{agentCptBean.banque.codeBanque}" size="5" maxlength="5"></p:inputText>
+		<h:panelGroup>
+			<h:outputText value="#{msgs['libelle.banque.absorbe']}"></h:outputText>
+			<h:outputText value=" *" styleClass="required"></h:outputText>
+		</h:panelGroup>
+		<p:inputText id="libBanque" value="#{agentCptBean.banque.nom}" size="40" maxlength="255"></p:inputText>
+		
+		<h:outputText value="#{msgs['date.de.fin.diffusion']}"></h:outputText>
+		<p:calendar id="dateDiff" pattern="dd/MM/yyyy" navigator="true"
+				value="#{agentCptBean.banque.finDiffusion}" showOn="button"
+				converterMessage="#{errorMsgs['date.format.invalide']}"
+				validator="validator.format.date">						
+		</p:calendar>					
+		<p:message showSummary="false" for="dateDiff" />
+		
+	</h:panelGrid>
+</ui:composition>

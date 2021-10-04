@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+<div align="center">
+		<h:panelGroup rendered="#{sepaMode=='sepa_saisie'}">
+		 <p:commandButton immediate="true" title="" global="false"
+					value="#{msgs['login.btn.valider']}" id="validate_hfr" 
+					update="globalMessage,:detailsForm:importPanel" disabled="#{sctBean.validationOutFrCompleted}"
+					actionListener="#{sctBean.executeOutFrValidation}">
+				</p:commandButton>
+            
+		</h:panelGroup>
+	</div>
+	<br/>
+	<p:dataTable id="nonSepaFrPaymentList_dtt" scrollable="true" scrollHeight="250" scrollRows="15"
+		rendered="#{sctBean.nonSepaFrPaymentList!=null}" var="credit"
+		style="width:100%;text-align:center" rowIndexVar="creditIndex"
+		emptyMessage="#{msgs['datatable.empty']}"
+		value="#{sctBean.nonSepaFrPaymentList}">
+		
+		<p:column headerText="#{msgs['matricule']}"
+			style="text-align: left;width:5%" rendered="#{sepaMode=='RMH'}">
+			<h:outputText value="#{credit.actor.code}" />
+		</p:column>
+		<p:column headerText="#{msgs['nom']}"	style="text-align:left;width:10%">
+			<h:outputText value="#{credit.actor.name}" />
+		</p:column>
+		<p:column headerText="#{msgs['prenom']}" style="text-align:left;width:10%">
+			<h:outputText value="#{credit.actor.firstName}" />
+		</p:column>
+		<p:column headerText="#{msgs['montant']}" style="width:10%">
+			<h:outputText value="#{credit.amount}" >
+             <f:convertNumber type="currency" currencySymbol="" />
+            </h:outputText>
+            <f:facet name="footer" >
+			<h:outputText style="vertical-align:top;align: left"
+				value="#{sctBean.nonSepaFrPaymentList.stream().map(credit->credit.amount).sum()}">
+				 <f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+		</f:facet>
+		</p:column>
+			
+		<p:column headerText="#{msgs['iban']}" style="text-align:left;width:10%">
+
+			<h:outputText value="#{credit.actor.iban}" />
+
+
+		</p:column>
+		<p:column headerText="#{msgs['bic']}" style="text-align:left;width:10%">
+			<h:outputText value="#{credit.actor.bic}" />
+		</p:column>
+		<p:column headerText="#{msgs['cpwin.objet']}" style="text-align:left;width:10%">
+
+			<h:outputText value="#{credit.object}" />
+
+		</p:column>
+		</p:dataTable>
+		
+		
+		</ui:composition>
+		

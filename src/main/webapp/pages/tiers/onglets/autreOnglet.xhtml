@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<p:panel style="width:100%;">
+
+		<div
+			style="margin-left: auto; margin-right: auto; text-align: left; vertical-align: top;">
+
+		<h:panelGrid columns="4" style="width:50%; vertical-align:top;">
+			<h:outputText   styleClass="Label" value="#{msgs['dateCrea']}" />
+			<h:outputText value="#{gestionTiersBean.tiers.trace.dateCreationF}" />
+			<h:outputText  styleClass="Label" value="#{msgs['autCrea']}" />
+			<h:outputText value="#{gestionTiersBean.tiers.trace.nomAuteurCreation}" />
+			<h:outputText  styleClass="Label" value="#{msgs['dateMaj']}" />
+			<h:outputText value="#{gestionTiersBean.tiers.trace.dateMajF}" />
+			<h:outputText  styleClass="Label" value="#{msgs['autMaj']}" />
+			<h:outputText value="#{gestionTiersBean.tiers.trace.nomAuteurMaj}" />
+		</h:panelGrid></div>
+
+	</p:panel>
+
+
+
+</ui:composition>

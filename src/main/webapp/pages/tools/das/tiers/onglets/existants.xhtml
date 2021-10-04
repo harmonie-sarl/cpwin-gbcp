@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+
+	
+        	<p:dataTable sortBy="#{tiers.numero}" id="tiersExistants_dtt"
+			rendered="#{dasBean.existantList!=null}"
+			 var="tiers" style="width:100%;text-align:center"
+			rowIndexVar="tiersIndex" emptyMessage="#{msgs['datatable.empty']}"
+			value="#{dasBean.existantList}">
+
+			<p:column headerText="#{msgs['num.tiers']}" style="width:9%">
+				<h:outputText value="#{tiers.numero}" />
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.type']}" style="width:9%">
+				<h:outputText value="#{tiers.type}" />
+			</p:column>
+		<p:column headerText="#{msgs['raison.sociale']}" style="width:9%">
+				<h:outputText value="#{tiers.rs}" />
+			</p:column>
+			<p:column headerText="#{msgs['login.lastname']}" style="width:9%">
+				<h:outputText value="#{tiers.nom}" />
+			</p:column>
+			<p:column headerText="#{msgs['login.firstname']}" style="width:9%">
+				<h:outputText value="#{tiers.prenom}" />
+			</p:column>
+
+			<p:column headerText="#{msgs['bureau.distributeur']}" style="width:9%">
+			<h:outputText value="#{tiers.adresse.bureau}" />
+			</p:column>
+			<p:column headerText="#{msgs['num.dans.voie']}" style="width:9%">
+				<h:outputText value="#{tiers.adresse.voie.numero}" />
+			</p:column>
+			<p:column headerText="#{msgs['nature.voie']}" style="width:9%">
+				<h:outputText value="#{tiers.adresse.voie.type}" />
+			</p:column>
+			<p:column headerText="#{msgs['nom.voie']}" style="width:9%">
+				<h:outputText value="#{tiers.adresse.voie.natureEtNom}" />
+			</p:column>
+			<p:column headerText="#{msgs['siret']}" style="width:14%">
+				<h:outputText value="#{tiers.siret}" />
+			</p:column>
+			<p:column headerText="#{msgs['btn.modifier']}" style="width:5%">
+				<p:commandButton   title="#{msgs['btn.modifier']}" icon="fa fa-fw fa-edit" 
+					actionListener="#{dasBean.openTiersDialog}"  >					
+					<f:setPropertyActionListener target="#{dasBean.selectedTiers}"
+						value="#{tiers}" />
+		
+					<p:ajax event="dialogReturn"
+						update=":detailsForm:ongletsImport:tiersExistants_dtt" />
+				</p:commandButton>
+				
+				
+			</p:column>
+			
+			  	</p:dataTable>   
+				 
+				
+
+
+
+
+
+
+
+
+
+
+</ui:composition>

@@ -1,0 +1,159 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<style type="text/css">
+
+.ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {
+    opacity: .50;
+    filter: Alpha(Opacity=50);
+    background-image: none;
+    color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	text-align: left;
+	font-style: italic;
+}
+
+</style>
+	<div align="center" style="width: 100%;">
+
+		<p:dataTable id="ecritures_dtt" 
+			rendered="#{not empty pltBean.selectedLigne.ecritureList}"
+			var="ecrit" style="width:100%; text-align: center;"
+			rowIndexVar="ecritIndex" emptyMessage="#{msgs['datatable.empty']}"
+			value="#{pltBean.selectedLigne.ecritureList}" >
+			
+			<p:column style="width:5%;text-align: center;" filterBy="#{ecrit.numero}" filterMatchMode="contains"
+			filterStyle="width: 40px;"	>
+				<f:facet name="header">
+					<h:outputText value="#{msgs['no.ecr']}" />
+				</f:facet>
+				<h:outputText value="#{ecrit.numero}" />
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+			<p:column style="width:5%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['no.op']}" />
+				</f:facet>
+				<h:outputText value="#{ecrit.numeroOP}" />
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+			<p:column style="width:5%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['type.ecr']}" />
+				</f:facet>
+				<h:outputText value="#{ecrit.type}" />
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+			<p:column style="width:7%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['tiers']}" />
+				</f:facet>
+				<h:outputText value="#{ecrit.tiers}" />
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+			<p:column style="width:10%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['lib.ecr']}" />
+				</f:facet>
+				<h:outputText value="#{ecrit.libelle}" />
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>		
+			<p:column style="width:6%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['debit']}" />
+				</f:facet>
+				<h:outputText value="#{ecrit.debit}">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+			<p:column style="width:6%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['credit']}" />
+				</f:facet>
+				<h:outputText value="#{ecrit.credit}">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>			
+			
+			<p:column style="width:10%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['piece']}" />
+				</f:facet>
+				<h:outputText value="#{ecrit.exerciceOrigine}/#{ecrit.typePiece}/#{ecrit.numeroPiece}" />
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+			
+			<p:column style="width:10%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['no.ltr1']}" />
+				</f:facet>
+				<h:outputText value="#{ecrit.libelleLigne1}" />
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+			<p:column style="width:8%;text-align: center;"  filterBy="#{ecrit.montantLigne1}" filterMatchMode="contains"
+			filterStyle="width: 40px;">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['mt.ltr1']}" />
+				</f:facet>
+				<h:outputText value="#{ecrit.montantLigne1}">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>				
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+			<p:column style="width:10%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['no.ltr2']}" />
+				</f:facet>
+				<h:outputText value="#{ecrit.libelleLigne2}" />
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+			<p:column style="width:8%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['mt.ltr2']}" />
+				</f:facet>
+				<h:outputText value="#{ecrit.montantLigne2}">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+			<p:column style="width:8%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['btn.modifier']}" />
+				</f:facet>
+				<p:commandButton   title="#{msgs['btn.modifier']}" icon="fa fa-fw fa-edit" 
+					actionListener="#{pltBean.openEcritureDialog}">					
+					<f:setPropertyActionListener target="#{pltBean.selectedEcriture}"
+						value="#{ecrit}" />
+		
+					<p:ajax event="dialogReturn"
+						update="ecrituresForm:listEcrituresPanel" />
+				</p:commandButton>
+
+			
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+
+		</p:dataTable>
+
+	</div>
+
+</ui:composition>

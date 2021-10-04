@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:panelGroup  id="tiersPG">
+	<h:panelGrid columns="8">
+		<h:outputLabel value="#{msgs['code.libelle.tiers']}" for="tiers"
+			styleClass="espace_entre_label_value" />
+		<p:inputText id="tiers" value="#{gestionTiersBean.codeTiers}" size="7">
+			<p:ajax event="keyup" global="false"
+				actionListener="#{gestionTiersBean.onSearchTiersChange}"
+				update=":detailsForm:tiersPanel" />
+		</p:inputText>
+		<p:message for="tiers" styleClass="error" />
+	
+	
+		<h:outputLabel value="#{msgs['cpwin.num.siren']}" for="numSiren"
+			styleClass="espace_entre_label_value" />
+		<p:inputText id="numSiren" value="#{gestionTiersBean.numSiren}" size="7">
+			<p:ajax event="keyup" global="false"
+				actionListener="#{gestionTiersBean.onSearchTiersChange}"
+				update=":detailsForm:tiersPanel" />
+		</p:inputText>
+		<p:message for="numSiren" styleClass="error" />
+	
+	
+		<h:outputLabel value="#{msgs['cpwin.etat']}" for="etatTiers" 
+			styleClass="espace_entre_label_value" />
+		<h:selectOneMenu id="etatTiers" styleClass="ReadOnlyText"
+			value="#{gestionTiersBean.etat}" >
+			<f:selectItem itemValue="" itemLabel="" />
+			<f:selectItems value="#{gestionTiersBean.etatsTiersList}" var="etat"
+				itemLabel="#{etat.code}- #{etat.designation}"
+				itemValue="#{etat.code}">
+			</f:selectItems>
+			<p:ajax event="change" global="false"
+				actionListener="#{gestionTiersBean.onSearchTiersChange}"
+				update=":detailsForm:tiersPanel" />
+		</h:selectOneMenu>
+		</h:panelGrid>
+	</h:panelGroup>
+	<h:panelGroup id="dateDuPg">
+		<h:outputLabel value="#{msgs['cpwin.modification']} #{msgs['cpwin.du']}"
+			for="dateDu" styleClass="espace_entre_label_value" />
+		<p:calendar id="dateDu" pattern="dd/MM/yyyy" size="10"
+			navigator="true"
+			converterMessage="#{errorMsgs['date.invalide']}"
+			value="#{gestionTiersBean.dateDebut}" showOn="button"
+			onSelectUpdate="dateDuPg,dateAuPg,:detailsForm:tiersPanel" maxdate="#{gestionTiersBean.dateFin}"
+			selectListener="#{gestionTiersBean.onDateDebChange}">			
+			<p:ajax event="blur" global="false"
+				listener="#{gestionTiersBean.onDateDebChange}"
+				update="dateAuPg,:detailsForm:tiersPanel" />
+		</p:calendar>
+		<p:message for="dateDu" styleClass="error" showSummary="false" />
+	</h:panelGroup>
+	<h:panelGroup id="dateAuPg">
+		<h:outputLabel
+			value="#{msgs['cpwin.au']}" for="dateAu" 
+			styleClass="espace_entre_label_value" />
+		<p:calendar id="dateAu" pattern="dd/MM/yyyy" size="10"
+			navigator="true" mindate="#{gestionTiersBean.dateDebut}"
+			converterMessage="#{errorMsgs['date.invalide']}"
+			value="#{gestionTiersBean.dateFin}" showOn="button"
+			onSelectUpdate="dateAuPg,:detailsForm:tiersPanel"
+			selectListener="#{gestionTiersBean.onDateFinChange}" >			
+			<p:ajax event="blur" global="false"
+				listener="#{gestionTiersBean.onDateFinChange}"
+				update=":detailsForm:tiersPanel" />
+		</p:calendar>
+		<p:message for="dateAu" styleClass="error" />
+	</h:panelGroup>
+
+</ui:composition>
+
+
+
+
+
+

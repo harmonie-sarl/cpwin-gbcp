@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+			<h:panelGrid columns="2">
+		<h:outputLabel value="#{msgs['exercice.co']}"	 />
+				<h:panelGroup>
+					 <p:selectOneMenu  id="exercList"  styleClass="ReadOnlyText" value="#{searchBean.exerciceCp}" >
+					 
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.exercicCpList}" var="exerc" 
+				itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax  listener="#{bpBean.onExerciceChange}"  process="@this" update="budgetCodeList,:detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+				</h:panelGroup>	
+		
+		</h:panelGrid>
+		
+		<h:panelGrid columns="2">
+		
+				<h:outputLabel value="#{msgs['budget.code']}"	 />
+				<h:panelGroup>
+					 <p:selectOneMenu id="budgetCodeList"  styleClass="ReadOnlyText" value="#{searchBean.codeBudget}" >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.listBudgetsCp}" var="budg"
+				itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax  process="@this" update=":detailsForm,:enteteForm,globalMessage" />
+			</p:selectOneMenu>
+				</h:panelGroup>
+		
+		
+		</h:panelGrid>
+					<h:panelGrid columns="2" style="width:50%; vertical-align:top;">
+			<h:panelGroup>
+			<h:outputText value="#{msgs['cpwin.objet']}" />
+				<h:outputText value=" *" styleClass="required"></h:outputText>			
+			</h:panelGroup>
+				
+				<h:inputTextarea id="objetModif" styleClass="ReadOnlyText"
+					value="#{bpBean.objetModification}" style="text-align: left;"
+					rows="2" cols="60">
+					<f:validateLength minimum="1" maximum="255" />
+					<p:ajax  process="@this" global="false" update=":detailsForm,globalMessage"></p:ajax>
+				</h:inputTextarea>
+			</h:panelGrid>
+	          
+	          
+			
+		</ui:composition>

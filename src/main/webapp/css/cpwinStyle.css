@@ -1,0 +1,659 @@
+@charset "utf-8";
+
+.searchIcon {
+	background-image: url(../images/search.png) !important;
+}
+.updateIcon {
+	background-image: url(../images/update.png) !important;
+}
+
+.lock-on-Icon {
+	background-image: url(../images/lock-on.png) !important;
+}
+.lock-off-Icon {
+	background-image: url(../images/lock-off.png) !important;
+}
+.printIcon {
+	background-image: url(../images/print.png) !important;
+}
+.downloadIcon {
+	background-image: url(../images/download.gif) !important;
+}
+.deleteIcon {
+	background-image: url(../images/delete.png) !important;
+}
+.label_col {
+	width: 35%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.Label {
+  font-weight:bold;
+
+}
+
+.value_col {
+	width: 65%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+.filter_col1 {
+	width: 20%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+.filter_col2 {
+	width: 35%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+.filter_col3{
+	width: 20%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}.filter_col4 {
+	width: 15%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}.filter_col5 {
+	width: 10%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+}.filter_col6 {
+	width: 40%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+.filter_colB1 {
+	width: 15%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+.filter_colB2 {
+	width: 25%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+.filter_colB3{
+	width: 30%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}.filter_colB4 {
+	width: 20%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}.filter_colB5 {
+	width: 10%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.search_col1 {
+		width: 90%;
+		align: left;
+		margin-left: 0;
+		text-align: left;
+	}
+	
+	.search_col2 {
+		width: 10%;
+		align: center;
+		text-align: center;
+	}
+	.entete_col1 {
+		width: 20%;
+		align: left;
+		margin-left: 0;
+		text-align: left;
+	}
+	
+		.entete_col2 {
+		width: 15%;
+		align: left;
+		margin-left: 0;
+		text-align: left;
+	}
+	
+		.entete_col3 {
+		width: 20%;
+		align: left;
+		margin-left: 0;
+		text-align: left;
+	}
+	
+	.entete_col4 {
+		width: 15%;
+		align: right;
+		margin-left: 0;
+		text-align: left;
+	}
+	
+	.entete_col5 {
+		width: 30%;
+		align: left;
+		margin-left: 0;
+		text-align: left;
+	}
+	.entete_col6 {
+		width: 15%;
+		align: left;
+		margin-left: 0;
+		text-align: left;
+	}
+	.entete_col7 {
+		width: 20%;
+		align: left;
+		margin-left: 0;
+		text-align: left;
+	}
+
+	.entete_col8 {
+		width: 20%;
+		align: left;
+		margin-left: 0;
+		text-align: left;
+	}
+	.espace_entre_label_value {
+		padding-right:5px;
+	}
+	.displayListWithLowSize {
+		font-size:8px;
+	}
+	
+/****************style pour l'application******************/
+.ApplicationTitle {
+	font-size: 20px;
+	color: #000000;
+	align: center;
+}
+
+/****************style pour les titres des pages******************/
+.PageTitle {
+	font-size: 19px;
+	color: #000000;
+	align: left;
+}
+
+/****************style pour les titres des zones dans une page******************/
+.PageZone {
+	font-size: 18px;
+	color: #000000;
+}
+
+/****************style pour les titres des sous zones dans une page******************/
+.PageZone1 {
+	font-size: 17px;
+	color: #000000;
+}
+
+/****************style pour les libellés dans une page******************/
+.LibText {
+	font-size: 15px;
+	font-family: "arial", Times, serif;
+	color: #000000;
+}
+
+/****************style pour des output text erronés dans une page******************/
+.WarningText {
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+
+/****************style pour l'afiichage des output text dans une page******************/
+.OutPutText {
+	color: #000000;
+	background-color: #FFFFFF;
+}
+
+/****************style pour l'afiichage en mode lecture seule des zones ******************/
+.ReadOnlyText {
+	color: #000000;	
+	
+}
+/****************style pour les listes déroulantes******************/
+.ComBoBox {
+	font-size: 15px;
+	font-family: verdana, arial, sans-serif;
+	color: #000000;
+}
+
+/****************style pour les liens dans une page******************/
+.lien {
+	color: #000000;
+	font-size: 15px;
+	font: Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+
+/****************style pour les boutons générles******************/
+.SimpleButton {
+	border: 1px solid;
+	font-size: 16px;
+	height: 30px;
+	width: 100px;
+	font-style: bold;
+	font-decoration: none;
+	font-family: verdana, arial, sans-serif;
+	text-align: center;
+	color: #000000;
+}
+
+/****************style pour les boutons larges******************/
+.LargeButton {
+	border: 1px solid;
+	font-size: 15px;
+	height: 30px;
+	width: 150px;
+	font-style: bold;
+	font-decoration: none;
+	font-family: verdana, arial, sans-serif;
+	text-align: center;
+}
+
+/****************style pour les cases à cocher******************/
+.CheckBoxStyle {
+	font-family: verdana, arial, sans-serif;
+}
+
+/****************style pour les zones de saisie******************/
+.InputText {
+	border-width: 1;
+	font-size: 15px;
+	border-color: 000000;
+	font-family: verdana, arial, sans-serif;
+	background: ffffff;
+	text-align: rigth;
+	color: 000000
+}
+
+/****************style pour les boutons radios******************/
+.boutonRadio {
+	background-color: vert;
+	font-size: 15px;
+	font-family: arial, Times, serif;
+}
+
+/****************style pour les combobox******************/
+.comboBox {
+	background-color: vert;
+	font-size: 15px;
+	font-family: arial, Times, serif;
+}
+
+/*********************************************************************/
+	/***********************style de la structure de tous les page********/
+	/***********************et le postion des composant principaux********/
+	/*********************************************************************/
+div#header {
+	width: 100%;
+	height: 2%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+div#menu {
+	width: 100%;
+	height: 10%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+div#containeur {
+	width: 100%;
+	height: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+div#details {
+	width: 100%;
+	height: 90%;
+	text-align: left;
+}
+
+div#footer {
+	width: 100%;
+	height: 5%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	font-size: 15px;
+	font-family: arial, Times, serif;
+}
+
+/*********************style panelGrid for entete******************************/
+.col11 {
+	text-align: left;
+	width: 30%;
+}
+
+.col12 {
+	text-align: center;
+	width: 40%;
+}
+
+.col13 {
+	text-align: right;
+	width: 30%;
+}
+
+/*********************************/
+.col1111 {
+	text-align: left;
+	width: 50%;
+}
+
+.col1222 {
+	text-align: center;
+	width: 40%;
+}
+
+/**************entete panelGrid Style**************/
+centerpanelGrid {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.col1 {
+	text-align: left;
+	vertical-align: top;
+	width: 25%;
+}
+
+.col2 {
+	text-align: left;
+	vertical-align: top;
+	width: 30%;
+}
+
+.col3 {
+	text-align: left;
+	vertical-align: top;
+	width: 20%;
+}
+
+.col4 {
+	text-align: right;
+	vertical-align: top;
+	width: 25%;
+}
+
+/************** panelGrid Style avec 3 colonnes*************/
+.col11 {
+	text-align: left;
+	vertical-align: top;
+	width: 33%;
+}
+
+.col21 {
+	text-align: center;
+	vertical-align: top;
+	width: 33%;
+}
+
+.col31 {
+	text-align: right;
+	vertical-align: top;
+	width: 33%;
+}
+
+/************** panelGrid Style avec 2 colonnes*************/
+.col12 {
+	text-align: left;
+	vertical-align: top;
+	width: 50%;
+}
+
+.col22 {
+	text-align: right;
+	vertical-align: top;
+	width: 50%;
+}
+
+/************** panelGrid simple Style pour les colonnes*************/
+.panel_col {
+		
+		align: left;
+		margin-left: 0;
+		text-align: left;
+		vertical-align: top;
+	}
+	
+/************** panelGrid Style avec 4 colonnes*************/
+.panel_col1 {
+		width: 20%;
+		align: left;
+		margin-left: 0;
+		text-align: left;
+		vertical-align: top;
+	}
+	
+	.panel_col2 {
+		width: 30%;
+		align: left;
+		margin-left: 0;
+		text-align: left;
+		vertical-align: top;
+	}
+	
+	.panel_col3 {
+		width: 20%;
+		align: left;
+		margin-left: 0;
+		text-align: left;
+		vertical-align: top;
+	}
+	
+	.panel_col4 {
+		width: 30%;
+		align: left;
+		margin-left: 0;
+		text-align: left;
+		vertical-align: top;
+	}		
+	
+/*************css for panel
+
+.pf-panel-1 {
+	border-color: #808080;
+	border-style: solid;
+	border-width: 1px 0;
+	position: relative;
+}
+
+.pf-panel-hd,.pf-panel-bd,.pf-panel-ft {
+	border-color: #808080;
+	border-style: solid;
+	border-width: 0 1px;
+	margin: 0 -1px;
+}
+
+.pf-panel-hd {
+	background: transparent url(../../yui/assets/skins/sam/sprite.png)
+		repeat-x scroll 0 -200px;
+	color: #000;
+	font-size: 93%;
+	font-weight: bold;
+	line-height: 2;
+	padding: 0 10px;
+	border-bottom: 1px solid #CCC;
+}
+
+.pf-panel-bd {
+	padding: 10px;
+}
+
+.pf-panel-bd,.pf-panel-ft {
+	background-color: #808080;
+}
+
+.pf-panel-ft {
+	border-top: 1px solid #808080;
+	font-size: 77%;
+	padding: 5px 10px;
+}
+
+.pf-panel-hd-controls {
+	cursor: pointer;
+	right: 6px;
+	top: 6px;
+	position: absolute;
+	overflow: hidden;
+}
+
+.pf-panel-toggler-expanded,.pf-panel-toggler-collapsed,.pf-panel-closer,.pf-panel-options
+	{
+	display: block;
+	float: right;
+	margin-left: 3px;
+}
+
+.pf-panel-closer {
+	width: 25px;
+	height: 15px;
+}
+
+.pf-panel-toggler-expanded {
+	width: 14px;
+	height: 14px;
+	background: url(../../yui/assets/skins/sam/sprite.png) no-repeat 0
+		-400px;
+}
+
+.pf-panel-toggler-collapsed {
+	width: 14px;
+	height: 14px;
+	background: url(../../yui/assets/skins/sam/sprite.png) no-repeat 0
+		-350px;
+}
+
+.pf-panel-closer {
+	background: url(../../yui/assets/skins/sam/sprite.png) no-repeat 0
+		-300px;
+}
+
+.pf-panel-options {
+	width: 16px;
+	height: 16px;
+	background: url(menu.png) no-repeat;
+}
+
+/**************Style de champpour l'affichage d'une ligne au niveau de la datatable**************/
+	/**style pour les libéllés dans les lignes validées**/
+.validatedLine {
+	font-size: 15px;
+	font-family: "arial", Times, serif;
+	color: #000000;
+}
+
+/**style pour les checkboxes dans les lignes supprimées**/
+.disabledCheckBox {
+	font-family: verdana, arial, sans-serif;
+	disabled: true;
+}
+
+.error {
+	color: #FF0000;
+}
+
+.required {
+	color: #FF0000; . ErrorPage span { display : inline;
+	float: left;
+	border: 1px solid #FF6600;
+	margin: 0px;
+	padding: 3px;
+}
+
+.Tableau p {
+	clear: left;
+	margin: 0px;
+	padding: 0px;
+	height: 100% !important;
+	height: 1em;
+}
+
+.Tableau p.legende {
+	font-weight: bold
+}
+
+.Tableau span.col1 {
+	width: 70px
+}
+
+.Tableau span.col2 {
+	width: 120px
+}
+
+.Tableau span.col3 {
+	width: 90px
+}
+/**style pour les panelGrid de 4 colonne*/
+.pg4col1{
+	width: 25%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.pg4col2 {
+	width: 25%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+.pg4col3{
+	width: 25%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.pg4col4{
+	width: 25%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+/***anglet instruction 1*/
+.instCol1 {
+	vertical-align:top;
+	width: 35%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.instCol2 {
+	vertical-align:top;
+	width: 65%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.required {
+	color: #FF0000; . ErrorPage span { display : inline;
+	float: left;
+	border: 1px solid #FF6600;
+	margin: 0px;
+	padding: 3px;
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+  <entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+  version="2.0">
+  <entity class="fr.symphonie.util.model.UserRole">
+		<table name="WEBuserRole">
+		</table>
+		<attributes>
+			<id name="role">
+				<column name="code_role" length="20"></column>
+			</id>
+			<basic name="designation">
+				<column length="50"/>
+			</basic>	
+		</attributes>		
+	</entity>
+	 <entity class="fr.symphonie.util.model.User">
+		<table name="DroitUtilisateur">
+		</table>
+		<attributes>
+			<id name="login">
+				<column name="code_util" length="20"/>
+			</id>
+			<basic name="password">
+				<column name="mot_pass" length="20"/>
+			</basic>
+			<basic name="lastName">
+				<column name="nom_util" length="50"/>
+			</basic>
+			<basic name="enabled">
+				<column name="ouvert"/>
+			</basic>
+			<one-to-many name="roles" fetch="EAGER">
+			<join-table name="WEBroles">
+				<join-column name="login" referenced-column-name="code_util"/>
+				<inverse-join-column name="profile" referenced-column-name="code_role"/>
+			</join-table>
+		</one-to-many>	
+			<transient name="firstName"/>
+		</attributes>
+	</entity>
+  </entity-mappings>

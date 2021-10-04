@@ -1,0 +1,110 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+		<p:dataTable id="displayList_dtt" scrollable="true"
+		scrollHeight="450" scrollRows="20" sortBy="#{ei.codeDirection}"
+		rendered="#{daiBean.displayList!=null}" var="ei"
+		style="width:100%;text-align:center" rowIndexVar="creditIndex"
+		emptyMessage="#{msgs['datatable.empty']}"
+		value="#{daiBean.displayList}">
+
+		<p:column headerText="#{msgs['code.dest']}" style="text-align:center;width:10%">
+			<h:outputText value="#{ei.codeDest}" />
+		</p:column>
+		<p:column headerText="#{msgs['code.nature']}" style="text-align:center;width:10%">
+			<h:outputText value="#{ei.codeNature}" />
+		</p:column>
+		<p:column headerText="#{msgs['import.service']}" style="text-align:center;width:10%">
+			<h:outputText value="#{ei.codeService}" />
+		</p:column>
+		<p:column headerText="#{msgs['code.direction']}" style="text-align:center;width:10%">
+			<h:outputText value="#{ei.codeDirection}" />
+		</p:column>
+		<p:column headerText="#{msgs['import.programme']}"	style="text-align:center;width:10%">
+			<h:outputText value="#{ei.codeProg}" />
+		</p:column>
+
+		<p:column headerText="#{msgs['nom.prog']}"	style="text-align:center;width:10%">
+			<h:outputText value="#{ei.libProg}" />
+		</p:column>
+
+		<p:column headerText="#{msgs['cp.ei']}"	style="text-align:center;width:10%">
+			<h:outputText value="#{ei.noEi}" />
+		</p:column>
+		
+		<p:column headerText="#{msgs['cpwin.objet']}" style="text-align:center;width:10%">
+			<h:outputText value="#{ei.libEi}" />
+		</p:column>
+		<p:column headerText="#{msgs['montant']}" style="text-align:center;width:10%">
+			<h:outputText value="#{ei.mtTot}" >
+			<f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+			   <f:facet name="footer" >
+			<h:outputText style="vertical-align:top;align: center; font-size: 12px;"
+				value="#{daiBean.displayList.stream().map(ei->ei.mtTot).sum()}">
+				 <f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+		</f:facet>
+		</p:column>
+		<p:column headerText="#{msgs['dep.paie']}" style="text-align:center;width:10%">
+			<h:outputText value="#{ei.mtPaie}" >
+			<f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+			  <f:facet name="footer" >
+			<h:outputText style="vertical-align:top;align: center; font-size: 12px;"
+				value="#{daiBean.displayList.stream().map(ei->ei.mtPaie).sum()}">
+				 <f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+		</f:facet>
+		</p:column>
+		<p:column headerText="#{msgs['autres.paie']}" style="text-align:center;width:10%">
+			<h:outputText value="#{ei.mtAutre}" >
+			<f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+			 <f:facet name="footer" >
+			<h:outputText style="vertical-align:top;align: center; font-size: 12px;"
+				value="#{daiBean.displayList.stream().map(ei->ei.mtAutre).sum()}">
+				 <f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+		</f:facet>
+		</p:column>
+		<p:column headerText="#{msgs['tot.dep']}" style="text-align:center;width:10%">
+			<h:outputText value="#{(ei.mtPaie)+(ei.mtAutre)}" >
+			<f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+			 <f:facet name="footer" >
+			<h:outputText style="vertical-align:top;align: center; font-size: 12px;"
+				value="#{(daiBean.displayList.stream().map(ei->ei.mtAutre).sum()+daiBean.displayList.stream().map(ei->ei.mtPaie).sum())}">
+				 <f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+		</f:facet>
+		</p:column>
+		<p:column headerText="#{msgs['disponible']}" style="text-align:center;width:10%">
+			<h:outputText value="#{ei.dispoEi}" >
+			<f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+			 <f:facet name="footer" >
+			<h:outputText style="vertical-align:top;align: center; font-size: 12px;"
+				value="#{daiBean.displayList.stream().map(ei->ei.dispoEi).sum()}">
+				 <f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+		</f:facet>
+		</p:column>
+		<p:column headerText="#{msgs['rembours.vague.details']}" style="width:5%" rendered="false">
+				<p:commandButton   title="#{msgs['rembours.vague.details']}" icon="fa fa-search" 
+					actionListener="#{daiBean.openEIDetailsDialog}"  >					
+					<f:setPropertyActionListener target="#{daiBean.selectedEi}"
+						value="#{ei}" />
+		
+					
+				</p:commandButton>
+				
+				
+			</p:column>
+	</p:dataTable>
+
+</ui:composition>

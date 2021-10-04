@@ -1,0 +1,426 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<style type="text/css">
+.cr_col1 {  
+	width:50%;
+	text-align: left;
+ } 
+ .cr_col2 {  
+	width:20%;
+	text-align: center;
+ } 
+ .cr_col3 {  
+	width:20%;
+	text-align: center;
+ } 
+ .gras{
+ font-weight: bold;
+ }
+ </style>
+
+<p:panel style="width:100%;" id="crPanel">
+
+		<f:facet name="header">
+			<h:outputText value="#{ed['cf.cr']}"
+				style="font-weight: bold; text-align: center;" />
+		</f:facet>
+
+		<div align="center">
+			<h:outputText value="#{ed['cf.cr.ch']} "
+				style="font-weight: bold; text-align: center;color:#008000;" />
+
+		</div>
+		<br/>
+
+<p:dataTable id="charge_fo_dtt" rendered="#{not empty cfBean.cr.charge.fonctionnement}"
+			var="item" style="width:100%; text-align: center;"
+			emptyMessage="#{msgs['datatable.empty']}" 
+			value="#{cfBean.cr.charge.fonctionnement}" paginator="false">
+			
+
+			<p:column styleClass="cr_col1" >
+				<f:facet name="header">
+					<h:outputText value="#{ed['cf.cr.ch.fo']}" />
+				</f:facet>
+				<h:outputText value="#{ed[item.key]}" styleClass="#{item.style}" />
+				<f:facet name="footer">
+					<h:outputLabel value="#{ed[cfBean.cr.charge.totFonct.key]}" style="font-weight: bold;" />
+				</f:facet>
+			</p:column>
+			
+			<p:column styleClass="cr_col2" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['n']}" />
+				</f:facet>
+				
+				<h:outputText value="#{item.n.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+				<f:facet name="footer">
+					<h:outputText value="#{cfBean.cr.charge.totFonct.n.montant}" styleClass="montantStyle" >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</f:facet>
+			</p:column>
+			
+			<p:column styleClass="cr_col3" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['n.ant']}" />
+				</f:facet>
+				<h:outputText value="#{item.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+				<f:facet name="footer">
+					<h:outputText value="#{cfBean.cr.charge.totFonct.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				</f:facet>
+			</p:column>
+			
+			</p:dataTable>
+			<br />
+						
+			<p:dataTable id="charge_int_dtt" rendered="#{not empty cfBean.cr.charge.intervention}"
+			var="item" style="width:100%; text-align: center;"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{cfBean.cr.charge.intervention}" paginator="false">
+			
+
+			<p:column styleClass="cr_col1" >
+				<f:facet name="header">
+					<h:outputText value="#{ed['cf.cr.ch.in']}" />
+				</f:facet>
+				<h:outputText value="#{ed[item.key]}" />
+				<f:facet name="footer">
+					<h:outputLabel value="#{ed[cfBean.cr.charge.totInter.key]}" style="font-weight: bold;" />
+				</f:facet>
+			</p:column>
+			
+			<p:column styleClass="cr_col2" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['n']}" />
+				</f:facet>
+				
+				<h:outputText value="#{item.n.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+				<f:facet name="footer">
+					<h:outputText value="#{cfBean.cr.charge.totInter.n.montant}" styleClass="montantStyle" >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</f:facet>
+			</p:column>
+			
+			<p:column styleClass="cr_col3" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['n.ant']}" />
+				</f:facet>
+				<h:outputText value="#{item.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+				<f:facet name="footer">
+					<h:outputText value="#{cfBean.cr.charge.totInter.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				</f:facet>
+			</p:column>
+			
+			</p:dataTable>
+			
+			<p:panelGrid style="width:100%; vertical-align:top;">
+			<p:row>
+			<p:column styleClass="cr_col1">
+				
+				<h:outputText value="#{ed[cfBean.cr.charge.engagement.key]}"  style="font-weight: bold;" />
+				
+			</p:column>
+			<p:column styleClass="cr_col2">
+			<h:outputText value="#{cfBean.cr.charge.engagement.n.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column styleClass="cr_col3">
+			<h:outputText value="#{cfBean.cr.charge.engagement.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			</p:row>
+			<p:row>
+			<p:column styleClass="cr_col1">
+				
+				<h:outputText value="#{ed[cfBean.cr.charge.totFonctInter.key]}"  style="font-weight: bold;" />
+				
+			</p:column>
+			<p:column styleClass="cr_col2">
+			<h:outputText value="#{cfBean.cr.charge.totFonctInter.n.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column styleClass="cr_col3">
+			<h:outputText value="#{cfBean.cr.charge.totFonctInter.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			</p:row>
+			
+		</p:panelGrid>
+	<br />
+						
+			<p:dataTable id="charge_financ_dtt" rendered="#{not empty cfBean.cr.charge.financier}"
+			var="item" style="width:100%; text-align: center;"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{cfBean.cr.charge.financier}" paginator="false">
+			
+
+			<p:column styleClass="cr_col1" >
+				<f:facet name="header">
+					<h:outputText value="#{ed['cf.cr.ch.fi']}" />
+				</f:facet>
+				<h:outputText value="#{ed[item.key]}" />
+				<f:facet name="footer">
+					<h:outputLabel value="#{ed[cfBean.cr.charge.totFinanc.key]}" style="font-weight: bold;" />
+				</f:facet>
+			</p:column>
+			
+			<p:column styleClass="cr_col2" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['n']}" />
+				</f:facet>
+				
+				<h:outputText value="#{item.n.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+				<f:facet name="footer">
+					<h:outputText value="#{cfBean.cr.charge.totFinanc.n.montant}" styleClass="montantStyle" >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</f:facet>
+			</p:column>
+			
+			<p:column styleClass="cr_col3" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['n.ant']}" />
+				</f:facet>
+				<h:outputText value="#{item.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+				<f:facet name="footer">
+					<h:outputText value="#{cfBean.cr.charge.totFinanc.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				</f:facet>
+			</p:column>
+			
+			</p:dataTable>
+			<br/>
+			<p:panelGrid style="width:100%; vertical-align:top;">
+			<p:row>
+			<p:column styleClass="cr_col1" >
+				
+				<h:outputText value="#{ed['cf.cr.impot']}"  style="font-weight: bold;" />
+				
+			</p:column>
+			<p:column styleClass="cr_col2">
+			<h:outputText value="#{cfBean.cr.charge.impot.n.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column styleClass="cr_col3">
+			<h:outputText value="#{cfBean.cr.charge.impot.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			</p:row>
+			<p:row>
+			<p:column styleClass="cr_col1" >
+				
+				<h:outputText value="#{ed[cfBean.cr.charge.benefice.key]}"  style="font-weight: bold;" />
+				
+			</p:column>
+			<p:column styleClass="cr_col2">
+			<h:outputText value="#{cfBean.cr.charge.benefice.n.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column styleClass="cr_col3">
+			<h:outputText value="#{cfBean.cr.charge.benefice.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			</p:row>
+			<p:row ></p:row>
+			<p:row>
+			<p:column styleClass="cr_col1" >
+				
+				<h:outputText value="#{ed[cfBean.cr.charge.totale.key]}"  style="font-weight: bold;" />
+				
+			</p:column>
+			<p:column styleClass="cr_col2">
+			<h:outputText value="#{cfBean.cr.charge.totale.n.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column styleClass="cr_col3">
+			<h:outputText value="#{cfBean.cr.charge.totale.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			</p:row>
+		</p:panelGrid>
+		<br/>
+			<div align="center">
+			<h:outputText value="#{ed['cf.cr.pr']} "
+				style="font-weight: bold; text-align: center;color:#008000;" />
+
+		</div>
+		<br/>
+		<p:dataTable id="produit_fonct_dtt" rendered="#{not empty cfBean.cr.produit.fonctionnement}"
+			var="item" style="width:100%; text-align: center;"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{cfBean.cr.produit.fonctionnement}" paginator="false">
+			
+
+			<p:column styleClass="cr_col1" >
+				<f:facet name="header">
+					<h:outputText value="#{ed['cf.cr.pr.fo']}" />
+				</f:facet>
+				<h:outputText value="#{ed[item.key]}" styleClass="#{item.style}" />
+				<f:facet name="footer">
+					<h:outputLabel value="#{ed[cfBean.cr.produit.totFonct.key]}" style="font-weight: bold;" />
+				</f:facet>
+			</p:column>
+			
+			<p:column styleClass="cr_col2">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['n']}" />
+				</f:facet>
+				
+				<h:outputText value="#{item.n.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+				<f:facet name="footer">
+					<h:outputText value="#{cfBean.cr.produit.totFonct.n.montant}" styleClass="montantStyle" >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</f:facet>
+			</p:column>
+			
+			<p:column styleClass="cr_col3">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['n.ant']}" />
+				</f:facet>
+				<h:outputText value="#{item.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+				<f:facet name="footer">
+					<h:outputText value="#{cfBean.cr.produit.totFonct.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				</f:facet>
+			</p:column>
+			
+			</p:dataTable>
+			<br/>
+			<p:dataTable id="produit_financ_dtt" rendered="#{not empty cfBean.cr.produit.financier}"
+			var="item" style="width:100%; text-align: center;"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{cfBean.cr.produit.financier}" paginator="false">
+			
+
+			<p:column styleClass="cr_col1">
+				<f:facet name="header">
+					<h:outputText value="#{ed['cf.cr.pr.fi']}" />
+				</f:facet>
+				<h:outputText value="#{ed[item.key]}" />
+				<f:facet name="footer">
+					<h:outputLabel value="#{ed[cfBean.cr.produit.totFinanc.key]}" style="font-weight: bold;" />
+				</f:facet>
+			</p:column>
+			
+			<p:column styleClass="cr_col2">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['n']}" />
+				</f:facet>
+				
+				<h:outputText value="#{item.n.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+				<f:facet name="footer">
+					<h:outputText value="#{cfBean.cr.produit.totFinanc.n.montant}" styleClass="montantStyle" >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</f:facet>
+			</p:column>
+			
+			<p:column styleClass="cr_col3">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['n.ant']}" />
+				</f:facet>
+				<h:outputText value="#{item.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+				<f:facet name="footer">
+					<h:outputText value="#{cfBean.cr.produit.totFinanc.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				</f:facet>
+			</p:column>
+			
+			</p:dataTable>
+			<br/>
+			<p:panelGrid style="width:100%; vertical-align:top;">
+			<p:row>
+			<p:column styleClass="cr_col1">
+				
+				<h:outputText value="#{ed[cfBean.cr.produit.perte.key]}"  style="font-weight: bold;" />
+				
+			</p:column>
+			<p:column styleClass="cr_col2">
+			<h:outputText value="#{cfBean.cr.produit.perte.n.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column styleClass="cr_col3">
+			<h:outputText value="#{cfBean.cr.produit.perte.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			</p:row>
+			<p:row></p:row>
+			<p:row>
+			<p:column styleClass="cr_col1">
+				
+				<h:outputText value="#{ed[cfBean.cr.produit.totale.key]}"  style="font-weight: bold;" />
+				
+			</p:column>
+			<p:column styleClass="cr_col2">
+			<h:outputText value="#{cfBean.cr.produit.totale.n.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column styleClass="cr_col3">
+			<h:outputText value="#{cfBean.cr.produit.totale.ant.montant}" styleClass="montantStyle" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			</p:row>
+						</p:panelGrid>
+</p:panel>
+
+
+
+
+</ui:composition>

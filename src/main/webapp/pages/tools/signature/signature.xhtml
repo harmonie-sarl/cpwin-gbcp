@@ -1,0 +1,126 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+
+</style>
+	</ui:define>
+	<ui:define name="lastPrefexedTitle">
+
+	</ui:define>
+	<ui:define name="pageTitle">#{msgs['menu.signature']}</ui:define>
+	
+	
+	<ui:define name="search">
+
+			
+
+
+	</ui:define>
+	<ui:define name="details">
+		<p:panel header="#{msgs['list.signatures']}" id="signaturePanel" style="width:100%;">
+			<p:dataTable id="signature_list_dtt" var="sign" 
+				
+				style="width:100%;text-align:center" rowIndexVar="creditIndex"
+				emptyMessage="#{msgs['datatable.empty']}"
+				value="#{signatBean.signatureList}" paginator="true" rows="15">
+				<p:columnGroup type="header">
+				<p:row>
+				<p:column headerText="Id" style="text-align:center" rowspan="2" />
+				<p:column headerText="#{msgs['codeSignataire']}" style="text-align:center" rowspan="2" />
+				<p:column headerText="#{msgs['stardate']}" style="text-align:center" rowspan="2" />
+				<p:column headerText="#{msgs['endDate']}" style="text-align:center" rowspan="2" />
+				<p:column headerText="#{msgs['function']}" style="text-align:center" rowspan="2" />
+				<p:column headerText="#{msgs['autorite']}" style="text-align:center" colspan="7" />
+				<p:column headerText="#{msgs['btn.consulter']}" style="text-align:center" rowspan="2" />
+				<p:column headerText="#{msgs['btn.modifier']}" style="text-align:center" rowspan="2" />
+				</p:row>
+						<p:row>
+						<p:column headerText="#{msgs['sf']}" style="text-align:center"  />
+						<p:column headerText="#{msgs['dp']}" style="text-align:center"  />
+						<p:column headerText="#{msgs['dr']}" style="text-align:center"  />
+						<p:column headerText="#{msgs['dv']}" style="text-align:center"  />
+						<p:column headerText="#{msgs['lrec']}" style="text-align:center"  />
+						<p:column headerText="#{msgs['ar']}" style="text-align:center"  />
+						<p:column headerText="#{msgs['actif']}" style="text-align:center"  />
+						</p:row>
+						</p:columnGroup>
+						<p:column>
+                              <h:outputText value="#{sign.id}"/>                                
+                          </p:column>
+						 <p:column>
+                              <h:outputText value="#{sign.codeUtil}"/>                                
+                          </p:column>
+				           <p:column>
+                              <h:outputText value="#{sign.startDate}">  
+                              <f:convertDateTime pattern="dd/MM/yyyy" type="date" timeZone="Europe/Paris" />
+                              </h:outputText>
+                          </p:column>
+				           <p:column>
+                              <h:outputText value="#{sign.endDate}">  
+                              <f:convertDateTime pattern="dd/MM/yyyy" type="date" timeZone="Europe/Paris" />
+                              </h:outputText>
+                          </p:column>
+			               <p:column>
+                              <h:outputText value="#{sign.function}" />  
+                          </p:column>
+				           <p:column>
+                               <h:outputText value="#{sign.sf?'Oui':'Non'}" /> 
+                          </p:column>
+						   <p:column>
+                             <h:outputText value="#{sign.dp?'Oui':'Non'}" /> 
+                          </p:column>
+						   <p:column>
+                               <h:outputText value="#{sign.dr?'Oui':'Non'}" /> 
+                          </p:column>
+				           <p:column>
+                               <h:outputText value="#{sign.dv?'Oui':'Non'}" /> 
+                          </p:column>
+			                 <p:column>
+                               <h:outputText value="#{sign.lrec?'Oui':'Non'}" /> 
+                          </p:column>
+						  <p:column>
+                               <h:outputText value="#{sign.ar?'Oui':'Non'}" /> 
+                          </p:column>
+                           <p:column>
+                               <h:outputText value="#{sign.actif?'Oui':'Non'}" /> 
+                          </p:column>
+						    <p:column>
+                            <p:commandButton value="#{msgs['telech']}"   oncomplete="PF('dlgpdf').show()"  update="detailsForm:dlgpdf"  icon="searchIcon" title=" " > 
+                           <f:setPropertyActionListener value="#{sign}" target="#{signatBean.selectedSignature}"></f:setPropertyActionListener>
+           
+                           </p:commandButton>
+                              </p:column>
+
+				<p:column>
+
+					<p:commandButton 
+						title="#{msgs['editer']}" icon="updateIcon" 
+						action="#{signatBean.goToUpdateSignature}">
+						<f:setPropertyActionListener target="#{signatBean.selectedSignature}"
+							value="#{sign}" />
+						<p:ajax event="dialogReturn" update=":detailsForm:signaturePanel" />
+
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+			<br />
+			<div align="center">
+
+				<p:commandButton id="addSignBtn" 
+					 value="#{msgs['btn.add']}" actionListener="#{signatBean.goToAddSignature}" disabled="#{!signatBean.requirmentsStatus}" >
+					 <p:ajax event="dialogReturn" update=":detailsForm:signaturePanel" />
+					 </p:commandButton>
+			</div>
+		</p:panel>
+		<p:dialog id="dlgpdf" header="signataire" widgetVar="dlgpdf"   dynamic="true"   fitViewport="true" position="right,top"      showEffect="explode" height="150" width="250">     
+				<p:graphicImage value="#{signatBean.signatStream}" cache="false"/>
+     </p:dialog> 
+   
+	</ui:define>
+</ui:composition>

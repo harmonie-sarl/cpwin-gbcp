@@ -1,0 +1,190 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panel id="adressePanel" style="width:100%;">
+			<div
+				style="margin-left: auto; margin-right: auto; text-align: center;" >
+				<p:dataTable var="adr" value="#{gestionTiersBean.tiers.adressesList}"
+				paginator="true" rows="5" rowIndexVar="selectedItem" id="adr_dtt"
+				style="width:100%;" margin="0 auto" padding="0"
+				emptyMessage="#{msgs['datatable.empty']}"
+				rendered="#{gestionTiersBean.tiers.adressesList!=null}" editable="true" >
+				
+					 <p:ajax event="rowEditInit" listener="#{gestionTiersBean.onAdressEditInit}"  />
+                     <p:ajax event="rowEdit" listener="#{gestionTiersBean.onAdressEdit}" />
+                     
+			 
+                     
+				<p:column style="width:14%;">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msgs['adresse1']}" />
+						<h:outputText value=" *" rendered="#{gestionTiersBean.active}" styleClass="required" />
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{adr.adresse1}" />
+						</f:facet>
+						<f:facet name="input">
+<!--							<h:inputText value="#{adr.adresse1}" maxlength="255" size="10" />-->
+							<p:inputTextarea value="#{adr.adresse1}" style="width:100px;height:50px;"/>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column style="width:14%;">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msgs['adresse2']}" />
+						<h:outputText value=" *" rendered="#{gestionTiersBean.active}" styleClass="required"/>
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{adr.adresse2}" />
+						</f:facet>
+						<f:facet name="input">
+<!--							<h:inputText value="#{adr.adresse2}" maxlength="255" size="10" />-->
+							<p:inputTextarea value="#{adr.adresse2}" style="width:100px;height:50px;" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column style="width:13%;">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msgs['bureau.postal']}" />
+						<h:outputText value=" *" rendered="#{gestionTiersBean.active}" styleClass="required"/>
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{adr.bureauPostale}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputTextarea value="#{adr.bureauPostale}" style="width:100px;height:50px;" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column style="width:5%;">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msgs['code.postal']}" />
+						<h:outputText value=" *" rendered="#{gestionTiersBean.active}" styleClass="required"/>
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{adr.codePostale}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputTextarea value="#{adr.codePostale}" style="width:70px;height:50px;" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column style="width:12%;">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msgs['ville']}" />
+						<h:outputText value=" *" rendered="#{gestionTiersBean.active}" styleClass="required"/>
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{adr.ville}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputTextarea value="#{adr.ville}" style="width:100px;height:50px;" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column style="width:7%;">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msgs['pays']}" />
+						<h:outputText value=" *" rendered="#{gestionTiersBean.active}" styleClass="required"/>
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{adr.pays.code}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputTextarea value="#{adr.pays.code}" style="width:100px;height:50px;" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>				
+				<p:column style="width:7%;">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msgs['contact.tel']}" />
+						<h:outputText value=" *" rendered="#{gestionTiersBean.active}" styleClass="required"/>
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{adr.contact.telephone}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputTextarea value="#{adr.contact.telephone}" style="width:70px;height:50px;" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column style="width:7%;">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msgs['contact.fax']}" />
+						<h:outputText value=" *" rendered="#{gestionTiersBean.active}" styleClass="required"/>
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{adr.contact.fax}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputTextarea value="#{adr.contact.fax}" style="width:70px;height:50px;" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column style="width:9%;">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msgs['cpwin.type']}" />
+						<h:outputText value=" *" rendered="#{gestionTiersBean.active}" styleClass="required"/>
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:selectOneMenu styleClass="ReadOnlyText" disabled="true"
+								value="#{adr.type}">
+								<f:selectItem itemValue="" itemLabel="-----" />
+								<f:selectItems value="#{gestionTiersBean.typeAdressesList}" var="type"
+									itemLabel="#{type.libelle}"
+									itemValue="#{type.value}">
+								</f:selectItems>
+							</h:selectOneMenu>
+						</f:facet>
+						<f:facet name="input">
+							<h:selectOneMenu styleClass="ReadOnlyText"
+								value="#{adr.type}">
+								<f:selectItem itemValue="" itemLabel="-----" />
+								<f:selectItems value="#{gestionTiersBean.typeAdressesList}" var="type"
+									itemLabel="#{type.libelle}"
+									itemValue="#{type.value}">
+								</f:selectItems>
+							</h:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="" style="width:5%;">
+					<p:rowEditor rendered="#{gestionTiersBean.active}"/>
+				</p:column>			
+				<p:column style="width:7%;" headerText="" >					
+					<p:commandButton title=" " icon="deleteIcon" rendered="#{gestionTiersBean.active}"
+					onclick="PF('confSupprAdresse').show();">
+					<f:setPropertyActionListener value="#{adr}"
+						target="#{gestionTiersBean.adresseToDelete}" />
+				</p:commandButton>
+				</p:column>	
+			</p:dataTable> <h:panelGroup>
+				<p:commandButton  value="#{msgs['btn.add']}"
+					title=" " immediate="true" rendered="#{gestionTiersBean.active}"
+					actionListener="#{gestionTiersBean.addAdresse}"
+					update="ongletsTiers:adressePanel" >
+				</p:commandButton>
+			</h:panelGroup></div>
+		</p:panel>
+</ui:composition>

@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:panel id="simulatedDataPanel" style="width:100%;">
+			<div align="center" style="width: 100%;">
+				
+				<p:treeTable id="adress_dtt" 
+					rendered="#{not empty bpBean.budget.listEnvelopBudgView}" var="envelop"
+					style="width:100%; text-align: left;" rowIndexVar="envelopIndex"
+					emptyMessage="#{msgs['datatable.empty']}"
+					value="#{bpBean.importTree}" paginator="true"
+					rows="10">					 
+					 
+					<p:column  style="width:7%;" >
+						<f:facet name="header">
+							<h:outputText value="#{msgs['nature']}" />
+						</f:facet>
+                    <h:outputText value="#{envelop.codeAndLibGroupNat}"/>
+						
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['destination']}" />
+						</f:facet>
+
+						<h:outputText value="#{envelop.codeAndLibGroupDest}" />
+					</p:column>
+						<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['nature.destination']}" />
+						</f:facet>
+
+						<h:outputText value="#{envelop.natureDestination}" />
+					</p:column>
+				    <p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['service']}" />
+						</f:facet>
+						<h:outputText value="#{envelop.codeAndLibServ}" />
+						
+					    </p:column>
+				
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['programme']}" />
+						</f:facet>
+						<h:outputText value="#{envelop.codeAndLibProg}" />
+						
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['montant.ae']}" />
+						</f:facet>
+						<h:outputText value="#{envelop.montantAE}">
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+						
+					</p:column>
+						<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['budget.resteAV']}" />
+						</f:facet>
+						<h:outputText value="#{envelop.adressResteAV}" rendered="#{envelop.envelop}">
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+						
+					</p:column>
+					
+    	
+				</p:treeTable>
+				<br />
+			</div>
+		</p:panel>
+	<div align="center" >
+		<p:commandButton title=" " value="#{msgs['btn.valider']}"
+			update="detailsForm:onglets,globalMessage" 
+			actionListener="#{bpBean.validateImport}" >
+		</p:commandButton>
+	</div>
+	</ui:composition>

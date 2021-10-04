@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	 <div align="center" style="width: 100%;">
+		 <h:panelGrid>
+		<p:commandButton title=" " value="#{msgs['budget.btn.export']}"
+			 immediate="true"
+			rendered="#{sctBean.creditTransfertList!=null}" ajax="false">
+			<p:fileDownload value="#{sctBean.xlsImportedVagueDetailsList}" />
+		</p:commandButton>
+			</h:panelGrid>
+	</div>
+	<p:dataTable id="byVagueDetails_dtt"  var="item" rendered="#{sctBean.vague!=null}"
+		style="width:100%;text-align:center" rowIndexVar="itemIndex" sortBy="#{item.displayedPaymentMode}"
+		emptyMessage="#{msgs['datatable.empty']}" value="#{sctBean.creditTransfertList}">
+		<f:facet name="header">
+			<h:outputText value="#{msgs['num.vague']} #{sctBean.noVague}" />
+		</f:facet>
+
+		<p:column headerText="#{msgs['mode.paiement']}" groupRow="true"	style="text-align:left;width:10%">
+			<h:outputText value="#{item.displayedPaymentMode.label}" />
+		</p:column>
+		
+		<p:column headerText="#{msgs['nom']}"	style="text-align: left;width:15%">
+			<h:outputText value="#{item.actor.name}" />
+		</p:column>
+		<p:column headerText="#{msgs['prenom']}"	style="text-align: left;width:15%">
+			<h:outputText value="#{item.actor.firstName}" />
+		</p:column>
+
+		<p:column headerText="#{msgs['montant']}" style="width:10%">
+			<h:outputText value="#{item.amount}">
+				<f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+		</p:column>
+
+		<p:column headerText="#{msgs['iban']}"	style="text-align: left;width:15%">
+			<h:outputText value="#{item.actor.iban}" />
+		</p:column>
+
+		<p:column headerText="#{msgs['bic']}"	style="text-align:left;width:10%">
+			<h:outputText value="#{item.actor.bic}" />
+		</p:column>
+		
+		<p:column headerText="#{msgs['cpwin.objet']}" style="text-align: left;width:20%">
+			<h:outputText value="#{item.object}" />
+		</p:column>
+		 <p:summaryRow>
+            <p:column colspan="3"/>
+            <p:column>
+                <h:outputText value="#{sctBean.getTotalByPaymentMode(item.paymentMode)}">
+                    <f:convertNumber type="currency" currencySymbol="" />
+                </h:outputText>
+            </p:column>
+             <p:column colspan="3"/>
+        </p:summaryRow>
+		
+		</p:dataTable>
+
+</ui:composition>

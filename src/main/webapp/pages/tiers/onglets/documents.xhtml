@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div align="center">
+		<p:treeTable id="docs_dtt" rendered="#{gestionTiersBean.tiersDocList!=null}"
+			var="doc" style="width:100%; text-align: center;"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{gestionTiersBean.documentTree}" paginator="true" rows="5" >
+			
+		<p:column  style="width:15%;text-align: left;">
+		<f:facet name="header" >
+           <h:outputText value="#{msgs['cpwin.type']} #{msgs['document']}" />
+        </f:facet>
+				<h:outputText value="#{doc.categorie}" rendered="#{!doc.document}"/>
+			</p:column>
+			<p:column  style="width:35%">
+			<f:facet name="header">
+				<h:outputText value="#{msgs['libelle']}" />
+			</f:facet>
+				<h:outputText value="#{doc.name}"/>
+			</p:column>
+			
+			<p:column style="width:20%">
+				<f:facet name="header">	
+				</f:facet>
+				<p:commandButton id="file1" icon="searchIcon"  ajax="false" rendered="#{doc.document}">
+					<f:setPropertyActionListener value="#{doc}" 
+						target="#{gestionTiersBean.selectedDocument}" />
+						<p:ajax event="dialogReturn" listener="#{gestionTiersBean.onNodeExpand}" update="detailsForm:ongletsTiers:docs_dtt" />
+					<p:fileDownload value="#{gestionTiersBean.fileDocument}" />
+				</p:commandButton>
+				<p:commandButton title=" " icon="deleteIcon" rendered="#{(gestionTiersBean.active)and(doc.document)}" 
+					onclick="PF('confSupprDoc').show();">
+					<f:setPropertyActionListener value="#{doc}"
+						target="#{gestionTiersBean.selectedDocument}" />
+				</p:commandButton>
+			</p:column>
+	</p:treeTable>
+	</div>
+</ui:composition>

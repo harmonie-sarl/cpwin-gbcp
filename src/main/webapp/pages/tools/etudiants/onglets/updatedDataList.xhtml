@@ -1,0 +1,132 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	 
+	
+	
+		<div align="center">
+		
+		<h:panelGrid columns="4" rendered="#{studentBean.importedDataVisible}">
+		<p:commandButton immediate="true" title="" 
+				value="#{msgs['bt.generer.mail.etudiant']} (#{studentBean.notificationItemCount})" id="note_btn"
+				rendered="#{studentBean.nonRenseigneStatus}" disabled="#{!studentBean.notificationMailAutorized}"
+				update=":detailsForm:importPanel,:detailsForm:etudiant_dtt" 
+				actionListener="#{studentBean.executeNotifications}">
+			</p:commandButton>
+			<p:commandButton immediate="true" title=""
+				value="#{msgs['transferer']}" id="transfer_btn" disabled="#{!studentBean.tranfertAutorized}" 
+				update=":detailsForm:importPanel,:enteteForm" 	rendered="#{studentBean.completStatus}"
+				actionListener="#{studentBean.executeTransfert}">
+			</p:commandButton>
+			<p:commandButton immediate="true" title="" 
+				value="#{msgs['relance.mail']} (#{studentBean.relanceItemCount})" id="mail_btn"
+				rendered="#{studentBean.nonRenseigneStatus}" disabled="#{!studentBean.relanceMailAutorized}"
+				update=":detailsForm:importPanel"
+				actionListener="#{studentBean.executeRelance}">
+			</p:commandButton>
+			<p:commandButton immediate="true" title="" 	rendered="#{studentBean.avecErreurStatus}"  disabled="#{!studentBean.missingBicMailAutorized}"
+				value="#{msgs['notif.adm']} (#{studentBean.missingBicItemCount})" id="adminis_btn" 
+				update=":detailsForm:importPanel"
+				actionListener="#{studentBean.executeMissingBICNotification}">
+			</p:commandButton>
+		</h:panelGrid>
+	</div>
+	<br />
+	<p:dataTable id="etudiant_dtt" scrollable="true"
+		scrollHeight="300" scrollRows="20" 
+		rendered="#{studentBean.etudiantList!=null}" var="student"
+		style="width:100%;text-align:center" rowIndexVar="studentIndex"
+		emptyMessage="#{msgs['datatable.empty']}"
+		value="#{studentBean.etudiantList}">
+		
+		<p:column headerText="#{msgs['code.cpwin']}"
+			style="text-align:center;width:5%">
+			<h:outputText value="#{student.codeCpwin}" />
+		</p:column>
+
+		<p:column headerText="#{msgs['matricule']}"
+			style="text-align:center;width:5%">
+			<h:outputText value="#{student.matricule}" />
+		</p:column>
+		<p:column headerText="#{msgs['nom']}"
+			style="text-align:center;width:5%">
+			<h:outputText value="#{student.nom}" />
+		</p:column>
+		<p:column headerText="#{msgs['prenom']}"
+			style="text-align:center;width:5%">
+			<h:outputText value="#{student.prenom}" />
+		</p:column>
+		<p:column headerText="#{msgs['adresse.mail']}"
+			style="text-align:center;width:13%">
+			<h:outputText value="#{student.email}">
+			</h:outputText>
+		</p:column>
+		<p:column headerText="#{msgs['statut.mail']}"
+			style="text-align:center;width:9%">
+			<h:outputText value="#{student.emailStatus}">
+			</h:outputText>
+		</p:column>
+		<p:column headerText="#{msgs['adresse1']}"
+			style="text-align:center;width:10%">
+			<h:outputText value="#{student.adresse.adresse1}">
+
+			</h:outputText>
+		</p:column>
+		
+		<p:column headerText="#{msgs['adresse2']}"
+			style="text-align:center;width:10%">
+			<h:outputText value="#{student.adresse.adresse2}">
+			</h:outputText>
+		</p:column>
+		<p:column headerText="#{msgs['code.postal']}"
+			style="text-align:center;width:6%">
+			<h:outputText value="#{student.adresse.codePostale}">
+			</h:outputText>
+		</p:column>
+			<p:column headerText="#{msgs['ville']}"
+			style="text-align:center;width:8%">
+			<h:outputText value="#{student.adresse.ville}">
+			</h:outputText>
+		</p:column>
+		<p:column headerText="#{msgs['pays']}"
+			style="text-align:center;width:8%">
+			<h:outputText value="#{student.adresse.pays}">
+			</h:outputText>
+		</p:column>
+	
+		<p:column headerText="#{msgs['iban']}"
+			style="text-align:center;width:17%">
+			<h:outputText value="#{student.iban.iban}">
+			</h:outputText>
+		</p:column>
+		<p:column headerText="#{msgs['bic']}"
+			style="text-align:center;width:8%">
+			<h:outputText value="#{student.iban.bic}">
+			</h:outputText>
+		</p:column>
+		<p:column headerText="#{msgs['detenteur']}"
+			style="text-align:center;width:8%">
+			<h:outputText value="#{student.iban.detenteur}">
+			</h:outputText>
+		</p:column>
+		<p:column headerText="#{msgs['telech.pj']}" rendered="#{studentBean.avecErreurStatus}"
+			style="text-align:center;width:10%">
+			  <p:commandButton value="#{msgs['telech']}"     oncomplete="PF('dlgpdf').show()"  update="detailsForm:dlgpdf"  icon="searchIcon" title=" " > 
+             <f:setPropertyActionListener value="#{student}" target="#{studentBean.selectedEtudiant}"></f:setPropertyActionListener>
+           
+              </p:commandButton>
+		</p:column>
+	
+
+
+	</p:dataTable>
+	 <p:dialog id="dlgpdf" header="document" widgetVar="dlgpdf"   dynamic="true"   fitViewport="true" position="right,top"      showEffect="explode" height="500" width="50%">
+               <p:media id="mediaPdf" value="#{studentBean.pdfStream}" cache="false" player="pdf" width="100%" height="500px">
+                   
+               </p:media>  
+              
+                    </p:dialog>  
+	
+	</ui:composition>

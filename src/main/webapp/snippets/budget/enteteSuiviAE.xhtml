@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+		
+		
+			<h:panelGrid columns="2">
+				<h:outputLabel value="#{msgs['budget.ExerciceAE']}" style="display:block;width:100px"	 />
+				<h:panelGroup>
+					 <p:selectOneMenu  id="exercList"  styleClass="ReadOnlyText" value="#{searchBean.exercice}" >
+					 
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.exercicAeList}" var="exerc" 
+				itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax  listener="#{bpBean.onExerciceChange}"  process="@this" update="budgetCodeList,:detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+				</h:panelGroup>
+				</h:panelGrid>
+				
+					<h:panelGrid columns="2">
+		
+				<h:outputLabel value="#{msgs['budget.code']}" />
+
+	<p:selectOneMenu id="budgetCodeList" styleClass="ReadOnlyText"
+		value="#{searchBean.codeBudget}">
+		<f:selectItem itemValue="" itemLabel="-----" />
+		<f:selectItems value="#{loaderBean.listBudgets}" var="budg"
+			itemLabel="#{budg}" itemValue="#{budg}">
+		</f:selectItems>
+		<p:ajax process="@this" update=":detailsForm,:enteteForm" />
+	</p:selectOneMenu>
+				
+		
+		</h:panelGrid>
+	
+				
+				
+				<h:panelGrid columns="2">
+					 <h:outputText value="#{msgs['nat.grp1']}" style="display:block;width:80px"/> 
+		 
+		  <p:selectOneMenu id="listNatureGroupe"  styleClass="ReadOnlyText" value="#{searchBean.codeNatureGrp}" >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.listNatureGroupe}" var="natgrp"
+				itemLabel="#{natgrp.codeAndLibelle}" itemValue="#{natgrp.code}">
+				</f:selectItems>
+				<p:ajax  process="@this" immediate="true"  listener="#{bpBean.onEnvelopCpItemChange}" update=":detailsForm,:enteteForm,globalMessage" />
+			</p:selectOneMenu>
+		 
+		 
+		 
+		 
+	
+				</h:panelGrid>
+		
+		</ui:composition>

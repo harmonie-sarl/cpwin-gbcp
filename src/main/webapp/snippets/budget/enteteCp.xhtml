@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+			<h:panelGrid columns="2">
+		<h:outputLabel value="#{msgs['exercice.co']}"	 />
+				<h:panelGroup>
+					 <p:selectOneMenu  id="exercList"  styleClass="ReadOnlyText" value="#{searchBean.exerciceCp}" >
+					 
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.exercicCpList}" var="exerc" 
+				itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax  listener="#{bpBean.onExerciceChange}"  process="@this" update="budgetCodeList,:detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+				</h:panelGroup>	
+		
+		</h:panelGrid>
+		
+		<h:panelGrid columns="2">
+		
+				<h:outputLabel value="#{msgs['budget.code']}"	 />
+				<h:panelGroup>
+					 <p:selectOneMenu id="budgetCodeList"  styleClass="ReadOnlyText" value="#{searchBean.codeBudget}" >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.listBudgetsCp}" var="budg"
+				itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax  process="@this" update=":detailsForm,:enteteForm,globalMessage" />
+			</p:selectOneMenu>
+				</h:panelGroup>
+		
+		
+		</h:panelGrid>
+					<h:panelGrid columns="2">
+					 <h:outputText value="#{msgs['enveloppe.budgetaire']}" /> 
+		 <p:selectOneMenu id="envBudgCpList" effect="fade" var="groupDN" styleClass="ReadOnlyText"  converter="groupDestNat.converter" panelStyle="width:360px"
+				filter="true" filterMatchMode="startsWith" value="#{bpBean.groupDestNatCp}" style="width:300px;" >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{bpBean.groupDestCpList}" var="groupDestNat"
+					itemLabel="#{groupDestNat.entity1.codeAndLibelle}-#{groupDestNat.entity2.codeAndLibelle}"  itemValue="#{groupDestNat}">
+				</f:selectItems>
+				<p:column style="width:10%">
+                                  <h:outputText value="#{groupDN.entity1.codeAndLibelle}" />
+                                    </p:column>
+                                  <p:column>
+                                   <h:outputText value="#{groupDN.entity2.codeAndLibelle}" />
+                                          </p:column>
+			<p:ajax process="@this" immediate="true"  listener="#{bpBean.onEnvelopCpItemChange}" update=":detailsForm,:enteteForm,globalMessage"></p:ajax>
+				 
+			</p:selectOneMenu>
+				</h:panelGrid>
+	          
+	          
+			
+		</ui:composition>

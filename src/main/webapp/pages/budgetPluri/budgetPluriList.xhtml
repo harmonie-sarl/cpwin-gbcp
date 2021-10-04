@@ -1,0 +1,178 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="../../templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+.ui-state-disabled, .ui-widget-content .ui-state-disabled,
+	.ui-widget-header .ui-state-disabled {
+	opacity: .40;
+	filter: Alpha(Opacity = 35);
+	background-image: none;
+}
+</style>
+
+	</ui:define>
+	<ui:define name="pageTitle">#{msgs['menu.saisi']}</ui:define>
+	<ui:define name="entetePage">
+	<ui:include src="/snippets/budget/entete.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="search">
+			
+	
+	</ui:define>
+	<ui:define name="enteteAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}" disabled="#{!bpBean.requiredDataDone}"
+			update="globalMessage,:enteteForm,:detailsForm:TotalPannel, :detailsForm:budgetPanel" 
+			
+			actionListener="#{bpBean.searchBudget}">
+
+		</p:commandButton>
+	</ui:define>
+
+	<ui:define name="details">
+
+		<p:panel id="TotalPannel" style="width:100%;">
+			<h:panelGrid columns="5" cellpadding="0" cellspacing="10" rendered="#{bpBean.budget!=null}"
+				columnClasses="filter_col1,filter_col2,filter_col3,filter_col4">
+				<h:outputLabel value="#{msgs['total.ae']}"	styleClass="espace_entre_label_value" />
+				<h:panelGroup>
+					<h:outputText  value="#{bpBean.budget.montantAE}" id="totalAe">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</h:panelGroup>
+				<h:outputLabel value="#{msgs['total.recette']}"	styleClass="espace_entre_label_value" />
+					<h:panelGroup>
+				<h:outputText value="#{bpBean.budget.recette}">		
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+				
+		</h:panelGroup>
+		<p:commandButton rendered="false" value="#{msgs['login.btn.valider']}"
+			update="globalMessage" 
+		 actionListener="#{bpBean.saveBudget}" disabled="#{bpBean.budget.visee}">
+				
+		</p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+		<p:panel id="budgetPanel" style="width:100%;">
+			<div align="center" style="width: 100%;">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['enveloppe.budgetaire']}" />
+				</f:facet>
+				<p:dataTable id="budget_dtt"
+					rendered="#{not empty bpBean.budget.listEnvBudg}" var="envelop"
+					style="width:100%; text-align: center;" rowIndexVar="envelopIndex"
+					emptyMessage="#{msgs['datatable.empty']}"
+					value="#{bpBean.budget.listEnvBudg}" paginator="true"
+					rows="10">
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['nature']}" />
+						</f:facet>
+
+						<h:outputText value="#{envelop.codeAndLibGroupNat}"  />
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['destination']}" />
+						</f:facet>
+
+						<h:outputText value="#{envelop.codeAndLibGroupDest}" />
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['programme']}" />
+						</f:facet>						
+							<h:outputText value="#{envelop.codeAndLibProg}" />
+						<f:facet name="footer">
+                              <h:outputText value="#{msgs['total']}" />
+                       </f:facet>
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['montant.ae']}" />
+						</f:facet>
+						<h:outputText value="#{envelop.montantAE}">
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+						<f:facet name="footer">
+                            <h:outputText value="#{bpBean.budget.totalMontantAE}">
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+                       </f:facet>
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['budget.montant.cp']}" />
+						</f:facet>
+						<h:outputText value="#{envelop.totalMntCreditPaie}">
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+						<f:facet name="footer">
+                            <h:outputText value="#{bpBean.budget.totalMontantCP}">
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+                       </f:facet>
+					</p:column>
+					<p:column style="width:5%;">
+						<p:commandButton icon="updateIcon" immediate="true" actionListener="#{bpBean.chooseEnvelop}"
+							title="#{msgs['btn.modifier']}" >
+						<f:setPropertyActionListener target="#{bpBean.envelopBudg}" value="#{envelop}"/>
+						<p:ajax event="dialogReturn"  update="detailsForm:budgetPanel" />
+						</p:commandButton>
+					</p:column>
+    	
+				</p:dataTable>
+				<br />
+				<h:panelGroup  >
+					<p:commandButton rendered="false" title=" " value="#{msgs['btn.add']}" immediate="true" process="@this" disabled="#{!bpBean.addAnvelopAutorized}"
+					actionListener="#{bpBean.addEnvelop}" >
+					<p:ajax event="dialogReturn"  update="detailsForm:budgetPanel,@this" />
+				</p:commandButton>
+					<p:commandButton title=" " value="#{msgs['budget.btn.export']}"
+						immediate="true" id="exportBTN"
+						rendered="#{not empty bpBean.budget.listEnvBudg}" ajax="false">
+						<p:fileDownload value="#{bpBean.xlsEnvelopBudg}" />
+					</p:commandButton>
+					<p:commandButton title=" " value="#{msgs['validation.ordo']}"  
+					 rendered="#{(p:ifAnyGranted('ordo'))and(not empty bpBean.budget.listEnvBudg)}"
+						 immediate="true"
+						update="globalMessage,detailsForm:budgetPanel"
+						actionListener="#{bpBean.validerOrdo}" disabled="#{!bpBean.validerOrdoAutorized}" >
+
+					</p:commandButton>
+					<p:commandButton title=" " value="#{msgs['validation.ac']}"   immediate="true"
+						rendered="#{(p:ifAnyGranted('AC'))and(not empty bpBean.budget.listEnvBudg)}"
+						update="globalMessage,detailsForm:budgetPanel"
+						actionListener="#{bpBean.validerAC}"  disabled="#{!bpBean.validerACAutorized}">
+
+					</p:commandButton>
+					<p:commandButton title=" " value="#{msgs['refus.ac']}"   immediate="true"
+						 rendered="#{(p:ifAnyGranted('AC'))and(not empty bpBean.budget.listEnvBudg)}"
+						update="globalMessage,detailsForm:budgetPanel"
+						actionListener="#{bpBean.refuserAC}"  disabled="#{!bpBean.validerACAutorized}" >
+
+					</p:commandButton>
+
+
+				</h:panelGroup>
+			</div>
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+		
+	</ui:define>
+</ui:composition>

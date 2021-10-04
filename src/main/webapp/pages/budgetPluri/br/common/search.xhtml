@@ -1,0 +1,143 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+
+
+	<h:panelGrid columns="3"  id="budgModifList" >
+		<h:outputText value="#{msgs['choix.br']}" />
+	<p:selectOneMenu styleClass="ReadOnlyText"
+			value="#{bpBean.numeroBudgModif}"  >
+			<f:selectItem itemValue="" itemLabel="-----" />
+			<f:selectItems value="#{bpBean.budgModifList}" var="budgModif"
+				itemLabel="#{budgModif.description} - #{budgModif.etatCp}" itemValue="#{budgModif.numero}">
+			</f:selectItems>
+			<p:ajax process="@this"  update=":detailsForm,:enteteForm:searchTable,globalMessage,:enteteForm:budgModifInfoButton,:enteteForm:infoVisa,:enteteForm:infoEtat,:enteteForm:infohistory"
+			
+			listener="#{bpBean.selectBrListener}" />
+		</p:selectOneMenu>
+			<h:panelGroup id="budgModifInfoButton" >		
+			 <p:commandButton   icon="fa fa-fw fa-info"     type="button" rendered="#{bpBean.selectedBudgModif!=null}" onclick="PF('info').show();" />
+				</h:panelGroup>
+  </h:panelGrid>
+	
+
+<p:dialog header="#{msgs['icon.information']}" widgetVar="info" showEffect="explode"  height="300">
+
+		<p:panelGrid id="infoVisa">
+			<f:facet name="header">
+				<p:row>
+					<p:column colspan="3">
+						<h:outputText value="#{msgs['visa']}"></h:outputText>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column></p:column>
+					<p:column>
+						<h:outputText value="#{msgs['budget.visePAR']}"></h:outputText>
+					</p:column>
+					<p:column>
+						<h:outputText value="#{msgs['budget.le']}"></h:outputText>
+					</p:column>
+				</p:row>
+			</f:facet>
+			<p:row rendered="#{bpBean.selectedBudgModif.ordoAccept}">
+
+				<p:column>
+					<p:outputLabel
+						value="#{msgs['budget.visaOrdo']} : #{bpBean.selectedBudgModif.visaOrdo.visa}" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.visaOrdo.auteur}"
+						size="7" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.visaOrdo.date}"
+						size="7" />
+				</p:column>
+
+			</p:row>
+
+
+			<p:row rendered="#{bpBean.selectedBudgModif.ctrlAccept || true}">
+				<p:column>
+					<p:outputLabel
+						value="#{msgs['budget.visaCF']} : #{bpBean.selectedBudgModif.visaCtrl.visa}" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.visaCtrl.auteur}"
+						size="7" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.visaCtrl.date}"
+						size="7" />
+				</p:column>
+			</p:row>
+			<p:row rendered="#{bpBean.selectedBudgModif.cptAccept|| true}">
+
+				<p:column>
+					<p:outputLabel
+						value="#{msgs['budget.visaAC']} : #{bpBean.selectedBudgModif.visaCpt.visa}" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.visaCpt.auteur}"
+						size="7" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.visaCpt.date}"
+						size="7" />
+				</p:column>
+
+			</p:row>
+
+		</p:panelGrid>
+		<p:panelGrid id="infoEtat">
+			<f:facet name="header">
+				<p:row>
+					<p:column colspan="2">
+						<h:outputText value="#{msgs['type']}"></h:outputText>
+					</p:column>
+				</p:row>
+			</f:facet>
+			<p:row>
+				<p:column>
+					<h:outputText value="#{msgs['type']}"></h:outputText>
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.type.libelle}" />
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		<p:panelGrid id="infohistory">
+			<f:facet name="header">
+				<p:row>
+					<p:column colspan="3">   	<h:outputText value="#{msgs['maj']}"></h:outputText></p:column>
+				</p:row>
+			</f:facet>
+			<p:row>
+
+				<p:column>
+					<p:outputLabel value="#{msgs['autMaj']}"></p:outputLabel>
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.trace.auteurMaj}"
+						size="7" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.trace.dateMajF}"
+						size="7" />
+				</p:column>
+
+			</p:row>
+		</p:panelGrid>
+
+	</p:dialog>
+	
+	
+
+
+</ui:composition>

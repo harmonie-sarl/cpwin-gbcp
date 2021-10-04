@@ -1,0 +1,1122 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<style type="text/css">
+	.totalTitle {
+	text-align: left;
+	font-weight: bold;
+	background: #feeebd !important;
+	font-size: 9.5px;
+}
+
+.totalFooter {
+	color: #383838 !important;
+	background: #F0E68C !important;
+	border-color: grey !important;
+	font-size: 9px;
+	text-align: right;
+}
+
+.totalValue {
+	font-weight: bold;
+	background: #feeebd !important;
+	text-align: center;
+	font-size: 9px
+}
+.detailTitle {	
+		text-align: left;
+}
+
+.detailValue {	
+	text-align: center;	
+}
+
+.globalTitle {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9px;
+	text-align: center;
+	font-style: italic;
+}
+
+.globalValue {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	
+	font-weight: bold;
+	font-size: 8.5px;
+	text-align: center;
+	font-style: italic;
+}
+
+.th {
+	color: #383838 !important;
+	background: #D19275 !important;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9px;
+}
+
+.td {
+	color: #383838 !important;
+	background: #F0E68C !important;
+	border-color: grey !important;
+	font-size: 9px;
+}
+
+
+.ui-datatable .ui-datatable-data td {
+    font-size: 75% !important;
+}
+
+.ui-datatable thead {
+    font-size: 75% !important;
+}
+
+	
+</style>
+	<p:panel style="width:100%;">
+		<f:facet name="header">
+			<h:outputText value="#{msgs['tab7']}"
+				style="font-weight: bold; text-align: center;" />
+		</f:facet>
+		<div align="center">
+			<h:outputText value="#{msgs['plan.tresorerie']}"
+				style="font-weight: bold; text-align: center;color:#008000;" />
+		</div>
+
+
+		<p:panelGrid style="width:100%; vertical-align:top;" rendered="#{editionBean.editionBi.tab7!=null}">
+     <p:row style="text-align: center;">
+            <p:column>
+					<h:outputText 
+						value="#{editionBean.editionBi.tab7.title}"
+						style="font-weight: bold; text-align: center;color:#008000;" />
+				</p:column>								
+        </p:row>
+		</p:panelGrid>
+		<p:dataTable id="tab7_encaiss_dtt" sortBy="#{encaiss.ligne.ordre}"
+			rendered="#{editionBean.editionBi.tab7!=null}" var="encaiss" style="width:100%;"
+			rowIndexVar="encaissIndex" emptyMessage="#{msgs['datatable.empty']}"
+			value="#{editionBean.editionBi.tab7.encaissements}">
+			<p:columnGroup type="header">
+				<p:row styleClass="th" style="font-weight: bold;">	              
+				  <p:column styleClass="th" colspan="1" style="width:10%;">
+					</p:column>			
+				 <p:column styleClass="th" colspan="1" style="width:8%;"
+						headerText="#{msgs['janvier']}">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" style="width:8%;"
+						headerText="#{msgs['fevrier']}">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['mars']}"
+						style="width:8%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['avril']}"
+						style="width:8%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['mai']}"
+						style="width:8%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['juin']}"
+						style="width:8%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['juillet']}" style="width:8%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['aout']}"
+						style="width:8%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['septembre']}" style="width:8%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['octobre']}" style="width:8%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['novembre']}" style="width:8%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['decembre']}" style="width:8%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['total.majus']} #{msgs['variation.tresorerie.annuelle']}"
+						style="width:8%;">
+
+
+					</p:column>
+					
+        </p:row>
+          <p:row styleClass="th" style="font-weight: bold;">
+           	 <p:column styleClass="totalTitle" colspan="1"
+						headerText="#{msgs['solde.initial']}">
+					</p:column>
+				  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeInitial.montant01}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					
+					</p:column>
+					
+					  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeInitial.montant02}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeInitial.montant03}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeInitial.montant04}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeInitial.montant05}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeInitial.montant06}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+							  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeInitial.montant07}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeInitial.montant08}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeInitial.montant09}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+						  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeInitial.montant10}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeInitial.montant11}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+
+						  <p:column styleClass="totalValue" colspan="1">
+						<f:facet name="header">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeInitial.montant12}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+
+							  <p:column styleClass="totalValue" colspan="1">
+
+					</p:column>
+					
+						
+					
+						
+        </p:row>
+				<p:row>
+           	 <p:column style="text-align: left;font-weight: bold;"
+						colspan="1" headerText="#{msgs['encaissements']}" styleClass="th">
+					</p:column>
+						  <p:column styleClass="th" colspan="1">
+
+					</p:column>			
+				 <p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+					<p:column styleClass="th" colspan="1">
+					</p:column>
+						 
+				 
+        </p:row>
+			</p:columnGroup>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalTitle':'detailTitle'}">
+
+				<h:outputText value="#{encaiss.ligne.libelle}" />
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+				
+				
+				<h:outputText value="#{encaiss.montant01}"
+				 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	
+				<h:outputText value="#{encaiss.montant02}"
+					>
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	
+				<h:outputText value="#{encaiss.montant03}"
+					 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+
+			
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	
+				<h:outputText value="#{encaiss.montant04}"
+						 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+				
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+
+				<h:outputText value="#{encaiss.montant05}"
+						  >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+			
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	
+				<h:outputText value="#{encaiss.montant06}"
+						>
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+				
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+
+	
+				<h:outputText value="#{encaiss.montant07}"
+					>
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+		
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	
+				<h:outputText value="#{encaiss.montant08}"
+				 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+		
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	
+				<h:outputText value="#{encaiss.montant09}"
+						   >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+				
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	
+				<h:outputText value="#{encaiss.montant10}"
+						 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+			
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	
+				<h:outputText value="#{encaiss.montant11}"
+				 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+
+				
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+	
+				<h:outputText value="#{encaiss.montant12}"
+					 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+			
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<h:outputText value="#{encaiss.totaleVariationAnnuelle}">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			
+		
+
+
+			<p:columnGroup type="footer">
+
+				<p:row style="font-weight: bold;">
+	              
+				  <p:column styleClass="totalFooter">
+						<f:facet name="footer">
+							<h:outputLabel value="#{msgs['a.total']}" />
+						</f:facet>
+					</p:column>			
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleEncaiss.montant01}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleEncaiss.montant02}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleEncaiss.montant03}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleEncaiss.montant04}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleEncaiss.montant05}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleEncaiss.montant06}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleEncaiss.montant07}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleEncaiss.montant08}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+
+						</f:facet>
+					</p:column>
+		  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleEncaiss.montant09}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleEncaiss.montant10}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleEncaiss.montant11}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleEncaiss.montant12}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText
+								value="#{editionBean.editionBi.tab7.totaleEncaiss.totaleVariationAnnuelle}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+
+					</p:column>
+					
+        </p:row>
+			</p:columnGroup>
+		</p:dataTable>
+			<p:dataTable id="tab7_decaiss_dtt" sortBy="#{decaiss.ligne.ordre}"
+			var="decaiss" style="width:100%; text-align: center;"
+			rendered="#{editionBean.editionBi.tab7!=null}" rowIndexVar="decaissIndex"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{editionBean.editionBi.tab7.decaissements}">
+
+			<p:columnGroup type="header">
+					
+        
+					<p:row>
+           	 <p:column
+						style="text-align: left;font-weight: bold; width:10%;" colspan="1"
+						headerText="#{msgs['decaissements']}" styleClass="th">
+					</p:column>
+						  <p:column styleClass="th" colspan="1" style="width:8%;">
+
+					</p:column>			
+				 <p:column styleClass="th" colspan="1" style="width:8%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:8%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:8%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:8%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:8%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:8%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:8%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:8%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:8%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:8%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:8%;">
+					</p:column>
+					<p:column styleClass="th" colspan="1" style="width:8%;">
+					</p:column>
+						 
+				
+        </p:row>
+			</p:columnGroup>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalTitle':'detailTitle'}">
+
+				<h:outputText value="#{decaiss.ligne.libelle}" />
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+			
+				<h:outputText value="#{decaiss.montant01}"
+						 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+
+
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+	
+				<h:outputText value="#{decaiss.montant02}"
+				>
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+			
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+	
+				<h:outputText value="#{decaiss.montant03}"
+						 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				
+
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+	
+				<h:outputText value="#{decaiss.montant04}"
+						 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+		
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+	
+				<h:outputText value="#{decaiss.montant05}"
+					  >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+		
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+	
+				<h:outputText value="#{decaiss.montant06}"
+						  >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+			
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+
+				<h:outputText value="#{decaiss.montant07}"
+						 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+
+			
+				<h:outputText value="#{decaiss.montant08}"
+							 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+
+
+			
+				<h:outputText value="#{decaiss.montant09}"
+						 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+
+
+				<h:outputText value="#{decaiss.montant10}"
+							 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+
+		
+				<h:outputText value="#{decaiss.montant11}"
+					 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+
+	
+				<h:outputText value="#{decaiss.montant12}"
+					 >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<h:outputText value="#{decaiss.totaleVariationAnnuelle}">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+			</p:column>
+		
+
+			<p:columnGroup type="footer">
+
+				<p:row style="font-weight: bold;text-align: center;">
+	              
+				  <p:column styleClass="totalFooter">
+						<f:facet name="footer">
+							<h:outputLabel value="#{msgs['b.total']}" />
+						</f:facet>
+					</p:column>			
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleDecaiss.montant01}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleDecaiss.montant02}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleDecaiss.montant03}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleDecaiss.montant04}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleDecaiss.montant05}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleDecaiss.montant06}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleDecaiss.montant07}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleDecaiss.montant08}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+		  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleDecaiss.montant09}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleDecaiss.montant10}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleDecaiss.montant11}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.totaleDecaiss.montant12}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText
+								value="#{editionBean.editionBi.tab7.totaleDecaiss.totaleVariationAnnuelle}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+
+					</p:column>
+					
+					
+        </p:row>
+
+              
+				  
+
+<p:row styleClass="th" style="font-weight: bold;text-align: center;">	
+	              
+				  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputLabel value="#{msgs['2.solde.mois.a.b']}" />
+						</f:facet>
+					</p:column>			
+				  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeMois.montant01}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+
+					</p:column>
+				  <p:column styleClass="th">
+
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeMois.montant02}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeMois.montant03}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeMois.montant04}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="th">
+
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeMois.montant05}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+		  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeMois.montant06}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+		  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeMois.montant07}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeMois.montant08}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+		  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeMois.montant09}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+	  <p:column styleClass="th">
+
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeMois.montant10}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+		  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeMois.montant11}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeMois.montant12}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="th">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeMois.totaleVariationAnnuelle}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					
+        </p:row>
+				<p:row style="font-weight: bold;text-align: center;">
+	              
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputLabel value="#{msgs['solde.cumul1.2']}" />
+						</f:facet>
+					</p:column>			
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeCumule.montant01}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeCumule.montant02}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeCumule.montant03}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeCumule.montant04}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeCumule.montant05}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeCumule.montant06}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeCumule.montant07}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeCumule.montant08}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+		  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeCumule.montant09}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+				  <p:column styleClass="td">
+
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeCumule.montant10}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeCumule.montant11}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					  <p:column styleClass="td">
+						<f:facet name="footer">
+							<h:outputText value="#{editionBean.editionBi.tab7.soldeCumule.montant12}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+			  <p:column styleClass="td">
+						<f:facet name="footer">
+
+						</f:facet>
+
+					</p:column>
+					
+        </p:row>
+			</p:columnGroup>
+		</p:dataTable>
+			
+			<br />
+		<div align="right">
+			<h:outputText value="#{msgs['variation.tresorerie']}"
+				style="text-align: center;" />
+		</div>
+		<br />	
+
+	</p:panel>
+
+
+</ui:composition>

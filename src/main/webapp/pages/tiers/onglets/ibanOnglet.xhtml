@@ -1,0 +1,134 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+
+		<p:panel id="ibanPanel" style="width:100%;">
+
+			<div
+				style="margin-left: auto; margin-right: auto; text-align: center;">
+
+			<p:dataTable var="iban"  rowKey="#{iban.ordre}"   editable="true" 
+				value="#{gestionTiersBean.tiers.ibanList}" id="iban_dtt"
+				paginator="true" rendered="true" rows="5"
+				selection="#{gestionTiersBean.iban}" selectionMode="single"
+				style="width:100%;" margin="0 auto" padding="0"
+				emptyMessage="#{msgs['datatable.empty']}">
+
+       <p:ajax event="rowSelect" listener="#{gestionTiersBean.onIbanSelect}" update="detailsForm:ongletsTiers:ribPanel" />
+       <p:ajax event="rowUnselect" listener="#{gestionTiersBean.onIbanUnselect}" update="detailsForm:ongletsTiers:ribPanel,detailsForm:tiersMsg" />
+
+				<p:column style="width:30%;">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msgs['iban']}" />
+						<h:outputText value=" *" rendered="#{gestionTiersBean.active}" styleClass="required" />
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{iban.iban}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{iban.iban}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column style="width:30%;">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msgs['bic']}" />
+						<h:outputText value=" *" rendered="#{gestionTiersBean.active}" styleClass="required" />
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{iban.bic}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{iban.bic}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column style="width:20%;">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msgs['detenteur']}" />
+						<h:outputText value=" *" rendered="#{gestionTiersBean.active}" styleClass="required" />
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{iban.detenteur}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{iban.detenteur}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column style="width:5%;" rendered="true"
+					headerText="#{msgs['valide']}">
+					<h:outputText value="#{iban.valideB.designation}" />
+				</p:column>
+
+				<p:column style="width:5%;" rendered="true"
+					headerText="#{msgs['ferme']}">
+					<h:outputText value="#{iban.ferme.designation}" />
+				</p:column>
+				<p:column style="width:10%;" headerText="" >
+					<p:rowEditor rendered="#{(iban.ouvert) and (gestionTiersBean.active)}"/>
+				</p:column>
+
+			</p:dataTable> <h:panelGroup>
+				<p:commandButton immediate="true" value="#{msgs['btn.add']}" rendered="#{gestionTiersBean.active}"
+					actionListener="#{gestionTiersBean.prepareAddIban}"					
+					update="ongletsTiers:ibanPanel">
+				</p:commandButton>
+			</h:panelGroup></div>
+		</p:panel>
+
+
+		<p:panel id="ribPanel" style="width:100%;" header="#{msgs['rib']}">
+			<h:panelGrid columns="6" style="width:100%; vertical-align:top;">
+				<h:outputText value="#{msgs['bank']}" />
+				<h:outputText value="#{msgs['guichet']}" />
+				<h:outputText value="#{msgs['compte']}" />
+				<h:outputText value="#{msgs['cle']}" />
+				<h:outputText value="#{msgs['domiciliation']}" />
+				<h:outputText value="#{msgs['detenteur']}" />
+
+				<h:outputText
+					value="#{gestionTiersBean.iban.calculatedRib.codeBanque}" />
+				<h:outputText
+					value="#{gestionTiersBean.iban.calculatedRib.codeGuichet}" />
+				<h:outputText
+					value="#{gestionTiersBean.iban.calculatedRib.numeroCompte}" />
+				<h:outputText value="#{gestionTiersBean.iban.calculatedRib.cle}" />
+				<h:outputText
+					value="#{gestionTiersBean.iban.calculatedRib.domiciliation}" />
+				<h:outputText value="#{gestionTiersBean.iban.calculatedRib.detenteur}" />
+			</h:panelGrid>
+		</p:panel>
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+</ui:composition>

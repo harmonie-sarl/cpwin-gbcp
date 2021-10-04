@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	<h:panelGrid columns="4">
+				
+		<h:outputLabel value="#{msgs['cpwin.exercice']}" style="display:block;width:80px"	 />
+				<h:panelGroup>
+					 <p:selectOneMenu  id="exercList"  styleClass="ReadOnlyText" value="#{searchBean.exercice}" >
+					 
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.exercicAeList}" var="exerc" 
+				itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax  listener="#{pltBean.onExerciceChange}"  process="@this" update=":detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+				</h:panelGroup> 
+				
+				<h:outputLabel value="#{msgs['compte']}" for="code_compte"
+			styleClass="espace_entre_label_value" />
+		<p:inputText id="code_compte" value="#{pltBean.codeCompte}" size="10">
+			<p:ajax process="@this" update=":detailsForm" />
+		</p:inputText>
+		
+		</h:panelGrid>
+
+
+	
+
+</ui:composition>
+
+
+
+
+
+

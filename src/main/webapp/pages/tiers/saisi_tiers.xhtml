@@ -1,0 +1,126 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+
+	<ui:define name="head">
+	<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+
+	<ui:define name="pageTitle">#{gestionTiersBean.pageTitle}</ui:define>
+	<ui:define name="errorMsg"></ui:define>
+	
+	<ui:define name="entetePage">
+
+	</ui:define>
+	<ui:define name="search">
+
+	</ui:define>
+
+
+	<ui:define name="details">		
+			<p:messages id="tiersMsg" globalOnly="true" showDetail="true" />
+			<h:panelGroup id="details_tiers" >
+				<ui:include src="/pages/tiers/details_tiers.xhtml" />
+			</h:panelGroup>
+			<br />
+			<div align="center"><h:panelGroup id="btnTiers">
+				<p:commandButton value="#{msgs['btn.valider']}"
+					rendered="false"
+					actionListener="#{gestionTiersBean.updateTiersActionListener}"					
+					update="detailsForm:tiersMsg,detailsForm:details_tiers" />
+				<p:commandButton value="#{msgs['btn.fermer']}" ajax="false"
+					rendered="true" immediate="true" action="#{gestionTiersBean.fermer}" 
+					 />
+				
+			</h:panelGroup></div>
+	
+		<p:dialog width="450" modal="true"
+			header="#{msgs['ajouter.document']}" widgetVar="confAddDocument">
+			<h:panelGrid id="addDocPG" columns="2" width="100%">
+				<h:outputText value="#{msgs['cpwin.type']} #{msgs['document']}" />
+				<h:panelGroup>
+					<h:selectOneMenu id="codeList" styleClass="ReadOnlyText"
+						required="false" value="#{gestionTiersBean.codeDocument}">
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{gestionTiersBean.docsList}" var="doc"
+							itemLabel="#{doc.libelle}" itemValue="#{doc.code}">
+						</f:selectItems>
+							<p:ajax process="@this" ></p:ajax>
+					</h:selectOneMenu>
+					<p:message for="codeList" styleClass="error" />
+				</h:panelGroup>
+				
+				<h:panelGroup></h:panelGroup>
+				<h:panelGroup>								
+					<p:fileUpload id="fileUp"     label="#{msgs['parcourir']}" skinSimple="true"
+				fileUploadListener="#{gestionTiersBean.handleFileUpload}" mode="advanced"
+				dragDropSupport="false" auto="true"  icon="fa fa-upload"
+				height="48" width="48" update=":detailsForm:addDocPG"
+				 description="Fichier" />
+				 <p:message id="fileUpMsg" for="fileUp" styleClass="error" />
+				</h:panelGroup>
+			</h:panelGrid>
+			<br />
+			<div align="center"><p:commandButton
+				value="#{msgs['btn.valider']}"
+				oncomplete="if(args.isValid) PF('confAddDocument').hide();"
+				actionListener="#{gestionTiersBean.addDocument}"
+				update="detailsForm:ongletsTiers:docs_dtt,addDocPG" /> <p:commandButton
+				value="#{msgs['btn.annuler']}" immediate="true"
+				onclick="PF('confAddDocument').hide();" type="button" /></div>
+		</p:dialog>
+		<p:confirmDialog message="#{msgs['confirm.fermeture.tiers']}"
+			header="" widgetVar="confFermTiers" modal="true">
+			<h:panelGrid width="100%" style="text-align: center;">
+				<h:panelGroup>
+					<p:commandButton value="#{msgs['btn.radio.yes']}"
+						onclick="PF('confFermTiers').hide();"	ajax="false"				
+						action="#{gestionTiersBean.updateTiersAction}"
+						 />
+					<p:commandButton value="#{msgs['btn.radio.no']}" ajax="false"
+						action="#{gestionTiersBean.deleteUnsavedDocsWPage}"
+						 />
+				</h:panelGroup>
+			</h:panelGrid>
+		</p:confirmDialog>
+		<p:confirmDialog message="#{msgs['confirm.suppression.document']}"
+			header="" widgetVar="confSupprDoc" modal="true">
+			<h:panelGrid width="100%" style="text-align: center;"
+				id="confSupprDocGrid">
+				<h:panelGroup>
+					<p:commandButton value="#{msgs['btn.valider']}"
+						oncomplete="PF('confSupprDoc').hide();"
+						actionListener="#{gestionTiersBean.deleteDocument}"
+						update="detailsForm:ongletsTiers:docs_dtt" />
+					<p:commandButton value="#{msgs['btn.annuler']}"
+						onclick="PF('confSupprDoc').hide();" type="button" />
+				</h:panelGroup>
+			</h:panelGrid>
+		</p:confirmDialog>
+		<p:confirmDialog message="#{msgs['confirm.suppression.adresse']}"
+			header="" widgetVar="confSupprAdresse" modal="true">
+			<h:panelGrid width="100%" style="text-align: center;"
+				id="confSupprAdresseGrid">
+				<h:panelGroup>
+					<p:commandButton value="#{msgs['btn.valider']}"
+						oncomplete="PF('confSupprAdresse').hide();"
+						actionListener="#{gestionTiersBean.deleteAdresse}"
+						update="detailsForm:ongletsTiers:adr_dtt" />
+					<p:commandButton value="#{msgs['btn.annuler']}"
+						onclick="PF('confSupprAdresse').hide();" type="button" />
+				</h:panelGroup>
+			</h:panelGrid>
+		</p:confirmDialog>
+
+
+	</ui:define>
+</ui:composition>

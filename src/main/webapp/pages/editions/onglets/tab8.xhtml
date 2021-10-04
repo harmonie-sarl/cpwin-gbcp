@@ -1,0 +1,797 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+
+</style>
+	<p:panel style="width:100%;" id="tab8Panel">
+		<f:facet name="header">
+			<h:outputText value="#{msgs['tableau8']}"
+				style="font-weight: bold; text-align: center;" />
+		</f:facet>
+
+<div align="left">
+			<h:outputText value="#{editionBean.nomConfig}"
+				style="font-weight: bold; text-align: left;" />
+		</div>
+		<div align="center">
+			<h:outputText value="#{msgs['operation.recet.flech']}"
+				style="font-weight: bold; text-align: center;color:#008000;" />
+		</div>
+	
+		<p:panelGrid style="width:100%; vertical-align:top;">	
+		
+		 <p:row>
+            <p:column colspan="6" rowspan="1"
+					style="font-weight: bold; text-align: left;background-color: #008000;color: #FFFFFF;">
+					<h:outputText value="#{msgs['pour.votre.org.delib']}" />
+				</p:column>
+				
+        </p:row>
+ 	 <p:row>
+            <p:column colspan="6" >  
+				
+				</p:column>
+				 
+
+        </p:row>
+
+ <p:row style="text-align: Center;">
+            <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['anter.non.douan']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+					<h:outputLabel value="#{msgs['n']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					<h:outputLabel value="#{msgs['n1']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					<h:outputLabel value="#{msgs['n2']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					<h:outputLabel value="#{msgs['n3']}" />
+				</p:column>
+				
+
+        </p:row>
+<p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+              <h:outputLabel value="#{msgs['pos.financ.flech.debut.exec']}" />
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">			
+						<p:inputNumber id="finanDebutExecN" size="20" inputStyle="text-align: right"
+							 onfocus="select();" value="#{editionBean.editionBi.tab8.finanDebutExec.n.montant}">
+							<p:ajax process="@this"
+							listener="#{editionBean.editionBi.refreshTotauxTab8}"
+							
+							 global="false" update=":detailsForm:ongletsEditionBi:tab8Panel"></p:ajax>
+						</p:inputNumber>				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+     <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+              
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+     <p:row style="font-weight: bold; text-align: right;">
+            <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+              <h:outputLabel value="#{msgs['recette.flecheb']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				 <h:outputText value="#{editionBean.editionBi.tab8.totalRecetFleche.n.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+					
+				</p:column>
+				
+
+        </p:row>
+ <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+              
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+ <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+               <h:outputLabel value="#{msgs['financ.etat.flech']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+				<h:outputText value="#{editionBean.editionBi.tab8.recetR22.n.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+<p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+               <h:outputLabel value="#{msgs['autre.financ.pub.flech']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+				<h:outputText value="#{editionBean.editionBi.tab8.recetR24.n.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+<p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+               <h:outputLabel value="#{msgs['recet.propr.flech']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+				<h:outputText value="#{editionBean.editionBi.tab8.recetR25.n.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+    <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+               
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+      <p:row style="font-weight: bold; text-align: right;">
+            <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+              <h:outputLabel value="#{msgs['dep.recet.flech.cp']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+				<h:outputText value="#{editionBean.editionBi.tab8.totDepRecetCp.n.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+					
+				</p:column>
+				
+
+        </p:row>
+  <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+               
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+<p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+                 <h:outputLabel value="#{msgs['personnel']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+     <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+                 <h:outputLabel value="#{msgs['ae.cp']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">	
+						<p:inputNumber id="personnelAeCpn" size="20" inputStyle="text-align: right"
+							 onfocus="select();" value="#{editionBean.editionBi.tab8.personnelAeCp.n.montant}">
+						<p:ajax process="@this" 
+						
+						listener="#{editionBean.editionBi.refreshTotauxTab8}"
+						global="false" update=":detailsForm:ongletsEditionBi:tab8Panel"></p:ajax>
+						</p:inputNumber>				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+     <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+                 <h:outputLabel value="#{msgs['fonctionnement']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+<p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+                 <h:outputLabel value="#{msgs['ae']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">			
+						<p:inputNumber id="fonctAEn" size="20" inputStyle="text-align: right"
+							 onfocus="select();" value="#{editionBean.editionBi.tab8.fonctAE.n.montant}">
+						<p:ajax process="@this" 
+						listener="#{editionBean.editionBi.refreshTotauxTab8}"
+						global="false" update=":detailsForm:ongletsEditionBi:tab8Panel"></p:ajax>
+						</p:inputNumber>					
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+    <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+                 <h:outputLabel value="#{msgs['cp']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">				
+						<p:inputNumber id="fonctCPn" size="20" inputStyle="text-align: right"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab8.fonctCP.n.montant}">
+							<p:ajax process="@this" 
+							listener="#{editionBean.editionBi.refreshTotauxTab8}"
+							global="false" update=":detailsForm:ongletsEditionBi:tab8Panel"></p:ajax>
+						</p:inputNumber>				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+        <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+                 <h:outputLabel value="#{msgs['intervention']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+           </p:row>
+ <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+                 <h:outputLabel value="#{msgs['ae']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">			
+						<p:inputNumber id="interAEn" inputStyle="text-align: right" size="20" 
+							 onfocus="select();" value="#{editionBean.editionBi.tab8.interAE.n.montant}">
+							<p:ajax process="@this" 
+							listener="#{editionBean.editionBi.refreshTotauxTab8}"
+							global="false" update=":detailsForm:ongletsEditionBi:tab8Panel"></p:ajax>
+						</p:inputNumber>					
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+           </p:row>
+              <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+                 <h:outputLabel value="#{msgs['cp']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">			
+						<p:inputNumber id="interCPn" inputStyle="text-align: right" size="20" 
+							 onfocus="select();"  value="#{editionBean.editionBi.tab8.interCP.n.montant}">
+							<p:ajax process="@this" 
+							listener="#{editionBean.editionBi.refreshTotauxTab8}"
+							global="false" update=":detailsForm:ongletsEditionBi:tab8Panel"></p:ajax>
+						</p:inputNumber>					
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+        <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+                 <h:outputLabel value="#{msgs['invest']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+    <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+                 <h:outputLabel value="#{msgs['ae']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">			
+						<p:inputNumber id="invesAEn" inputStyle="text-align: right" size="20" 
+							 onfocus="select();"  value="#{editionBean.editionBi.tab8.invesAE.n.montant}">
+								<p:ajax process="@this" 
+								listener="#{editionBean.editionBi.refreshTotauxTab8}"
+								global="false" update=":detailsForm:ongletsEditionBi:tab8Panel"></p:ajax>
+						</p:inputNumber>				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+  <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+                 <h:outputLabel value="#{msgs['cp']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">				
+						<p:inputNumber id="invesCPn" inputStyle="text-align: right" size="20" 
+							 onfocus="select();"  value="#{editionBean.editionBi.tab8.invesCP.n.montant}">
+							<p:ajax process="@this" 
+							listener="#{editionBean.editionBi.refreshTotauxTab8}"
+							global="false" update=":detailsForm:ongletsEditionBi:tab8Panel"></p:ajax>
+						</p:inputNumber>				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+  <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+                
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+    <p:row style="font-weight: bold; text-align: right;">
+            <p:column colspan="1" rowspan="1" >
+              <h:outputLabel value="#{msgs['sold.budg.exec.flech']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1" >
+				<h:outputText value="#{editionBean.editionBi.tab8.soldBudgBC.n.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="1" rowspan="1" >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				
+
+        </p:row>
+</p:panelGrid>
+<div align="right">
+			<h:outputText value="#{msgs['sold.budg.nequilib.financ']}"    style="font-style: italic;" 
+				 />
+		</div>
+		<br />
+		<br />
+		<div align="left"  >
+			<h:outputText value="#{msgs['seconde.partie']}" style="font-weight: bold;"/>
+		</div>
+		<p:panelGrid style="width:100%; vertical-align:top;">	
+	
+		<p:row style="font-weight: bold; text-align: right;">
+            <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;width:49.5%;"   >
+              <h:outputLabel value="#{msgs['autof.op.flech']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;width:19.5%;" >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;width:17.6%;">
+					<p:inputNumber id="autofinancementN" inputStyle="text-align: right" size="20" 
+							 onfocus="select();"  value="#{editionBean.editionBi.tab8.autofinancement.n.montant}">
+							<p:ajax process="@this" 
+							listener="#{editionBean.editionBi.refreshTotauxTab8}"
+							global="false" update=":detailsForm:ongletsEditionBi:tab8Panel"></p:ajax>
+						</p:inputNumber>			
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;width:4.46%;">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;width:4.46%;" >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;width:4.46%;" >
+					
+				</p:column>
+				
+
+        </p:row>
+ <p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+                
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				
+
+        </p:row>
+<p:row style="font-weight: bold; text-align: right;">
+            <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+              <h:outputLabel value="#{msgs['op.tresor.par.recet.flech']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+					<p:inputNumber id="tresorerieN" size="20" inputStyle="text-align: right"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab8.tresorerie.n.montant}">
+							<p:ajax process="@this" 
+							listener="#{editionBean.editionBi.refreshTotauxTab8}"
+							global="false" update=":detailsForm:ongletsEditionBi:tab8Panel"></p:ajax>
+						</p:inputNumber>						
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+					
+				</p:column>
+				
+				<p:column colspan="1" rowspan="1" style="background-color: #D3D3D3;" >
+					
+				</p:column>
+
+        </p:row>
+<p:row style="text-align: right;">
+            <p:column colspan="1" rowspan="1">
+                
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1">
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1">
+				
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"   >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				
+
+        </p:row>
+ <p:row style="font-weight: bold; text-align: right;">
+            <p:column colspan="1" rowspan="1" >
+              <h:outputLabel value="#{msgs['pos.op.flech.fin.exec']}" /> 
+					
+				</p:column>
+				  <p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1" >
+			
+				<h:outputText value="#{editionBean.editionBi.tab8.posOpFlechFfinExec.n.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="1" rowspan="1" >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				<p:column colspan="1" rowspan="1"  >
+					
+				</p:column>
+				
+
+        </p:row>
+		</p:panelGrid>
+</p:panel>
+
+</ui:composition>

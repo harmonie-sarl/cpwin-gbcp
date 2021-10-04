@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+     
+    <h:head>
+        <title>#{msgs['datatable.buget.pluri.annuel.ventilation.service.programme']}</title>
+                <style type="text/css">
+            .ui-widget {
+                font-size: 90%;
+            }
+            .colDataTable {
+	width: 15%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+}
+
+.noneStyle {
+	color: #000000;
+	background-color: none;
+}
+
+.redStyle {
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+
+        </style>
+    </h:head>
+     
+    <h:body>
+        <h:form id="adrBudgetForm">
+	
+	
+	<p:panel id="AdressPanel"  style="width:100%;" >
+	
+	<h:panelGrid id="AdressbudgetPanel" columns="6" style="width:100%; vertical-align:top;align: left;" columnClasses="colDataTable" >			
+			<h:outputLabel styleClass="espace_entre_label_value" style="font-weight:bold" value="#{msgs['budget.ExerciceAE']}"/>			
+				<h:outputText value="#{bpBean.budget.exercice}" size="7" />				
+				<h:outputLabel styleClass="espace_entre_label_value" style="font-weight:bold"  value="#{msgs['montant.ae']}"/>		
+			<h:outputText value="#{bpBean.envelopBudg.montantAE}" size="7" >
+			<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			
+				<h:outputLabel styleClass="espace_entre_label_value" style="font-weight:bold"  value="#{msgs['budget.resteAV']}"/>
+			<h:outputText value="#{bpBean.envelopBudg.adressResteAV}" size="7" >
+			<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			</h:panelGrid>
+			<br />			
+			<h:panelGrid columns="6" style="width:100%; vertical-align:top;align: left;" columnClasses="colDataTable">			
+			<h:outputLabel styleClass="espace_entre_label_value"  style="font-weight:bold" value="#{msgs['nature']}"/>			
+				<h:outputText value="#{bpBean.envelopBudg.codeAndLibGroupNat}" size="7" />				
+			<h:outputLabel styleClass="espace_entre_label_value" style="font-weight:bold"  value="#{msgs['destination']}"/>			
+			<h:outputText value="#{bpBean.envelopBudg.codeAndLibGroupDest}" size="7" />			
+			<h:outputLabel styleClass="espace_entre_label_value" style="font-weight:bold"  value="#{msgs['programme']}"/>			
+			<h:outputText value="#{bpBean.envelopBudg.codeAndLibProg}" size="7" />
+				</h:panelGrid>					
+					<br />
+   
+		<h:panelGrid id="ongletsAdressService"
+		style="width:100%;vertical-align:top;">
+			<br />
+				<p:commandButton rendered="false" title="#{msgs['btn.add']}" update="@this,tb_lb" id="add_lb_btn" icon="fa fa-plus" 
+				 actionListener="#{bpBean.addLbAdressage}"  disabled="#{!bpBean.envelopBudg.adressAddAutorized}" >
+				
+				</p:commandButton>	
+			<br />
+			
+			<p:dataTable id="tb_lb" style="width:100%; text-align: center;" 	
+			 paginator="true" editable="true" editMode="cell" widgetVar="cellCredit" 	emptyMessage="#{msgs['datatable.empty']}"
+					rows="10" value="#{bpBean.envelopBudg.listLigneBudgView}" var="lb"> 
+					<p:ajax event="cellEdit" listener="#{bpBean.onLigneBudgetaireCellEdit}"  />
+					 <p:columnGroup type="header">
+                       <p:row>
+                            <p:column rowspan="2" headerText="#{msgs['nature.destination']}" />
+                            <p:column rowspan="2" headerText="#{msgs['service']}" />
+                            <p:column rowspan="2" headerText="#{msgs['programme']}" />
+                            <p:column rowspan="2" headerText="#{msgs['montant.ae']}" />
+                        
+                       </p:row>
+                        <p:row>
+
+                      </p:row>
+        </p:columnGroup>
+      <p:column>
+      <p:cellEditor>
+							<f:facet name="output">
+								<h:outputText  value="#{lb.destNat.entity1.codeAndLibelle}-#{lb.destNat.entity2.codeAndLibelle}" />
+							</f:facet>
+							<f:facet name="input">
+      <p:selectOneMenu id="desNatList" effect="fade" var="DN" styleClass="ReadOnlyText"  converter="groupDestNat.converter" panelStyle="width:330px"
+				filter="true" filterMatchMode="startsWith" value="#{lb.destNat}" style="width:270px"  >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{bpBean.destNatList}" var="destNat"
+					itemLabel="#{destNat.entity1.codeAndLibelle}-#{destNat.entity2.codeAndLibelle}"  itemValue="#{destNat}">
+				</f:selectItems>
+				<p:column style="width:10%">
+                                  <h:outputText value="#{DN.entity1.codeAndLibelle}" />
+                                    </p:column>
+                                  <p:column>
+                                   <h:outputText value="#{DN.entity2.codeAndLibelle}" />
+                                          </p:column>
+			<p:ajax process="@this"  listener="#{bpBean.onEnvelopItemChange}"></p:ajax>	 
+			</p:selectOneMenu>
+      </f:facet>
+      </p:cellEditor>
+      </p:column>
+					<p:column>
+                    	<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText  value="#{lb.service}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:selectOneMenu id="serviceList" required="true" styleClass="ReadOnlyText" var="S" panelStyle="width:330px"
+									converter="listServiceConverter" value="#{lb.serviceSE}" style="width:270px">
+									<f:selectItem itemValue=""
+										itemLabel="---------------------"
+										noSelectionOption="true" />
+									<f:selectItems value="#{loaderBean.listService}" var="serv"
+										itemLabel="#{serv.codeAndLibelle}" itemValue="#{serv}">
+									</f:selectItems>
+									<p:column style="width:10%">
+                                  <h:outputText value="#{S.code}" />
+                                    </p:column>
+                                  <p:column>
+                                   <h:outputText value="#{S.designation}" />
+                                          </p:column>
+									<p:ajax process="@this"></p:ajax>
+								</p:selectOneMenu>
+								<p:message for="serviceList" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column>
+			<p:cellEditor >
+					<f:facet name="output"><h:outputText value="#{lb.programme}" /></f:facet>
+					 <f:facet name="input" >					 
+					   <p:selectOneMenu required="true" id="programList" styleClass="ReadOnlyText" converter="listProgramConverter"	var="P"	panelStyle="width:200px"		
+				value="#{lb.progSE}" style="width:160px" >
+				<f:selectItem itemValue="" itemLabel="-------------------------------" noSelectionOption="true"/>
+				<f:selectItems value="#{loaderBean.listPrograme}" var="program"
+					itemLabel="#{program.codeAndLibelle}" itemValue="#{program}">
+				</f:selectItems>
+				<p:column style="width:10%">
+                                  <h:outputText value="#{P.code}" />
+                                    </p:column>                                 
+			     <p:ajax process="@this" ></p:ajax>	
+			</p:selectOneMenu>	
+			<p:message for="programList" />				 					 
+					 </f:facet>
+					</p:cellEditor>
+			</p:column>
+			<p:column id="montantAE" >
+			
+			 <p:cellEditor>
+					<f:facet name="output"><h:outputText value="#{lb.montantAE}" >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+					</f:facet>
+					 <f:facet name="input"><p:inputText value="#{lb.montantAE}" >
+					   <p:ajax event="blur" process="@this" update="@this,adrBudgetForm:AdressPanel"/>
+					   </p:inputText>
+					 </f:facet>
+					</p:cellEditor>
+					<f:facet name="footer">
+					<h:outputText value="#{msgs['montant.max']}"  >	</h:outputText>
+					</f:facet>
+			</p:column>
+          
+
+			</p:dataTable>
+			</h:panelGrid>
+			<br/>
+			<h:panelGroup>
+		<div align="center" style="width: 100%;">
+        	 <p:commandButton rendered="false" value="#{msgs['btn.valider']}" process ="@this" immediate="true"  actionListener="#{bpBean.validateAdressage}" update="adrBudgetForm:AdressPanel" > 
+        	
+        	 </p:commandButton>	              	                     		   		 
+	        <p:commandButton value="#{msgs['btn.fermer']}" immediate="true" actionListener="#{bpBean.closeAdressageDialog}" >
+	        </p:commandButton> 
+	        	<p:commandButton title=" " value="#{msgs['budget.btn.export']}"
+				immediate="true" id="exportBTN"
+					rendered="#{not empty bpBean.envelopBudg.listLigneBudgView}"
+					ajax="false" >
+					<p:fileDownload value="#{bpBean.xlsLigneBudg}" />	
+				</p:commandButton>
+				
+	         </div>
+	           </h:panelGroup>
+			</p:panel>
+			
+ </h:form>
+    </h:body>
+     
+</html>

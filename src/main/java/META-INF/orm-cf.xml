@@ -1,0 +1,104 @@
+<entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+  version="2.0">
+	<mapped-superclass class="fr.symphonie.budget.core.model.cf.CfGenericDemat">
+		<id-class class="fr.symphonie.budget.core.model.cf.pk.CfDematPK"></id-class>
+		<attributes>
+			<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="codeBudget">
+				<column name="code_budg"></column>
+			</id>
+			<id name="numeroLigne">
+			<column name="no_ligne"></column>
+			</id>
+			<basic name="libelle">
+		</basic>
+		<basic name="montant">
+		</basic>
+		<basic name="auteurCrea">
+				<column name="aut_crea" length="8" nullable="false"/>
+			</basic>
+			<basic name="dateCrea">
+				<column name="date_crea" nullable="false"/>
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+		</attributes>
+	</mapped-superclass>
+	<entity class="fr.symphonie.budget.core.model.cf.CfParam">
+		<table name="gbcpParamCF">
+		</table>
+		<id-class class="fr.symphonie.budget.core.model.cf.pk.ParamPK"></id-class>
+		<attributes>
+			<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="codeBudget">
+				<column name="code_budg"></column>
+			</id>
+			<id name="type">
+				<column name="etat"></column>
+			</id>
+			<id name="codeCompte">
+				<column name="num_nomenc"></column>
+			</id>
+			<basic name="codeRef" optional="true">
+				<column name="code_minefi"></column>
+			</basic>
+			<basic name="codeRefTab6" optional="true">
+				<column name="ref_tab6"></column>
+			</basic>
+			
+		</attributes>
+	</entity>
+	<entity class="fr.symphonie.budget.core.model.cf.CfReference">
+		<table name="gbcpRefCF">
+		</table>
+		<id-class class="fr.symphonie.budget.core.model.cf.pk.ReferencePK"></id-class>
+		<attributes>
+			<id name="code">
+				<column name="code_minefi"></column>
+			</id>
+			<id name="type">
+				<column name="etat"></column>
+			</id>
+			<basic name="description">
+			</basic>
+			<basic name="zoneExcel">
+				<column name="zone_excel"></column>
+			</basic>
+			<basic name="numeroLigne">
+				<column name="no_ligne"></column>
+			</basic>
+			<basic name="detail">
+				<column name="est_detail"></column>
+			</basic>
+			<basic name="concerneAnt">
+				<column name="code_net_ant"></column>
+			</basic>
+		</attributes>
+	</entity>
+  <entity class="fr.symphonie.budget.core.model.cf.DematBilan">
+	<table name="GbcpDematBilan">
+	</table>
+	<inheritance strategy="TABLE_PER_CLASS"></inheritance>
+</entity>
+  <entity class="fr.symphonie.budget.core.model.cf.DematCR">
+  	<table name="GbcpDematCR">
+  	</table>
+  	<inheritance strategy="TABLE_PER_CLASS"></inheritance>
+  </entity>
+<!--   <entity class="fr.symphonie.budget.core.model.cf.DematSPE1"> -->
+<!--   <table name="GbcpDematSPE1"> -->
+<!--   	</table> -->
+<!--   	<inheritance strategy="TABLE_PER_CLASS"></inheritance> -->
+<!--   </entity> -->
+<!--   <entity class="fr.symphonie.budget.core.model.cf.DematSPE2"> -->
+<!--   <table name="GbcpDematSPE2"> -->
+<!--   	</table> -->
+<!--   	<inheritance strategy="TABLE_PER_CLASS"></inheritance> -->
+<!--   </entity> -->
+  </entity-mappings>

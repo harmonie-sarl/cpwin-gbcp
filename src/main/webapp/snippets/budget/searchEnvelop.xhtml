@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+		 <style type="text/css">
+            
+            .colDataTable {
+	width: 15%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+}
+        </style>
+			<h:panelGroup id="searchCpDest">
+			<h:panelGrid style="width:120%; vertical-align:top;align: left;" columns="4" columnClasses="colDataTable" rendered="#{bpBean.budget!=null}">
+			<h:outputText value="#{msgs['enveloppe.budgetaire']}" style="font-weight:bold" /> 
+		 <p:selectOneMenu id="envBudgList" effect="fade" var="groupDN" styleClass="ReadOnlyText"  converter="groupDestNat.converter" panelStyle="width:360px"
+				filter="true" filterMatchMode="startsWith" value="#{bpBean.groupDestNat}" style="width:300px" >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{bpBean.groupDestList}" var="groupDestNat"
+					itemLabel="#{groupDestNat.entity1.codeAndLibelle}-#{groupDestNat.entity2.codeAndLibelle}"  itemValue="#{groupDestNat}">
+				</f:selectItems>
+				<p:column style="width:10%">
+                                  <h:outputText value="#{groupDN.entity1.codeAndLibelle}" />
+                                    </p:column>
+                                  <p:column>
+                                   <h:outputText value="#{groupDN.entity2.codeAndLibelle}" />
+                                          </p:column>
+			<p:ajax process="@this"  listener="#{bpBean.onEnvelopItemChange}" update=":detailsForm,exerciceCP,programList,montantCP"></p:ajax>	 
+			</p:selectOneMenu>
+			
+			 <h:outputText  value="#{msgs['programme']}" style="font-weight:bold"  rendered="false" />
+			  <p:selectOneMenu id="programList" effect="fade" var="prog" styleClass="ReadOnlyText" converter="listProgramConverter" style="width:300px"
+				panelStyle="width:240px" filter="true" filterMatchMode="startsWith"	value="#{bpBean.programme}" rendered="false" >
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{bpBean.listPrograme}" var="program"
+					itemLabel="#{program.codeAndLibelle}" itemValue="#{program}">
+				</f:selectItems>
+				<p:column style="width:10%">
+                                  <h:outputText value="#{prog.code}" />
+                                    </p:column>
+                                  <p:column>
+                                   <h:outputText value="#{prog.designation}" />
+                                          </p:column>				 
+				
+						<p:ajax  process="@this" listener="#{bpBean.onEnvelopItemChange}"  update=":detailsForm" />
+			
+			</p:selectOneMenu>
+			
+					<h:outputText value="#{msgs['exercice.co']}" />
+					<h:panelGroup id="exerciceCP" >
+					 <p:selectOneMenu  styleClass="ReadOnlyText" value="#{bpBean.exerciceCp}" >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{bpBean.exerciceCpList}" var="exerc" 
+				itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax  process="@this" update="budgetCodeList,:detailsForm,:enteteForm:searchPanel,montantCP,detailsForm:listBudgetPanel" />
+			</p:selectOneMenu>
+				</h:panelGroup>
+					
+							
+							
+		<h:outputLabel value="#{msgs['budget.montant.cp']}" />
+			
+			
+				
+			<h:panelGroup >
+				<h:outputText id="montantCP" style="font-weight:bold" styleClass="espace_entre_label_value" value="#{bpBean.montanCp}" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</h:panelGroup>
+			 
+					
+				</h:panelGrid>
+			</h:panelGroup>
+		
+		</ui:composition>

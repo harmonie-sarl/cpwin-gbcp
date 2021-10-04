@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:panelGrid columns="2" >
+		<h:panelGroup>
+			<h:outputLabel styleClass="espace_entre_label_value"
+						 value="#{msgs['cpwin.exercice']}" />
+			
+		</h:panelGroup>
+
+			<p:selectOneMenu styleClass="ReadOnlyText"
+				value="#{sctBean.exercice}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{sctBean.vagueExerciseList}" var="exec"
+					itemLabel="#{exec}" itemValue="#{exec}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{sctBean.onExerciceChange}"
+					update="budgetCodeList,globalMessage,:enteteForm,:detailsForm" />
+			</p:selectOneMenu>
+          </h:panelGrid>
+          
+            <h:panelGrid columns="2" >
+			<h:panelGroup>
+			<h:outputLabel styleClass="espace_entre_label_value"
+						style="display:block;width:110px" value="#{msgs['budget.code']}" />
+			
+			</h:panelGroup>
+
+			<p:selectOneMenu id="budgetCodeList" styleClass="ReadOnlyText"
+				value="#{sctBean.codeBudget}">
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{sctBean.listBudgets}" var="budg"
+					itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{sctBean.reset}"
+					update="globalMessage,:enteteForm,:detailsForm"/>
+			</p:selectOneMenu>
+      </h:panelGrid>
+    
+      
+	
+	
+	</ui:composition>

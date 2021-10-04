@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+	<p:dataTable sortBy="#{erreur.code}"
+		rendered="#{dasBean.errorReport!=null}" var="erreur"
+		style="width:70%;text-align:center" rowIndexVar="erreurIndex"
+		emptyMessage="#{msgs['datatable.empty']}"
+		value="#{dasBean.errorReport}">
+		<p:column headerText="#{msgs['codes.tiers.errones']}" style="width:60%">
+			<h:outputText value="#{erreur.code}" />
+		</p:column>			
+			  	</p:dataTable>
+</ui:composition>

@@ -1,0 +1,704 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+	<p:panel style="width:100%;">
+
+
+
+		<p:panelGrid style="width:100%; vertical-align:top;">	
+		
+	
+			
+	  <p:row  style="text-align: center;font-weight: bold;" >           
+				  <p:column colspan="2" rowspan="1">
+					<h:outputText value="#{msgs['natr.recet']}" />
+				</p:column>
+
+				<p:column colspan="4" rowspan="1">
+					<h:outputText value="#{msgs['recet.globalises']}" />
+				</p:column>
+
+				<p:column colspan="3" rowspan="1">
+					<h:outputText value="#{msgs['recette.flech']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="2">
+					<h:outputText value="#{msgs['totaux']}" />
+				</p:column>	
+        </p:row>
+	  <p:row  style="text-align: center;font-weight: bold;" >            
+				  <p:column colspan="1" rowspan="1">
+					<h:outputText value="#{msgs['code']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1">
+					<h:outputText value="#{msgs['designation']}" />
+				</p:column>	
+				
+				  <p:column colspan="1" rowspan="1">
+					<h:outputText value="#{msgs['subvent.charges.serv.pub']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputText value="#{msgs['autre.financ.etat']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputText value="#{msgs['autres.financ.pub']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputText value="#{msgs['recet.propr']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputText value="#{msgs['financ.etat.flech']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputText value="#{msgs['autre.financ.pub.flech']}" />
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+					<h:outputText value="#{msgs['recet.propr.flech']}" />
+				</p:column>	
+				 
+        </p:row>
+			 <p:row  >       
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;"  >
+					<h:outputText value="#{msgs['code.079541']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['subv.equip.h.h']}" />
+				</p:column>	
+				
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				   <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+                   <h:outputText value="#{editionBean.editionBi.totSubvEquip}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>	
+				 
+        </p:row>
+
+
+
+
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;"  >
+					<h:outputText value="#{msgs['code.1651']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['dep.caut.rec']}" />
+				</p:column>				 
+				   <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				    <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+              <h:outputText value="#{editionBean.editionBi.totDepQuotRecu}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column> 
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['code.701']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['vent.prod.fini']}" />
+				</p:column>				 
+				   <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				    <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+
+				</p:column> 
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;"  >
+					<h:outputText value="#{msgs['code.706']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['prest.serv']}" />
+				</p:column>				 
+				   <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				    <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+
+				</p:column> 
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;"  >
+					<h:outputText value="#{msgs['code.708']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['prod.act.annx']}" />
+				</p:column>				 
+				    <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				    <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+
+				</p:column>
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['code.7411']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['subv.titr.3']}" />
+				</p:column>				 
+				    <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				   <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+             <h:outputText value="#{editionBean.editionBi.totSubvTitre}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['code.744111']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['ville.nice']}" />
+				</p:column>				 
+				    <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				    <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+
+				</p:column>
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['code.744112']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['drac.paca']}" />
+				</p:column>				 
+				   <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				    <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+
+				</p:column> 
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['code.744113']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['cons.reg']}" />
+				</p:column>				 
+				   <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				    <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+
+				</p:column> 
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['code.744114']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['cons.gen']}" />
+				</p:column>				 
+				    <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+
+				</p:column>
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['code.744118']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['autre.org.internat']}" />
+				</p:column>				 
+				    <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				    <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+
+				</p:column>
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['code.744119']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['contrat.aid']}" />
+				</p:column>				 
+				    <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				    <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+                    <h:outputText value="#{editionBean.editionBi.totContrAide}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['code.74132']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['subvent.contrat.etud']}" />
+				</p:column>				 
+				    <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				   <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+                 <h:outputText value="#{editionBean.editionBi.totSubvContrEtud}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['code.744']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['collect.pub.org']}" />
+				</p:column>				 
+				    <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				    <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+                 <h:outputText value="#{editionBean.editionBi.totCollectPubOrg}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['code.7481']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['taxe.apprenti']}" />
+				</p:column>				 
+				    <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				   <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+              <h:outputText value="#{editionBean.editionBi.totTaxApprentis}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['code.752']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['revenu.immb']}" />
+				</p:column>				 
+				    <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				    <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+             <h:outputText value="#{editionBean.editionBi.totRevenuImmb}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+        </p:row>
+			<p:row  >           
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['code.7483']}" />
+				</p:column>		
+				  <p:column colspan="1" rowspan="1"  style="text-align: left;" >
+					<h:outputText value="#{msgs['autre.financ.pub.flech']}" />
+				</p:column>				 
+				    <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+
+				</p:column>	
+				  <p:column colspan="1" rowspan="1"   style="font-weight: bold;text-align: center;" >
+              <h:outputText value="#{editionBean.editionBi.totAutrFinancPubFlech}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+				</p:column>
+        </p:row>
+			<p:row  style="text-align: left;font-weight: bold;">           
+				  <p:column colspan="1" rowspan="1">
+                
+				</p:column>		
+				  <p:column colspan="1" rowspan="1">
+					<h:outputText value="#{msgs['totaux']}" />
+				</p:column>				 
+				   <p:column colspan="1" rowspan="1">
+                <h:outputText value="#{editionBean.editionBi.totAutrFinancPubFlech}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+                     <h:outputText value="#{editionBean.editionBi.totSubvServPublic}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+                     <h:outputText value="#{editionBean.editionBi.totAutrfinancEtat}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+                     <h:outputText value="#{editionBean.editionBi.totAutrfinancPublic}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+                    <h:outputText value="#{editionBean.editionBi.totRecetPropre}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+              <h:outputText value="#{editionBean.editionBi.totFinancEtatFlech}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+                   <h:outputText value="#{editionBean.editionBi.totAutrfinancPublicFlech}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>	
+				  <p:column colspan="1" rowspan="1">
+                  <h:outputText value="#{editionBean.editionBi.totRecetPropreFleche}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+        </p:row>
+		</p:panelGrid>
+		<br />
+
+		<br />
+	</p:panel>
+
+
+</ui:composition>

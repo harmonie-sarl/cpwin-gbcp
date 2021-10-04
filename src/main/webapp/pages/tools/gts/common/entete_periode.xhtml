@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+			<h:panelGrid columns="2">
+		<h:outputLabel value="#{msgs['cpwin.exercice']}"
+			style="display:block;width:80px" />
+		<h:panelGroup>
+			<p:selectOneMenu id="exercList" styleClass="ReadOnlyText"
+				value="#{dataListBean.exec}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{loaderBean.allExecList}" var="exerc"
+					itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{gtsRefBean.execListener}"
+					update=":detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+		</h:panelGroup>
+	</h:panelGrid>
+	<h:panelGroup />
+		<h:panelGrid columns="3">
+		<h:outputLabel value="#{msgs['numero']}" for="numero"
+			styleClass="espace_entre_label_value" />
+		<p:selectOneMenu id="numero" styleClass="ReadOnlyText"
+				value="#{gtsRefBean.numPeriode}">
+
+				<f:selectItem itemValue="#{dataListBean.nullValue}" itemLabel="-----" />
+				<f:selectItems value="#{gtsRefBean.listNumPeriode}" var="numero"
+					itemLabel="#{numero}" itemValue="#{numero}">
+				</f:selectItems>
+				<p:ajax process="@this"
+					update=":detailsForm" />
+			</p:selectOneMenu>
+		<p:message for="numero" styleClass="error" />
+	
+	
+		
+		</h:panelGrid>
+		
+			<h:panelGroup />
+				
+	          
+	          
+			
+		</ui:composition>

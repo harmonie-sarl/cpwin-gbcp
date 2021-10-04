@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+	
+
+		<div align="center">
+			<h:panelGroup >
+				<p:commandButton title=" " rendered="#{not empty dasBean.tiersImportedData}" value="#{msgs['rapp.base.tiers']}"
+					 update="@this,:detailsForm:importPanel" immediate="true" actionListener="#{dasBean.rapprochement}">
+				</p:commandButton>
+			</h:panelGroup>
+		</div>
+        	<p:dataTable sortBy="#{tiers.code}"
+			rendered="#{dasBean.tiersImportedData!=null}"
+			 var="tiers" style="width:20%;text-align:center"
+			rowIndexVar="tiersIndex" emptyMessage="#{msgs['datatable.empty']}"
+			value="#{dasBean.tiersImportedData}">
+
+			<p:column headerText="#{msgs['num.tiers']}" style="width:10%">
+				<h:outputText value="#{tiers.code}" />
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.type']}" style="width:10%">
+				<h:outputText value="#{tiers.designation}" />
+			</p:column>
+		
+			
+			  	</p:dataTable>   
+				 
+				
+
+
+
+
+
+
+
+
+
+
+</ui:composition>

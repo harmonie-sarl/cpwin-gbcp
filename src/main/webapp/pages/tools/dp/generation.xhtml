@@ -1,0 +1,193 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head"/>
+	
+	<ui:define name="lastPrefexedTitle"/>
+	
+	<ui:define name="entete">
+		<ui:include src="/pages/tools/dp/entete.xhtml"></ui:include>
+	</ui:define>
+
+	<ui:define name="search"/>
+
+	<ui:define name="details">
+		<p:panel id="operation" style="width:100%;" rendered="#{not empty dpBean.objet}">
+
+	
+			<h:panelGrid columns="3" cellspacing="10" style="width:100%; vertical-align:top;">
+				
+				<h:panelGrid columns="3"  cellpadding="10">
+				<ui:insert name="tiersSearch">
+				<p:outputLabel value="#{msgs['tiers']}"/>
+				<h:panelGroup>
+					<p:autoComplete id="tiers" 
+						value="#{dpBean.selectedTiers}" required="false"
+						requiredMessage="#{errorMsgs['cpwin.required']}"
+						style="width: 30%;" size="30" 
+						completeMethod="#{dpBean.autoCompleteTiers}"
+						converter="convert.tiers" var="tiers"
+						itemLabel="#{tiers.description}" itemValue="#{tiers}"
+						minQueryLength="#{gestionTiersBean.minAjaxQL}"
+						maxResults="#{gestionTiersBean.maxAjaxResult}"
+						title="#{gestionTiersBean.ajaxTitleMsg}">
+						<p:ajax event="itemSelect"
+							listener="#{dpBean.onTiersSelected}" 
+							update="globalMessage,selectedTiersPanel,addBtn,amountPanel"
+							process="@this" global="false" />
+
+					</p:autoComplete>
+					<p:message for="tiers" styleClass="error" />
+				</h:panelGroup>
+				</ui:insert>
+				<p:panelGrid id="selectedTiersPanel" >
+					<f:facet name="header">
+
+						<p:row rendered="#{not empty dpBean.selectedTiers}">
+							<p:column style="text-align:center;width:7%">
+								<h:outputText styleClass="Label" value="#{msgs['code']}" />
+							</p:column>
+							<p:column style="text-align:center;width:15%">
+								<h:outputText styleClass="Label" value="#{msgs['nom']}" />
+							</p:column>
+							
+							<p:column style="text-align:center;width:13%">
+								<h:outputText styleClass="Label" value="#{msgs['iban']}" />
+							</p:column>
+						</p:row>
+					</f:facet>
+					<p:row rendered="#{not empty dpBean.selectedTiers}">
+						<p:column>
+							<h:outputText value="#{dpBean.selectedTiers.code}"/>
+						</p:column>
+						<p:column style="text-align:center;width:8%">
+							<h:outputText value="#{dpBean.selectedTiers.nom}"/>
+						</p:column>
+					
+						<p:column style="text-align:center;width:13%">
+							<h:outputText value="#{dpBean.iban.iban}" rendered="#{not empty dpBean.iban}"/>
+						</p:column>
+					</p:row>
+
+				</p:panelGrid>
+				</h:panelGrid>
+				<h:panelGrid id="amountPanel" columns="2">
+					<h:outputLabel styleClass="espace_entre_label_value" rendered="#{not empty dpBean.selectedTiers}"
+						style="font-weight:bold" value="#{msgs['montant']}" />
+
+					<p:inputText id="montant" value="#{dpBean.amount}" rendered="#{not empty dpBean.selectedTiers}" size="10" maxlength="32">
+						<p:ajax process="@this"/>
+					</p:inputText>
+				</h:panelGrid>
+				<p:commandButton title=" " value="#{msgs['btn.add']}" id="addBtn" actionListener="#{dpBean.executeAddOperation}" disabled="#{!dpBean.addOperationAuthorized}" 
+					update="globalMessage,:detailsForm" >
+
+				</p:commandButton>
+			</h:panelGrid>
+
+		</p:panel>
+		<p:panel id="DPPanel" style="width:100%;"  >
+
+
+			<p:dataTable id="imported_scolarite_dtt" scrollable="true"  
+				rendered="#{not empty dpBean.operationList}" var="op" style="width:100%;text-align:center"
+				rowIndexVar="creditIndex" editable="true" editMode="cell" emptyMessage="#{msgs['datatable.empty']}"
+				value="#{dpBean.operationList}">
+				
+          <p:ajax event="cellEdit" listener="#{dpBean.onDpEdit}"  />
+        
+                <p:column headerText="#{msgs['code']}"
+					style="text-align:center;width:5%">
+					<h:outputText value="#{op.actor.code}" />
+				</p:column>
+			
+				<p:column headerText="#{msgs['nom']}"
+					style="text-align:center;width:5%">
+					<h:outputText value="#{op.actor.nom}" />
+				</p:column>
+			
+				<p:column headerText="#{msgs['iban']}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{op.iban.iban}">
+
+					</h:outputText>
+
+				</p:column>
+						<p:column headerText="#{msgs['mode.paiement']}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{op.modePaie}">
+
+					</h:outputText>
+
+				</p:column>
+			<p:column 
+					headerText="#{msgs['montant']}"
+					style="text-align:center;width:10%">
+					 <p:cellEditor>
+					<f:facet name="output"><h:outputText value="#{op.amount}" >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+					</f:facet>
+					 <f:facet name="input"><p:inputNumber  value="#{op.amount}" >	
+					 </p:inputNumber>
+					
+					 </f:facet>
+					</p:cellEditor>
+
+					
+
+				</p:column>
+				<p:column headerText="#{msgs['num.dp']}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{op.noDp}">
+
+					</h:outputText>
+
+				</p:column>
+				<p:column headerText="#{msgs['btn.supprimer']}" style="text-align:center;width:5%">
+				<p:commandButton title=" " icon="deleteIcon" 
+					onclick="PF('confSupprOperation').show();">
+					<f:setPropertyActionListener value="#{op}"
+						target="#{dpBean.operationToDelete}" />
+				</p:commandButton>
+					
+
+				</p:column>
+       
+       
+
+			</p:dataTable>
+			<br />
+			<div align="center">
+
+
+				<p:commandButton immediate="true" title="" 
+					value="#{msgs['generer']}" id="generer_btn" actionListener="#{dpBean.executeGeneration}" rendered="#{not empty dpBean.operationList}"
+					update=":detailsForm,:enteteForm" disabled="#{!dpBean.generationPermitted}">
+				</p:commandButton>
+
+
+			</div>
+		</p:panel>
+		<p:confirmDialog message="#{msgs['confirm.suppression.etudinat']}"
+			header="" widgetVar="confSupprOperation" modal="true">
+			<h:panelGrid width="100%" style="text-align: center;"
+				id="confSupprAdresseGrid">
+				<h:panelGroup>
+					<p:commandButton value="#{msgs['btn.valider']}"
+						oncomplete="PF('confSupprOperation').hide();"
+						actionListener="#{dpBean.executeDeleteOperation}"
+						update="detailsForm:DPPanel" />
+					<p:commandButton value="#{msgs['btn.annuler']}"
+						onclick="PF('confSupprOperation').hide();" type="button" />
+				</h:panelGroup>
+			</h:panelGrid>
+		</p:confirmDialog>
+	</ui:define>
+
+
+
+</ui:composition>

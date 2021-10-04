@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	
+	<ui:define name="head">
+		<style type="text/css"/>
+	</ui:define>
+	<ui:define name="lastPrefexedTitle"/>
+	<ui:define name="entetePage">
+		<ui:include src="./common/entete.xhtml"/>
+	</ui:define>
+
+	<ui:define name="searchPage">
+		<ui:include src="./common/search.xhtml"/>
+	</ui:define>
+	
+	<ui:define name="searchAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.Importer']}"
+			id="importBtn" update="globalMessage,:detailsForm:importPanel"
+			immediate="true" actionListener="#{sctBean.importer}"
+			disabled="#{!sctBean.requiredDataDone}">
+		</p:commandButton>
+
+	</ui:define>
+
+	<ui:define name="details">
+		<p:panel id="importPanel" style="width:100%;">
+		<div align="center" >
+		<p:commandButton immediate="true" title="" value="#{msgs['btn.enregistrer']}" rendered="#{ sctBean.importedDataVisible}"
+				id="save_btn" disabled="#{ !sctBean.validationAutorized}"
+				update="globalMessage,:detailsForm:importPanel,enteteForm"
+				actionListener="#{sctBean.saveData}">
+			</p:commandButton>
+		<p:commandButton immediate="true" title="" value="#{msgs['generer']}" rendered="#{ sctBean.importedDataVisible}"
+				id="generate_btn" disabled="#{ !(sctBean.generationAutorized and p:ifAnyGranted('remb_generation'))}"
+				update="globalMessage,:detailsForm:importPanel,enteteForm"
+				actionListener="#{sctBean.executeGeneration}">
+			</p:commandButton>
+	</div>
+	<br />
+			<p:tabView id="ongletsImport" style="width:100%;" cache="false"	rendered="#{ sctBean.dataVisible}">
+
+				<p:tab id="tabSepaFrlist" rendered="#{sctBean.dataFrFound}"
+					title="#{msgs['sepa.paiement.fr']} (#{sctBean.sepaFrPaymentList.stream().count()})">
+
+					<ui:include src="./onglets/sepaFrPaymentList.xhtml">
+					<ui:param name="sepaMode" value="sepa_saisie" />
+					</ui:include>
+				</p:tab>
+				<p:tab id="tabSepaHorsFrlist" rendered="#{ sctBean.dataOutFrFound}"
+					title="#{msgs['sepa.paiement.nofr']} (#{sctBean.nonSepaFrPaymentList.stream().count()})">
+					<ui:include src="./onglets/sepaHorsFrPaymentList.xhtml">
+					<ui:param name="sepaMode" value="sepa_saisie" />
+					</ui:include>
+				</p:tab>
+				
+				<p:tab id="tabHorsSepalist"	rendered="#{sctBean.dataOutSepaFound}"
+					title="#{msgs['sepa.paiement.hors']} (#{sctBean.nonSepaPaymentList.stream().count()})">
+
+					<ui:include src="./onglets/horsSepaPaymentList.xhtml">
+					<ui:param name="sepaMode" value="sepa_saisie" />
+					</ui:include>
+
+				</p:tab>
+
+				<p:tab id="tabErreurs" rendered="#{sctBean.errorReportVisible}"
+					title="#{msgs['budget.data.error.tab']} (#{sctBean.errorReport.stream().count()})">
+
+					<ui:include src="./onglets/rapport_erreurs.xhtml" />
+
+				</p:tab>
+
+			</p:tabView>
+		</p:panel>
+	</ui:define>
+	
+</ui:composition>

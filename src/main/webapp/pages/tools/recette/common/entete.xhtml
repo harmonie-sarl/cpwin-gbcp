@@ -1,0 +1,213 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	
+		<p:panel style="width:100%;">
+		<h:panelGrid columns="4" style="width:50%;vertical-align:top;align: left;">
+		<h:panelGroup>
+			<h:outputLabel styleClass="espace_entre_label_value"
+						style="font-weight:bold" value="#{msgs['cpwin.exercice']}" />
+			<h:outputText value=" *" styleClass="required"></h:outputText>
+		</h:panelGroup>
+
+			<p:selectOneMenu styleClass="ReadOnlyText"
+				value="#{impRecBean.exercice}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{loaderBean.allExecList}" var="exec"
+					itemLabel="#{exec}" itemValue="#{exec}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{impRecBean.onExerciceChange}" global="false"
+					update="budgetCodeList,:enteteForm,:detailsForm" />
+			</p:selectOneMenu>
+
+
+			<h:panelGroup>
+			<h:outputLabel styleClass="espace_entre_label_value"
+						style="font-weight:bold" value="#{msgs['budget.code']}" />
+						
+			
+				<h:outputText value=" *" styleClass="required"></h:outputText>
+			</h:panelGroup>
+			
+			<p:selectOneMenu id="budgetCodeList" styleClass="ReadOnlyText"
+				value="#{impRecBean.codeBudget}">
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{impRecBean.listBudgets}" var="budg"
+					itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{impRecBean.reset}"
+					update=":enteteForm,:detailsForm" />
+			</p:selectOneMenu>
+
+		</h:panelGrid>
+	
+	
+</p:panel>
+		
+<p:panel id="adressBudgPanel" style="width:100%;" header="#{msgs['adresse.budgetaire']}">
+
+				<h:panelGrid columns="8" style="width:100%;vertical-align:top;align: left;">
+					<h:panelGroup>
+						<h:outputLabel styleClass="espace_entre_label_value"
+							style="font-weight:bold" value="#{msgs['origine']}" />
+						<h:outputText value=" *" styleClass="required"></h:outputText>
+					</h:panelGroup>
+
+					<p:selectOneMenu id="destPg" styleClass="ReadOnlyText"  
+						value="#{dataListBean.codeDest}">
+
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{dataListBean.destinationList}" var="dest"
+							itemLabel="#{dest.code}" itemValue="#{dest.code}">
+						</f:selectItems>
+						<p:ajax process="@this" listener="#{impRecBean.selectDestListener}" update="detailsForm,noLbi,noEnv,cptProd,natPg,srvPg,progPg,compteTva,compteClient,enteteForm" />
+
+					</p:selectOneMenu>
+					<h:panelGroup>
+						<h:outputLabel styleClass="espace_entre_label_value"
+							style="font-weight:bold" value="#{msgs['import.nature']}" />
+
+						<h:outputText value=" *" styleClass="required"></h:outputText>
+					</h:panelGroup>
+					<p:selectOneMenu id="natPg" styleClass="ReadOnlyText"
+						value="#{dataListBean.codeNature}">
+
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{dataListBean.natureList}" var="nature"
+							itemLabel="#{nature.code}" itemValue="#{nature.code}">
+						</f:selectItems>
+						<p:ajax process="@this"  listener="#{impRecBean.selectDestListener}"
+						
+						update="detailsForm,noLbi,noEnv,cptProd,srvPg,progPg" />
+
+					</p:selectOneMenu>
+					<h:panelGroup>
+						<h:outputLabel styleClass="espace_entre_label_value"
+							style="font-weight:bold" value="#{msgs['service']}" />
+						<h:outputText value=" *" styleClass="required"></h:outputText>
+					</h:panelGroup>
+					<p:selectOneMenu id="srvPg" styleClass="ReadOnlyText" 
+						value="#{dataListBean.codeService}">
+
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{dataListBean.serviceList}" var="service"
+							itemLabel="#{service.code}" itemValue="#{service.code}">
+						</f:selectItems>
+						<p:ajax process="@this" listener="#{impRecBean.selectDestListener}" update="detailsForm,noLbi,noEnv,progPg,cptProd" />
+					</p:selectOneMenu>
+					<h:panelGroup>
+						<h:outputLabel styleClass="espace_entre_label_value"
+							style="font-weight:bold" value="#{msgs['programme']}" />
+
+						<h:outputText value=" *" styleClass="required"></h:outputText>
+					</h:panelGroup>
+					<p:selectOneMenu id="progPg" styleClass="ReadOnlyText" 
+						value="#{dataListBean.codeProg}">
+
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{dataListBean.programmeList}" var="prog"
+							itemLabel="#{prog.code}" itemValue="#{prog.code}">
+						</f:selectItems>
+						<p:ajax process="@this" listener="#{impRecBean.selectProgListener}" update="detailsForm,noLbi,noEnv,cptProd"  />
+					</p:selectOneMenu>
+					
+					<h:outputLabel styleClass="espace_entre_label_value" style="font-weight:bold" value="#{msgs['no.envoi']}" />
+					<h:outputLabel value="#{impRecBean.noEnv}" id="noEnv" />
+
+					<h:outputLabel styleClass="espace_entre_label_value" 	style="font-weight:bold" value="#{msgs['no.lbi']}" />
+					<h:outputLabel value="#{impRecBean.noLbi}" id="noLbi" />
+
+				</h:panelGrid>
+			</p:panel>
+
+
+	
+	
+
+
+
+	<p:panel style="width:100%;">
+		<h:panelGrid columns="8"
+			style="width:100%;vertical-align:top;align: left;">
+			<h:panelGroup>
+				<h:outputLabel styleClass="espace_entre_label_value"
+					style="font-weight:bold" value="#{msgs['compte.produit']}" />
+				<h:outputText value=" *" styleClass="required"></h:outputText>
+			</h:panelGroup>
+			<p:selectOneMenu styleClass="ReadOnlyText" id="cptProd"
+				value="#{dataListBean.compteProduit}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{dataListBean.compteProduitList}" var="cpt"
+					itemLabel="#{cpt.code}" itemValue="#{cpt.code}">
+				</f:selectItems>
+				<p:ajax listener="#{impRecBean.selectCmptProdListener}"
+					process="@this"
+					update="detailsForm,compteTva,compteClient,objet"></p:ajax>
+			</p:selectOneMenu>
+
+<h:panelGroup>
+				<h:outputLabel styleClass="espace_entre_label_value"
+				style="font-weight:bold" value="#{msgs['compte.tva']}" />
+				<h:outputText value=" *" styleClass="required"></h:outputText>
+			</h:panelGroup>
+			
+			
+			<p:inputText id="compteTva" value="#{impRecBean.compteTva}" size="10"
+				maxlength="32">
+				<p:ajax 
+					process="@this" event="keyup"
+					update="detailsForm"></p:ajax>
+
+			</p:inputText>
+
+<h:panelGroup>
+					<h:outputLabel styleClass="espace_entre_label_value"
+				style="font-weight:bold" value="#{msgs['compte.tiers']}" />
+				<h:outputText value=" *" styleClass="required"></h:outputText>
+			</h:panelGroup>
+
+
+
+
+		
+			
+
+<p:inputText  value="#{impRecBean.compteClient}" size="10" id="compteClient"
+				maxlength="32">
+				<p:ajax  event="keyup"
+					process="@this"
+					update="detailsForm"></p:ajax>
+
+			</p:inputText>
+		</h:panelGrid>
+	</p:panel>
+	<p:panel style="width:100%;">
+		<h:panelGrid columns="2">
+		<h:panelGroup>
+				<h:outputText value="#{msgs['objet.recette']}" />
+				<h:outputText value=" *" styleClass="required"></h:outputText>
+			</h:panelGroup>
+
+			<p:inputTextarea styleClass="ReadOnlyText" id="objet" disabled="#{impRecBean.compteProduit==null}"
+				value="#{impRecBean.objet}" style="text-align: left;" rows="2"
+				cols="50">
+				<f:validateLength minimum="1" maximum="255" />
+				<p:ajax process="@this" event="keyup" 
+					update="detailsForm"></p:ajax>
+
+			</p:inputTextarea>
+
+			<h:outputText styleClass="Label" value="#{msgs['mode.paiement']}"  />
+		<h:outputText id="modePaie" value="#{impRecBean.modePaie}"></h:outputText>
+		
+		</h:panelGrid>
+		</p:panel>
+		
+
+</ui:composition>

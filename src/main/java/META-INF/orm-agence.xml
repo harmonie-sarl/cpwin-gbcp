@@ -1,0 +1,909 @@
+<!--  
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+        http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd" version="2.1">
+        -->
+        <entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+  version="2.0">
+  <package>fr.symphonie.acse.tb.core.model</package>
+	
+	<mapped-superclass class="Depense">
+		<attributes>	
+			<embedded-id name="id">
+			</embedded-id>			
+			<basic name="tiersOrig">
+				<column name="tiers_"/>
+			</basic>
+			<basic name="montant">
+				<column name="mt_"/>
+			</basic>
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="Operation">
+		<attributes>
+			<id name="id">
+				<generated-value strategy="IDENTITY"/>
+			</id>
+			<basic name="date">
+				<column name="date_"/>
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="montant">
+				<column name="mt_"/>
+			</basic>
+			<basic name="numero">
+				<column name="no_" nullable="false"/>
+			</basic>
+		</attributes>
+	</mapped-superclass>
+	<entity class="Mouvement">
+		<table name="TBbudgmvt">
+		</table>
+		<inheritance strategy="TABLE_PER_CLASS"/>
+		<attribute-override name="date">
+			<column name="date_mvt"/>
+		</attribute-override>
+		<attribute-override name="montant">
+			<column name="mt_mvt"/>
+		</attribute-override>
+		<attribute-override name="numero">
+			<column name="no_mvt"/>
+		</attribute-override>
+		<attributes>
+			<basic name="type">
+				<column name="type_mb" length="10" nullable="false"/>
+			</basic>
+			<many-to-one name="lb" fetch="LAZY">
+			<join-column name="num_exec" referenced-column-name="num_exec" nullable="false"/>
+			<join-column name="no_lbi" referenced-column-name="no_lbi" nullable="false"/>
+			</many-to-one>
+		</attributes>
+	</entity>
+	<entity class="MouvementReport">
+		<table name="TBbudgrep">
+		</table>
+		<inheritance strategy="TABLE_PER_CLASS"/>
+		<attribute-override name="date">
+			<column name="date_mvt"/>
+		</attribute-override>
+		<attribute-override name="montant">
+			<column name="mt_mvt"/>
+		</attribute-override>
+		<attribute-override name="numero">
+			<column name="no_mvt"/>
+		</attribute-override>
+		<attributes>
+			<basic name="type">
+				<column name="type_mb" length="10" nullable="false"/>
+			</basic>
+			<many-to-one name="lb" fetch="LAZY">
+			<join-column name="num_exec" referenced-column-name="num_exec" nullable="false"/>
+			<join-column name="no_lbi" referenced-column-name="no_lbi" nullable="false"/>
+			</many-to-one>
+		</attributes>
+	</entity>
+	<entity class="Mandat">
+		<table name="TBmdt">
+		</table>
+		<inheritance strategy="TABLE_PER_CLASS"/>
+		<attribute-override name="date">
+			<column name="date_pec"/>
+		</attribute-override>
+		<attribute-override name="montant">
+			<column name="mt_mdt"/>
+		</attribute-override>
+		<attribute-override name="numero">
+			<column name="no_mdt"/>
+		</attribute-override>
+		<attributes>
+			<basic name="numeroEj">
+				<column name="no_ej"/>
+			</basic>
+			<many-to-one name="lb" fetch="LAZY">
+				<join-column name="num_exec" referenced-column-name="num_exec" nullable="false"/>
+			<join-column name="no_lbi" referenced-column-name="no_lbi" nullable="false"/>
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</many-to-one>
+			<transient name="engagement"/>
+		</attributes>
+	</entity>
+	<entity class="Engagement">
+		<table name="TBej">
+		</table>
+		<inheritance strategy="TABLE_PER_CLASS"/>
+		<attribute-override name="date">
+			<column name="date_ej"/>
+		</attribute-override>
+		<attribute-override name="montant">
+			<column name="mt_ej"/>
+		</attribute-override>
+		<attribute-override name="numero">
+			<column name="no_ej"/>
+		</attribute-override>
+		<attributes>
+			<basic name="designation">
+				<column name="lib_cej" length="120"/>
+			</basic>
+			<many-to-one name="lb" fetch="LAZY">
+			<join-column name="num_exec" referenced-column-name="num_exec" nullable="false"/>
+			<join-column name="no_lbi" referenced-column-name="no_lbi" nullable="false"/>
+			</many-to-one>
+			<embedded name="tiers">
+				<attribute-override name="code">
+					<column name="code_tiers" length="8"/>
+				</attribute-override>
+				<attribute-override name="designation">
+					<column name="nom_tiers" length="80"/>
+				</attribute-override>
+			</embedded>
+			<transient name="mandats"/>
+			<transient name="mandatsReport"/>
+			
+		</attributes>
+	</entity>
+	<entity class="EngagementReport">
+		<table name="TBejrep">
+		</table>
+		<inheritance strategy="TABLE_PER_CLASS"/>
+		<attribute-override name="date">
+			<column name="date_ej"/>
+		</attribute-override>
+		<attribute-override name="montant">
+			<column name="mt_ej"/>
+		</attribute-override>
+		<attribute-override name="numero">
+			<column name="no_ej"/>
+		</attribute-override>
+		<attributes>
+			<basic name="exericeOrigine">
+				<column name="exec_orig"/>
+			</basic>
+			<basic name="montantMdtOrigine">
+				<column name="Mt_mdt_orig"/>
+			</basic>
+			<basic name="numeroEjOrig">
+				<column name="no_ejorig"/>
+			</basic>
+			<many-to-one name="lb" fetch="LAZY">
+			<join-column name="num_exec" referenced-column-name="num_exec" nullable="false"/>
+			<join-column name="no_lbi" referenced-column-name="no_lbi" nullable="false"/>
+			</many-to-one>
+			<transient name="engagement"/>
+		
+		</attributes>
+	</entity>
+	<entity class="MandatReport">
+		<table name="TBmdtrep">
+		</table>
+		<inheritance strategy="TABLE_PER_CLASS"/>
+		<attribute-override name="date">
+			<column name="date_pec"/>
+		</attribute-override>
+		<attribute-override name="montant">
+			<column name="mt_mdt"/>
+		</attribute-override>
+		<attribute-override name="numero">
+			<column name="no_mdt"/>
+		</attribute-override>
+		<attributes>
+			<basic name="exericeOrigine">
+				<column name="exec_orig"/>
+			</basic>
+			<basic name="numeroEj">
+				<column name="no_ej"/>
+			</basic>
+			<basic name="numeroEjOrig">
+				<column name="no_ejorig"/>
+			</basic>
+			<many-to-one name="lb" fetch="LAZY">
+			<join-column name="num_exec" referenced-column-name="num_exec" nullable="false"/>
+			<join-column name="no_lbi" referenced-column-name="no_lbi" nullable="false"/>
+			</many-to-one>
+			<transient name="engagement"/>
+		</attributes>
+	</entity>
+	<entity class="LightLB">
+		<table name="TBlbi">
+		</table>	
+		<attributes>
+			<embedded-id name="id">
+			</embedded-id>
+			<basic name="bp">
+			</basic>
+			<basic name="typeBudget">
+				<column name="type_budg " length="1"/>
+			</basic>
+			<basic name="libTypeBudget">
+				<column name="lib_type_budg " length="80"/>
+			</basic>
+			<one-to-many name="cumuleEngagement" mapped-by="lightLb" fetch="EAGER">
+			</one-to-many>
+			<embedded name="budget">
+				<attribute-override name="code">
+					<column name="code_budg" length="4"/>
+				</attribute-override>
+				<attribute-override name="designation">
+					<column name="lib_budg"/>
+				</attribute-override>
+			</embedded>
+			<embedded name="destinationGroupe">
+				<attribute-override name="code">
+					<column name="dest_grp " length="1"/>
+				</attribute-override>
+				<attribute-override name="designation">
+					<column name="lib_dest_grp "/>
+				</attribute-override>
+			</embedded>
+			<embedded name="region">
+				<attribute-override name="code">
+					<column name="code_reg" length="2"/>
+				</attribute-override>
+				<attribute-override name="designation">
+					<column name="lib_reg"/>
+				</attribute-override>
+			</embedded>
+			<embedded name="programme">
+				<attribute-override name="code">
+					<column name="code_prog" length="10"/>
+				</attribute-override>
+				<attribute-override name="designation">
+					<column name="lib_prog"/>
+				</attribute-override>
+			</embedded>
+		</attributes>
+	</entity>
+	<entity class="LigneBudgetaire">
+	<table name="TBlbi">
+		</table>	
+		<attributes>
+			<embedded-id name="id">
+			</embedded-id>
+			<basic name="bp">
+			</basic>
+			<basic name="typeBudget">
+				<column name="type_budg " length="1"/>
+			</basic>
+			<basic name="libTypeBudget">
+				<column name="lib_type_budg " length="80"/>
+			</basic>
+			<one-to-many name="mouvements" mapped-by="lb" fetch="EAGER">
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</one-to-many>
+			<one-to-many name="mouvementReportList" mapped-by="lb" fetch="EAGER">
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</one-to-many>
+			<one-to-many name="engagements" mapped-by="lb" fetch="EAGER">
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</one-to-many>
+			<one-to-many name="mandats" mapped-by="lb" fetch="EAGER">
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</one-to-many>
+			<one-to-many name="ejReportList" mapped-by="lb" fetch="EAGER">
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</one-to-many>
+			<one-to-many name="mandatReportList" mapped-by="lb" fetch="EAGER">
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</one-to-many>
+			<embedded name="budget">
+				<attribute-override name="code">
+					<column name="code_budg" length="4"/>
+				</attribute-override>
+				<attribute-override name="designation">
+					<column name="lib_budg"/>
+				</attribute-override>
+			</embedded>
+			<embedded name="destinationGroupe">
+				<attribute-override name="code">
+					<column name="dest_grp " length="1"/>
+				</attribute-override>
+				<attribute-override name="designation">
+					<column name="lib_dest_grp "/>
+				</attribute-override>
+			</embedded>
+			<embedded name="region">
+				<attribute-override name="code">
+					<column name="code_reg" length="2"/>
+				</attribute-override>
+				<attribute-override name="designation">
+					<column name="lib_reg"/>
+				</attribute-override>
+			</embedded>
+			<embedded name="programme">
+				<attribute-override name="code">
+					<column name="code_prog" length="10"/>
+				</attribute-override>
+				<attribute-override name="designation">
+					<column name="lib_prog"/>
+				</attribute-override>
+			</embedded>
+		</attributes>
+	</entity>
+	<entity class="Pilotage">
+	<table name="TBpilotage">
+		</table>
+		<attributes>
+			<id name="lastExecutionDate">
+				<column name="date_batch"/>
+				<temporal>TIMESTAMP</temporal>
+			</id>
+		</attributes>
+	</entity>
+
+	
+	
+	<entity class="CumuleEngagement">
+		<table name="tbejmois">
+		</table>
+		<attributes>
+			<id name="id">
+				<generated-value strategy="IDENTITY"/>
+			</id>
+			<basic name="montant01">
+				<column name="m01"/>
+			</basic>
+			<basic name="montant02">
+			<column name="m02"/>
+			</basic>
+			<basic name="montant03">
+			<column name="m03"/>
+			</basic>
+			<basic name="montant04">
+			<column name="m04"/>
+			</basic>
+			<basic name="montant05">
+			<column name="m05"/>
+			</basic>
+			<basic name="montant06">
+			<column name="m06"/>
+			</basic>
+			<basic name="montant07">
+			<column name="m07"/>
+			</basic>
+			<basic name="montant08">
+			<column name="m08"/>
+			</basic>
+			<basic name="montant09">
+			<column name="m09"/>
+			</basic>
+			<basic name="montant10">
+			<column name="m10"/>
+			</basic>
+			<basic name="montant11">
+			<column name="m11"/>
+			</basic>
+			<basic name="montant12">
+			<column name="m12"/>
+			</basic>
+			<many-to-one name="lightLb" fetch="LAZY">
+				<join-column name="num_exec" nullable="false" referenced-column-name="num_exec"/>
+				<join-column name="no_lbi" nullable="false" referenced-column-name="no_lbi"/>
+			</many-to-one>
+		</attributes>
+	</entity>
+	
+	
+	
+	
+	
+	
+	<entity class="DepMandat">
+		<table name="DepMandat">
+		</table>
+<!-- 		<inheritance strategy="TABLE_PER_CLASS"/> -->		
+		<attribute-override name="exercice">
+			<column name="num_exec"/>
+		</attribute-override>
+		<attribute-override name="codeBudget">
+			<column name="code_budg"/>
+		</attribute-override>
+		<attribute-override name="numero">
+			<column name="no_mdt"/>
+		</attribute-override>		
+		<attribute-override name="tiersOrig">
+			<column name="tiers_mdt"/>
+		</attribute-override>
+		<attribute-override name="montant">
+			<column name="mt_mdt"/>
+		</attribute-override>		
+		<attributes>
+			<basic name="bordereauReg">
+				<column name="no_bordreg"/>
+			</basic>
+			<basic name="bordereau">
+				<column name="no_bord"/>
+			</basic>
+			<basic name="numLiquidation">
+				<column name="no_liq"/>
+			</basic>
+			<basic name="debit">
+				<column name="debit_mdt"/>
+			</basic>
+			<basic name="credit">
+				<column name="credit_mdt"/>
+			</basic>
+			<basic name="estSolde">
+				<column name="est_solde"/>
+			</basic>
+			<basic name="estRegle">
+				<column name="est_regle"/>
+			</basic>
+			<basic name="avisEdite">
+				<column name="avis_edite"/>
+			</basic>
+			<one-to-many name="reglements" mapped-by="mandat" fetch="LAZY">
+			</one-to-many>
+			<one-to-many name="oppositions" mapped-by="mandat" fetch="LAZY">
+			</one-to-many>			
+			<one-to-many name="retenues" mapped-by="mandat" fetch="EAGER">
+			</one-to-many>
+			<embedded name="trace">
+			</embedded>
+		</attributes>
+	</entity>	
+	<entity class="OrdrePaiement">
+		<table name="DepOp">
+		</table>
+		<attribute-override name="exercice">
+			<column name="num_exec"/>
+		</attribute-override>
+		<attribute-override name="codeBudget">
+			<column name="code_budg"/>
+		</attribute-override>
+		<attribute-override name="numero">
+			<column name="no_op"/>
+		</attribute-override>
+		<attribute-override name="tiersOrig">
+			<column name="tiers_orig"/>
+		</attribute-override>
+		<attribute-override name="montant">
+			<column name="mtttc_op"/>
+		</attribute-override>
+		<attributes>
+			<basic name="exerciceOrig">
+				<column name="num_exec_orig"/>
+			</basic>
+			<basic name="numMdtOrig">
+				<!-- <column name="no_mdt_orig"/>-->
+				<column name="no_piece_orig"/>
+			</basic>
+			<basic name="tiersBenef">
+				<column name="tiers_benef"/>
+			</basic>
+			<basic name="libelle">
+				<column name="lib_cop"/>
+			</basic>
+			<basic name="typeOp">
+				<column name="type_op"/>
+			</basic>	
+			<basic name="montantInit">
+				<column name="mtht_op"/>
+			</basic>
+			<basic name="avisEdite">
+				<column name="avis_edite"/>
+			</basic>
+<!--			<many-to-one name="mandat" fetch="EAGER">-->
+<!--				<join-column name="num_exec_orig" referenced-column-name="num_exec" nullable="false" insertable="false" updatable="false"/>-->
+<!--				<join-column name="code_budg" referenced-column-name="code_budg" nullable="false" insertable="false" updatable="false"/>-->
+<!--				<join-column name="no_mdt_orig" referenced-column-name="no_mdt" nullable="false" insertable="false" updatable="false"/>-->
+<!--			</many-to-one>-->
+<!--			<one-to-many name="reglements" mapped-by="ordrePaiement" fetch="LAZY">-->
+<!--			</one-to-many>-->
+			<embedded name="trace">
+			</embedded>
+		</attributes>
+	</entity>
+	<entity class="Opposition">
+		<table name="CtaDepOppoExec">
+		</table>
+<!-- 		<inheritance strategy="TABLE_PER_CLASS"/> -->
+		<attributes>
+			<embedded-id name="id">
+			</embedded-id>
+			<basic name="montant">
+				<column name="mt_opp"/>
+			</basic>
+			<basic name="numMvt">
+				<column name="no_mvt"/>
+			</basic>
+			<basic name="libelle">
+				<column name="lib_opp"/>
+			</basic>
+<!-- 			<basic name="estRegle"> -->
+<!-- 				<column name="est_regle"/> -->
+<!-- 			</basic> -->
+			<many-to-one name="type" fetch="EAGER">
+				<join-column name="exec_oppo" referenced-column-name="exec_oppo" nullable="false" insertable="false" updatable="false"/>
+				<join-column name="no_oppo" referenced-column-name="no_oppo" nullable="false" insertable="false" updatable="false"/>
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</many-to-one>
+			<many-to-one name="mandat" fetch="LAZY">
+				<join-column name="exer_mdt" referenced-column-name="num_exec" nullable="false" insertable="false" updatable="false"/>
+				<join-column name="code_budg" referenced-column-name="code_budg" nullable="false" insertable="false" updatable="false"/>
+				<join-column name="no_mdt" referenced-column-name="no_mdt" nullable="false" insertable="false" updatable="false"/>
+			</many-to-one>
+<!--			<many-to-one name="ordrePaiement" fetch="LAZY">-->
+<!--				<join-column name="exer_mdt" referenced-column-name="num_exec_orig" nullable="false" insertable="false" updatable="false"/>-->
+<!--				<join-column name="code_budg" referenced-column-name="code_budg" nullable="false" insertable="false" updatable="false"/>-->
+<!--				<join-column name="no_mdt" referenced-column-name="no_mdt_orig" nullable="false" insertable="false" updatable="false"/>-->
+<!--			</many-to-one>-->
+<!-- 			<embedded name="trace"> -->
+<!-- 			</embedded> -->
+		</attributes>
+	</entity>
+	<entity class="TypeOpposition">
+		<table name="CtaDepOppo">
+		</table>
+<!-- 		<inheritance strategy="TABLE_PER_CLASS"/> -->
+		<attributes>
+			<embedded-id name="id">
+			</embedded-id>
+			<basic name="typeCreance">
+				<column name="typ_creance"/>
+			</basic>
+			<one-to-many name="oppositions" mapped-by="type" fetch="LAZY">
+			</one-to-many>
+			<!-- <one-to-many name="oppositions" fetch="LAZY">
+				<join-column name="exec_oppo" referenced-column-name="exec_oppo" nullable="false"/>
+				<join-column name="no_oppo" referenced-column-name="no_oppo" nullable="false"/>
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</one-to-many> -->	
+			<embedded name="trace">
+			</embedded>		
+		</attributes>
+	</entity>
+	<entity class="Liquidation">
+		<table name="DepLiq">
+		</table>
+<!-- 		<inheritance strategy="TABLE_PER_CLASS"/> -->
+		<attributes>
+			<embedded-id name="id">
+			</embedded-id>
+			<basic name="libMdt">
+				<column name="lib_Mandat"/>
+			</basic>
+			<basic name="tiersBenef">
+				<column name="tiers_benef"/>
+			</basic>
+			<basic name="montant">
+				<column name="mttc_liq"/>
+			</basic>
+<!--			<many-to-one name="mandat" fetch="LAZY">-->
+<!--				<join-column name="num_exec" referenced-column-name="num_exec" nullable="false"/>-->
+<!--				<join-column name="code_budg" referenced-column-name="code_budg" nullable="false" insertable="false" updatable="false"/>-->
+<!--				<join-column name="no_piece" referenced-column-name="no_mdt" nullable="false" insertable="false" updatable="false"/>-->
+<!--				<join-column name="no_liq" referenced-column-name="no_liq" nullable="false"/>-->
+<!--			</many-to-one>-->
+			<embedded name="trace">
+			</embedded>					
+		</attributes>
+	</entity>
+	<entity class="RecetteLiquidation">
+		<table name="RecLiq">
+		</table>
+<!-- 		<inheritance strategy="TABLE_PER_CLASS"/> -->
+		<attributes>
+			<embedded-id name="id">
+			</embedded-id>
+			<basic name="libelle">
+				<column name="lib_lrec"/>
+			</basic>
+			<basic name="tiers">
+				<column name="tiers_ori"/>
+			</basic>
+			<basic name="montantInit">
+				<column name="mttc"/>
+			</basic>
+			<basic name="montant">
+				<column name="mtht"/>
+			</basic>
+			<one-to-many name="recTitre" mapped-by="recetteLiquidation" fetch="EAGER">				
+			</one-to-many>
+<!-- 			<embedded name="trace"> -->
+<!-- 			</embedded>					 -->
+		</attributes>
+	</entity>
+	<entity class="RecetteTitre">
+		<table name="RecTitre">
+		</table>
+<!-- 		<inheritance strategy="TABLE_PER_CLASS"/> -->
+		<attributes>
+			<embedded-id name="id">
+			</embedded-id>
+			<basic name="codeBudget">
+				<column name="code_budg"/>
+			</basic>
+			<basic name="estSolde">
+				<column name="est_solde"/>
+			</basic>
+			<many-to-one name="recetteLiquidation" fetch="LAZY">
+				<join-column name="num_exec" referenced-column-name="num_exec" nullable="false" insertable="false" updatable="false"/>
+				<join-column name="no_lrec" referenced-column-name="no_lrec" nullable="false" insertable="false" updatable="false"/>
+			</many-to-one>	
+<!--			<one-to-one name="recetteLiquidation" fetch="LAZY">-->
+<!--				<join-column name="num_exec" referenced-column-name="num_exec" nullable="false" insertable="false" updatable="false"/>-->
+<!--				<join-column name="no_lrec" referenced-column-name="no_lrec" nullable="false" insertable="false" updatable="false"/>-->
+<!--			</one-to-one>-->				
+		</attributes>
+	</entity>
+
+	<entity class="Piece">
+		<table name="CtaDebSitu">
+		</table>
+		<attributes>
+			<embedded-id name="id">
+			</embedded-id>
+			<basic name="codeTiers">
+				<column name="code_Tiers"></column>
+			</basic>
+			<basic name="objet">
+			</basic>
+			<basic name="montantInitial">
+				<column name="mt_initial"></column>
+			</basic>
+			<basic name="debit">
+			</basic>
+			<basic name="credit">
+			</basic>
+		</attributes>
+	</entity>
+	<entity class="Reglement">
+		<table name="Reglt">
+		</table>
+		<attributes>
+			<embedded-id name="id">
+			</embedded-id>
+			<basic name="bordereau">
+				<column name="no_bord"/>
+			</basic>
+			<basic name="exerciceOpp">
+				<column name="num_exec_oppo"/>
+			</basic>
+			<basic name="numOpp">
+				<column name="no_oppo"/>
+			</basic>
+			<basic name="numMvt">
+				<column name="no_mvt"/>
+			</basic>
+			<basic name="numRib">
+				<column name="no_rib"/>
+			</basic>
+			<basic name="montant">
+				<column name="montant_regle"/>
+			</basic>
+			<basic name="libelle">
+				<column name="lib1"/>
+			</basic>
+			<basic name="typePiece">
+				<column name="type_piece"/>
+			</basic>
+			<basic name="numEcriture">
+				<column name="no_ecr"></column>
+			</basic>
+			<many-to-one name="mandat" fetch="LAZY">
+				<join-column name="num_exec" referenced-column-name="num_exec" nullable="false" insertable="false" updatable="false"/>
+				<join-column name="code_budg" referenced-column-name="code_budg" nullable="false" insertable="false" updatable="false"/>
+				<join-column name="no_piece" referenced-column-name="no_mdt" nullable="false" insertable="false" updatable="false"/>
+			</many-to-one>
+			<embedded name="trace">
+			</embedded>						
+		</attributes>
+	</entity>
+	<entity class="Retenue">
+		<table name="CtaDepRetenue">
+		</table>
+		<attributes>
+			<embedded-id name="id">
+			</embedded-id>
+			<basic name="montant">
+				<column name="mt_ret"/>
+			</basic>
+			<basic name="libelle">
+				<column name="lib_ret"/>
+			</basic>
+			<basic name="exerciceTitre">
+				<column name="exec_titrec"/>
+			</basic>
+			<basic name="codeBudgetTitre">
+				<column name="budg_tit"/>
+			</basic>
+			<basic name="type">
+				<column name="typie_ret"/>
+			</basic>
+			<basic name="numEcriture">
+				<column name="no_ecr"></column>
+			</basic>
+			<many-to-one name="mandat" fetch="LAZY">
+				<join-column name="exec_mdt" referenced-column-name="num_exec" nullable="false" insertable="false" updatable="false"/>
+				<join-column name="budg_mdt" referenced-column-name="code_budg" nullable="false" insertable="false" updatable="false"/>
+				<join-column name="no_mdt" referenced-column-name="no_mdt" nullable="false" insertable="false" updatable="false"/>
+			</many-to-one>
+			
+		</attributes>
+	</entity>
+	<entity class="Bordereau">
+		<table name="CfgBordereau">
+		</table>
+		<id-class class="fr.symphonie.acse.tb.core.model.pk.BordereauId"></id-class>		
+		<attributes>
+			<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="codeBudget">
+				<column name="code_budg"></column>
+			</id>
+			<id name="typeBordereau">
+				<column name="type_bord"></column>
+			</id>
+			<id name="numero">
+				<column name="no_bord"></column>
+			</id>
+			<basic name="avisEdite">
+				<column name="avis_edite"/>
+			</basic>
+		</attributes>
+	</entity>
+		
+	
+
+		
+		
+	<embeddable class="LigneBudgetaireID">
+		<attributes>
+			<basic name="exercice">
+				<column name="num_exec"/>
+			</basic>
+			<basic name="numero">
+				<column name="no_lbi"/>
+			</basic>
+		</attributes>
+	</embeddable>
+	
+	
+	
+	<embeddable class="IdEntity">
+		<attributes>
+			<basic name="exercice">
+				<column name="num_exec"/>
+			</basic>
+			<basic name="codeBudget">
+				<column name="code_budg"/>
+			</basic>
+			<basic name="numero">
+				<column name="no_mdt"/>
+			</basic>
+		</attributes>
+	</embeddable>
+	<embeddable class="OppositionId">
+		<attributes>
+			<basic name="exercice">
+				<column name="exer_mdt"/>
+			</basic>
+			<basic name="codeBudget">
+				<column name="code_budg"/>
+			</basic>
+			<basic name="numMdt">
+				<column name="no_mdt"/>
+			</basic>
+			<basic name="numOppo">
+				<column name="no_oppo"/>
+			</basic>
+		</attributes>
+	</embeddable>
+	<embeddable class="TypeOppositionId">
+		<attributes>
+			<basic name="exercice">
+				<column name="exec_oppo"/>
+			</basic>
+			<basic name="numOppo">
+				<column name="no_oppo"/>
+			</basic>
+		</attributes>
+	</embeddable>
+	<embeddable class="LiquidationId">
+		<attributes>
+			<basic name="exercice">
+				<column name="num_exec"/>
+			</basic>
+			<basic name="numLiq">
+				<column name="no_liq"/>
+			</basic>
+		</attributes>
+	</embeddable>
+	<embeddable class="ReglementId">
+		<attributes>
+			<basic name="exercice">
+<!-- 				<column name="num_exec_piece"/> -->
+				<column name="num_exec"/>
+			</basic>
+			<basic name="codeBudget">
+				<column name="code_budg"/>
+			</basic>
+			<basic name="numero">
+				<column name="no_piece"/>
+			</basic>
+			
+		</attributes>
+	</embeddable>
+	<embeddable class="RetenueId">
+		<attributes>
+			<basic name="exercice">
+				<column name="exec_mdt"/>
+			</basic>
+			<basic name="codeBudget">
+				<column name="budg_mdt"/>
+			</basic>
+			<basic name="numero">
+				<column name="no_mdt"/>
+			</basic>
+			<basic name="numTitreRec">
+				<column name="no_titrec"/>
+			</basic>
+		</attributes>
+	</embeddable>
+	<embeddable class="IdRecette">
+		<attributes>
+			<basic name="exercice">
+				<column name="num_exec"/>
+			</basic>
+			<basic name="numero">
+				<column name="no_lrec"/>
+			</basic>
+		</attributes>
+	</embeddable>
+
+	<embeddable class="ReversementId">
+		<attributes>
+			<basic name="exercice">
+				<column name="num_exec"/>
+			</basic>
+			<basic name="codeBudget">
+				<column name="code_budg"/>
+			</basic>
+			<basic name="numMdt">
+				<column name="no_mdt"/>
+			</basic>
+			<basic name="numero">
+				<column name="no_or"/>
+			</basic>
+		</attributes>
+	</embeddable>
+	<embeddable class="PieceId">
+		<attributes>
+			<basic name="exercice">
+				<column name="exec_orig"/>
+			</basic>
+			<basic name="codeBudget">
+				<column name="code_budg"/>
+			</basic>
+			<basic name="numero">
+				<column name="piece"/>
+			</basic>
+			<basic name="type">
+				<column name="type_piece"/>
+			</basic>
+		</attributes>
+	</embeddable>
+  
+  </entity-mappings>

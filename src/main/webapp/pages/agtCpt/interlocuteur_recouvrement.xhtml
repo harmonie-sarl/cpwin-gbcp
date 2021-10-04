@@ -1,0 +1,100 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/template-1.0.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<style type="text/css">
+.col1 {
+	width: 10%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col2 {
+	width: 90%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.simpleColumn {
+	width: 20%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+}
+</style>
+	<ui:define name="pageTitle">
+		<h:outputText value="#{msgs['interloc.recouvrement.titre']}"></h:outputText>
+	</ui:define>
+	<ui:define name="errorMsg">
+		<div>	<p:messages id="globalMessage" globalOnly="true" showDetail="true"/></div>
+	</ui:define>
+	<ui:define name="entete">
+	</ui:define>
+	<ui:define name="subTitle">
+
+	</ui:define>
+	<ui:define name="search">
+	</ui:define>
+	<ui:define name="details">
+		<p:panel id="interlocPanel" style="width:100%;padding:0;margin:0;" >
+		<h:panelGrid id="interloc" columns="3"
+			columnClasses="filter_colB3,filter_colB3,filter_col6">
+					<h:outputLabel value="#{msgs['nom']}" for="nom" rendered="true"
+						styleClass="espace_entre_label_value" />
+					<h:panelGroup>
+						<p:inputText id="nom" required="true" value="#{avisReglementBean.nomChargeRecouv}" rendered="#{!avisReglementBean.disableField}"
+							requiredMessage="#{errorMsgs['required']}">
+							<p:ajax event="change" update="detailsForm:nomMsg" />
+						</p:inputText>
+						<h:outputText value="#{avisReglementBean.nomChargeRecouv}" rendered="#{avisReglementBean.disableField}"/>
+					</h:panelGroup>	
+					<p:message id="nomMsg" for="nom" styleClass="error" />
+					<h:outputLabel value="#{msgs['contact.tel']}" for="tel"
+						styleClass="espace_entre_label_value" />
+					<h:panelGroup>
+						<p:inputText id="tel" required="true" value="#{avisReglementBean.telChargeRecouv}" rendered="#{!avisReglementBean.disableField}"
+							requiredMessage="#{errorMsgs['required']}">
+							<p:ajax event="change" update="detailsForm:telMsg" />
+						</p:inputText>
+						<h:outputText value="#{avisReglementBean.telChargeRecouv}" rendered="#{avisReglementBean.disableField}"/>
+					</h:panelGroup>
+					<p:message id="telMsg" for="tel" styleClass="error" />
+					<h:outputLabel value="#{msgs['icon.email']}" for="mail"
+						styleClass="espace_entre_label_value" />
+					<h:panelGroup>
+						<p:inputText id="mail" validator="validator.email" required="true" value="#{avisReglementBean.mailChargeRecouv}" rendered="#{!avisReglementBean.disableField}"
+							requiredMessage="#{errorMsgs['required']}">
+							<p:ajax event="change" update="detailsForm:mailMsg" />
+						</p:inputText>
+					<h:outputText value="#{avisReglementBean.mailChargeRecouv}" rendered="#{avisReglementBean.disableField}"/>
+					</h:panelGroup>
+					<p:message id="mailMsg" for="mail" styleClass="error" />
+			</h:panelGrid>
+			</p:panel>
+			<br/>
+			<div align="center">
+				<h:panelGroup id="btnPG">
+					<p:commandButton value="#{msgs['btn.modifier']}" rendered="#{avisReglementBean.disableField}"
+							actionListener="#{avisReglementBean.activeFields}"
+							update="detailsForm:interloc,btnPG,globalMessage" />
+					<p:commandButton value="#{msgs['btn.valider']}" rendered="#{!avisReglementBean.disableField}"
+							actionListener="#{avisReglementBean.updateInterlocRecouvrement}"
+							update="detailsForm:interloc,btnPG,globalMessage" />	
+				</h:panelGroup>	
+			</div>
+	</ui:define>
+</ui:composition>

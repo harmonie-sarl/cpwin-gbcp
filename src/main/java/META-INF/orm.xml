@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+        http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd" version="2.1">
+        -->
+        <entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+  version="2.0">
+	<persistence-unit-metadata>
+		<persistence-unit-defaults>
+			<access>FIELD</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<package>fr.symphonie.budget.core.model.pluri</package>
+	
+	<entity class="BudgetPluriannuel">
+		<table name="budget">
+		</table>
+		<id-class class="fr.symphonie.budget.core.model.pluri.pk.BudgetPK"></id-class>
+		<attributes>
+			<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="codeBudget">
+				<column name="code_budg"></column>
+			</id>
+			<basic name="recette">
+			<column name="bp_rec" column-definition="money default 0"></column>
+			</basic>
+			<basic name="depense">
+				<column name="bp_dep" column-definition="money default 0"></column>
+			</basic>
+			<basic name="etatCp">
+				<column name="etat_Cp" column-definition="TCODE default 'Ouvert'"></column>
+			</basic>
+			
+			<basic name="editionBI">
+				<column name="edition_bi" column-definition="bit default 0"></column>
+			</basic>
+			<one-to-many name="listEnvelopBudg" mapped-by="budget" fetch="EAGER">
+				<cascade>
+					<cascade-persist ></cascade-persist>
+					<cascade-merge ></cascade-merge>
+				</cascade>
+			</one-to-many>
+			<embedded name="trace">
+				<attribute-override name="dateMaj">
+					<column name="date_maj"></column>
+				</attribute-override>
+			</embedded>
+			<embedded name="visaOrdo">
+				<attribute-override name="visa">
+					<column name="visa_bp_ordo"></column>
+				</attribute-override>
+				<attribute-override name="auteur">
+					<column name="aut_bp_ordo"></column>
+				</attribute-override>
+				<attribute-override name="date">
+					<column name="date_bp_ordo"></column>
+				</attribute-override>
+			</embedded>
+			<embedded name="visaCF">
+				<attribute-override name="visa">
+					<column name="visa_bp_ctrl"></column>
+				</attribute-override>
+				<attribute-override name="auteur">
+					<column name="aut_bp_ctrl"></column>
+				</attribute-override>
+				<attribute-override name="date">
+					<column name="date_bp_ctrl"></column>
+				</attribute-override>
+			</embedded>
+			<embedded name="visaAC">
+				<attribute-override name="visa">
+					<column name="visa_bp_cpt"></column>
+				</attribute-override>
+				<attribute-override name="auteur">
+					<column name="aut_bp_cpt"></column>
+				</attribute-override>
+				<attribute-override name="date">
+					<column name="date_bp_cpt"></column>
+				</attribute-override>
+			</embedded>
+		</attributes>
+	</entity>
+	<entity class="EnvelopBudg">
+		<table name="BudgOfficielLIGNE">
+		</table>
+		<id-class class="fr.symphonie.budget.core.model.pluri.pk.EnvelopBudgPK"></id-class>
+		<attributes>
+			<id name="codeBudget">
+				<column name="code_budg"></column>
+			</id>
+			<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="groupDest">
+				<column name="dest_grp"></column>
+			</id>
+			<id name="groupNat">
+				<column name="nat_grp"></column>
+			</id>
+			<basic name="type">
+				<column name="dep_rec"></column>
+			</basic>
+			<basic name="montantAE">
+				<column name="bp" column-definition="money default 0"></column>
+			</basic>
+			
+			
+			<many-to-one name="budget">
+				<join-column name="code_budg" referenced-column-name="code_budg" insertable="false" updatable="false"></join-column>
+				<join-column name="num_exec" referenced-column-name="num_exec" insertable="false" updatable="false"></join-column>
+			</many-to-one>
+			<one-to-many name="listCreditPaiement" mapped-by="envelop" fetch="EAGER">
+				<cascade>
+					<cascade-persist ></cascade-persist>
+					<cascade-merge ></cascade-merge>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="listLigneBudg" mapped-by="envelop" fetch="EAGER">
+				<cascade>
+					<cascade-persist ></cascade-persist>
+					<cascade-merge ></cascade-merge>
+				</cascade>
+			</one-to-many>
+			<embedded name="trace">
+			</embedded>
+			
+		</attributes>
+	</entity>
+	<entity class="CreditPaiement">
+		<table name="budgCP">
+		</table>
+		<id-class class="fr.symphonie.budget.core.model.pluri.pk.CreditPaiementPK"></id-class>
+		<attributes>
+			<id name="exerciceAE">
+				<column name="num_exec_ae"></column>
+			</id>
+			<id name="codeBudget">
+				<column name="code_budg"></column>
+			</id>
+			<id name="exerciceCP">
+				<column name="num_exec_cp"></column>
+			</id>
+			<id  name="groupDest">
+				<column name="dest_grp"></column>
+			</id >
+			<id  name="groupNat">
+				<column name="nat_grp"></column>
+			</id >
+			<basic name="programme">
+				<column name="code_prog"></column>
+			</basic>
+			<basic name="montant">
+				<column name="montant" column-definition="money default 0"></column>
+			</basic>
+			<many-to-one name="envelop">
+				<join-column name="num_exec_ae" referenced-column-name="num_exec" insertable="false" updatable="false"></join-column>
+				<join-column name="code_budg" referenced-column-name="code_budg" insertable="false" updatable="false"></join-column>
+				<join-column name="dest_grp" referenced-column-name="dest_grp" insertable="false" updatable="false"></join-column>
+				<join-column name="nat_grp" referenced-column-name="nat_grp" insertable="false" updatable="false"></join-column>
+			</many-to-one>
+			<embedded name="trace">
+			</embedded>
+		
+		</attributes>
+	</entity>
+	<entity class="LigneBudgetaireAE">
+		<table name="BudgInterneLigne">
+		</table>
+		<id-class class="fr.symphonie.budget.core.model.pluri.pk.LigneBudgPK"></id-class>
+		<attributes>
+			<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="service">
+				<column name="code_service"></column>
+			</id>
+			<id name="codeBudget">
+				<column name="code_budg"></column>
+			</id>
+			<id name="groupDest">
+				<column name="dest_grp"></column>
+			</id>
+			<id name="groupNat">
+				<column name="nat_grp"></column>
+			</id>
+			<id name="programme">
+				<column name="code_prog"></column>
+			</id>
+			<id name="destination">
+				<column name="code_dest"></column>
+			</id>
+			<id name="nature">
+				<column name="code_nature"></column>
+			</id>
+			<basic name="noLbi">
+				<column name="no_lbi"></column>
+			</basic>
+			<basic name="noEnv">
+				<column name="no_env"></column>
+			</basic>
+			
+			<basic name="montantAE">
+				<column name="bp" column-definition="money default 0"></column>
+			</basic>
+			<basic name="typeDepRec">
+				<column name="dep_rec"></column>
+			</basic>
+			
+			<many-to-one name="envelop">
+				<join-column name="num_exec" referenced-column-name="num_exec" insertable="false" updatable="false"></join-column>
+				<join-column name="code_budg" referenced-column-name="code_budg" insertable="false" updatable="false"></join-column>
+				<join-column name="dest_grp" referenced-column-name="dest_grp" insertable="false" updatable="false"></join-column>
+				<join-column name="nat_grp" referenced-column-name="nat_grp" insertable="false" updatable="false"></join-column>
+<!-- 				<join-column name="code_prog" referenced-column-name="code_prog" insertable="false" updatable="false"></join-column> -->
+			</many-to-one>
+			<embedded name="trace">
+			</embedded>
+		</attributes>
+	</entity>
+	
+	<entity class="BudgetCpDest">
+		<table name="BudgCPDest">
+		</table>
+		<id-class class="fr.symphonie.budget.core.model.pluri.pk.BudgetCpDestPK"></id-class>
+		<attributes>
+			
+			<id name="groupNat">
+				<column name="nat_grp"></column>
+			</id>
+			<id name="destination">
+				<column name="code_dest"></column>
+			</id>
+			<id name="codeBudget">
+				<column name="code_budg"></column>
+			</id>
+			<id name="exerciceCP">
+				<column name="num_exec"></column>
+			</id>
+			<id name="niveau">
+				<column name="niveau"></column>
+			</id>
+			<basic name="montant">
+				<column name=" bi" column-definition="money default 0"></column>
+			</basic>
+			<basic name="budgetRectificatif">
+				<column name="br_encours" column-definition="money default 0"></column>
+			</basic>
+			<basic name="creditOuvert">
+				<column name="co" column-definition="money default 0"></column>
+			</basic>
+			
+		</attributes>
+	</entity>
+	<entity class="CpGestionnaire">
+		<table name="BudgCPgest">
+		</table>
+		<id-class class="fr.symphonie.budget.core.model.pluri.pk.CpGestPK"></id-class>
+		<attributes>
+		<id name="exerciceCP">
+				<column name="num_exec"></column>
+			</id>
+			<id name="codeBudget">
+				<column name="code_budg"></column>
+			</id>
+			<id name="groupNat">
+				<column name="nat_grp"></column>
+			</id>
+			<id name="gestionnaire">
+				<column name="code_gest"></column>
+			</id>
+			
+			<basic name="budgetInitial">
+				<column name=" bi" column-definition="money default 0"></column>
+			</basic>
+			<basic name="budgetRectificatif">
+				<column name="br_encours" column-definition="money default 0"></column>
+			</basic>
+			<basic name="creditOuvert">
+				<column name="co" column-definition="money default 0"></column>
+			</basic>
+			
+			<basic name="ejReserve">
+				<column name="ej_Reserve" column-definition="money default 0"></column>
+			</basic>
+			<basic name="dispoEj">
+				<column name="dispo_sur_ej" column-definition="money default 0"></column>
+			</basic>
+			<basic name="dpEmis">
+				<column name="dp_emis" column-definition="money default 0"></column>
+			</basic>
+			
+			<basic name="dpAdmis">
+				<column name="dp_admis" column-definition="money default 0"></column>
+			</basic>
+			<basic name="dispoCo">
+				<column name="dispo_sur_co" column-definition="money default 0"></column>
+			</basic>
+			<basic name="noLbgCp">
+				<column name="no_lbg_cp" column-definition="int null"></column>
+			</basic>
+			
+		</attributes>
+	</entity>
+	<entity class="CpModification">
+		<table name="budgetcpmodification">
+		</table>
+		<id-class class="fr.symphonie.budget.core.model.pluri.pk.CpModificationPK"></id-class>
+		<attributes>
+		<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="codeBudget">
+				<column name="code_budg"></column>
+			</id>
+			<id name="numero">
+				<column name="no_vir_cp"></column>
+			</id>	
+			
+			<basic name="objet">
+			</basic>
+			
+			<one-to-many name="items" mapped-by="parent" orphan-removal="true">
+				<cascade>
+					<cascade-all ></cascade-all>
+				</cascade>
+			</one-to-many>
+			<embedded name="trace">
+			</embedded>
+		</attributes>
+	</entity>
+	<entity class="CpModificationItem">
+		<table name="budgetcpmodificationligne">
+		</table>
+		<id-class class="fr.symphonie.budget.core.model.pluri.pk.CpModificationLignePK"></id-class>
+		<attributes>
+		<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="codeBudget">
+				<column name="code_budg"></column>
+			</id>
+			<id name="numero">
+				<column name="no_vir_cp"></column>
+			</id>
+			<id name="noLbgCp">
+				<column name="no_lbg_cp"></column>
+			</id>	
+			<basic name="montant">
+				<column column-definition="money default 0" name="variation"></column>
+			</basic>
+			<many-to-one name="parent" optional="false">
+				<join-column name="num_exec" referenced-column-name="num_exec" insertable="false" updatable="false"></join-column>
+				<join-column name="code_budg" referenced-column-name="code_budg" insertable="false" updatable="false"></join-column>
+				<join-column name="no_vir_cp" referenced-column-name="no_vir_cp" insertable="false" updatable="false"></join-column>
+			</many-to-one>
+		</attributes>
+	</entity>
+	
+	<entity class="BudgModification">
+		<table name="BudgModification">
+		</table>
+		<id-class class="fr.symphonie.budget.core.model.pluri.pk.ModificationPK"></id-class>
+		<attributes>
+			<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="type">
+				<column name="type_mb"></column>
+			</id>
+			<id name="numero">
+				<column name="no_mb"></column>
+			</id>
+			<basic name="codeBudget">
+				<column name="code_budg"></column>
+			</basic>
+			<basic name="objet">
+				<column name="lib_mb"></column>
+			</basic>
+			<basic name="dateModif">
+				<column name="date_mb"></column>
+			</basic>
+			<basic name="etatCp">
+				<column name="etat_Cp" column-definition="TCODE default 'Ouvert'"></column>
+			</basic>			
+			<embedded name="trace">
+				<attribute-override name="dateMaj">
+					<column name="date_maj"></column>
+				</attribute-override>
+			</embedded>
+			<embedded name="visaOrdo">
+				<attribute-override name="visa">
+					<column name="visa_ordo"></column>
+				</attribute-override>
+				<attribute-override name="auteur">
+					<column name="aut_ordo"></column>
+				</attribute-override>
+				<attribute-override name="date">
+					<column name="date_ordo"></column>
+				</attribute-override>
+			</embedded>
+			<embedded name="visaCtrl">
+				<attribute-override name="visa">
+					<column name="visa_ctrl"></column>
+				</attribute-override>
+				<attribute-override name="auteur">
+					<column name="aut_ctrl"></column>
+				</attribute-override>
+				<attribute-override name="date">
+					<column name="date_ctrl"></column>
+				</attribute-override>
+			</embedded>
+			<embedded name="visaCpt">
+				<attribute-override name="visa">
+					<column name="visa_cpt"></column>
+				</attribute-override>
+				<attribute-override name="auteur">
+					<column name="aut_cpt"></column>
+				</attribute-override>
+				<attribute-override name="date">
+					<column name="date_cpt"></column>
+				</attribute-override>
+			</embedded>
+		</attributes>
+	</entity>
+	<entity class="ModificationCpLigne">
+		<table name="BudgModificationCpLigne">
+		</table>
+		<id-class class="fr.symphonie.budget.core.model.pluri.pk.ModificationCpLignePK"></id-class>
+		<attributes>
+			<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="type">
+				<column name="type_mb"></column>
+			</id>
+			<id name="numero">
+				<column name="no_mb"></column>
+			</id>
+			<id name="codeBudget">
+				<column name="code_budg"></column>
+			</id>
+			<basic name="montantBR">
+				<column name="mnt_br" column-definition="money default 0"></column>
+			</basic>
+			<id name="noLbgCp">
+				<column name="no_lbg_cp"></column>
+			</id>
+			<embedded name="trace">
+			</embedded>
+			<transient name="budgModification"></transient>
+		</attributes>
+	</entity>
+	
+
+</entity-mappings>

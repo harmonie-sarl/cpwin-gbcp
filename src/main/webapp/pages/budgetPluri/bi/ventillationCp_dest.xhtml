@@ -1,0 +1,150 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+.noneStyle {
+	color: #000000;
+	background-color: none;
+}
+
+.redStyle {
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+.ui-state-disabled, .ui-widget-content .ui-state-disabled,
+	.ui-widget-header .ui-state-disabled {
+	opacity: .40;
+	filter: Alpha(Opacity = 35);
+	background-image: none;
+}
+</style>
+
+
+
+</ui:define>
+	<ui:define name="pageTitle">#{msgs['datatable.buget.pluri.annuel.adressage.cp.dest']}</ui:define>
+	<ui:define name="entetePage">
+		<ui:include src="./common/entete_cp_niveau_dest.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="search">		
+			
+	</ui:define>
+		
+	<ui:define name="enteteAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}" immediate="true" disabled="#{!bpBean.requiredDataDone}"
+		actionListener="#{bpBean.searchCpParDestination}" update="globalMessage,:detailsForm" ></p:commandButton>
+		<ui:param name="statusRendered" value="true" />	
+	</ui:define>
+	<ui:define name="details">
+
+		<p:panel id="listBudgetPanel" style="width:100%;" rendered="#{bpBean.listBudgetCpDest!=null}">
+			<div align="center" style="width: 100%;">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['credit.destination']}" />
+				</f:facet>
+				
+				<div align="center">
+				<h:panelGrid columns="4" style="width:50%;">
+					<h:outputLabel styleClass="espace_entre_label_value"
+						style="font-weight:bold" value="#{msgs['montant.cp']}" rendered="#{not empty bpBean.listCreditPaiement}"/>
+					<h:outputText value="#{bpBean.totalMntCp}" size="7" rendered="#{not empty bpBean.listCreditPaiement}" >
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+	
+			
+			</h:panelGrid>
+		</div>
+					
+		
+		<br/>
+				<p:dataTable id="cpDest_dtt"
+					rendered="#{not empty bpBean.listBudgetCpDest}"
+					var="cpDest" style="width:100%; text-align: center;"
+					rowIndexVar="cpDestIndex" emptyMessage="#{msgs['datatable.empty']}"
+					value="#{bpBean.listBudgetCpDest}" paginator="true"
+					rows="10">
+
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['import.destination']}" />
+						</f:facet>
+
+						<h:outputText value="#{cpDest.codeAndLib}" />
+							<f:facet name="footer">
+                              <h:outputText value="#{msgs['total']}" />
+                       </f:facet>
+					</p:column>
+
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['montant']}" />
+						</f:facet>
+						<h:panelGroup>
+							<p:inputNumber id="montant" rendered="#{bpBean.etatCpOuvert}"
+								size="20"
+								value="#{cpDest.montant}">
+								<p:ajax event="keyup" process="@this" global="false"
+									update="detailsForm:creditdest_Btn,montant_msg"></p:ajax>
+								<p:ajax process="@this" global="false"
+									update="detailsForm:cpDest_dtt,detailsForm:creditdest_Btn"></p:ajax>
+							</p:inputNumber>
+							<p:message id="montant_msg" showSummary="false" for="montant" />
+							<h:outputText value="#{cpDest.montant}" rendered="#{!bpBean.etatCpOuvert}">
+									<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+								</h:outputText>
+						</h:panelGroup>
+						<f:facet name="footer">
+						<h:panelGroup id="totalMntCpDest">
+								<h:outputText value="#{bpBean.totalMntCpDest}"
+									 rendered="#{!bpBean.depassementTotalCpDest}" >
+									<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+								</h:outputText>
+								<h:outputText value="#{bpBean.totalMntCpDest}"
+									styleClass="redStyle" rendered="#{bpBean.depassementTotalCpDest}" >
+									<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+								</h:outputText>
+
+							</h:panelGroup>
+							
+						</f:facet>
+
+					</p:column>
+					
+					
+						<p:column style="width:7%;">
+						<f:facet name="header">
+						</f:facet>
+						<p:commandButton title="#{msgs['ajuster']}" icon="fa fa-adjust"
+							disabled="#{(bpBean.mntCpDestEqual)||(!bpBean.etatCpOuvert)}"
+							actionListener="#{bpBean.ajusterVentCpDest}"
+							update="detailsForm:cpDest_dtt,detailsForm:creditdest_Btn">
+							<f:param name="cpDestIndex" value="#{cpDestIndex}" />
+						</p:commandButton>
+						<f:facet name="footer">
+						</f:facet>
+					</p:column>
+
+
+				</p:dataTable>
+				<br />
+				<h:panelGroup id="creditdest_Btn" 	 >
+				
+				<p:commandButton  title=" " rendered="#{not empty bpBean.listBudgetCpDest}"
+						value="#{msgs['btn.enregistrer']}" actionListener="#{bpBean.saveVentBIParDest}"
+					disabled="#{(!bpBean.mntCpDestEqual)||(!bpBean.etatCpOuvert)}" update="globalMessage,:detailsForm,:enteteForm"
+						immediate="true" process="@this" >
+					</p:commandButton>
+				</h:panelGroup>
+			</div>
+		</p:panel>
+	</ui:define>
+	</ui:composition>	

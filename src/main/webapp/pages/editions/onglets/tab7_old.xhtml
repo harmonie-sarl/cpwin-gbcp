@@ -1,0 +1,1426 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+	<p:panel style="width:100%;">
+		<f:facet name="header">
+			<h:outputText value="#{msgs['tab7']}"
+				style="font-weight: bold; text-align: center;" />
+		</f:facet>
+		<div align="center">
+			<h:outputText value="#{msgs['plan.tresorerie']}"
+				style="font-weight: bold; text-align: center;color:#008000;" />
+		</div>
+		
+		<p:panelGrid style="width:100%; vertical-align:top;">	
+		 <p:row style="text-align: center;" >
+            <p:column colspan="14"
+					style="font-weight: bold; background-color: #008000;color: #FFFFFF;">
+					<h:outputText value="#{msgs['pour.info.org']}"
+						 />
+				</p:column>				
+        </p:row>
+	 <p:row>
+            <p:column colspan="14">
+				</p:column>
+			 </p:row>
+			
+	 <p:row  style="text-align: center;font-weight: bold;" >           
+				  <p:column style="background-color: #D19275;" >
+				</p:column>			
+				 <p:column style="background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['janvier']}" />
+				</p:column>
+				 <p:column style="background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['fevrier']}" />
+				</p:column>
+				 <p:column style="background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['mars']}" />
+				</p:column>
+				 <p:column style="background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['avril']}" />
+				</p:column>
+				 <p:column style="background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['mai']}" />
+				</p:column>
+				 <p:column style="background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['juin']}" />
+				</p:column>
+				 <p:column style="background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['juillet']}" />
+				</p:column>
+				 <p:column style="background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['aout']}" />
+				</p:column>
+				 <p:column style="background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['septembre']}" />
+				</p:column>
+				 <p:column style="background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['octobre']}" />
+				</p:column>
+				 <p:column style="background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['novembre']}" />
+				</p:column>
+				 <p:column style="background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['decembre']}" />
+				</p:column>
+				 <p:column style="background-color: #D19275;" >
+					<h:panelGrid column="1">
+						<h:outputLabel value="#{msgs['total.majus']}" />
+						<h:outputLabel value="#{msgs['variation.tresorerie']}" />
+					</h:panelGrid>
+				</p:column>
+        </p:row>
+
+ <p:row   >
+           	 <p:column style="text-align: right;font-weight: bold;"  >	
+					<h:outputLabel value="#{msgs['solde.initial']}" />
+				</p:column>
+				  <p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+        </p:row>
+			<p:row>
+           	 <p:column style="text-align: left;font-weight: bold;background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['encaissements']}" />
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>			
+				 <p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>				 
+        </p:row>
+			<p:row>  
+           <p:column style="text-align: left;font-weight: bold;font-style: italic;background-color: #F0E68C;" >
+					<h:outputLabel value="#{msgs['recet.budg.global']}" />
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>			
+				 <p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['subvent.charges.serv.pub']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 	 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['autre.financ.etat']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 	 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['fisc.affect']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 	 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['autres.financ.pub']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>						 
+        </p:row>
+			<p:row>
+           		 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['recet.propr']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           		 <p:column style="text-align: left;font-weight: bold;font-style: italic;background-color: #F0E68C;" >
+					<h:outputLabel value="#{msgs['recet.budg.fleches']}" />
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>			
+				 <p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>				 
+        </p:row>
+			<p:row>
+           		 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['financ.etat.fleches']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 	 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['autre.financ.pub.flech']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 	 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['recet.propr.flech']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 	 <p:column style="text-align: left;font-weight: bold;font-style: italic;background-color: #F0E68C;" >
+					<h:outputLabel value="#{msgs['ope.non.budg']}" />
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>			
+				 <p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['emprunt.encaiss.capital']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 	 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['prets.encaiss.capital']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['depots.caution']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 	 <p:column style="text-align: left;background-color: #F0E68C;" >
+					<h:outputLabel value="#{msgs['op.gere.compte.tiers']} :" />
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>			
+				 <p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 	 <p:column style="text-align: left;" >
+					<h:outputLabel value="- #{msgs['tva.encaiss']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 	 <p:column style="text-align: left;" >
+					<h:outputLabel value="- #{msgs['dispositif.interv.cmpt.tiers']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 	 <p:column style="text-align: left;" >
+					<h:outputLabel
+						value="- #{msgs['autre.encaiss.op.gere.cmpt.tiers']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+
+			<p:row>
+           <p:column style="text-align: right;font-weight: bold;background-color: #F0E68C;" >
+					<h:outputLabel value="#{msgs['a.total']}" />
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>			
+				 <p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	  <p:column style="text-align: left;font-weight: bold;background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['decaissements']}" />
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>			
+				 <p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	  <p:column style="text-align: left;font-weight: bold;font-style: italic;background-color: #F0E68C;" >
+					<h:outputLabel value="#{msgs['depns.lies.recet.globalis']}" />
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>			
+				 <p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>				 
+        </p:row>
+			<p:row>
+            <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['personnel']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	  <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['fonctionnement']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['intervention']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+            <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['invest']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 <p:column style="text-align: left;font-weight: bold;font-style: italic;background-color: #F0E68C;" >
+					<h:outputLabel value="#{msgs['depns.lie.recet.flech']}" />
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>			
+				 <p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	  <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['personnel']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>						 
+        </p:row>
+			<p:row>
+           	  <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['fonctionnement']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['intervention']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['invest']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+            <p:column style="text-align: left;font-weight: bold;font-style: italic;background-color: #F0E68C;" >
+					<h:outputLabel value="#{msgs['ope.non.budg']}" />
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>			
+				 <p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>				 
+        </p:row>
+			<p:row>
+            <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['emprunts.rembrsmnt.capital']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	  <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['pre.decaiss.capital']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	 <p:column style="text-align: left;" >
+					<h:outputLabel value="#{msgs['depots.caution']}" />
+				</p:column>
+					<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>			 
+        </p:row>
+			<p:row>
+           	  <p:column style="text-align: left;background-color: #F0E68C;" >
+					<h:outputLabel value="#{msgs['op.gere.compte.tiers']} :" />
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>			
+				 <p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>						 
+        </p:row>
+			<p:row>
+           	 <p:column style="text-align: left;" >
+					<h:outputLabel value="- #{msgs['tva.decaiss']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>						 
+        </p:row>
+			<p:row>
+           	 <p:column style="text-align: left;" >
+					<h:outputLabel value="- #{msgs['disp.interv.cmpt.tiers']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>						 
+        </p:row>
+			<p:row>
+           <p:column style="text-align: left;" >
+					<h:outputLabel
+						value="- #{msgs['autres.decaissement.op.cpt.tiers']}" />
+				</p:column>
+				<p:column>
+				</p:column>			
+				 <p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>
+				<p:column>
+				</p:column>						 
+        </p:row>
+			<p:row>
+           	 <p:column style="text-align: right;font-weight: bold;background-color: #F0E68C;" >
+					<h:outputLabel value="#{msgs['b.total']}" />
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>			
+				 <p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>						 
+        </p:row>
+			<p:row>
+           	 	 <p:column style="text-align: right;font-weight: bold;background-color: #D19275;" >
+					<h:outputLabel value="#{msgs['2.solde.mois.a.b']}" />
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>			
+				 <p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>
+				<p:column style="background-color: #D19275;" >
+				</p:column>				 
+        </p:row>
+			<p:row>
+           	  	 <p:column style="text-align: right;font-weight: bold;background-color: #F0E68C;" >
+					<h:outputLabel value="#{msgs['solde.cumul1.2']}" />
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>			
+				 <p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>
+				<p:column style="background-color: #F0E68C;" >
+				</p:column>				 
+        </p:row>
+   	
+		</p:panelGrid>
+		<br />
+		<div align="right">
+			<h:outputText value="#{msgs['variation.tresorerie']}"
+				style="text-align: center;" />
+		</div>
+		<br />
+	</p:panel>
+
+
+</ui:composition>

@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">		
+	<h:panelGroup id="paysPG">
+	<h:panelGrid columns="2">
+		<h:outputLabel value="#{msgs['code.pays']}" for="codePays"
+			styleClass="espace_entre_label_value" />
+		<p:selectOneMenu id="codePays"
+			styleClass="ReadOnlyText" value="#{agentCptBean.codePays}">
+			<f:selectItem itemValue="" itemLabel=""/>
+			<f:selectItems value="#{agentCptBean.paysList}"
+				var="pays" itemLabel="#{pays}" itemValue="#{pays}" >
+			</f:selectItems>
+	</p:selectOneMenu>
+	</h:panelGrid>
+	</h:panelGroup>
+	<h:panelGroup id="codeBqPG">
+	<h:panelGrid columns="2">
+		<h:outputLabel value="#{msgs['code.banque.absorbe']}" for="codeBq"
+			styleClass="espace_entre_label_value" />
+		<p:inputText id="codeBq" value="#{agentCptBean.codeBanque}" size="5" maxlength="5"/>
+		</h:panelGrid>
+	</h:panelGroup>
+	<h:panelGroup id="dateDiffusionPG">
+	<h:panelGrid columns="2">
+		<h:outputLabel value="#{msgs['date.de.fin.diffusion']}" for="dateDiffusion"
+			styleClass="espace_entre_label_value" />
+		<p:calendar id="dateDiffusion" pattern="dd/MM/yyyy" navigator="true"
+			value="#{agentCptBean.dateFinDiffusion}" size="10" showOn="button">						
+		</p:calendar>
+		<p:message for="dateDiffusion" styleClass="error" />
+		</h:panelGrid>
+	</h:panelGroup>	
+	<h:panelGroup id="etatIbansPG">
+	<h:panelGrid columns="2">
+		<h:selectOneRadio id="etatIbans"
+			value="#{agentCptBean.etatIban}" styleClass="boutonRadio">
+			<f:selectItem id="ouvert"
+				itemLabel="#{msgs['avec.ibans.ouverts']}" itemValue="ouvert" />
+			<f:selectItem id="tous"
+				itemLabel="#{msgs['tous']}" itemValue="tous" />
+		</h:selectOneRadio>	
+		</h:panelGrid>
+	</h:panelGroup>	
+</ui:composition>
+
+
+
+
+
+

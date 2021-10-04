@@ -1,0 +1,144 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+
+	<ui:define name="pageTitle">#{msgs['menu.editions']}</ui:define>
+	<ui:define name="entetePage">
+	<ui:include src="./common/entete_chrgmnt_br.xhtml"></ui:include>
+	</ui:define>
+		<ui:define name="searchPage">
+			
+
+	<ui:include src="/pages/budgetPluri/br/common/search.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="searchAction">	
+		
+		<p:splitButton title=" " id="importBtn"
+					value="#{msgs['cpwin.btn.Importer']}"			>
+			<p:menuitem value="#{msgs['import.btn.recuperer']}" ajax="false">
+			 <p:fileDownload value="#{editionBean.importEditionBiBr}" />
+			</p:menuitem>
+			<p:separator />
+			<p:menuitem value="#{msgs['fichier']}"
+				actionListener="#{editionBean.importerBR}"  
+					update="globalMessage,:enteteForm, :detailsForm:budgetPanel" 
+				 disabled="#{(!editionBean.requiredDataDone)||(!editionBean.permitted)}" >
+
+			</p:menuitem>
+			<ui:param name="statusRendered" value="true" />
+		</p:splitButton>
+	</ui:define>
+	<ui:define name="enteteAction">
+	
+		
+			
+		
+
+		
+		
+		
+	</ui:define>
+	
+
+	<ui:define name="details">
+
+		
+		<p:panel id="budgetPanel" style="width:100%;">
+		
+			<div align="center" style="width: 100%;">
+				
+				
+				
+				<h:panelGroup>
+					
+					<p:commandButton title=" " value="#{msgs['budget.btn.export']}" 
+					rendered="#{editionBean.editionBi!=null}" immediate="true"
+
+				ajax="false" >
+						<p:fileDownload value="#{editionBean.xlsEditionBi}" />	
+						</p:commandButton>
+						
+				
+
+					<p:commandButton immediate="true"  disabled="#{(editionBean.editionBi.loaded)}"
+						rendered="#{editionBean.editionBi!=null}" 
+						update="globalMessage,:detailsForm:budgetPanel" 
+						actionListener="#{editionBean.saveImportedBR}"
+						value="#{msgs['btn.enregistrer']}" title=" " >
+					</p:commandButton>
+					
+						
+						
+				</h:panelGroup>
+				<br />
+			</div>
+	<h:panelGroup   id="editionBiPG" >
+		<p:tabView id="ongletsEditionBi" style="width:100%;" rendered="#{editionBean.dataVisible}"
+			cache="false" >
+			
+			 <p:ajax event="tabChange" listener="#{editionBean.onEditionTabChange}" update=":detailsForm:editionBiPG" />
+        	
+			<p:tab id="tab2" title="#{msgs['tab2']}" rendered="#{editionBean.importDataVisible}" >
+					<ui:include src="/pages/editions/onglets/tab2.xhtml" />
+				</p:tab>	
+					<p:tab id="tab3" title="#{msgs['dep.par.dest']}" rendered="#{editionBean.importDataVisible}and false" >
+					<ui:include src="/pages/editions/onglets/tab3.xhtml" />
+				</p:tab>	
+					<p:tab id="tab4" title="#{msgs['tab4.equi.financier']}" rendered="#{editionBean.importDataVisible}" >
+					<ui:include src="/pages/editions/onglets/tab4.xhtml" />
+				</p:tab>		
+				<p:tab id="tab5" title="#{msgs['tab5.compte.tiers']}" rendered="#{editionBean.importDataVisible}and false" >
+					<ui:include src="/pages/editions/onglets/tab5.xhtml" />
+				</p:tab>		
+			<p:tab id="tab6" title="#{msgs['cr']}" rendered="#{editionBean.importDataVisible}"  >
+					<ui:include src="/pages/editions/onglets/tab6.xhtml" />
+				</p:tab>
+				<p:tab id="tab7" title="#{msgs['tab.tresorerie']}"  rendered="#{editionBean.importDataVisible}and false" >
+					<ui:include src="/pages/editions/onglets/tab7.xhtml" />
+				</p:tab>
+					<p:tab id="tab8" title="#{msgs['tab8']}"  rendered="#{editionBean.importDataVisible}and false" >
+					<ui:include src="/pages/editions/onglets/tab8.xhtml" />
+				</p:tab>
+				<p:tab id="tab" title="#{msgs['operation.pluri.ann']}"  rendered="#{editionBean.importDataVisible}and false" >
+					<ui:include src="/pages/editions/onglets/tab.xhtml" />
+				</p:tab>
+				<p:tab id="tab10" title="#{msgs['tab10.synthese']}"
+						rendered="#{editionBean.importDataVisible}and false">
+						<ui:include src="/pages/editions/onglets/tab10.xhtml" />
+				</p:tab>
+			     <p:tab id="tabErreurs" rendered="#{editionBean.errorReportVisible}"
+						title="#{msgs['budget.data.error.tab']} #{editionBean.erreursCount}">
+
+						<ui:include src="./onglets/rapport_erreurs.xhtml" />
+
+					</p:tab>
+
+
+
+
+				</p:tabView>
+	</h:panelGroup>
+	
+
+<div align="left">
+			<h:outputText value="(*) #{msgs['pouvoir.valider.edition']}" 	rendered="#{editionBean.editionBi!=null}"
+				styleClass="indication1" style="text-align: left;color: #2F4F4F;" />
+		</div>
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+		
+	</ui:define>
+</ui:composition>

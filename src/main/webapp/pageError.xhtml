@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<f:view id="errorView" contentType="text/html" >
+	<h:head>
+		
+	</h:head>	
+		<h:body  >
+		<div style="margin-left: auto; margin-right: auto;	text-align: center; ">
+	
+		<h:form id="aaa">
+		
+			<p:panel  id="titreglobal" >
+				<br/>
+				<p:panel style="text-align: left; color:red;"  id="messageException"  header="#{msgs['pageError.message']}">
+				<div style="color:red; text-align: left;">
+					<h:outputText value="#{errorBean.errorMessage}" />
+					</div>
+				</p:panel>
+				<br />
+				<br />
+				<p:panel style="text-align: left;" id="detailException" header="#{msgs['pageError.details']}">				
+				<div style="color:red; text-align: left;">
+					<h:outputText value="#{errorBean.errorTrace}" />
+				</div>	
+				</p:panel>
+				<br />
+				<br />
+			</p:panel>
+		
+			<br />
+		</h:form>
+			</div>
+		</h:body>
+	</f:view>
+</ui:composition>

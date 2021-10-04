@@ -1,0 +1,136 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+	
+		
+		<p:panelGrid style="width:100%; vertical-align:top;">			
+		 		 <p:row style="text-align: center;">
+            <p:column colspan="5">
+					<h:outputText value="#{msgs['nature.avantages']}" />
+				</p:column>				
+        </p:row>
+ <p:row style="text-align: center;">
+ <p:column>
+					<h:outputText value="#{msgs['nourriture']}" />
+				</p:column>	
+            <p:column>
+					<h:outputText value="#{msgs['logement']}" />
+				</p:column>
+				 <p:column>
+					<h:outputText value="#{msgs['voiture']}" />
+				</p:column>	
+				 <p:column>
+					<h:outputText value="#{msgs['autre']}" />
+				</p:column>
+					 <p:column>
+					<h:outputText value="#{msgs['outils.ntic']}" />
+				</p:column>	
+										
+        </p:row>
+ <p:row style="text-align: center;">
+            <p:column>
+					<h:outputText value="#{dasBean.selectedHonoraire.nourriture}">
+					</h:outputText>
+				</p:column>
+				  <p:column>
+					<h:outputText value="#{dasBean.selectedHonoraire.logement}">
+					</h:outputText>
+				</p:column>
+				 <p:column>
+					<h:outputText value="#{dasBean.selectedHonoraire.voiture}">
+					</h:outputText>
+				</p:column>	
+				 <p:column>
+					<h:outputText value="#{dasBean.selectedHonoraire.autres}">
+					</h:outputText>
+				</p:column>	
+				 <p:column>
+					<h:outputText value="#{dasBean.selectedHonoraire.outilsNTIC}">
+					</h:outputText>
+				</p:column>					
+        </p:row>
+		</p:panelGrid>
+		<p:panelGrid style="width:100%; vertical-align:top;">			
+		 		 <p:row style="text-align: center;">
+            <p:column colspan="3">
+					<h:outputText value="#{msgs['modalites.prise.charge']}" />
+				</p:column>				
+        </p:row>
+		 <p:row style="text-align: center;">
+            <p:column>
+					<h:outputText value="#{msgs['allocat.forfai']}" />
+				</p:column>
+				 <p:column>
+					<h:outputText value="#{msgs['remboursements']}" />
+				</p:column>	
+				 <p:column>
+					<h:outputText value="#{msgs['prise.charge.employeur']}" />
+				</p:column>					
+        </p:row>
+ <p:row style="text-align: center;">
+            <p:column>
+					<h:outputText value="#{dasBean.selectedHonoraire.allocForfaitaire}">
+					</h:outputText>
+				</p:column>
+				  <p:column>
+					<h:outputText value="#{dasBean.selectedHonoraire.remboursements}">
+					</h:outputText>
+				</p:column>
+				 <p:column>
+					<h:outputText
+						value="#{dasBean.selectedHonoraire.priseEnChargeDirecteEmployeur}">
+					</h:outputText>
+				</p:column>					
+        </p:row>
+		</p:panelGrid>
+		<p:panelGrid style="width:100%; vertical-align:top;">			
+		 		 <p:row style="text-align: center;">
+            <p:column colspan="2">
+					<h:outputText value="#{msgs['taux.retenue.source']}" />
+				</p:column>				
+        </p:row>
+		 <p:row style="text-align: center;">
+            <p:column>
+					<h:outputText value="#{msgs['taux.reduit']}" />
+				</p:column>
+				 <p:column>
+					<h:outputText value="#{msgs['dispense']}" />
+				</p:column>					
+        </p:row>
+ <p:row style="text-align: center;">
+            <p:column>
+					<h:outputText value="#{dasBean.selectedHonoraire.tauxReduit}">
+					</h:outputText>
+				</p:column>
+				<h:outputText value="#{dasBean.selectedHonoraire.dispense}">
+				</h:outputText>
+				 <p:column>
+					<h:outputText value="#{dasBean.selectedHonoraire.dispense}">
+					</h:outputText>
+				</p:column>					
+        </p:row>
+		</p:panelGrid>
+		<p:panelGrid style="width:100%; vertical-align:top;">			
+		 		 <p:row style="text-align: center;">
+            <p:column colspan="1">
+					<h:outputText value="#{msgs['tva.nette.droits.auteur']}" />
+				</p:column>				
+        </p:row>
+ <p:row style="text-align: center;">
+            <p:column colspan="1">
+					<h:outputText
+						value="#{dasBean.selectedHonoraire.tvaNetteDroitsAuteur}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+
+					</h:outputText>
+				</p:column>				
+        </p:row>
+		</p:panelGrid>
+
+</ui:composition>

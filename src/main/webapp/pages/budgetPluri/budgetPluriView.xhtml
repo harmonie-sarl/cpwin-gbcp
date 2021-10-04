@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+     
+    <h:head>
+        <title>#{msgs['datatable.buget.pluri.annuel.ventilation']}</title>
+                <style type="text/css">
+            .ui-widget {
+                font-size: 90%;
+            }
+            .colDataTable {
+	width: 15%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+}
+        </style>
+    </h:head>
+     
+    <h:body>
+        <h:form id="form">
+	<p:messages id="montantAeCompar_msg" showDetail="true"  autoUpdate="true" styleClass="error" globalOnly="true"  />
+	
+	<p:panel id="Panel1"  style="width:100%;" >
+	
+	<h:panelGrid id="budgetPanel1" columns="6" style="width:100%; vertical-align:top;align: left;" columnClasses="colDataTable" >
+			<h:panelGroup>
+			<h:outputLabel styleClass="espace_entre_label_value" style="font-weight:bold"  value="#{msgs['budget.ExerciceAE']}"/>
+			<h:outputText value=" *"  styleClass="required"></h:outputText>
+			</h:panelGroup>
+			
+				<h:outputText value="#{bpBean.budget.exercice}" size="7" />	
+			<h:panelGroup>	
+				<h:outputLabel styleClass="espace_entre_label_value" style="font-weight:bold"  value="#{msgs['budget.TotalAE']}"/>
+				
+			</h:panelGroup>
+			
+			<h:outputText value="#{bpBean.budget.montantAE}" size="7" >	
+			<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>	
+				
+			<h:panelGroup >
+				<h:outputLabel id="resteAv" style="font-weight:bold" styleClass="espace_entre_label_value"  value="#{msgs['budget.resteAV']}" rendered="false"/>
+			
+			</h:panelGroup>
+			
+			<h:outputText  value="#{bpBean.budget.resteAV}" size="7" rendered="false">
+			<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+					</h:panelGrid>
+					<br />
+
+   <h:panelGrid   columns="3" style="width:100%; vertical-align:top;align: left;" columnClasses="colDataTable">
+  
+		<h:outputLabel style="font-weight:bold" value="#{msgs['montant.ae']}" 
+				styleClass="espace_entre_label_value" />
+				<h:panelGroup>
+		<h:outputText id="montantAe" value="#{bpBean.envelopBudg.montantAE}"  size="7"   >
+          	
+			<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+		
+		</h:outputText>
+	
+		
+		</h:panelGroup>
+		 </h:panelGrid>
+      <br />
+	
+	<h:panelGroup  >
+	<h:panelGrid style="width:100%; vertical-align:top;align: left;" columns="4" columnClasses="colDataTable">
+		 <h:outputText value="#{msgs['enveloppe.budgetaire']}" style="font-weight:bold" /> 
+		 <p:selectOneMenu id="envBudgList" effect="fade" var="groupDN" styleClass="ReadOnlyText"  converter="groupDestNat.converter" panelStyle="width:360px"
+				filter="true" filterMatchMode="startsWith" value="#{bpBean.envelopBudg.groupDestNat}" style="width:300px" disabled="#{!bpBean.editableBI}" >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.groupDestList}" var="groupDestNat"
+					itemLabel="#{groupDestNat.entity1.codeAndLibelle}-#{groupDestNat.entity2.codeAndLibelle}"  itemValue="#{groupDestNat}">
+				</f:selectItems>
+				<p:column style="width:10%">
+                                  <h:outputText value="#{groupDN.entity1.codeAndLibelle}" />
+                                    </p:column>
+                                  <p:column>
+                                   <h:outputText value="#{groupDN.entity2.codeAndLibelle}" />
+                                          </p:column>
+			<p:ajax process="@this"  listener="#{bpBean.onEnvelopItemChange}"></p:ajax>	 
+			</p:selectOneMenu>
+			 <h:outputText  value="#{msgs['programme']}" style="font-weight:bold"  />
+			  <p:selectOneMenu id="programList" effect="fade" var="prog" styleClass="ReadOnlyText" converter="listProgramConverter" style="width:300px;"
+				panelStyle="width:360px" filter="true" filterMatchMode="startsWith"	value="#{bpBean.envelopBudg.progSE}"  disabled="#{!bpBean.editableBI}">
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{loaderBean.listPrograme}" var="program"
+					itemLabel="#{program.codeAndLibelle}" itemValue="#{program}">
+				</f:selectItems>
+				<p:column style="width:10%">
+                                  <h:outputText value="#{prog.code}" />
+                                    </p:column>
+                                  <p:column>
+                                   <h:outputText value="#{prog.designation}" />
+                                          </p:column>
+				<p:ajax process="@this"  listener="#{bpBean.onEnvelopItemChange}"></p:ajax>	 
+			</p:selectOneMenu>
+		</h:panelGrid>
+		</h:panelGroup>
+		
+		<h:panelGrid id="ongletsVentilation"
+		style="width:100%;vertical-align:top;">
+			<p:tabView id="ongletCreditPayInfo" style="width:100%;" cache="false"
+				activeIndex="0">
+				<p:tab id="CreditPay_tab"
+				title="#{msgs['budget.pluri.credit']}">
+				
+			<br />
+			<p:commandButton title="#{msgs['btn.add']}" id="add_credit_btn" icon="fa fa-plus" update="@this,tb_cp" 
+			actionListener="#{bpBean.addCreditPaiement}"  rendered="#{bpBean.editableBI}" disabled="#{!bpBean.addCpAuthorized}"	>
+				
+				</p:commandButton>	<br /><br />
+			<p:dataTable id="tb_cp" style="width:100%; text-align: center;"  	
+			 paginator="true" editable="true" widgetVar="cellCredit" 	emptyMessage="#{msgs['datatable.empty']}"
+					rows="10" value="#{bpBean.envelopBudg.cpList}" var="cp"> 
+					 <p:ajax event="rowEditInit" listener="#{bpBean.onCpEditInit}"  />
+                     <p:ajax event="rowEdit" listener="#{bpBean.onCpEdit}" update="form:ongletCreditPayInfo:add_credit_btn" />
+
+
+            <p:column  style="width:10px;" rendered="#{bpBean.editableBI}" >
+             <p:rowEditor />   
+              </p:column>
+			<p:column >
+			<f:facet name="header">
+							<h:outputText value="#{msgs['exercice.co']}" />
+						</f:facet>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{cp.exerciceCP}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText value="#{cp.exerciceCP}" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+			<p:column id="montantCP" >
+			<f:facet name="header">
+							<h:outputText value="#{msgs['budget.montant.cp']}" />
+						</f:facet>
+			 <p:cellEditor>
+					<f:facet name="output"><h:outputText value="#{cp.montant}" >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+					</f:facet>
+					 <f:facet name="input"><p:inputNumber id="montantInput" value="#{cp.montant}" >	
+					 </p:inputNumber>
+					
+					 </f:facet>
+					</p:cellEditor>
+			</p:column>
+			
+			</p:dataTable>
+			</p:tab>
+			</p:tabView>
+			</h:panelGrid>
+			<br/>
+			
+		<h:panelGroup>
+		<div align="center" style="width: 100%;">
+        	 <p:commandButton value="#{msgs['btn.valider']}" rendered="#{bpBean.editableBI}" process="@this"   actionListener="#{bpBean.validateEnvelop}" update=":form:budgetPanel1,montantAeCompar_msg"> 
+        	 
+        	 </p:commandButton>	               	                     		   		 
+	        <p:commandButton value="#{msgs['btn.fermer']}" immediate="true"   actionListener="#{bpBean.closeEnvelopDialog}">
+	        </p:commandButton> 
+	        </div>
+	        </h:panelGroup>
+			</p:panel>
+			
+ </h:form>
+    </h:body>
+     
+</html>

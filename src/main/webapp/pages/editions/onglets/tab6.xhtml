@@ -1,0 +1,698 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+.col11 {
+	width: 10%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col21 {
+	width: 90%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+</style>
+	<p:panel style="width:100%;" id="tab6Panel">
+		<f:facet name="header">
+			<h:outputText value="#{msgs['tableau6']}"
+				style="font-weight: bold; text-align: center;" />
+		</f:facet>
+
+		<div align="center">
+			<h:outputText value="#{msgs['menu.situation.patrim']}"
+				style="font-weight: bold; text-align: center;color:#008000;" />	
+		</div>
+		
+
+
+
+
+
+		<p:panelGrid style="width:100%; vertical-align:top;">	
+		 <p:row>
+            <p:column colspan="6" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #008000;color: #FFFFFF;">
+					<h:outputText value="#{msgs['pour.votre.org.delib']}"
+						style="font-weight: bold; text-align: center;" />
+				</p:column>
+				
+        </p:row>
+    <p:row>
+            <p:column colspan="6" rowspan="1"
+					style="font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['compte.result.prev']}"
+						style="font-weight: bold; text-align: center;color:#008000;" />
+				</p:column>
+				
+        </p:row>
+ <p:row>
+          	<p:column colspan="6" rowspan="1">
+
+				</p:column>
+				
+        </p:row>
+	 <p:row>
+            <p:column colspan="2" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['charges']}" />
+				</p:column>
+				<p:column  style="font-weight: bold; text-align: center;background-color: #D19275;">
+                  <h:outputLabel value="#{msgs['montans']}" />
+				</p:column>
+				 <p:column colspan="2" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['produits']}" />
+				</p:column>
+				<p:column 
+                  style="font-weight: bold; text-align: center;background-color: #D19275;">
+                  <h:outputLabel value="#{msgs['montans']}" />
+				</p:column>
+        </p:row>
+     <p:row>
+            <p:column colspan="2" rowspan="1" style="text-align: left;">
+	   <h:outputLabel value="#{msgs['personnel']}" />
+				</p:column>
+				 <p:column  style="text-align: center;">
+                      <h:outputText value="#{editionBean.editionBi.tab6.crp.depPersCp.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="2" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['subv.etat']}" />
+				</p:column>
+            
+				<p:column 
+             style="text-align: center;">
+					<h:outputText value="#{editionBean.editionBi.tab6.crp.subvEtat.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+ <p:row>
+            <p:column colspan="2" rowspan="1" style="text-align: right;">
+	   <h:outputLabel value="#{msgs['charge.pens.civile']}" />
+				</p:column>
+				 <p:column colspan="1" rowspan="1" style="text-align: center; ">
+				<p:inputNumber id="chrgPensCivil" rendered="#{!editionBean.demat}" inputStyle="text-align: center" size="20"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab6.crp.chargePensCivile.montant}">
+							<p:ajax process="@this" global="false" listener="#{editionBean.editionBi.refreshTotauxTab6}"
+								update=":detailsForm:ongletsEditionBi:tab6Panel"></p:ajax>
+						</p:inputNumber>
+						
+							<h:outputText rendered="#{editionBean.demat}" 
+					value="#{editionBean.editionBi.tab6.crp.chargePensCivile.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>					
+				</p:column>
+				<p:column colspan="2" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['fisc.affect']}" />
+				</p:column>
+
+				<p:column  style="text-align: center;">
+					<h:outputText value="#{editionBean.editionBi.tab6.crp.fiscAffect.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+
+<p:row>	 
+            <p:column colspan="2" rowspan="1" style="text-align: left;">
+	   <h:outputLabel value="#{msgs['autre.fonc.personnel']}" />
+				</p:column>
+				 <p:column 
+                  style="text-align: center">
+					<h:outputText value="#{editionBean.editionBi.tab6.crp.autreFoncPersonnel.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="2" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['autres.subv']}" />
+				</p:column>
+
+				<p:column 
+             style="text-align: center;">
+					<h:outputText value="#{editionBean.editionBi.tab6.crp.autresSubv.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+<p:row>
+            <p:column colspan="2" rowspan="1" style="text-align: left;">
+	   <h:outputLabel value="#{msgs['interv.cas.echant']}" />
+				</p:column>
+				 <p:column style="text-align: center;">
+             <h:outputText value="#{editionBean.editionBi.tab6.crp.intervCasEcheant.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="2" rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['autres.produit']}" />
+				</p:column>
+
+				<p:column 
+              style="text-align: center;">
+					<h:outputText value="#{(editionBean.editionBi.tab6.crp.autresProduit.montant)}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+
+
+
+<p:row>
+            <p:column colspan="2" rowspan="1" style="font-weight: bold;text-align: center;">
+	   <h:outputLabel value="#{msgs['tot.charges']}" />
+				</p:column>
+				 <p:column  style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab6.crp.totCharges.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="2" rowspan="1" style="font-weight: bold;text-align: center;">
+					<h:outputLabel value="#{msgs['tot.produits']}" />
+				</p:column>
+
+				<p:column  style="text-align: center;font-weight: bold;">
+             <h:outputText value="#{editionBean.editionBi.tab6.crp.totProduits.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+<p:row>
+            <p:column colspan="2" rowspan="1" style="font-weight: bold;text-align: left;background-color: #D19275;">
+	   <h:outputLabel value="#{msgs['result.prev1']}" />
+				</p:column>
+				 <p:column   style="text-align: center;font-weight: bold;">
+                  <h:outputText value="#{editionBean.editionBi.tab6.crp.resultPrevBenifce.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="2" rowspan="1" style="font-weight: bold;text-align: left;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['result.prev2']}" />
+				</p:column>
+
+				<p:column  style="font-weight: bold;text-align: center;">
+              <h:outputText value="#{editionBean.editionBi.tab6.crp.resultPrevPerte.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+
+<p:row>
+            <p:column colspan="2" rowspan="1" style="font-weight: bold;text-align: center;">
+	   <h:outputLabel value="#{msgs['tot.equilibre.prev']}" />
+				</p:column>
+				 <p:column colspan="1" rowspan="1" style="font-weight: bold;text-align: center;">
+                  <h:outputText value="#{editionBean.editionBi.tab6.crp.totalEquilibreCharge.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="2" rowspan="1" style="font-weight: bold;text-align: left;">
+					<h:outputLabel value="#{msgs['tot.equilibre.prev']}" />
+				</p:column>
+
+				<p:column  style="font-weight: bold;text-align: center;">
+              <h:outputText value="#{editionBean.editionBi.tab6.crp.totalEquilibreProduit.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+
+
+
+
+		</p:panelGrid>
+		<div align="left">
+			<h:outputText value=" #{msgs['note.situat.patri']}"
+				styleClass="indication1" style="text-align: left;color: #2F4F4F;" />
+		</div>
+		<br />
+		<br />
+        <p:panelGrid style="width:100%; vertical-align:top;">
+          <p:row>
+            <p:column colspan="8" 
+					style="font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['calcul.capacite.autofinanc']}" 
+						style="font-weight: bold; text-align: center;color:#008000;" />
+				</p:column>
+				
+        </p:row>
+         <p:row>
+              <p:column colspan="6" rowspan="1" style="font-weight: bold;text-align: center;">
+	   <h:outputLabel  />
+				</p:column>
+				 <p:column   style="text-align: center;background-color: #D19275;font-weight: bold;">
+					<h:outputText value="#{msgs['montans']}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+  <p:row>
+              <p:column colspan="6" rowspan="1" style="font-weight: bold;text-align: center;background-color: #D19275;">
+	   <h:outputLabel value="#{msgs['result.prev.exec.benifice']}"  />
+				</p:column>
+				 <p:column   style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab6.caf.resultPrevExerc.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+        <p:row>
+            <p:column colspan="6" rowspan="1" style="text-align: center;">
+	   <h:outputLabel value="#{msgs['doatation.amortiss.deprecia.provi']}" />
+				</p:column>
+				 <p:column   style="text-align: center;">
+					<p:inputNumber id="dotaAmort"  inputStyle="text-align: center" size="20"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab6.caf.data1.montant}">
+							<p:ajax process="@this" global="false" listener="#{editionBean.editionBi.refreshTotauxTab6}"
+								update=":detailsForm:ongletsEditionBi:tab6Panel"></p:ajax>
+						</p:inputNumber>
+				</p:column>
+				
+             </p:row>
+  <p:row>
+            <p:column colspan="6" rowspan="1" style="text-align: center;">
+	   <h:outputLabel value="#{msgs['reprise.amortiss.deprecia.provi']}" />
+				</p:column>
+				 <p:column   style="text-align: center;">
+					<p:inputNumber id="repriseAmort"  inputStyle="text-align: center" size="20"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab6.caf.data2.montant}">
+							<p:ajax process="@this" global="false" listener="#{editionBean.editionBi.refreshTotauxTab6}"
+								update=":detailsForm:ongletsEditionBi:tab6Panel"></p:ajax>
+						</p:inputNumber>
+				</p:column>
+				
+             </p:row>
+  <p:row>
+            <p:column colspan="6" rowspan="1" style="text-align: center;">
+	   <h:outputLabel value="#{msgs['valeur.nette.compatble']}" />
+				</p:column>
+				 <p:column   style="text-align: center;">
+					<p:inputNumber id="valeurCompta"  inputStyle="text-align: center" size="20"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab6.caf.data3.montant}">
+							<p:ajax process="@this" global="false" listener="#{editionBean.editionBi.refreshTotauxTab6}"
+								update=":detailsForm:ongletsEditionBi:tab6Panel"></p:ajax>
+						</p:inputNumber>
+				</p:column>
+				
+             </p:row>
+  <p:row>
+            <p:column colspan="6" rowspan="1" style="text-align: center;">
+	   <h:outputLabel value="#{msgs['produit.cession']}" />
+				</p:column>
+				 <p:column   style="text-align: center;">
+					<p:inputNumber id="produitCession"  inputStyle="text-align: center" size="20"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab6.caf.data4.montant}">
+							<p:ajax process="@this" global="false" listener="#{editionBean.editionBi.refreshTotauxTab6}"
+								update=":detailsForm:ongletsEditionBi:tab6Panel"></p:ajax>
+						</p:inputNumber>
+				</p:column>
+				
+             </p:row>
+<p:row>
+            <p:column colspan="6" rowspan="1" style="text-align: center;">
+	   <h:outputLabel value="#{msgs['quote.part.subv.invest.exerc']}" />
+				</p:column>
+				 <p:column   style="text-align: center;">
+					<p:inputNumber id="quotePart"  inputStyle="text-align: center" size="20"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab6.caf.data5.montant}">
+							<p:ajax process="@this" global="false" listener="#{editionBean.editionBi.refreshTotauxTab6}"
+								update=":detailsForm:ongletsEditionBi:tab6Panel"></p:ajax>
+						</p:inputNumber>
+				</p:column>
+				
+             </p:row>
+ <p:row>
+              <p:column colspan="6" rowspan="1" style="font-weight: bold;text-align: center;background-color: #D19275;">
+	   <h:outputLabel value="#{msgs['capacite.autofinanc.caf.iaf']}"  />
+				</p:column>
+				 <p:column   style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab6.caf.resultCafIaf.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+        
+        </p:panelGrid>
+		<br />
+		<br />
+  <p:panelGrid style="width:100%; vertical-align:top;">
+          <p:row>
+           <p:column colspan="6" rowspan="1"
+					style="font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['previs.evolution.situation.patri']}"
+						style="font-weight: bold; text-align: center;color:#008000;" />
+				</p:column>
+				
+        </p:row>
+        <p:row>
+            <p:column colspan="2" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['emplois']}" />
+				</p:column>
+				<p:column  style="font-weight: bold; text-align: center;background-color: #D19275;">
+                  <h:outputLabel value="#{msgs['montans']}" />
+				</p:column>
+				 <p:column colspan="2" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['ressources']}" />
+				</p:column>
+				<p:column 
+                  style="font-weight: bold; text-align: center;background-color: #D19275;">
+                  <h:outputLabel value="#{msgs['montans']}" />
+				</p:column>
+        </p:row>
+         <p:row>
+            <p:column colspan="2" rowspan="1"
+					style="text-align: center;">
+					<h:outputLabel value="#{msgs['Iinsuffisance.autofinanc']}" />
+				</p:column>
+				<p:column  style=" text-align: center;font-weight: bold;">
+                  <h:outputText value="#{editionBean.editionBi.tab6.tfp.insufAutofinanc.montant}" >
+                  	<f:convertNumber type="currency" currencySymbol=""/>
+                  	</h:outputText>
+				</p:column>
+				 <p:column colspan="2" rowspan="1"
+					style="text-align: center;">
+					<h:outputLabel value="#{msgs['capacite.autofinanc']}" />
+				</p:column>
+				<p:column 
+                  style=" text-align: center;font-weight: bold;">
+                  <h:outputLabel value="#{editionBean.editionBi.tab6.tfp.capaciteAutofinanc.montant}" >
+                  	<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+                  	</h:outputLabel>
+				</p:column>
+        </p:row>
+   <p:row>
+            <p:column colspan="2" rowspan="3"
+					style="text-align: center;">
+					<h:outputLabel value="#{msgs['investissements']}" />
+				</p:column>
+				<p:column rowspan="3"
+					style=" text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab6.tfp.depInvestCp.montant}">
+						<f:convertNumber type="currency" currencySymbol="" />
+					</h:outputText>
+				</p:column>
+				 <p:column colspan="2" 
+					style="text-align: center;">
+					<h:outputLabel value="#{msgs['financ.actif.etat']}" />
+				</p:column>
+				<p:column 
+                  style="font-weight: bold; text-align: center;">
+                  <p:inputNumber id="finacActifEtat"  inputStyle="text-align: center" size="20"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab6.tfp.financActifEtat.montant}">
+							<p:ajax process="@this" global="false" listener="#{editionBean.editionBi.refreshTotauxTab6}"
+								update=":detailsForm:ongletsEditionBi:tab6Panel"></p:ajax>
+						</p:inputNumber>
+				</p:column>
+        </p:row>
+       <p:row>
+            <p:column colspan="2"
+					style="text-align: center;">
+					<h:outputLabel value="#{msgs['financement.actif.tiers.autre']}" />
+				</p:column>
+				<p:column colspan="2"  style="font-weight: bold; text-align: center;">
+                   <p:inputNumber id="finacActifAutre"  inputStyle="text-align: center" size="20"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab6.tfp.financActifTiersAutre.montant}">
+							<p:ajax process="@this" global="false" listener="#{editionBean.editionBi.refreshTotauxTab6}"
+								update=":detailsForm:ongletsEditionBi:tab6Panel"></p:ajax>
+						</p:inputNumber>
+				</p:column>
+        </p:row>
+       
+         <p:row>
+            <p:column colspan="2"
+					style="text-align: center;">
+					<h:outputLabel value="#{msgs['autres.ressource']}" />
+				</p:column>
+				<p:column colspan="2"  style="font-weight: bold; text-align: center;">
+                   <p:inputNumber id="autreRessource"  inputStyle="text-align: center" size="20"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab6.tfp.autreRessource.montant}">
+							<p:ajax process="@this" global="false" listener="#{editionBean.editionBi.refreshTotauxTab6}"
+								update=":detailsForm:ongletsEditionBi:tab6Panel"></p:ajax>
+						</p:inputNumber>
+				</p:column>
+        </p:row>
+         <p:row>
+            <p:column colspan="2" rowspan="1"
+					style="text-align: center;">
+					<h:outputLabel value="#{msgs['rembours.cautions']}" />
+				</p:column>
+				<p:column  style=" text-align: center;font-weight: bold;">                       
+						<p:inputNumber id="rmbrsCaut" rendered="#{!editionBean.demat}" inputStyle="text-align: center" size="20"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab6.tfp.rembCautions.montant}">
+								<p:ajax process="@this" global="false"  listener="#{editionBean.editionBi.refreshTotauxTab6}"
+								update=":detailsForm:ongletsEditionBi:tab6Panel"></p:ajax>
+						</p:inputNumber>
+						<h:outputText rendered="#{editionBean.demat}" 
+					value="#{editionBean.editionBi.tab6.tfp.rembCautions.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>							
+				</p:column>
+				 <p:column colspan="2" rowspan="1"
+					style="text-align: center;">
+					<h:outputLabel value="#{msgs['cautionnement.recu']}" />
+				</p:column>
+				<p:column 
+                  style=" text-align: center;font-weight: bold;">              
+						<p:inputNumber id="cautRecu" rendered="#{!editionBean.demat}" inputStyle="text-align: center" size="20"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab6.tfp.cautionRecu.montant}">
+						<p:ajax process="@this" global="false"  listener="#{editionBean.editionBi.refreshTotauxTab6}"
+								update=":detailsForm:ongletsEditionBi:tab6Panel"></p:ajax>
+						</p:inputNumber>	
+						
+						
+						<h:outputText rendered="#{editionBean.demat}" 
+					value="#{editionBean.editionBi.tab6.tfp.cautionRecu.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>					
+				</p:column>
+        </p:row>
+  <p:row>
+            <p:column colspan="2" rowspan="1"
+					style="text-align: center;">
+					<h:outputLabel value="#{msgs['rembours.dette.financ']}" />
+				</p:column>
+				<p:column  style=" text-align: center;font-weight: bold;">                
+						<p:inputNumber id="rembDetFinanc" rendered="#{!editionBean.demat}" inputStyle="text-align: center" size="20"
+							 onfocus="select();" value="#{editionBean.editionBi.tab6.tfp.rembDettes.montant}">
+							<p:ajax process="@this" global="false"  listener="#{editionBean.editionBi.refreshTotauxTab6}"
+								update=":detailsForm:ongletsEditionBi:tab6Panel"></p:ajax>
+						</p:inputNumber>	
+						
+							<h:outputText rendered="#{editionBean.demat}" 
+					value="#{editionBean.editionBi.tab6.tfp.rembDettes.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>						
+				</p:column>
+				 <p:column colspan="2" rowspan="1"
+					style="text-align: center;">
+					<h:outputLabel value="#{msgs['augmentation.dette.financ']}" />
+				</p:column>
+				<p:column 
+                  style=" text-align: center;font-weight: bold;">                  
+						<p:inputNumber id="augmDetFinanc" rendered="#{!editionBean.demat}" inputStyle="text-align: center" size="20"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab6.tfp.augDettes.montant}">
+						<p:ajax process="@this" global="false"  listener="#{editionBean.editionBi.refreshTotauxTab6}"
+								update=":detailsForm:ongletsEditionBi:tab6Panel"></p:ajax>
+						</p:inputNumber>	
+						
+							<h:outputText rendered="#{editionBean.demat}" 
+				 value="#{editionBean.editionBi.tab6.tfp.augDettes.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>						
+				</p:column>
+        </p:row>
+ <p:row>
+            <p:column colspan="2" rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputLabel value="#{msgs['total.emploi']}" />
+				</p:column>
+				<p:column  style=" text-align: center;font-weight: bold;">
+                  <h:outputText value="#{editionBean.editionBi.tab6.tfp.totalEmploi.montant}" >
+                  	<f:convertNumber type="currency" currencySymbol=""/>
+                  	</h:outputText>
+				</p:column>
+				 <p:column colspan="2" rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputLabel value="#{msgs['total.ressource']}" />
+				</p:column>
+				<p:column 
+                  style=" text-align: center;font-weight: bold;">
+                  <h:outputLabel value="#{editionBean.editionBi.tab6.tfp.totalRessource.montant}" >
+                  	<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+                  	</h:outputLabel>
+				</p:column>
+        </p:row>
+ <p:row>
+            <p:column colspan="2" rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputLabel value="#{msgs['apport.fond.roulement']}" />
+				</p:column>
+				<p:column  style=" text-align: center;font-weight: bold;">
+                  <h:outputText value="#{editionBean.editionBi.tab6.tfp.apportFondRoulement.montant}" >
+                  	<f:convertNumber type="currency" currencySymbol=""/>
+                  	</h:outputText>
+				</p:column>
+				 <p:column colspan="2" rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputLabel value="#{msgs['prelevement.fond.roulement']}" />
+				</p:column>
+				<p:column 
+                  style=" text-align: center;font-weight: bold;">
+                  <h:outputLabel value="#{editionBean.editionBi.tab6.tfp.prelevFondRoulement.montant}" >
+                  	<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+                  	</h:outputLabel>
+				</p:column>
+        </p:row>
+   </p:panelGrid>
+   <br />
+   <br />
+  <p:panelGrid style="width:100%; vertical-align:top;"    rendered="#{!editionBean.demat}">
+          <p:row>
+           <p:column colspan="7" rowspan="1"
+					style="font-weight: bold; text-align: center;">
+					<h:outputText value="#{msgs['variation.niveau.besoin.fond.tresorie']}"
+						style="font-weight: bold; text-align: center;color:#008000;" />
+				</p:column>
+				
+        </p:row>
+		  <p:row>
+              <p:column colspan="6" rowspan="1" style="background-color: #D19275;text-align: center;">
+	   <h:outputLabel />
+				</p:column>
+				 <p:column   style="text-align: center;background-color: #D19275;font-weight: bold;">
+					<h:outputText value="#{msgs['montans']}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+  <p:row>
+              <p:column colspan="6" rowspan="1" style="text-align: left;">
+	   <h:outputLabel value="#{msgs['variation.fond.apport.prelevement']}" />
+				</p:column>
+				 <p:column   style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab6.vfr.variationFondRoul.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+ <p:row>
+              <p:column colspan="6" rowspan="1" style="text-align: left;">
+	   <h:outputLabel value="#{msgs['variation.besoin.fond.roulement']}" />
+				</p:column>
+				 <p:column   style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab6.vfr.variationBesoinFondRoul.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+ <p:row>
+              <p:column colspan="6" rowspan="1" style="text-align: left;">
+	   <h:outputLabel value="#{msgs['variation.tresorie']}" />
+				</p:column>
+				 <p:column   style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab6.vfr.variTresorie.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+<p:row>
+              <p:column colspan="6" rowspan="1" style="text-align: left;">
+	   <h:outputLabel value="#{msgs['niveau.fond.roul']}" />
+				</p:column>
+				 <p:column   style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab6.vfr.nivFondRoul.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+      <p:row>
+              <p:column colspan="6" rowspan="1" style="text-align: left;">
+	   <h:outputLabel value="#{msgs['niv.besoin.fond.roul']}" />
+				</p:column>
+				 <p:column   style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab6.vfr.nivBesoinFroul.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+ <p:row>
+              <p:column colspan="6" rowspan="1" style="text-align: left;">
+	   <h:outputLabel value="#{msgs['niv.treso']}" />
+				</p:column>
+				 <p:column   style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab6.vfr.nivTresorie.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				
+        </p:row>
+</p:panelGrid>
+<div align="left">
+			<h:outputText value=" #{msgs['mnt.issue.equil.finacier']}"
+				styleClass="indication1" style="text-align: left;color: #2F4F4F;" />
+		</div>
+	</p:panel>
+
+
+
+
+
+</ui:composition>

@@ -1,0 +1,162 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+	<ui:define name="pageTitle">#{msgs['datatable.buget.pluri.annuel.br']}</ui:define>
+	<ui:define name="entetePage">
+	<ui:include src="/pages/budgetPluri/br/common/entete_niveau_dest.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="searchPage">
+			
+	<ui:include src="/pages/budgetPluri/br/common/search.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="searchAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}" disabled="#{!bpBean.searchBrAutorised}"
+			update="globalMessage,:enteteForm,:detailsForm:budgetPanel" actionListener="#{bpBean.searchSaisieBr}">
+
+		</p:commandButton>
+	</ui:define>
+
+	<ui:define name="details">
+
+	
+		<p:panel id="budgetPanel" style="width:100%;">
+			<div align="center" style="width: 100%;">
+				<f:facet name="header">
+					
+				</f:facet>
+				<p:dataTable id="budget_dtt"
+					rendered="#{not empty bpBean.saisieBrList}" var="envelop"
+					style="width:100%; text-align: center;" rowIndexVar="envelopIndex"
+					emptyMessage="#{msgs['datatable.empty']}"
+					value="#{bpBean.saisieBrList}" paginator="true"
+					rows="10">
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['import.nature']}" />
+						</f:facet>
+
+
+						<p:commandLink actionListener="#{bpBean.chooseNatForVentilBrDest}"
+							rendered="#{!bpBean.selectedBudgModif.etatCpOuvert}" >
+							<h:outputText value="#{envelop.codeAndLibGroupNat}" />
+							<f:setPropertyActionListener target="#{bpBean.selectedBr}"
+								value="#{envelop}" />
+							<p:ajax event="dialogReturn" update="detailsForm:budgetPanel" />
+						</p:commandLink>
+
+
+						<h:outputText rendered="#{bpBean.selectedBudgModif.etatCpOuvert}"
+							value="#{envelop.codeAndLibGroupNat}" />
+
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['bi']}" /> 
+						</f:facet>
+						<h:outputText value="#{envelop.budgetInitial}">
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['br.precedent']}" /> 
+						</f:facet>
+						<h:outputText value="#{envelop.cumuleBrAvant}">
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['co.avant.br']}" />
+						</f:facet>
+						<h:outputText value="#{envelop.coAvant}">
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					
+					</p:column>
+				
+						<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['variation.br']}" />
+						</f:facet>
+								<h:panelGroup   rendered="#{bpBean.editableBR}" >
+							<p:inputNumber id="varaitionBR" size="20" 
+								value="#{envelop.varaitionBR}">
+								<p:ajax event="keyup" process="@this" global="false"
+									update="varaitionBR_msg"></p:ajax>
+								<p:ajax process="@this" global="false"
+									update="detailsForm:budget_dtt"></p:ajax>
+							</p:inputNumber>
+							<p:message id="varaitionBR_msg" showSummary="false" for="varaitionBR" />
+							
+						</h:panelGroup>
+						<h:outputText value="#{envelop.varaitionBR}" rendered="#{!bpBean.editableBR}" >
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+						
+						
+					
+					</p:column>
+					
+    		<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['co.apres.br']}" />
+						</f:facet>
+						<h:outputText value="#{envelop.coApresBR}">
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					
+					</p:column>
+				</p:dataTable>
+				<br />
+				
+	
+				<h:panelGroup id="creditdest_Btn" 	 >
+				
+				<p:commandButton  title=" " rendered="#{(not empty bpBean.saisieBrList)and((p:ifAnyGranted('ordo')))}" 
+						value="#{msgs['btn.enregistrer']}" actionListener="#{bpBean.saveCreditBR}" disabled="#{!bpBean.editableBR}"
+					update="globalMessage,:detailsForm,:enteteForm:budgModifList"
+						immediate="true" process="@this" >
+					</p:commandButton>
+					<p:commandButton  title=" " rendered="#{(not empty bpBean.saisieBrList)and((p:ifAnyGranted('ordo')))}" 
+						value="#{msgs['validation.ordo']}" actionListener="#{bpBean.validerOrdoBr}" disabled="#{!bpBean.validBudgModifOrdoAutorized}"
+						 update="globalMessage,:detailsForm,:enteteForm:budgModifList"
+						immediate="true" >
+					</p:commandButton>
+					<p:commandButton  title=" " rendered="#{(p:ifAnyGranted('AC'))and(not empty bpBean.saisieBrList)}" disabled="#{!bpBean.validBudgModifACAutorized}"
+						value="#{msgs['validation.ac']}" actionListener="#{bpBean.validerAcBr}"
+						 update="globalMessage,:detailsForm,:enteteForm:budgModifList"
+						immediate="true"  >
+					</p:commandButton>
+					<p:commandButton  title=" " rendered="#{(p:ifAnyGranted('AC'))and(not empty bpBean.saisieBrList)}" disabled="#{!bpBean.validBudgModifACAutorized}"
+						value="#{msgs['refus.ac']}" actionListener="#{bpBean.refuserAcBr}"
+						 update="globalMessage,:detailsForm,:enteteForm:budgModifList"
+						immediate="true"  >
+					</p:commandButton>
+				</h:panelGroup>
+			</div>
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+		
+	</ui:define>
+</ui:composition>

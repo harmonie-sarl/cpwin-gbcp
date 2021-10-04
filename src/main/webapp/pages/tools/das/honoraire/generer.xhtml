@@ -1,0 +1,91 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+	<ui:define name="lastPrefexedTitle">
+
+	</ui:define>
+	<ui:define name="entetePage">
+		<ui:include src="../common/entete_honoraire.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="enteteAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}"
+			id="generateBtn" update=":detailsForm:generatePanel" immediate="true"
+			actionListener="#{dasBean.search}" 
+			disabled="#{!dasBean.requiredDataDone}"			>
+
+		</p:commandButton>
+		<ui:param name="statusRendered" value="true" />
+	</ui:define>
+
+	<ui:define name="search">
+
+
+	</ui:define>
+
+
+	<ui:define name="details">
+
+
+		<p:panel id="generatePanel" style="width:100%;">
+		
+<div align="center">
+	<h:panelGrid columns="4" cellspacing="20" rendered="#{dasBean.honoraires!=null}">
+
+				<h:selectOneRadio id="selectModeRadio" styleClass="boutonRadio"
+					 value="#{dasBean.modeProd}"  >
+					<f:selectItem  itemLabel="#{msgs['test']}"
+						itemValue="false" />
+					<f:selectItem itemLabel="#{msgs['prod']}"
+						itemValue="true" />
+							<p:ajax process="@this" update="gerate_btn,exerciceTestPg"  global="false"></p:ajax>
+					
+				</h:selectOneRadio>
+				<h:panelGroup id="exerciceTestPg">
+
+	<h:outputText  rendered="#{!dasBean.modeProd}" itemLabel="#{msgs['exercice.test']}" styleClass="montantStyle">
+					</h:outputText>
+					<p:inputNumber size="11" thousandSeparator="" rendered="#{!dasBean.modeProd}"
+						value="#{dasBean.exerciceTest}" padControl="false " >
+						<p:ajax process="@this" event="keyup" update="gerate_btn" global="false"></p:ajax>
+					</p:inputNumber>
+
+				</h:panelGroup>
+
+				<p:commandButton immediate="true" title="" disabled="#{dasBean.genrateFileDisabled}"
+					value="#{msgs['btn.generer.export']}" id="gerate_btn"
+					update="globalMessage,:detailsForm:generatePanel" 
+					actionListener="#{dasBean.generateFile}">
+
+				</p:commandButton>
+				<p:commandButton id="exportFile" ajax="false" disabled="#{dasBean.dasStruct==null}"
+						title="#{msgs['btn.enregistrer']}" icon="downloadIcon">
+						<p:fileDownload value="#{dasBean.dasFile}" />
+					</p:commandButton>
+		
+	</h:panelGrid>
+			</div>
+			
+		<ui:include src="./onglets/honoraire_list.xhtml" />
+
+
+
+			
+
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+	
+				<h:outputLabel value="#{msgs['cpwin.exercice']}" 	 />
+				
+				<p:selectOneMenu  id="exercList"  styleClass="ReadOnlyText" value="#{searchBean.exercice}" >					 
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.exercicAeList}" var="exerc" 
+				itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax  listener="#{cfBean.onExerciceChange}"  process="@this" update="budgetCodeList,:detailsForm,:enteteForm" />
+				</p:selectOneMenu>
+	
+				<h:outputLabel value="#{msgs['budget.code']}"	 />
+				
+				<p:selectOneMenu id="budgetCodeList"  styleClass="ReadOnlyText" value="#{searchBean.codeBudget}" >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.listBudgets}" var="budg"
+				itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax  process="@this" update=":detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+			
+			<h:panelGrid  columns="2" >
+		<h:outputLabel value="#{msgs['menu.tresorerie']}"	style="display:block;width:120px" />
+		<h:selectBooleanCheckbox id="planTresEnabled"
+			value="#{cfBean.plTresEnabled}" >		
+				<p:ajax listener="#{cfBean.resetSuiviCF}"  process="@this" update=":detailsForm,:enteteForm" />		
+		</h:selectBooleanCheckbox>
+		</h:panelGrid>
+			<p:selectOneMenu id="periodeList" styleClass="ReadOnlyText" disabled="#{!cfBean.plTresEnabled}"
+				value="#{cfBean.periodeSuivi}">
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{cfBean.periodeSuiviList}" var="periode"
+					itemLabel="#{periode.libelle}" itemValue="#{periode.value}">
+				</f:selectItems>
+				<p:ajax listener="#{cfBean.resetSuiviCF}"  process="@this" update=":detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+
+
+	<h:outputText value="#{msgs['date.fin']}"></h:outputText>
+	<h:panelGroup>
+		<p:calendar id="dateFin" pattern="dd/MM/yyyy" navigator="true" locale="fr" mindate="01/01/#{searchBean.exercice}" maxdate="31/12/#{searchBean.exercice}"
+			disabled="#{cfBean.plTresEnabled}" value="#{cfBean.dateFin}" readonlyInput="true"
+			converterMessage="#{errorMsgs['date.format.invalide']}"
+			validator="validator.format.date">
+			<p:ajax event="dateSelect" listener="#{cfBean.resetSuiviCF}"  update=":detailsForm,:enteteForm" />
+		</p:calendar>
+		<p:message showSummary="false" for="dateFin" />
+	</h:panelGroup>
+
+</ui:composition>

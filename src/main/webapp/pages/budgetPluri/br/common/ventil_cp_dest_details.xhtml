@@ -1,0 +1,150 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+		<style type="text/css">
+
+
+
+.redStyle {
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+</style>
+	
+     
+  
+    
+		<div align="center" style="width: 100%;">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['credit.destination']}" />
+				</f:facet>
+				
+				<h:panelGrid columns="2" style="width:50%; ">
+					<h:outputLabel styleClass="espace_entre_label_value"
+						style="font-weight:bold" value="#{msgs['total.ventille']}" />
+					<h:outputText value="#{bpBean.variationBrAventiller}" size="7">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>				
+			
+				</h:panelGrid>
+				
+				
+					
+		
+		<br/>
+				<p:dataTable id="cpDest_dtt"
+					rendered="#{not empty bpBean.listBudgetCpDest}"
+					var="cpDest" style="width:100%; text-align: center;"
+					rowIndexVar="cpDestIndex" emptyMessage="#{msgs['datatable.empty']}"
+					value="#{bpBean.listBudgetCpDest}" paginator="true"
+					rows="10">
+
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['import.destination']}" />
+						</f:facet>
+
+						<h:outputText value="#{cpDest.codeAndLib}" />
+							<f:facet name="footer">
+                              <h:outputText value="#{msgs['total']}" />
+                       </f:facet>
+					</p:column>
+                   	<p:column style="width:7%;text-align: center;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['bi']}" /> 
+						</f:facet>
+						<h:outputText value="#{cpDest.bi}">
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					
+					</p:column>
+	
+					<p:column style="width:7%;text-align: center;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['br.precedent']}" /> 
+						</f:facet>
+						<h:outputText value="#{cpDest.totaleBrPrecedent}" >
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					
+					</p:column>
+					<p:column style="width:7%;text-align: center;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['nouveau.reste']}" />
+						</f:facet>
+		
+					
+					
+					
+									<h:panelGroup >
+								<h:outputText value="#{cpDest.reste}"
+									 rendered="#{cpDest.reste ge 0}" >
+									<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+								</h:outputText>
+								<h:outputText value="#{cpDest.reste}"
+									styleClass="redStyle" rendered="#{cpDest.reste lt 0}" >
+									<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+								</h:outputText>
+
+							</h:panelGroup>
+					</p:column>
+					<p:column style="width:7%;text-align: center;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['montant']}" />
+						</f:facet>
+						<h:panelGroup>
+							<p:inputNumber id="montant" rendered="#{bpBean.editableBR}"
+								size="19"
+								value="#{cpDest.budgetRec}">
+								<p:ajax event="keyup" process="@this" global="false"
+									update="detailsForm:creditdest_Btn,montant_msg"></p:ajax>
+								<p:ajax process="@this" global="false"
+									update="detailsForm:cpDest_dtt,detailsForm:creditdest_Btn"></p:ajax>
+							</p:inputNumber>
+							<p:message id="montant_msg" showSummary="false" for="montant" />
+							<h:outputText value="#{cpDest.budgetRec}" rendered="#{!bpBean.editableBR}">
+									<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+								</h:outputText>
+						</h:panelGroup>
+						<f:facet name="footer">
+						<h:panelGroup id="totalMntCpDest">
+								<h:outputText value="#{bpBean.totalMntCpDestBr}"
+									 rendered="#{!bpBean.depassTotalCpDestBr}" >
+									<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+								</h:outputText>
+								<h:outputText value="#{bpBean.totalMntCpDestBr}"
+									styleClass="redStyle" rendered="#{bpBean.depassTotalCpDestBr}" >
+									<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+								</h:outputText>
+
+							</h:panelGroup>
+							
+						</f:facet>
+
+					</p:column>
+					
+					
+						<p:column style="width:7%;">
+						<f:facet name="header">
+						</f:facet>
+						<p:commandButton title="#{msgs['ajuster']}" icon="fa fa-adjust"
+							disabled="#{(bpBean.mntCpDestBrEqual)||(!bpBean.editableBR)}"
+							actionListener="#{bpBean.ajusterVentCpDestBr}"
+							update="detailsForm:cpDest_dtt,detailsForm:creditdest_Btn">
+							<f:param name="cpDestIndex" value="#{cpDestIndex}" />
+						</p:commandButton>
+						<f:facet name="footer">
+						</f:facet>
+					</p:column>
+
+
+				</p:dataTable>
+				<br />
+				
+			</div>
+
+   </ui:composition>

@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	<style type="text/css">
+	
+	.noneStyle {
+	color: #000000;
+	background-color: none;
+      }
+
+.redStyle {
+	color: #FFFFFF;
+	background-color: #FF0000;
+    }
+   </style>
+		<div align="center">
+		
+		<h:panelGrid columns="2">
+			<p:commandButton immediate="true" title=""
+				value="#{msgs['btn.enregistrer']} (#{studentBean.updateableItemCount})" id="save_btn" disabled="#{!studentBean.saveAutorized}"
+				update=":detailsForm:importPanel,:enteteForm" 
+				actionListener="#{studentBean.executeSave}">
+			</p:commandButton>
+			<p:commandButton immediate="true" title="" 
+				value="#{msgs['bt.generer.mail.etudiant']}" id="mail_btn" disabled="#{!studentBean.notificationAutorized}"
+				update=":detailsForm:importPanel"
+				actionListener="#{studentBean.executeNotifications}">
+			</p:commandButton>
+		</h:panelGrid>
+	</div>
+	<br />
+	<p:dataTable id="imported_scolarite_dtt" scrollable="true"
+		scrollHeight="300" scrollRows="20" 
+		rendered="#{studentBean.etudiantList!=null}" var="std"
+		style="width:100%;text-align:center" rowIndexVar="creditIndex"
+		emptyMessage="#{msgs['datatable.empty']}"
+		value="#{studentBean.etudiantList}">
+		
+		
+		<p:column headerText="#{msgs['matricule']}"  style="text-align:center;width:5%" >
+			<h:outputText value="#{std.matricule}" />
+		</p:column>
+		<p:column headerText="#{msgs['nom']}"  style="text-align:center;width:5%" >
+			<h:outputText value="#{std.nom}" />
+		</p:column>
+		<p:column headerText="#{msgs['prenom']}"  style="text-align:center;width:5%" >
+			<h:outputText value="#{std.prenom}" />
+		</p:column>
+		<p:column headerText="#{msgs['adresse.mail']}" style="text-align:center;width:10%">
+			<h:outputText value="#{std.email}" >
+			
+			</h:outputText>
+			
+		</p:column>
+		<p:column headerText="#{msgs['icon.information']}" style="text-align:center;width:10%">
+			<h:outputText value="#{std.observation}" >
+			
+			</h:outputText>
+			
+		</p:column>
+		
+	
+	</p:dataTable>
+	
+	</ui:composition>

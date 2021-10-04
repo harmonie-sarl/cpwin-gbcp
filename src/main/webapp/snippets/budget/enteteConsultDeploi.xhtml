@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+			<h:panelGrid columns="2">
+		<h:outputLabel value="#{msgs['exercice.co']}"	 />
+				<h:panelGroup>
+					 <p:selectOneMenu  id="exercList"  styleClass="ReadOnlyText" value="#{searchBean.exerciceCp}" >
+					 
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.exercicCpList}" var="exerc" 
+				itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax  listener="#{bpBean.onExerciceChange}"  process="@this" update="budgetCodeList,:detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+				</h:panelGroup>	
+		
+		</h:panelGrid>
+				
+						<h:panelGrid columns="2">
+		
+				<h:outputLabel value="#{msgs['budget.code']}"	 />
+				<h:panelGroup>
+					 <p:selectOneMenu id="budgetCodeList"  styleClass="ReadOnlyText" value="#{searchBean.codeBudget}" >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.listBudgetsCp}" var="budg"
+				itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax listener="#{bpBean.reset}" process="@this" update="cpmodifList,:detailsForm,:enteteForm,globalMessage" />
+			</p:selectOneMenu>
+				</h:panelGroup>
+		
+		
+		</h:panelGrid>
+				
+					<h:panelGrid columns="2"  id="cpmodifList" > 
+					 <h:outputText value="#{msgs['liste.virements']}" style="display:block;width:160px" /> 
+		
+					
+		
+		<p:selectOneMenu  styleClass="ReadOnlyText"  effect="fade" style="display:block;width:320px"
+		  var="cpItem"  filter="true" filterMatchMode="startsWith"
+		 	panelStyle="width:400px"   
+		 	converter="cpModification.converter"
+			value="#{bpBean.selectedModifCP}"  >
+			<f:selectItem itemValue="" itemLabel="-----" />
+			<f:selectItems value="#{bpBean.cpModificationList}" var="cpModifItem"
+				itemLabel="#{cpModifItem.numero}-#{cpModifItem.objet}"
+				itemValue="#{cpModifItem}">
+			</f:selectItems>
+
+			<p:column style="width:5%" headerText="#{msgs['numero']}" >
+				<h:outputText value="#{cpItem.numero}" />
+			</p:column>
+<p:column style="width:5%" headerText="#{msgs['cpwin.objet']}">
+				<h:outputText value="#{cpItem.objet}"  />
+			</p:column>
+			<p:column style="width:5%" headerText="#{msgs['dateCrea']}">
+				<h:outputText value="#{cpItem.trace.dateCreationF}" />
+			</p:column>
+			<p:column style="width:5%" headerText="#{msgs['ordonnateur']}">
+				<h:outputText value="#{cpItem.trace.auteurCreation}" />
+			</p:column>
+			<p:ajax  process="@this" global="true"
+			immediate="true"
+				update=":detailsForm,globalMessage,:enteteForm:searchBtn" />
+		</p:selectOneMenu>
+				</h:panelGrid>
+	          
+	          
+			
+		</ui:composition>

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Tomcat context descriptor used for specifying a custom ClassLoader -->
+<!-- Useful for allowing web-app wide (as opposed to VM or container wide) class instrumentation -->
+<Context path="/budget" reloadable="false">
+	<!-- Tomcat 6.x or higher -->
+	
+	<Loader loaderClass="org.springframework.instrument.classloading.tomcat.TomcatInstrumentableClassLoader"/>
+	<Manager className= "org.apache.catalina.session.PersistentManager"
+	debug="0"	saveOnRestart="false"	maxActiveSessions="-1"
+	minIdleSwap="-1"	maxIdleSwap="-1"	maxIdleBackup="-1">
+	<Store className="org.apache.catalina.session.FileStore"/>
+	</Manager>
+	
+</Context>

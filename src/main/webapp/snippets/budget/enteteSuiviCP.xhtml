@@ -1,0 +1,213 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+		
+		<h:panelGroup>
+		<h:panelGrid columns="5" cellpadding="0" cellspacing="5"  columnClasses="entete_col1,entete_col2,entete_col1,entete_col2">
+		<h:panelGrid columns="2">
+			<h:outputLabel value="#{msgs['exercice.co']}"
+				style="display:block;width:100px" />
+			<h:outputText value=" *" styleClass="required"></h:outputText>
+		</h:panelGrid>
+		<h:panelGroup>
+					 <p:selectOneMenu  id="exercList"  
+					 valueChangeListener="#{searchBean.execrciceChangeListener}" styleClass="ReadOnlyText" value="#{searchBean.exercice}" >
+					 
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.exerciceSuiviCpList}" var="exerc" 
+				itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax    process="@this" listener="#{bpBean.onExerciceChange}" update="creditOuvertPG,globalMessage,budgetCodeList,directionList,libDirection,serviceList,libService,fongDestList,destList,libDestination,progrList,libProgram,natureGroupeList,natureList,libNature,:detailsForm" />
+			</p:selectOneMenu>
+				</h:panelGroup>
+		<p:spacer width="60" height="10" />
+		<h:panelGrid columns="2">
+			<h:outputLabel value="#{msgs['budget.code']}"
+				style="display:block;width:100px" />
+			<h:outputText value=" *" styleClass="required"></h:outputText>
+		</h:panelGrid>
+		<h:panelGroup>
+			<p:selectOneMenu id="budgetCodeList" styleClass="ReadOnlyText"
+				value="#{searchBean.codeBudget}"
+				valueChangeListener="#{searchBean.codeBudgetChangeListener}">
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{loaderBean.listBudgetsSuiviCp}" var="budg"
+					itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+
+
+				<p:ajax process="@this" 
+					update="creditOuvertPG,serviceList,libService,natureGroupeList,natureList,libNature,progrList,libProgram,destList,libDestination,fongDestList,directionList,libDirection,:detailsForm,globalMessage" />
+			</p:selectOneMenu>
+		</h:panelGroup>
+		<h:outputLabel value="#{msgs['suivicp.direction']}"	style="display:block;width:100px" />
+		<h:panelGroup>
+
+			<h:panelGrid columns="2">
+				<p:selectOneMenu id="directionList" styleClass="ReadOnlyText"  onfocus="select();"
+					style="width:80px;" editable="true"
+					value="#{searchBean.codeDirection}"
+					valueChangeListener="#{searchBean.codeDirectionChangeListener}">
+					<f:selectItem itemValue="" itemLabel="-----" />
+					<f:selectItems value="#{loaderBean.listDirectionSuiviCp}" var="dir"
+						itemLabel="#{dir.code}" itemValue="#{dir.code}">
+					</f:selectItems>
+					<p:ajax process="@this"
+						update="creditOuvertPG,libDirection,natureList,libNature,progrList,libProgram,destList,libDestination,serviceList,libService,:detailsForm,globalMessage" />
+				</p:selectOneMenu>
+				<p:inputText value="#{searchBean.libDirection}" id="libDirection" readonly="true"
+					style="display:block;width:200px" />
+			</h:panelGrid>
+
+
+
+		</h:panelGroup>
+				<p:spacer width="60" height="10" />
+				<h:outputLabel value="#{msgs['service']}"	style="display:block;width:100px" />
+		<h:panelGroup>
+		<h:panelGrid columns="2">
+					 <p:selectOneMenu id="serviceList"  styleClass="ReadOnlyText" style="width:80px;" onfocus="select();"
+					editable="true"  valueChangeListener="#{searchBean.codeServiceChangeListener}"
+					   value="#{searchBean.codeService}"  >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.listServiceSuiviCp}" var="serv"
+				itemLabel="#{serv.code}" itemValue="#{serv.code}">
+				</f:selectItems>
+					<p:ajax  process="@this"  update="libService,natureList,libNature,progrList,libProgram,destList,libDestination,:detailsForm,globalMessage" />
+			</p:selectOneMenu>
+				<p:inputText value="#{searchBean.libService}" id="libService" readonly="true"
+					style="display:block;width:250px" />
+			</h:panelGrid>
+				</h:panelGroup>
+				</h:panelGrid>
+		<h:panelGroup id="creditOuvertPG">
+			<h:panelGrid columns="5" cellpadding="0"
+				rendered="#{bpBean.creditOuvertEnabled}" cellspacing="5"
+				columnClasses="entete_col1,entete_col2,entete_col1,entete_col2">
+				<h:outputLabel value="#{msgs['credit.ouvert']}"
+					style="display:block;width:100px" />
+				<h:outputText value="#{bpBean.creditOuvert}">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+				<p:spacer width="60" height="10" />
+				<h:panelGroup />
+				<h:panelGroup />
+			</h:panelGrid>
+		</h:panelGroup>
+		<h:panelGrid columns="5" cellpadding="0" cellspacing="5"
+				columnClasses="entete_col1,entete_col2,entete_col1,entete_col2">
+
+				<h:outputLabel value="#{msgs['fong.dest']}"
+					style="display:block;width:100px" />
+				<h:panelGroup>
+					<h:outputText id="fongDestList"    value="#{searchBean.fongDestination.codeAndLibelle}" >
+		
+		
+		</h:outputText>
+
+				</h:panelGroup>
+				<p:spacer width="60" height="10" />
+				<h:outputLabel value="#{msgs['origine']}"
+					style="display:block;width:100px" />
+				<h:panelGroup>
+					<h:panelGrid columns="2">
+						<p:selectOneMenu id="destList" styleClass="ReadOnlyText"
+							style="width:80px;" value="#{searchBean.codeDest}"
+							onfocus="select();"
+							valueChangeListener="#{searchBean.codeDestChangeListener}"
+							editable="true">
+							<f:selectItem itemValue="" itemLabel="-----" />
+							<f:selectItems value="#{loaderBean.listDestinationSuiviCp}"
+								var="dest" itemLabel="#{dest.code}" itemValue="#{dest.code}">
+							</f:selectItems>
+							<p:ajax process="@this"
+								update="libDestination,natureGroupeList,natureList,libNature,progrList,libProgram,:detailsForm,globalMessage" />
+						</p:selectOneMenu>
+						<p:inputText value="#{searchBean.libDestination}"
+							id="libDestination" readonly="true"
+							style="display:block;width:250px" />
+					</h:panelGrid>
+				</h:panelGroup>
+
+
+
+
+
+				<h:panelGroup>
+
+				</h:panelGroup>
+				<h:panelGroup>
+					<h:outputLabel style="display:block;width:50px" />
+				</h:panelGroup>
+				<p:spacer width="60" height="10" />
+				<h:outputLabel value="#{msgs['programme']}"
+					style="display:block;width:100px" />
+				<h:panelGroup>
+
+					<h:panelGrid columns="2">
+
+						<p:selectOneMenu id="progrList" styleClass="ReadOnlyText"
+							style="width:80px;" onfocus="select();"
+							valueChangeListener="#{searchBean.codeProgChangeListener}"
+							editable="true" value="#{searchBean.codeProg}">
+							<f:selectItem itemValue="" itemLabel="-----" />
+							<f:selectItems value="#{loaderBean.listProgrammeSuiviCp}"
+								var="prog" itemLabel="#{prog.code}" itemValue="#{prog.code}">
+							</f:selectItems>
+							<p:ajax process="@this"
+								update="libProgram,natureList,libNature,:detailsForm,globalMessage" />
+						</p:selectOneMenu>
+						<p:inputText value="#{searchBean.libProgramme}" id="libProgram"
+							readonly="true" style="display:block;width:250px" />
+					</h:panelGrid>
+				</h:panelGroup>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="#{msgs['fong.nat']}"
+						style="display:block;width:100px" />
+					<h:outputText value=" *" styleClass="required"></h:outputText>
+
+				</h:panelGrid>
+				<p:selectOneMenu id="natureGroupeList" styleClass="ReadOnlyText"
+					valueChangeListener="#{searchBean.codeNatureGrpChangeListnener}"
+					style="width:300px;" value="#{searchBean.codeNatureGrp}">
+					<f:selectItem itemValue="" itemLabel="-----" />
+
+					<f:selectItems value="#{loaderBean.listNatureGroupeSuiviCp}"
+						var="natureGroupe" itemLabel="#{natureGroupe.codeAndLibelle}"
+						itemValue="#{natureGroupe.code}">
+					</f:selectItems>
+					<p:ajax process="@this"
+						update=":detailsForm,globalMessage,natureList,libNature" />
+
+				</p:selectOneMenu>
+
+				<p:spacer width="60" height="10" />
+				<h:outputText value="#{msgs['import.nature']}"
+					style="display:block;width:100px" />
+				<h:panelGroup>
+					<h:panelGrid columns="2">
+						<p:selectOneMenu id="natureList" styleClass="ReadOnlyText"
+							valueChangeListener="#{searchBean.codeNatureChangeListnener}"
+							style="width:80px;" value="#{searchBean.codeNature}"
+							onfocus="select();" editable="true">
+							<f:selectItem itemValue="" itemLabel="-----" />
+							<f:selectItems value="#{loaderBean.listNatureSuiviCp}"
+								var="natureGroupe" itemLabel="#{natureGroupe.code}"
+								itemValue="#{natureGroupe.code}">
+							</f:selectItems>
+							<p:ajax process="@this"
+								update="libNature,:detailsForm,globalMessage,natureGroupeList,libNature" />
+
+						</p:selectOneMenu>
+						<p:inputText value="#{searchBean.libNature}" id="libNature"
+							readonly="true" style="display:block;width:250px" />
+					</h:panelGrid>
+				</h:panelGroup>
+
+
+
+			</h:panelGrid>
+
+		</h:panelGroup></ui:composition>

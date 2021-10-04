@@ -1,0 +1,208 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<style type="text/css">
+.col1 {
+	width: 10%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col2 {
+	width: 60%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+.col3 {
+	width: 10%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+.col4 {
+	width: 10%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+.col5 {
+	width: 10%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+</style>
+
+
+
+
+	<h:panelGrid columns="5" id="budgModifList"
+		columnClasses="col1,col2,col3,col4,col5">
+		<h:outputText value="#{msgs['choix.br']}"
+			style="display:block;width:80px" />
+		<p:selectOneMenu styleClass="ReadOnlyText"
+			value="#{bpBean.numeroBudgModif}">
+			<f:selectItem itemValue="" itemLabel="-----" />
+			<f:selectItems value="#{bpBean.budgModifList}" var="budgModif"
+				itemLabel="#{budgModif.description}" itemValue="#{budgModif.numero}">
+			</f:selectItems>
+			<p:ajax process="@this"
+				update=":detailsForm,:enteteForm,:enteteForm:montantBrGrid,:enteteForm:budgModifInfoButton,:enteteForm:infoVisa,:enteteForm:infoEtat,:enteteForm:infohistory" />
+		</p:selectOneMenu>
+		<h:panelGroup id="budgModifInfoButton">
+			<p:commandButton icon="fa fa-fw fa-info" type="button"
+				rendered="#{bpBean.selectedBudgModif!=null}"
+				onclick="PF('info').show();" />
+		</h:panelGroup>
+		<p:spacer width="20" />
+		<h:panelGrid id="montantBrGrid" columns="2">
+			<h:outputText value="#{msgs['montant.br']}"
+				style="display:block;width:100px"
+				rendered="#{bpBean.numeroBudgModif!=null}"></h:outputText>
+			<h:outputText rendered="#{bpBean.numeroBudgModif!=null}"  >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+				</h:panelGrid>
+	</h:panelGrid>
+
+
+
+
+	<p:dialog header="#{msgs['icon.information']}" widgetVar="info" showEffect="explode"  height="300">
+
+		<p:panelGrid id="infoVisa">
+			<f:facet name="header">
+				<p:row>
+					<p:column colspan="3">
+						<h:outputText value="#{msgs['visa']}"></h:outputText>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column></p:column>
+					<p:column>
+						<h:outputText value="#{msgs['budget.visePAR']}"></h:outputText>
+					</p:column>
+					<p:column>
+						<h:outputText value="#{msgs['budget.le']}"></h:outputText>
+					</p:column>
+				</p:row>
+			</f:facet>
+			<p:row rendered="#{bpBean.selectedBudgModif.ordoAccept}">
+
+				<p:column>
+					<p:outputLabel
+						value="#{msgs['budget.visaOrdo']} : #{bpBean.selectedBudgModif.visaOrdo.visa}" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.visaOrdo.auteur}"
+						size="7" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.visaOrdo.date}"
+						size="7" />
+				</p:column>
+
+			</p:row>
+
+
+			<p:row rendered="#{bpBean.selectedBudgModif.ctrlAccept || true}">
+				<p:column>
+					<p:outputLabel
+						value="#{msgs['budget.visaCF']} : #{bpBean.selectedBudgModif.visaCtrl.visa}" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.visaCtrl.auteur}"
+						size="7" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.visaCtrl.date}"
+						size="7" />
+				</p:column>
+			</p:row>
+			<p:row rendered="#{bpBean.selectedBudgModif.cptAccept|| true}">
+
+				<p:column>
+					<p:outputLabel
+						value="#{msgs['budget.visaAC']} : #{bpBean.selectedBudgModif.visaCpt.visa}" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.visaCpt.auteur}"
+						size="7" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.visaCpt.date}"
+						size="7" />
+				</p:column>
+
+			</p:row>
+
+		</p:panelGrid>
+		<p:panelGrid id="infoEtat">
+			<f:facet name="header">
+				<p:row>
+					<p:column colspan="2">
+						<h:outputText value="#{msgs['type']}"></h:outputText>
+					</p:column>
+				</p:row>
+			</f:facet>
+			<p:row>
+				<p:column>
+					<h:outputText value="#{msgs['type']}"></h:outputText>
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.type.libelle}" />
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		<p:panelGrid id="infohistory">
+			<f:facet name="header">
+				<p:row>
+					<p:column colspan="3">   	<h:outputText value="#{msgs['maj']}"></h:outputText></p:column>
+				</p:row>
+			</f:facet>
+			<p:row>
+
+				<p:column>
+					<p:outputLabel value="#{msgs['autMaj']}"></p:outputLabel>
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.trace.auteurMaj}"
+						size="7" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{bpBean.selectedBudgModif.trace.dateMajF}"
+						size="7" />
+				</p:column>
+
+			</p:row>
+		</p:panelGrid>
+
+	</p:dialog>
+
+
+</ui:composition>

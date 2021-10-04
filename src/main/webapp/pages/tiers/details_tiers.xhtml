@@ -1,0 +1,117 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<style  type="text/css"   >
+	
+.col1 {
+	width: 9%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col2 {
+	width: 13%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col3 {
+	width: 5%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col4 {
+	width: 50%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col5 {
+	width: 5%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+}
+.col6 {
+	width: 16%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+</style>
+
+	<p:panel style="width:99,7%;" >
+		<h:panelGrid columns="6" columnClasses="col1,col2,col3,col4,col5,col6" >
+			<h:panelGroup>	
+				<h:outputText value="#{msgs['code.tiers']}"/>
+				<h:outputText value=" *" rendered="#{gestionTiersBean.activeAdd}" styleClass="required"></h:outputText>
+			</h:panelGroup>
+			<h:outputText value="#{gestionTiersBean.tiers.code}" rendered="#{!gestionTiersBean.activeAdd}"/>
+			<p:inputText value="#{gestionTiersBean.tiers.code}" maxlength="10" rendered="#{gestionTiersBean.activeAdd}" 
+				valueChangeListener="#{gestionTiersBean.codeTiersListener}" >
+				<p:ajax event="change" process="@this"></p:ajax>
+			</p:inputText>
+			<h:panelGroup>	
+				<h:outputText value="#{msgs['nom']}"/>
+				<h:outputText value=" *" rendered="#{gestionTiersBean.active}" styleClass="required"></h:outputText>
+			</h:panelGroup>
+			<h:outputText value="#{gestionTiersBean.tiers.nom}" rendered="#{!gestionTiersBean.active}"   />
+			<p:inputText value="#{gestionTiersBean.tiers.nom}" maxlength="255" rendered="#{gestionTiersBean.active}" size="40" />			
+			<h:panelGroup>
+				<h:outputText value="#{msgs['cpwin.etat']}"/>
+				<h:outputText value=" *" rendered="#{gestionTiersBean.active}" styleClass="required"></h:outputText>
+			</h:panelGroup>
+			<h:outputText value="#{gestionTiersBean.tiers.libEtat}" rendered="#{!gestionTiersBean.active}"/>
+			<h:selectOneMenu styleClass="ReadOnlyText" rendered="#{gestionTiersBean.active}"
+				value="#{gestionTiersBean.tiers.etat}">
+				<f:selectItem itemValue="" itemLabel="" />
+				<f:selectItems value="#{gestionTiersBean.etatsTiersList}" var="etat"
+					itemLabel="#{etat.code}- #{etat.designation}"
+					itemValue="#{etat.code}">
+				</f:selectItems>
+			</h:selectOneMenu>			
+		</h:panelGrid>
+	</p:panel>
+	<h:panelGrid
+		id="tiersTabPG" style="width:100%;vertical-align:top;">
+		<div align="left"><h:outputText value="* #{msgs['required']}" styleClass="indication1"/></div>
+		<p:tabView id="ongletsTiers" style="width:99,7%;"  activeIndex="#{gestionTiersBean.activeTvIndex}"
+			cache="false" >
+			<p:tab id="generalTab" title="#{msgs['general']}" rendered="#{gestionTiersBean.generalTab}">
+					<ui:include src="/pages/tiers/onglets/generalOnglet.xhtml" />
+				</p:tab>
+			<p:tab id="coordTab" rendered="#{gestionTiersBean.adressTab}"
+				title="#{msgs['coordonnees']}">
+				<ui:include src="/pages/tiers/onglets/coordonnees.xhtml"/>
+			</p:tab>
+			<p:tab id="ibanTab" title="#{msgs['iban']}" rendered="#{gestionTiersBean.ibanTab}">
+					<ui:include src="/pages/tiers/onglets/ibanOnglet.xhtml" />
+				</p:tab>
+			<p:tab id="docTab" rendered="#{gestionTiersBean.docTab}"
+				title="#{msgs['documents']}">
+				<ui:include src="/pages/tiers/onglets/documents.xhtml"/>
+				<div align="center">
+					<h:panelGrid columns="2">
+						<p:commandButton id="addDocumentBtn" immediate="true" rendered="#{gestionTiersBean.active}"
+							value="#{msgs['btn.add']}" oncomplete="PF('confAddDocument').show();" />
+					</h:panelGrid>
+				</div>
+			</p:tab>
+			<p:tab id="autreTab"
+				title="#{msgs['autre']}">
+				<ui:include src="/pages/tiers/onglets/autreOnglet.xhtml"/>			
+			</p:tab>
+			
+		
+		</p:tabView>
+	</h:panelGrid>
+</ui:composition>

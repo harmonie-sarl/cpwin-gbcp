@@ -1,0 +1,570 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="../../../templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+
+</style>
+	</ui:define>
+	<ui:define name="lastPrefexedTitle">
+					
+					</ui:define>
+
+	<ui:define name="entetePage">
+	<ui:include src="/snippets/budget/enteteSuiviREC.xhtml"></ui:include>
+		
+	
+	
+	
+	</ui:define>
+		<ui:define name="enteteAction">
+		<p:commandButton title=" " immediate="true" value="#{msgs['cpwin.btn.afficher']}" actionListener="#{bpBean.searchSuiviRecette}"
+			 update=":detailsForm,globalMessage" >
+		</p:commandButton>
+	</ui:define>
+
+	<ui:define name="search">
+			
+	
+	</ui:define>
+
+
+	<ui:define name="details">
+
+		<p:panel  style="width:100%;">
+			
+			
+				<p:panel id="surAeAntPanel" style="width:100%;"  rendered="#{bpBean.globalSuiviAnt!=null}" >
+		
+				
+		
+		<h:panelGrid columns="1">
+			<p:commandButton styleClass="Label"  title=" " immediate="true"  value="#{msgs['tr.anterieur']}" actionListener="#{bpBean.loadSuiviRecetAnt}" 
+	  disabled="#{bpBean.suiviRecetAnt!=null}" update="detailsForm:surAeAntPanel,globalMessage" >
+		</p:commandButton>
+		</h:panelGrid>
+		<div align="right">
+		<p:ajaxStatus id="status5" style="width:30px;height:30px;" >
+				<f:facet name="start">
+					<h:graphicImage value="/images/ajax/ajax-loader-0.gif" />
+				</f:facet>
+				<f:facet name="complete">
+					<h:outputText value="" />
+				</f:facet>
+			</p:ajaxStatus>
+			</div>
+	<p:spacer width="40" height="5" />
+	
+	<div align="center">
+	   <h:panelGrid  columns="5"  style="width:70%;">
+      
+ 	<p:panelGrid  style="margin-top:20px">
+    <f:facet name="header">
+       
+         <p:row>
+         <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['rar.ini.ht']}"  />
+            </p:column>
+            <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['rar.ini.ttc']}"  />
+            </p:column>
+             </p:row>
+             </f:facet>
+              <p:row>
+              <p:column>
+                <h:outputText value="#{bpBean.globalSuiviAnt.initial.ht}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+				<p:column>
+                <h:outputText value="#{bpBean.globalSuiviAnt.initial.ttc}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+              </p:row>
+     
+        </p:panelGrid>
+        
+        
+        
+        <p:panelGrid style="margin-top:20px">
+    <f:facet name="header">
+       
+         <p:row>
+         <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['rar.ht.01.01']}"  />
+            </p:column>
+            <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['rar.ttc.01.01']}"  />
+            </p:column>
+             </p:row>
+             </f:facet>
+              <p:row>
+              <p:column>
+                <h:outputText value="#{bpBean.globalSuiviAnt.rar.ht}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+				  <p:column>
+				 <h:outputText value="#{bpBean.globalSuiviAnt.rar.ttc}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+              </p:row>
+     
+        </p:panelGrid>
+        <p:panelGrid  style="margin-top:20px">
+    <f:facet name="header">
+       
+         <p:row>
+         <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['onb.ht']}"  />
+            </p:column>
+            <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['onb.ttc']}"  />
+            </p:column>
+             </p:row>
+             </f:facet>
+              <p:row>
+              <p:column>
+                <h:outputText value="#{bpBean.globalSuiviAnt.onb.ht}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+				<p:column>
+                <h:outputText value="#{bpBean.globalSuiviAnt.onb.ttc}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+              </p:row>
+     
+        </p:panelGrid>
+        
+         <p:panelGrid style="margin-top:20px">
+    <f:facet name="header">
+       
+         <p:row>
+         <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['recet.ht']}"  />
+            </p:column>
+         
+             </p:row>
+             </f:facet>
+              <p:row>
+              <p:column>
+                <h:outputText value="#{bpBean.globalSuiviAnt.rec_ht}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+              </p:row>
+     
+        </p:panelGrid>
+        
+          <p:panelGrid style="margin-top:20px">
+    <f:facet name="header">
+      
+         <p:row>
+        
+            <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['solde.ttc']}"  />
+            </p:column>
+             </p:row>
+             </f:facet>
+              <p:row>
+              
+				  <p:column>
+				 <h:outputText value="#{bpBean.globalSuiviAnt.solde.ttc}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+              </p:row>
+     
+        </p:panelGrid>
+       </h:panelGrid>
+        </div>
+ 	  <br />
+
+        
+   <h:panelGrid  style="width:100%; vertical-align:top;" modal="true" >
+			<ui:include src="./panel/details_suivi_recet.xhtml">
+				<ui:param name="suiviRecetList" value="#{bpBean.suiviRecetAnt}" />
+		<ui:param name="rarNetHtColumn" value="#{msgs['rar.ht.01.01']}" />
+		<ui:param name="rarNetTtcColumn" value="#{msgs['rar.ttc.01.01']}" />
+		<ui:param name="isAnt" value="true" />
+		<ui:param name="isExec" value="false" />
+			</ui:include>
+			
+			</h:panelGrid>
+      	  <br />
+	<div align="center">
+			<p:commandButton  title=" " value="#{msgs['budget.btn.export']}" immediate="true"  rendered="#{bpBean.suiviRecetAnt!=null}"
+					ajax="false"  >
+					<p:fileDownload value="#{bpBean.xlsSuiviRecetAnt}"  />	
+
+		</p:commandButton>
+		</div>
+		
+		
+</p:panel>
+	<p:panel id="surAeExecPanel"  style="width:100%;"  rendered="#{bpBean.globalSuiviExec!=null}" >
+		
+				
+		
+		
+		
+		<h:panelGrid columns="1">	
+			
+			<p:commandButton styleClass="Label" title=" " immediate="true"  value="#{msgs['tr.exercice']}" actionListener="#{bpBean.loadSuiviRecetExec}" 
+			disabled="#{bpBean.suiviRecetExec!=null}" update="detailsForm:surAeExecPanel,globalMessage" >
+		</p:commandButton>
+		</h:panelGrid>
+		<div align="right">
+		<p:ajaxStatus id="status6" style="width:30px;height:30px;" >
+				<f:facet name="start">
+					<h:graphicImage value="/images/ajax/ajax-loader-0.gif" />
+				</f:facet>
+				<f:facet name="complete">
+					<h:outputText value="" />
+				</f:facet>
+			</p:ajaxStatus>
+			</div>
+			
+		
+	<p:spacer width="40" height="5" />
+	
+	<div align="center">
+	<h:panelGrid columns="5" style="width:70%;">
+		<p:panelGrid style="margin-top:20px">
+    <f:facet name="header">
+     
+         <p:row>
+         <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['rar.ini.ht']}"  />
+            </p:column>
+          <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['rar.ini.ttc']}"  />
+            </p:column>
+             </p:row>
+             </f:facet>
+              <p:row>
+              <p:column>
+                 <h:outputText value="#{bpBean.globalSuiviExec.initial.ht}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+				 <p:column>
+                 <h:outputText value="#{bpBean.globalSuiviExec.initial.ttc}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+				 
+              </p:row>
+     
+        </p:panelGrid>
+        
+        <p:panelGrid style="margin-top:20px">
+    <f:facet name="header">
+     
+         <p:row>
+         <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['ar.ht']}"  />
+            </p:column>
+          <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['ar.ttc']}"  />
+            </p:column>
+             </p:row>
+             </f:facet>
+              <p:row>
+              <p:column>
+                 <h:outputText value="#{bpBean.globalSuiviExec.ar.ht}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+				 <p:column>
+                 <h:outputText value="#{bpBean.globalSuiviExec.ar.ttc}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+				 
+              </p:row>
+     
+        </p:panelGrid>
+        
+        
+        <p:panelGrid style="margin-top:20px">
+    <f:facet name="header">
+      
+         <p:row>
+         <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['mnt.net.ht']}"  />
+            </p:column>
+            <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['mnt.net.ttc']}"  />
+            </p:column>
+             </p:row>
+             </f:facet>
+              <p:row>
+              <p:column>
+              <h:outputText value="#{bpBean.globalSuiviExec.rar.ht}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+				  <p:column>
+				  <h:outputText value="#{bpBean.globalSuiviExec.rar.ttc}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+              </p:row>
+     
+        </p:panelGrid>
+          <p:panelGrid style="margin-top:20px">
+    <f:facet name="header">
+      
+         <p:row>
+         <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['recet.ht']}"  />
+            </p:column>
+         
+             </p:row>
+             </f:facet>
+              <p:row>
+              <p:column>
+                <h:outputText value="#{bpBean.globalSuiviExec.rec_ht}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+              </p:row>
+     
+        </p:panelGrid>
+        
+          <p:panelGrid style="margin-top:20px">
+    <f:facet name="header">
+     
+         <p:row>
+       
+            <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['solde.ttc']}"  />
+            </p:column>
+             </p:row>
+             </f:facet>
+              <p:row>
+          
+				  <p:column>
+				 <h:outputText value="#{bpBean.globalSuiviExec.solde.ttc}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+              </p:row>
+     
+        </p:panelGrid>
+        </h:panelGrid>
+</div>
+ <br />
+<h:panelGrid  style="width:100%; vertical-align:top;" modal="true" id="details_suivi_recet_exec">
+				<ui:include src="./panel/details_suivi_recet.xhtml">
+				<ui:param name="suiviRecetList" value="#{bpBean.suiviRecetExec}" />
+			<ui:param name="rarNetHtColumn" value="#{msgs['mnt.net.ht']}" />
+		    <ui:param name="rarNetTtcColumn" value="#{msgs['mnt.net.ttc']}" />
+				<ui:param name="isAnt" value="false" />
+		<ui:param name="isExec" value="true" />
+			</ui:include>
+			</h:panelGrid>
+			 <br />
+	<div align="center">
+			<p:commandButton  title=" " value="#{msgs['budget.btn.export']}" immediate="true"  rendered="#{(bpBean.suiviRecetExec!=null)and(not empty bpBean.suiviRecetExec)}"
+					ajax="false"  >
+					<p:fileDownload value="#{bpBean.xlsSuiviRecetExec}"  />	
+
+		</p:commandButton>
+		</div>
+</p:panel>
+<p:panel id="totalPanel"  style="width:100%;"  rendered="#{bpBean.globalSuiviExec!=null}" >
+		
+				
+		
+		
+		
+		<h:panelGrid columns="2">
+				
+			
+			<p:commandButton styleClass="Label" title=" " immediate="true"  value="#{msgs['total']}" actionListener="#{bpBean.loadSuiviRecetTotal}" 
+			disabled="#{bpBean.suiviRecetTotal!=null}" update="detailsForm:totalPanel,globalMessage" >
+		</p:commandButton>
+		
+			<p:commandButton value="#{msgs['recette.origine']}" styleClass="Label" title=" " 
+		         update="globalMessage"
+			actionListener="#{bpBean.gotoTotalRectOrigin}"  	>
+				
+				</p:commandButton>
+		</h:panelGrid>
+			<div align="right">
+		<p:ajaxStatus id="status7" style="width:30px;height:30px;"  >
+				<f:facet name="start">
+					<h:graphicImage value="/images/ajax/ajax-loader-0.gif" />
+				</f:facet>
+				<f:facet name="complete">
+					<h:outputText value="" />
+				</f:facet>
+			</p:ajaxStatus>
+			</div>
+		
+	<p:spacer width="40" height="5" />
+	
+	<div align="center">
+	<h:panelGrid columns="4" style="width:70%;">
+		<p:panelGrid style="margin-top:20px">
+    <f:facet name="header">
+      
+         <p:row>
+         <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['rar.ini.ht']}"  />
+            </p:column>
+          <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['rar.ini.ttc']}"  />
+            </p:column>
+             </p:row>
+             </f:facet>
+              <p:row>
+              <p:column>
+                 <h:outputText value="#{bpBean.globalSuiviTotal.initial.ht}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+				 <p:column>
+                 <h:outputText value="#{bpBean.globalSuiviTotal.initial.ttc}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+				
+              </p:row>
+     
+        </p:panelGrid>
+        
+        
+        
+        <p:panelGrid style="margin-top:20px">
+    <f:facet name="header">
+     
+         <p:row>
+         <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['net.ht']}"  />
+            </p:column>
+            <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['net.ttc']}"  />
+            </p:column>
+             </p:row>
+             </f:facet>
+              <p:row>
+              <p:column>
+              <h:outputText value="#{bpBean.globalSuiviTotal.rar.ht}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+				  <p:column>
+				  <h:outputText value="#{bpBean.globalSuiviTotal.rar.ttc}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+              </p:row>
+     
+        </p:panelGrid>
+          <p:panelGrid style="margin-top:20px">
+    <f:facet name="header">
+       
+         <p:row>
+         <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['recet.ht']}"  />
+            </p:column>
+         
+             </p:row>
+             </f:facet>
+              <p:row>
+              <p:column>
+                <h:outputText value="#{bpBean.globalSuiviTotal.rec_ht}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+              </p:row>
+     
+        </p:panelGrid>
+        
+          <p:panelGrid style="margin-top:20px">
+    <f:facet name="header">
+       
+         <p:row>
+        
+            <p:column >
+             <h:outputText  styleClass="Label" value="#{msgs['solde.ttc']}"  />
+            </p:column>
+             </p:row>
+             </f:facet>
+              <p:row>
+            
+				  <p:column>
+				 <h:outputText value="#{bpBean.globalSuiviTotal.solde.ttc}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				</p:column>
+              </p:row>
+     
+        </p:panelGrid>
+        </h:panelGrid>
+</div>
+ <br />
+<h:panelGrid  style="width:100%; vertical-align:top;" modal="true" id="details_suivi_recet_total">
+				<ui:include src="./panel/details_suivi_recet.xhtml">
+				<ui:param name="suiviRecetList" value="#{bpBean.suiviRecetTotal}" />
+		    <ui:param name="rarNetHtColumn" value="#{msgs['net.ht']}" />
+		    <ui:param name="rarNetTtcColumn" value="#{msgs['net.ttc']}" />
+				<ui:param name="isAnt" value="false" />
+		<ui:param name="isExec" value="false" />
+			
+			</ui:include>
+			</h:panelGrid>
+			 <br />
+	<div align="center">
+			<p:commandButton  title=" " value="#{msgs['budget.btn.export']}" immediate="true"  rendered="#{(bpBean.suiviRecetTotal!=null)and(not empty bpBean.suiviRecetTotal)}"
+					ajax="false"  >
+					<p:fileDownload value="#{bpBean.xlsSuiviRecetTotal}"  />	
+
+		</p:commandButton>
+		</div>
+</p:panel>
+		</p:panel>
+		
+	</ui:define>
+	
+	<ui:define name="dialogs">
+		
+	</ui:define>
+</ui:composition>

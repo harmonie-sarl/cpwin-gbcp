@@ -1,0 +1,151 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+		
+
+	<p:dataTable id="recette_dtt" var="recette" paginator="true" rows="10"
+		style="width:100%; text-align: center;"
+		emptyMessage="#{msgs['datatable.empty']}"
+		value="#{bpBean.recByOrigList}">
+		<p:columnGroup type="header">
+			<p:row>
+				<p:column rowspan="3" headerText="#{msgs['origine']}" />
+				<p:column colspan="9" headerText="#{msgs['recettes']}" />
+			</p:row>
+			<p:row>
+				<p:column colspan="5" headerText="#{msgs['recette.global']}" />
+				<p:column colspan="3" headerText="#{msgs['recette.flech']}" />
+				<p:column colspan="1" rowspan="2" headerText="#{msgs['total']}" />
+
+			</p:row>
+			<p:row>
+				<p:column headerText="#{msgs['subvent.charges.serv.pub']}" />
+				<p:column headerText="#{msgs['autre.financ.etat']}" />
+				<p:column headerText="#{msgs['fisc.affect']}" />
+				<p:column headerText="#{msgs['autres.financ.pub']}" />
+				<p:column headerText="#{msgs['recet.propr']}" />
+				<p:column headerText="#{msgs['financ.etat.flech']}" />
+				<p:column headerText="#{msgs['autre.financ.pub.flech']}" />
+				<p:column headerText="#{msgs['recet.propr.flech']}" />
+
+			</p:row>
+		</p:columnGroup>
+            <p:column style="text-align: center;">
+
+			<h:outputText value="#{recette.origine.codeAndLibelle}" />
+			<f:facet name="footer">
+			<h:outputText value="#{msgs['total']}">
+				
+           </h:outputText>
+			</f:facet>
+		</p:column>
+		 <p:column style="text-align: center;">
+
+			<h:outputText value="#{recette.dataR11.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<f:facet name="footer">
+			<h:outputText value="#{bpBean.recByOrigTotal.dataR11.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+           </h:outputText>
+			</f:facet>
+			
+		</p:column>
+		 <p:column style="text-align: center;">
+
+			<h:outputText value="#{recette.dataR12.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<f:facet name="footer">
+			<h:outputText value="#{bpBean.recByOrigTotal.dataR12.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+			</f:facet>
+		</p:column>
+		 <p:column style="text-align: center;">
+
+			<h:outputText value="#{recette.dataR13.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<f:facet name="footer">
+			<h:outputText value="#{bpBean.recByOrigTotal.dataR13.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+			</f:facet>
+		</p:column>
+		 <p:column style="text-align: center;">
+
+			<h:outputText value="#{recette.dataR14.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<f:facet name="footer">
+			<h:outputText value="#{bpBean.recByOrigTotal.dataR14.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+			</f:facet>
+		</p:column>
+		 <p:column style="text-align: center;">
+
+			<h:outputText value="#{recette.dataR15.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<f:facet name="footer">
+			<h:outputText value="#{bpBean.recByOrigTotal.dataR15.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+			</f:facet>
+		</p:column>
+	 <p:column style="text-align: center;">
+
+			<h:outputText value="#{recette.dataR22.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<f:facet name="footer">
+			<h:outputText value="#{bpBean.recByOrigTotal.dataR22.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+			</f:facet>
+		</p:column>
+		 <p:column style="text-align: center;">
+
+			<h:outputText value="#{recette.dataR24.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<f:facet name="footer">
+			<h:outputText value="#{bpBean.recByOrigTotal.dataR24.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+			</f:facet>
+		</p:column>
+		 <p:column style="text-align: center;">
+
+			<h:outputText value="#{recette.dataR25.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<f:facet name="footer">
+			<h:outputText value="#{bpBean.recByOrigTotal.dataR25.montant}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+			</f:facet>
+		</p:column>
+		 <p:column style="text-align: center;">
+
+			<h:outputText value="#{recette.somme}"
+				style="font-weight:bold;">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<f:facet name="footer">
+			<h:outputText value="#{bpBean.recByOrigTotal.somme}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+			</f:facet>
+		</p:column>	
+		
+	
+        </p:dataTable>
+
+</ui:composition>

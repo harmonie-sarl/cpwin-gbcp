@@ -1,0 +1,106 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGrid columns="2" cellpadding="0" cellspacing="10"
+		rendered="#{initBean.newLBC!=null}"
+		columnClasses="filter_col1,filter_col2">
+		<h:outputLabel value="#{msgs['lbc.origine']}"
+			styleClass="espace_entre_label_value" />
+		<h:outputText value="#{initBean.origineLBC.numero}"></h:outputText>
+
+
+	</h:panelGrid>
+
+	<p:dataTable id="lbc_list_dtt" var="lbc"
+		style="width:60%;text-align:center" rowIndexVar="creditIndex"
+		emptyMessage="#{msgs['datatable.empty']}" value="#{initBean.lbcList}"
+		rendered="#{initBean.lbcList!=null}">
+		<f:facet name="header">
+            #{msgs['lbc']}
+              </f:facet>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="#{msgs['cpwin.exercice']}" />
+			</f:facet>
+			<h:outputText value="#{initBean.newExercice}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="#{msgs['num.lbc']}" />
+			</f:facet>
+			<h:outputText value="#{lbc.numero}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="#{msgs['import.destination']}" />
+			</f:facet>
+			<h:outputText value="#{lbc.destination}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="#{msgs['import.nature']}" />
+			</f:facet>
+			<h:outputText value="#{lbc.nature}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="#{msgs['service']}" />
+			</f:facet>
+			<h:outputText value="#{lbc.service}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="#{msgs['programme']}" />
+			</f:facet>
+			<h:outputText value="#{lbc.programme}" />
+		</p:column>
+	</p:dataTable>
+
+
+	<br />
+
+
+	<p:dataTable id="period_list_dtt" var="period"
+		style="width:60%;text-align:center" rowIndexVar="creditIndex"
+		emptyMessage="#{msgs['datatable.empty']}"
+		value="#{initBean.periodList}" rendered="#{initBean.periodList!=null}">
+		<f:facet name="header">
+            #{msgs['periode']}
+              </f:facet>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="#{msgs['cpwin.exercice']}" />
+			</f:facet>
+			<h:outputText value="#{period.exercice}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="#{msgs['code']}" />
+			</f:facet>
+			<h:outputText value="#{period.code}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="#{msgs['libelle']}" />
+			</f:facet>
+			<h:outputText value="#{period.object}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="#{msgs['cpwin.etat']}" />
+			</f:facet>
+			<h:outputText value="#{period.etat}" />
+		</p:column>
+
+	</p:dataTable>
+	<br />
+	<div align="center" style="width: 100%;">
+		<p:commandButton id="valid_btn" value="#{msgs['btn.valider']}"
+			 update="globalMessage,:detailsForm:initPanel,:enteteForm" 
+			actionListener="#{initBean.executeValidation}"  />
+	</div>
+
+</ui:composition>

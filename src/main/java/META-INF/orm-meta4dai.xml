@@ -1,0 +1,105 @@
+<entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+  version="2.0">
+	<entity class="fr.symphonie.tools.meta4dai.model.Period">
+		<table name="PaieMeta4DAIperiode">
+		</table>
+	<id-class class="fr.symphonie.cpwin.model.pk.YearlyCodeAndBudgetPK"></id-class>
+		<attributes>
+			<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="budget">
+				<column name="code_budg"></column>
+			</id>
+			<id name="code">
+				<column name="periode"></column>
+			</id>
+			<basic name="etat">
+				<column name="statut"></column>
+			</basic>
+			<basic name="total">
+				<column name="mt_tot"></column>
+			</basic>
+			<basic name="object">
+				<column name="lib_periode"></column>
+			</basic>
+		
+			<embedded name="trace">
+			</embedded>
+		
+		</attributes>
+	</entity>
+	<entity class="fr.symphonie.tools.meta4dai.model.PaymentItem">
+		<table name="PaieMeta4DAIMvt">
+		</table>
+		<id-class class="fr.symphonie.tools.meta4dai.model.pk.PaymentPK"></id-class>
+		<attributes>
+			<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="period">
+				<column name="periode"></column>
+			</id>
+			<id name="noEI">
+				<column name="no_ei"></column>
+			</id>
+			<id name="budget">
+			<column name="code_budg"></column>
+			</id>
+			<basic name="amount">
+				<column name="mt_paie"></column>
+			</basic>
+			<basic name="objetEI">
+				<column name="lib_ei"></column>
+			</basic>
+			<basic name="objetDAI">
+				<column name="lib_dai"></column>
+			</basic>
+			<basic name="noDAI">
+				<column name="no_dai"></column>
+			</basic>
+			<basic name="noLBI">
+				<column name="no_lbi"></column>
+			</basic>
+			<basic name="noLMI">
+				<column name="no_lmi"></column>
+			</basic>
+			<basic name="noLBC">
+				<column name="no_lbi_str"></column>
+			</basic>
+			<basic name="dispoEi">
+			<column name="dispo_da_avant"></column>
+			</basic>
+			<embedded name="trace">
+			</embedded>
+			<transient name="dispoApres"></transient>
+		</attributes>
+	</entity>
+	<entity class="fr.symphonie.tools.meta4dai.model.InternalEngagement" access="FIELD">
+		<table name="PaieMeta4DAIEI">
+		</table>
+		<id-class class="fr.symphonie.cpwin.model.pk.YearlySeqKey"></id-class>
+		<attributes>
+			<id name="exercice">
+			<column name="num_exec"></column>
+			</id>
+			<id name="numero">
+			<column name="no_ei"></column>
+			</id>
+			<basic name="noLBI">
+			<column name="no_lbi"></column>
+			</basic>
+			<basic name="noLMI">
+			<column name="no_lmi"></column>
+			</basic>
+			<basic name="noLBC">
+			<column name="no_lbi_str"></column>
+			</basic>
+		</attributes>
+	</entity>
+  
+  
+  </entity-mappings>

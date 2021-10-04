@@ -1,0 +1,54 @@
+<entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+  version="2.0">
+	<entity class="fr.symphonie.tools.signature.model.Signature">
+		<table name="DroitSignature">
+		</table>
+		<attributes>
+			<id name="id">
+				<column column-definition="numeric identity not null"></column>
+				<generated-value strategy="IDENTITY"></generated-value>
+			</id>
+			<basic name="codeUtil">
+				<column name="code_util" length="10" nullable="false"></column>
+			</basic>
+			<basic name="startDate">
+				<column name="date_debut"></column>
+				<temporal>DATE</temporal>
+			</basic>
+			<basic name="endDate">
+				<column name="date_fin"></column>
+				<temporal>DATE</temporal>
+			</basic>
+			<basic name="function">
+				<column name="fonction"></column>
+			</basic>
+			<basic name="signatureData">
+				<column name="img_signature" column-definition="image"></column>
+			</basic>
+			<basic name="sf">
+				<column name="valid_sf"></column>
+			</basic>
+			<basic name="dp">
+				<column name="valid_dp"></column>
+			</basic>
+			<basic name="dr">
+				<column name="valid_dr"></column>
+			</basic>
+			<basic name="dv">
+				<column name="valid_dv"></column>
+			</basic>
+			<basic name="lrec">
+				<column name="valid_lrec"></column>
+			</basic>
+			<basic name="ar">
+				<column name="valid_ar"></column>
+			</basic>
+			<embedded name="trace">
+			</embedded>
+		</attributes>
+	</entity>
+  
+  </entity-mappings>

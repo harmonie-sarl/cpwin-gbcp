@@ -1,0 +1,155 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+.ui-state-disabled, .ui-widget-content .ui-state-disabled,
+	.ui-widget-header .ui-state-disabled {
+	opacity: .77;
+	filter: Alpha(Opacity = 35);
+	background-image: none;
+}
+
+.totalTitle {
+	text-align: left;
+	font-weight: bold;
+	background: #feeebd !important;
+	font-size: 9.5px;
+}
+
+.totalFooter {
+	color: #383838 !important;
+	background: #F0E68C !important;
+	border-color: grey !important;
+	font-size: 9.5px;
+	text-align: right;
+}
+
+.totalValue {
+	font-weight: bold;
+	background: #feeebd !important;
+}
+
+.detailTitle {
+	text-align: left;
+}
+
+.detailValue {
+	text-align: center;
+}
+
+.biInputValue {   
+    border: 2px solid #00FF00 !important;  
+}
+
+.globalTitle {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+	text-align: left;
+	font-style: italic;
+}
+
+.globalValue {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+	text-align: center;
+	font-style: italic;
+}
+
+.th {
+	color: #383838 !important;
+	background: #D19275 !important;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+}
+
+.td {
+	color: #383838 !important;
+	background: #F0E68C !important;
+	border-color: grey !important;
+	font-size: 9.5px;
+}
+
+.ui-datatable .ui-datatable-data td {
+	font-size: 65% !important;
+}
+
+.ui-datatable thead {
+	font-size: 65% !important;
+}
+</style>
+
+
+		<div align="center" style="width: 100%;">
+
+		<p:dataTable id="param_dtt" 
+			rendered="#{not empty pltBean.pltParamList}"
+			var="compte" style="width:100%; text-align: center;"
+			rowIndexVar="paramIndex" emptyMessage="#{msgs['datatable.empty']}"
+			value="#{pltBean.pltParamList}"  paginator="true" rows="10" >
+			
+				<p:column style="width:5%;text-align: center;"	>
+				<f:facet name="header">
+					<h:outputText value="#{msgs['compte']}" />
+				</f:facet>
+				<h:outputText value="#{compte.codeLibCompte}" />
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+			
+			<p:column style="width:5%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['tiers']}" />
+				</f:facet>
+				<h:outputText value="#{compte.codeLibTiers}" />
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+				<p:column style="width:5%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['param.ltr.dep']}" />
+				</f:facet>
+				<h:outputText value="#{compte.noLtrDep}" />
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+			<p:column style="width:5%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['param.ltr.rec']}" />
+				</f:facet>
+				<h:outputText value="#{compte.noLtrRec}" />
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+			<p:column style="width:8%;text-align: center;" >
+				<f:facet name="header">
+					<h:outputText value="#{msgs['editer']}" />
+				</f:facet>
+				<p:commandButton   title="#{msgs['btn.modifier']}" icon="fa fa-fw fa-edit" 
+					actionListener="#{pltBean.editParamCompte}">					
+					<f:setPropertyActionListener target="#{pltBean.selectedParam}"
+						value="#{compte}" />
+		   <p:ajax event="dialogReturn"
+						update=":detailsForm:paramPanel" />
+					
+				</p:commandButton>
+
+			
+				<f:facet name="footer">
+				</f:facet>
+			</p:column>
+			
+			</p:dataTable>
+</div>
+
+
+</ui:composition>

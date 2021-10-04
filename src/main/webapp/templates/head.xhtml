@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+		
+		<link href="#{request.contextPath}/css/cpwinStyle.css" rel="stylesheet"	type="text/css" />
+				<title>
+				<h:outputText value="#{config['app.version']}"/>
+				</title>
+		<script src="#{request.contextPath}/scripts/utils.js"  type="text/javascript"></script>
+        <style type="text/css">
+		.ui-widget {
+				font-size: 95% !important;
+			font-family:Verdana, Helvetica, Arial, sans-serif !important;
+			}
+			.ui-widget-header{
+			font-size: 100% !important;
+			}
+			.ui-datatable thead{
+			font-size: 75% !important;
+			
+			}
+			.ui-datatable .ui-datatable-data td {
+			font-size: 80% !important;
+			}
+			
+		</style>
+		
+		
+		</ui:composition>

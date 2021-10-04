@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+	<ui:define name="pageTitle">#{msgs['menu.interface.minefi']}</ui:define>
+	<ui:define name="entetePage">
+	<ui:include src="./entete.xhtml"></ui:include>
+	</ui:define>
+		<ui:define name="enteteAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}" 
+			update="globalMessage,:enteteForm,:detailsForm:detailsMinefiPanel" immediate="true" actionListener="#{dematBean.search}" disabled="#{!dematBean.requiredDataDone}">
+
+		</p:commandButton>
+		<ui:param name="statusRendered" value="true"/>
+			</ui:define>
+	
+	<ui:define name="search">
+			
+
+	</ui:define>
+	
+
+	<ui:define name="details">
+
+
+		<p:panel id="detailsMinefiPanel" style="width:100%;">
+
+			<div align="center" style="width: 100%;">
+
+				<h:panelGroup id="btnPanel" rendered="#{dematBean.edition!=null}">
+					<p:commandButton title=" " value="#{msgs['btn.enregistrer']}"
+						actionListener="#{dematBean.saveDemat}"
+						 disabled="#{!dematBean.editable}"
+						update="globalMessage,:detailsForm" immediate="true">
+					</p:commandButton>
+						<p:commandButton disabled="#{dematBean.generateFileDisabled}" 
+						immediate="true" title="" 
+						value="#{msgs['btn.generer.export']}" 
+						update="globalMessage,:detailsForm:btnPanel" 
+						actionListener="#{dematBean.generateDematFiles}">
+				</p:commandButton>
+					<p:commandButton id="exportFile" ajax="false"
+						title="#{msgs['btn.enregistrer']}" icon="downloadIcon" 
+						disabled="#{!dematBean.exportFileGenerated}">
+						<p:fileDownload value="#{dematBean.dematZipFile}" />
+					</p:commandButton>
+		
+					<p:commandButton title=" " value="#{msgs['budget.btn.export']}" rendered="#{dematBean.edition!=null}" immediate="true"
+					ajax="false" >
+						<p:fileDownload value="#{dematBean.xlsDematBi}" />	
+						</p:commandButton>
+				</h:panelGroup>
+
+			</div>
+
+
+			<p:tabView id="ongletsEditionBi" style="width:100%;"
+				rendered="#{dematBean.edition!=null}" cache="false">
+				<p:tab id="balance" title="#{msgs['balance']}" rendered="#{!dematBean.biPeriod}">
+					<ui:include src="./onglets/balance.xhtml" />
+				</p:tab>
+				<p:tab id="tab2" title="#{msgs['abp']}"  >
+					<ui:include src="../editions/onglets/tab2.xhtml" />
+				</p:tab>
+					<p:tab id="tab3" title="#{msgs['tab3E']}"  rendered="#{dematBean.december}" >
+					<ui:include src="./onglets/TAB3E.xhtml" />
+				</p:tab>
+				
+				<p:tab id="tab4" title="#{msgs['efp']}">
+					<ui:include src="../editions/onglets/tab4.xhtml" />
+				</p:tab>
+				
+				<p:tab id="tab6" title="#{msgs['tab6']}">
+				<ui:include src="./onglets/TAB6.xhtml" />				
+				</p:tab>
+		
+				<p:tab id="abe" title="#{msgs['abe']}"  rendered="#{!dematBean.biPeriod}">
+					<ui:include src="./onglets/ABE.xhtml" />
+				</p:tab>
+				
+				<p:tab id="efe" title="#{msgs['efe']}"  rendered="#{!dematBean.biPeriod}">
+					<ui:include src="./onglets/EFE.xhtml" />
+				</p:tab>
+				<p:tab id="tab7e" title="#{msgs['tab7E']}"  rendered="#{!dematBean.biPeriod}">
+					<ui:include src="/pages/editions/onglets/tab7.xhtml" />
+				</p:tab>
+				<p:tab id="tab10" title="#{msgs['tab10.synthese']}"  rendered="#{dematBean.annuelDef}">
+					<ui:include src="./onglets/TAB10.xhtml" />
+				</p:tab>
+			</p:tabView>
+
+
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+		
+	</ui:define>
+</ui:composition>

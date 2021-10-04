@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+     <entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+  version="2.0">
+     	<entity class="fr.symphonie.tools.gts.model.Article">
+     		<table name="gts_article">
+     		</table>
+     		<attributes>
+     			<id name="code">
+     			</id>
+     			<basic name="libelle">
+     				<column name="lib"></column>
+     			</basic>
+     			<one-to-many name="details" mapped-by="article" fetch="EAGER" orphan-removal="true">
+     				<cascade>
+     					<cascade-all />
+     				</cascade>
+     			</one-to-many>
+     			<embedded name="trace">
+     			</embedded>
+     		</attributes>
+     	</entity>
+     	<entity class="fr.symphonie.tools.gts.model.ArticleDetails">
+     		<table name="gts_detailArticle">
+     		</table>
+     		<id-class class="fr.symphonie.cpwin.model.pk.YearlyCodeKey"></id-class>
+     		<attributes>
+     			<id name="exercice">
+     				<column name="num_exec"></column>
+     			</id>
+     			<id name="code">
+     				<column name="code_article"></column>
+     			</id>
+     			<basic name="pu">
+     			</basic>
+     			<basic name="tva">
+     			</basic>
+     			<basic name="imputTtc">
+     			<column name="imput_ttc"></column>
+     			</basic>
+     			<basic name="imputTva">
+     			<column name="imput_tva"></column>
+     			</basic>
+     			<basic name="noLbi">
+     			<column name="no_lbi"></column>
+     			</basic>
+     			<many-to-one name="article">
+     				<join-column name="code_article" referenced-column-name="code" insertable="false" updatable="false"></join-column>
+     			</many-to-one>
+     			<embedded name="destination">
+     				<attribute-override name="code">
+     					<column name="code_dest"></column>
+     				</attribute-override>
+     			</embedded>
+     			<embedded name="nature">
+     				<attribute-override name="code">
+     					<column name="code_nature" ></column>
+     				</attribute-override>
+     			</embedded>
+     			<embedded name="service">
+     				<attribute-override name="code">
+     					<column name="code_service"></column>
+     				</attribute-override>
+     			</embedded>
+     			<embedded name="programme">
+     				<attribute-override name="code">
+     					<column name="code_prog"></column>
+     				</attribute-override>
+     			</embedded>
+     			<embedded name="compteProduit">
+     				<attribute-override name="code">
+     					<column name="imput_htd"></column>
+     				</attribute-override>
+     			</embedded>
+     			<embedded name="trace">
+     			</embedded>
+     		</attributes>
+     	</entity>
+     	<entity class="fr.symphonie.tools.gts.model.PeriodeGts">
+     	<table name="gts_periode">
+     		</table>
+     		<id-class class="fr.symphonie.cpwin.model.pk.YearlySeqKey"></id-class>
+     		<attributes>
+     			<id name="exercice">
+     				<column name="num_exec"></column>
+     			</id>
+     			<id name="numero">
+     			</id>
+     			<basic name="etat">
+     			</basic>
+     			<basic name="closed">
+     				<column name="ferme"></column>
+     			</basic>
+     			<embedded name="trace">
+     			</embedded>
+     		</attributes>
+     	</entity>
+     	<entity class="fr.symphonie.tools.gts.model.ClientGts">
+     		<table name="gts_client">
+     		</table>
+     		<attributes>
+     			<id name="code">
+     				<column name="code_gts"></column>
+     			</id>
+     			<basic name="nom">
+     			</basic>
+     			<basic name="codeCpwin">
+     				<column name="code_cpwin"></column>
+     			</basic>
+     			<basic name="noAdresseCpwin">
+     				<column name="no_adr"></column>
+     			</basic>
+     			<basic name="regisseur">
+     				<column name="est_regisseur"></column>
+     			</basic>
+     			<embedded name="trace">
+     			</embedded>
+     		</attributes>
+     	</entity>
+     	<entity class="fr.symphonie.tools.gts.model.ImportedData">
+     		<table name="gts_import">
+     		</table>
+     		<attributes>
+     			<id name="id">
+     				<column column-definition="numeric" nullable="false" unique="true"></column>
+     				<generated-value strategy="IDENTITY"></generated-value>
+     			</id>
+     			<basic name="exercice">
+     				<column name="num_exec"></column>
+     			</basic>
+     			<basic name="numero">
+     				<column name="no_periode"></column>
+     			</basic>
+     			<basic name="codeArticle">
+     				<column name="code_article"></column>
+     			</basic>
+     			<basic name="pu">
+     			</basic>
+     			<basic name="tauxRemise">
+     				<column name="taux_remise"></column>
+     			</basic>
+     			<basic name="quantite">
+     			</basic>
+     			<basic name="codeClientGts">
+     				<column name="code_clientGts"></column>
+     			</basic>
+     			<basic name="refCommande">
+     				<column name="ref_commande"></column>
+     			</basic>
+     			<basic name="serviceClient">
+     				<column name="service_client"></column>
+     			</basic>
+     			<basic name="objet">
+     			</basic>
+     			<embedded name="trace">
+     			</embedded>
+     		</attributes>
+     	</entity>
+     	<entity class="fr.symphonie.tools.gts.model.LiqRecette">
+     		<table name="gts_recliq">
+     		</table>
+     		<id-class class="fr.symphonie.cpwin.model.pk.YearlySeqKey"></id-class>
+     		<attributes>
+     			<id name="exercice">
+     				<column name="num_exec"></column>
+     			</id>
+     			<id name="numero">
+     				<column name="no_lrec"></column>
+     			</id>
+     			<basic name="numPeriode">
+     				<column name="no_periode"></column>
+     			</basic>
+     			<basic name="libelle">
+     				<column name="lib_lrec"></column>
+     			</basic>
+     			<basic name="tiersOrigine">
+     				<column name="tiers_orig"></column>
+     			</basic>
+     			<basic name="debiteur">
+     				<column name="debiteur"></column>
+     			</basic>
+     			<basic name="noAdresse">
+     				<column name="adr_tiers"></column>
+     			</basic>
+     			<basic name="imputHt">
+     				<column name="imput_ht"></column>
+     			</basic>
+     			<basic name="imputTtc">
+     				<column name="imput_ttc"></column>
+     			</basic>
+     			<basic name="imputTva">
+     				<column name="imput_tva"></column>
+     			</basic>
+     			<basic name="noLbi">
+     				<column name="no_lbi"></column>
+     			</basic>
+     			<basic name="refCommande">
+     				<column name="ref_cde"></column>
+     			</basic>
+     			<basic name="modePaie">
+     				<column name="moda_paie"></column>
+     			</basic>
+     			<basic name="differe">
+     				<column name="est_differe"></column>
+     			</basic>
+     			<one-to-many name="details" mapped-by="liqRecette" fetch="EAGER">
+     				<cascade>
+     					<cascade-all />
+     				</cascade>
+     			</one-to-many>
+     			<embedded name="trace">
+     			</embedded>
+     		</attributes>
+     	</entity>
+     	<entity class="fr.symphonie.tools.gts.model.LigneRecette">
+     		<table name="gts_recligne">
+     		</table>
+     		<id-class class="fr.symphonie.tools.gts.model.pk.LigneRecettePK"></id-class>
+     		<attributes>
+     			<id name="exercice">
+     				<column name="num_exec"></column>
+     			</id>
+     			<id name="numero">
+     				<column name="no_ligne"></column>
+     			</id>
+     			<id name="noLiqRec">
+     				<column name="no_lrec"></column>
+     			</id>
+     			<basic name="quantite">
+     			</basic>
+     			<basic name="pu">
+     			</basic>
+     			<basic name="tauxRemise">
+     			<column name="taux_Remise"></column>
+     			</basic>
+     			<basic name="mntRemise">
+     			<column name="mnt_remise"></column>
+     			</basic>
+     			<basic name="tauxTva">
+     			<column name="taux_tva"></column>
+     			</basic>
+     			<basic name="mntTva">
+     			<column name="mnt_tva"></column>
+     			</basic>
+     			<basic name="mntHt">
+     			<column name="mnt_ht"></column>
+     			</basic>
+     			<basic name="mntTtc">
+     			<column name="mnt_ttc"></column>
+     			</basic>
+     			<basic name="libelle">
+     				<column name="lib_pres"></column>
+     			</basic>
+     			<many-to-one name="liqRecette">
+     				<join-column name="num_exec" referenced-column-name="num_exec" insertable="false" updatable="false" unique="false" nullable="false"></join-column>
+     				<join-column name="no_lrec" referenced-column-name="no_lrec" insertable="false" updatable="false" unique="false" nullable="false"></join-column>
+     			</many-to-one>
+     			<embedded name="prestation">
+     				<attribute-override name="code">
+     					<column name="code_pres"></column>
+     				</attribute-override>
+     			</embedded>
+     		</attributes>
+     	</entity>
+  
+  </entity-mappings>

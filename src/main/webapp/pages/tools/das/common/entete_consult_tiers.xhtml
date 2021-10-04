@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+
+
+		<h:outputLabel value="#{msgs['code.libelle.tiers']}" for="tiers"
+			styleClass="espace_entre_label_value" />
+		<p:inputText id="tiers" value="#{dasBean.codeTiers}" size="7" >
+			<p:ajax event="keyup" process="@this"	update=":detailsForm" global="false" />
+		</p:inputText>	
+	
+	
+		<h:outputLabel value="#{msgs['siret']}" for="numSiren"
+			styleClass="espace_entre_label_value" />
+		<p:inputText id="numSiren" value="#{dasBean.numSiret}" size="7" >
+			<p:ajax event="keyup" process="@this"	update=":detailsForm" global="false"/>
+		</p:inputText>	
+
+
+	
+	
+
+</ui:composition>
+
+
+
+
+
+

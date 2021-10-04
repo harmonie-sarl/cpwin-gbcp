@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h:panelGroup>
+		
+		<p:autoComplete id="tiers"
+			value="#{autCmpltTrsValue}" required="#{autCmpltTrsRequired}"
+			requiredMessage="#{errorMsgs['cpwin.required']}" style="#{autCmpltTrsStyle}"
+			size="#{autCmpltTrsSize}" completeMethod="#{gestionTiersBean.autoCompleteTiers}"
+			converter="convert.tiers" var="tiers"
+			itemLabel="#{tiers.description}" itemValue="#{tiers}"
+			minQueryLength="#{gestionTiersBean.minAjaxQL}"
+			maxResults="#{gestionTiersBean.maxAjaxResult}"
+			title="#{gestionTiersBean.ajaxTitleMsg}">
+			
+			<p:ajax event="itemSelect" process="@this" global="false"
+				update="#{autCmpltTrsUpdate}"  />
+	  <p:ajax event="blur" process="@this" global="false"
+				update="#{autCmpltTrsUpdate}"  />
+		</p:autoComplete>
+		<p:message for="tiers" styleClass="error" />
+	</h:panelGroup>
+</ui:composition>

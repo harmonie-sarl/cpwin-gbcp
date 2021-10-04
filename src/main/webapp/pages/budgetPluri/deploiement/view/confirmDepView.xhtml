@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>#{msgs['ajouter.ligne']}</title>
+		<style type="text/css">
+.redStyle {
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+</style>
+	</h:head>
+
+	<h:body>
+		<h:form id="ligneDepForm">
+<p:messages id="addLigneDep_msg" showDetail="true"  autoUpdate="true" styleClass="error" globalOnly="true"  />
+			<p:panel style="width:100%;">
+
+				<h:panelGrid columns="2"
+					style="width:100%; vertical-align:top;align: left;"
+					columnClasses="colDataTable">
+
+					<h:outputText value="#{msgs['enveloppe.budgetaire']}" />
+					<h:panelGroup>
+						<h:outputText
+							value="#{bpBean.groupDestNatCp.entity1.codeAndLibelle}" />
+						<h:outputText
+							value="#{bpBean.groupDestNatCp.entity2.codeAndLibelle}" />
+
+
+					</h:panelGroup>
+
+
+
+
+					<h:panelGroup>
+
+						<h:outputText value="#{msgs['code.gest']}" />
+					</h:panelGroup>
+					<p:selectOneMenu styleClass="ReadOnlyText" required="true"
+						value="#{bpBean.gestionnaire}" style="width:300px">
+						<f:selectItem itemValue="" itemLabel="-------------" />
+						<f:selectItems value="#{loaderBean.listGetionnaires}" var="gest"
+							itemLabel="#{gest.codeAndLibelle}"							
+							itemDisabled="#{gest.code=='RESERVE'}"
+							 itemValue="#{gest.code}">
+						</f:selectItems>
+						<p:ajax process="@this" update="addLigneDep_msg" />
+					</p:selectOneMenu>
+
+
+
+				</h:panelGrid>
+
+
+			</p:panel>
+
+
+			<h:panelGroup>
+				<div align="center" style="width: 100%;">
+					<p:commandButton value="#{msgs['btn.valider']}"
+					immediate="true" process="@this"
+					update="addLigneDep_msg"
+						actionListener="#{bpBean.validateAddLigneDep}" >
+
+					</p:commandButton>
+					<p:commandButton value="#{msgs['btn.fermer']}" immediate="true"
+						actionListener="#{bpBean.closeAddLigneDepDialog}">
+					</p:commandButton>
+				</div>
+			</h:panelGroup>
+		</h:form>
+	</h:body>
+</ui:composition>

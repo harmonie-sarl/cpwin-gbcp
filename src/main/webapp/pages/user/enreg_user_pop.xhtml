@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title>#{msgs['ajoutUtilisateur.popUp']}</title>
+	<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+
+.colDataTable {
+	width: 15%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+}
+</style>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:messages id="userMsg" showDetail="true" autoUpdate="true"
+			styleClass="error" globalOnly="true" />
+
+		<p:panel id="Panel1" style="width:100%;">
+
+
+
+
+			<h:panelGroup id="enregUserPG">
+
+				<h:panelGrid columns="4" style="width:100%; vertical-align:top;"
+					columnClasses="col11,col21,col31,col41">
+					<h:panelGroup>
+						<h:outputText value="#{msgs['login']}" />
+						<h:outputText value=" *" rendered="false" styleClass="required"></h:outputText>
+					</h:panelGroup>
+					<p:inputText id="userLogin" value="#{userBean.selectedUser.login}" readonly="true"
+						disabled="#{userBean.loginReadOnly}" size="17">
+						<p:ajax event="change" update=":form:userLogin" />
+					</p:inputText>
+					<h:panelGroup>
+						<h:outputText value="#{msgs['nom']} et #{msgs['prenom']}"></h:outputText>
+						<h:outputText rendered="false" value=" *" styleClass="required"></h:outputText>
+					</h:panelGroup>
+					<p:inputText id="nom" value="#{userBean.selectedUser.lastName}" readonly="true"
+						size="40">
+						<p:ajax event="change" update=":form:nom" />
+					</p:inputText>
+					
+					
+					<h:outputText value="#{msgs['actif']}" />
+					<h:selectOneRadio id="selectEnabledRadio" styleClass="boutonRadio" disabled="true"
+						value="#{userBean.selectedUser.enabled}">
+						<f:selectItem id="enabled" itemLabel="#{msgs['btn.radio.yes']}"
+							itemValue="true" />
+						<f:selectItem id="disabled" itemLabel="#{msgs['btn.radio.no']}"
+							itemValue="false" />
+					</h:selectOneRadio>
+					<h:panelGroup>
+						<h:outputText value="#{msgs['role']}" />
+						<h:outputText value=" " styleClass="required"></h:outputText>
+					</h:panelGroup>
+					<h:selectManyListbox value="#{userBean.selectedRoleList}" style="width: 100%;">
+						<f:selectItems value="#{userBean.froleValue}" />
+							<p:ajax process="@this" ></p:ajax>
+					</h:selectManyListbox>
+				</h:panelGrid>
+				<c:set target="#{userBean.selectedUser}" property="firstName"
+					value="default value"></c:set>
+
+	<h:panelGroup>
+		<div align="center" style="width: 100%;">
+        	 <p:commandButton value="#{msgs['btn.valider']}" process="@this"  immediate="true"
+        	 actionListener="#{userBean.addOrUpdateUser}"  update=":form:userMsg,:form:enregUserPG"> 
+        	 
+        	 </p:commandButton>	               	                     		   		 
+	        <p:commandButton value="#{msgs['btn.fermer']}" immediate="true"   actionListener="#{userBean.closeEnregUserDialog}">
+	        </p:commandButton> 
+	        </div>
+	        </h:panelGroup>
+
+
+
+
+
+				
+					<div align="left"><h:outputText rendered="false"
+					value="(*) #{msgs['required']}" styleClass="required" /></div>
+			</h:panelGroup>
+		</p:panel>
+
+	</h:form>
+</h:body>
+
+</html>

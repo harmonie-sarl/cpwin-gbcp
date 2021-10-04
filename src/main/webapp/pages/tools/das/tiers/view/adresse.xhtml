@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+
+<h:panelGrid columns="4" cellspacing="4" >
+
+  <h:outputText value="#{msgs['das.adresse']}" />	
+   <p:inputText value="#{dasBean.selectedTiers.adresse.complement}" size="32" maxlength="32"></p:inputText>
+
+       <h:panelGroup />
+		   <h:panelGroup />
+</h:panelGrid>
+  
+        <p:panel header="Adresse voie:">
+        <h:panelGrid columns="2" columnClasses="label, value">
+        <h:outputText value="#{msgs['num.dans.voie']}" />
+		<p:inputText value="#{dasBean.selectedTiers.adresse.voie.numero}" size="4" maxlength="4" ></p:inputText>
+				
+   <h:outputText value="#{msgs['BTQC']}" />	
+   	<p:selectOneMenu id="BTQC" styleClass="ReadOnlyText"
+			value="#{dasBean.selectedTiers.adresse.voie.type}">
+
+			<f:selectItem itemValue="" itemLabel="-----" />
+			<f:selectItems value="#{dasBean.btqcList}" var="btqc"
+				itemLabel="#{btqc.designation}" itemValue="#{btqc.value}">
+			</f:selectItems>
+		
+		</p:selectOneMenu>
+
+   <h:outputText value="#{msgs['nature.nom.voie']}" />	
+   <p:inputText value="#{dasBean.selectedTiers.adresse.voie.natureEtNom}" size="26" maxlength="26" ></p:inputText>
+   </h:panelGrid>
+</p:panel>
+
+  <p:panel header="Adresse commune:">
+
+   <h:panelGrid columns="2" columnClasses="label, value">
+         
+        <h:outputText value="#{msgs['das.insee']}" />
+		<p:inputText value="#{dasBean.selectedTiers.adresse.codeINSEE}" size="5" maxlength="5" ></p:inputText>
+				
+   <h:outputText value="#{msgs['das.commune']}" />	
+   <p:inputText value="#{dasBean.selectedTiers.adresse.commune}" size="26" maxlength="26" ></p:inputText>
+
+         <h:panelGroup />
+		   <h:panelGroup />
+		   </h:panelGrid>
+</p:panel>
+		   
+		    <p:panel header="Adresse bureau distributeur :">
+		     <h:panelGrid columns="2" columnClasses="label, value">
+		    
+		    <h:outputText value="#{msgs['code.postal']}" />	
+   <p:inputText value="#{dasBean.selectedTiers.adresse.codePostale}" size="5" maxlength="5" ></p:inputText>
+		   
+		    <h:outputText value="#{msgs['das.distrub']}" />	
+   <p:inputText value="#{dasBean.selectedTiers.adresse.bureau}" 
+   
+   
+   size="26" maxlength="26"></p:inputText>
+		    </h:panelGrid>
+		  
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p:panel>
+
+</ui:composition>

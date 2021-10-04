@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+		<ui:define name="lastPrefexedTitle"></ui:define>
+	<ui:define name="pageTitle"></ui:define>
+	<ui:define name="entetePage">
+	<ui:include src="./common/entete.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="search">
+			
+	
+	</ui:define>
+	<ui:define name="enteteAction">
+	
+		
+			<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}" rendered="#{true or editionBean.permitted}"
+			update="globalMessage,:enteteForm, :detailsForm:budgetPanel" actionListener="#{editionBean.search}"  >
+	<ui:param name="statusRendered" value="true"/>
+		</p:commandButton>
+		
+		<p:commandButton value="#{msgs['gbcp.btn.recuperer']}" rendered="#{false and (editionBean.editionGenerated)}" immediate="true"
+					ajax="false">
+		<p:fileDownload value="#{editionBean.savedEditionBi}" />
+		</p:commandButton>
+		
+		
+		
+	</ui:define>
+
+	<ui:define name="details">
+
+		
+		<p:panel id="budgetPanel" style="width:100%;">
+		
+			<div align="center" style="width: 100%;">
+				
+				
+				
+				<h:panelGroup>
+					
+					<p:commandButton title=" " value="#{msgs['budget.btn.export']}" rendered="#{editionBean.editionBi!=null}" immediate="true"
+					ajax="false" disabled="#{false and (editionBean.editionGenerated)}">
+						<p:fileDownload value="#{editionBean.xlsEditionBi}" />	
+						</p:commandButton>
+
+					<p:commandButton immediate="true" update="globalMessage"
+						rendered="#{ (editionBean.editable)}"
+						actionListener="#{editionBean.prepareValidatEdit}"
+						value="#{msgs['btn.valider']}" title=" " >
+						<p:ajax event="dialogReturn" update=":detailsForm:budgetPanel,:enteteForm" />
+					</p:commandButton>
+				</h:panelGroup>
+				<br />
+			</div>
+	<h:panelGroup   id="editionBiPG" >
+		<p:tabView id="ongletsEditionBi" style="width:100%;" rendered="#{(editionBean.editionBi!=null)}" 
+			cache="false" >
+			
+			 <p:ajax event="tabChange" listener="#{editionBean.onEditionTabChange}" update=":detailsForm:editionBiPG" />
+        	
+			<p:tab id="tab2" title="#{msgs['tab2']}" >
+					<ui:include src="/pages/editions/onglets/tab2.xhtml" />
+				</p:tab>	
+					<p:tab id="tab3" title="#{msgs['dep.par.dest']}" >
+					<ui:include src="/pages/editions/onglets/tab3.xhtml" />
+				</p:tab>	
+					<p:tab id="tab4" title="#{msgs['tab4.equi.financier']}" >
+					<ui:include src="/pages/editions/onglets/tab4.xhtml" />
+				</p:tab>		
+				<p:tab id="tab5" title="#{msgs['tab5.compte.tiers']}" >
+					<ui:include src="/pages/editions/onglets/tab5.xhtml" />
+				</p:tab>		
+			<p:tab id="tab6" title="#{msgs['cr']}" >
+					<ui:include src="/pages/editions/onglets/tab6.xhtml" />
+				</p:tab>
+				<p:tab id="tab7" title="#{msgs['tab.tresorerie']}" >
+					<ui:include src="/pages/editions/onglets/tab7.xhtml" />
+				</p:tab>
+					<p:tab id="tab8" title="#{msgs['tab8']}" >
+					<ui:include src="/pages/editions/onglets/tab8.xhtml" />
+				</p:tab>
+				<p:tab id="tab" title="#{msgs['operation.pluri.ann']}"  >
+					<ui:include src="/pages/editions/onglets/tab.xhtml" />
+				</p:tab>
+				<p:tab id="tab10" title="#{msgs['tab10.synthese']}"  >
+					<ui:include src="/pages/editions/onglets/tab10.xhtml" />
+				</p:tab>
+		</p:tabView>
+	</h:panelGroup>
+	
+		
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+		
+	</ui:define>
+</ui:composition>

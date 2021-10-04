@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	
+	<ui:define name="pageTitle"></ui:define>
+	<ui:define name="entetePage">
+	
+		<h:outputLabel value="#{msgs['cpwin.exercice']}" />
+		<p:selectOneMenu id="exercList" styleClass="ReadOnlyText"
+			value="#{searchBean.exercice}">
+			<f:selectItem itemValue="" itemLabel="-----" />
+			<f:selectItems value="#{loaderBean.exercicAeList}" var="exerc"
+				itemLabel="#{exerc}" itemValue="#{exerc}">
+			</f:selectItems>
+			<p:ajax listener="#{cfBean.onExerciceChange}" process="@this"
+				update="budgetCodeList,:detailsForm,:enteteForm" />
+		</p:selectOneMenu>
+
+		<h:outputLabel value="#{msgs['budget.code']}" />
+		<p:selectOneMenu id="budgetCodeList" styleClass="ReadOnlyText"
+			value="#{searchBean.codeBudget}">
+			<f:selectItem itemValue="" itemLabel="-----" />
+			<f:selectItems value="#{loaderBean.listBudgets}" var="budg"
+				itemLabel="#{budg}" itemValue="#{budg}">
+			</f:selectItems>
+			<p:ajax process="@this" update=":detailsForm,:enteteForm" />
+		</p:selectOneMenu>
+		
+	</ui:define>
+	<ui:define name="search"/>
+
+	<ui:define name="enteteAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}"
+			disabled="#{!cfBean.requiredDataDone}"
+			update="globalMessage,:enteteForm, :detailsForm:budgetPanel"
+			actionListener="#{cfBean.search}">
+			<ui:param name="statusRendered" value="true" />
+		</p:commandButton>
+	</ui:define>
+
+	<ui:define name="details">
+
+		<p:panel id="budgetPanel" style="width:100%;">
+         <div align="center" style="width: 100%;">
+				
+				
+				
+				<h:panelGroup>
+
+					<p:commandButton id="export_btn" title=" " value="#{msgs['budget.btn.export']}"
+						rendered="#{cfBean.cfVentilationList!=null}"  ajax="false">
+						<p:fileDownload value="#{cfBean.xlsSF}" />
+					</p:commandButton>	
+						
+				</h:panelGroup>
+				<br />
+			</div>
+
+			<h:panelGroup id="editionBiPG">
+				<p:tabView id="ongletsEditionBi" style="width:100%;"
+					rendered="#{cfBean.cfVentilationList!=null}" cache="false"
+					activeIndex="0">
+
+					<p:tab id="ctrlImputSF" title="#{msgs['ctrlImputSF']}">
+						<ui:include src="/pages/cpt_financier/onglets/ctrlImputSF.xhtml" />
+					</p:tab>
+				</p:tabView>
+			</h:panelGroup>
+
+
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+
+	</ui:define>
+</ui:composition>

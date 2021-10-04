@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="../../templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+
+</style>
+	</ui:define>
+	<ui:define name="pageTitle">#{msgs['datatable.buget.pluri.annuel.adressage.import']}</ui:define>
+	<ui:define name="entetePage">
+		<ui:include src="/snippets/budget/entete.xhtml"></ui:include>
+	</ui:define>
+	
+	<ui:define name="searchPage">		
+		<div  align="center">
+			<h:panelGroup rendered="#{bpBean.budget!=null}">
+			
+						<p:fileUpload label="Importer" skinSimple="true"  id ="fileupload" fileUploadListener="#{bpBean.readInputFile}"  auto="true" image="/images/browse.png" 
+						height="48" width="48"   update="detailsForm:onglets"
+						allowTypes="/(\.|\/)(xls|xlsx)$/"  rendered="true" >
+						
+						</p:fileUpload>	
+					</h:panelGroup>	
+				</div>
+	</ui:define>
+	<ui:define name="enteteAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}" actionListener="#{bpBean.searchBudget}" update=":enteteForm,enteteForm:searchPanel">
+          
+		</p:commandButton>
+	</ui:define>
+	<ui:define name="details">
+	
+	
+	<h:panelGrid id="onglets" style="width:100%;vertical-align:top;">
+	
+	<p:tabView id="ongletsImport" style="width:100%;" cache="false"
+				activeIndex="0">
+				
+		<p:tab rendered="#{not empty bpBean.importList}" id="importData_tab" title="#{msgs['budget.data.import.tab']}">	
+		
+    	    <ui:include src="/pages/budgetPluri/ongles/import/importData.xhtml" />
+    	   
+		</p:tab>
+		
+		<p:tab id="simulateData_tab" rendered="#{not empty bpBean.importTree}" title="#{msgs['budget.data.simulate.tab']}" >
+		
+		     <ui:include src="/pages/budgetPluri/ongles/import/simulatedDataView.xhtml" />
+			
+		</p:tab>
+		
+		<p:tab id="rapportError_tab" rendered="#{not empty bpBean.importErrorList}"   title="#{msgs['budget.data.error.tab']}" >
+		
+			<ui:include src="/pages/budgetPluri/ongles/import/errorImportDataView.xhtml" />
+			
+		</p:tab>
+	</p:tabView>
+	</h:panelGrid>
+	</ui:define>
+	
+	
+	
+	</ui:composition>

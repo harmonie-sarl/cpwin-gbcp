@@ -1,0 +1,110 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+	<ui:define name="lastPrefexedTitle">
+
+	</ui:define>
+	<ui:define name="entete">
+		<ui:include src="../common/entete.xhtml"></ui:include>
+	</ui:define>
+
+	<ui:define name="search">
+
+			
+		
+
+
+
+	</ui:define>
+
+
+	<ui:define name="details">
+
+
+		<p:panel id="importPanel" style="width:100%;">
+		
+		
+		
+			
+			
+
+			<div align="center">
+			<h:panelGrid id="btn_grid" columns="4" cellspacing="20">
+			<p:commandButton immediate="true" title="" rendered="#{impRecBean.validateAutorized}"
+					value="#{msgs['btn.valider']}" id="validate_btn" disabled="#{impRecBean.validationCompleted}"
+					update="globalMessage,:detailsForm:importPanel"
+					actionListener="#{impRecBean.executeValidateRecette}">
+
+				</p:commandButton>
+				  <p:commandButton immediate="true" title="" rendered="#{impRecBean.generateAutorized }"
+					value="#{msgs['generer']}" id="generate_btn" disabled="#{impRecBean.generateLiqExecuted}"
+					update="globalMessage,:detailsForm:importPanel"
+					actionListener="#{impRecBean.generer}">
+
+				</p:commandButton>
+			
+					
+					
+		
+				</h:panelGrid>
+			</div>
+
+			<p:tabView id="ongletsImport" style="width:100%;" cache="false" activeIndex="0"  rendered="#{not empty impRecBean.objet}" >
+
+			<p:tab id="tabRecetLigneBudg" rendered="#{not empty impRecBean.objet}" closable="false"
+				
+				 title="#{msgs['liste.recettes']} #{impRecBean.recetCount}">
+				
+		
+								<ui:include src="./onglets/recettes.xhtml"  />			
+				
+			
+				</p:tab>
+		<p:tab id="tabLiqRcetGenr" rendered="#{(impRecBean.liqRecetteVisible) or (impRecBean.generateAutorized)}" title="#{msgs['liquid.recet.generer']} #{impRecBean.liqRecetteCount}">
+				
+									<ui:include src="./onglets/liq_recet_gener.xhtml" />	
+				
+				</p:tab>
+				
+				<p:tab id="tabErreurs" rendered="#{impRecBean.errorReportVisible}" title="#{msgs['budget.data.error.tab']} #{impRecBean.erreursCount}">
+				
+									<ui:include src="./onglets/rapport_erreurs.xhtml" />	
+				
+				</p:tab>
+
+			</p:tabView>
+
+
+
+
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+	<p:confirmDialog message="#{msgs['confirm.suppression.recette']}"
+			header="" widgetVar="confSupprRecette" modal="true">
+			<h:panelGrid width="100%" style="text-align: center;"
+				id="confSupprAdresseGrid">
+				<h:panelGroup>
+					<p:commandButton value="#{msgs['btn.valider']}"
+						oncomplete="PF('confSupprRecette').hide();"
+						actionListener="#{impRecBean.executeDeleteRecette}"
+						update="detailsForm:importPanel" />
+					<p:commandButton value="#{msgs['btn.annuler']}"
+						onclick="PF('confSupprRecette').hide();" type="button" />
+				</h:panelGroup>
+			</h:panelGrid>
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>

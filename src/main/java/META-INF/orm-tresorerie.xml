@@ -1,0 +1,245 @@
+<entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+  version="2.0">
+	<mapped-superclass class="fr.symphonie.budget.core.model.plt.GenericLigneTresorerie">
+	<attributes>
+				
+			<basic name="montant03">
+			<column name="mt_03" column-definition="money default 0"></column>
+			</basic>
+			<basic name="montant04">
+			<column name="mt_04" column-definition="money default 0"></column>
+			</basic>
+			<basic name="montant12">
+			<column name="mt_12" column-definition="money default 0"></column>
+			</basic>
+			<basic name="montant06">
+			<column name="mt_06" column-definition="money default 0"></column>
+			</basic>
+			<basic name="montant07">
+			<column name="mt_07" column-definition="money default 0"></column>
+			</basic>
+			<basic name="montant01">
+			<column name="mt_01" column-definition="money default 0"></column>
+			</basic>
+			<basic name="montant09">
+			<column name="mt_09" column-definition="money default 0"></column>
+			</basic>
+			<basic name="montant05">
+			<column name="mt_05" column-definition="money default 0"></column>
+			</basic>
+			<basic name="montant02">
+			<column name="mt_02" column-definition="money default 0"></column>
+			</basic>
+			<basic name="montant08">
+			<column name="mt_08" column-definition="money default 0"></column>
+			</basic>
+			<basic name="montant11">
+			<column name="mt_11" column-definition="money default 0"></column>
+			</basic>
+			<basic name="montant10">
+			<column name="mt_10" column-definition="money default 0"></column>
+			</basic>			
+			
+			<one-to-one name="ligne">
+				<join-column name="num_exec" referenced-column-name="num_exec" insertable="false" updatable="false" unique="false" nullable="false"></join-column>
+				<join-column name="no_ltr" referenced-column-name="no_ltr" insertable="false" updatable="false" unique="false" nullable="false"></join-column>
+			</one-to-one>
+			<embedded name="trace">
+			</embedded>
+			
+			</attributes>
+	</mapped-superclass>
+	<entity class="fr.symphonie.budget.core.model.plt.LigneTresorerie">
+		<table name="BudgTresorerieLigne">
+		</table>
+		<id-class class="fr.symphonie.cpwin.model.pk.YearlySeqKey"></id-class>
+		<attributes>
+			<id name="numero">
+				<column name="no_ltr"></column>
+			</id>
+			<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<basic name="numeroParent">
+				<column name="no_ltr_grp"></column>
+			</basic>
+			<basic name="ordre">
+				<column name="num_ordre"></column>
+			</basic>
+			<basic name="libelle">
+				<column name="lib_ltr"></column>
+			</basic>
+			<basic name="typeOp">
+				<column name="enc_dec"></column>
+			</basic>
+			<basic name="type">
+				<column name="type_ltr"></column>
+			</basic>
+			<basic name="categorie">
+				<column name="cat_ltr"></column>
+			</basic>
+			<embedded name="trace">
+			</embedded>
+			
+		</attributes>
+	</entity>
+	<entity class="fr.symphonie.budget.core.model.plt.DetailLigneTresorerie">
+		<table name="budgtresorerieplan">
+		</table>
+		<id-class class="fr.symphonie.budget.core.model.pk.PlanTresoreriePk"></id-class>
+		<inheritance strategy="TABLE_PER_CLASS"></inheritance>
+		<attributes>
+		<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="numero">
+				<column name="no_ltr"></column>
+			</id>
+			<id name="periode">
+				<column name="periode"></column>
+			</id>
+		
+			<basic name="montant13">
+			<column name="mt_13" column-definition="money default 0"></column>
+			</basic>
+			<basic name="montantInitiale">
+			<column name="mt_init" column-definition="money default 0"></column>
+			</basic>
+			<basic name="projetDM">
+			<column name="mt_projetDM" column-definition="money default 0"></column>
+			</basic>
+			<basic name="etat">
+			</basic>
+			<basic name="creditOuvert">
+			<column name="mt_co" column-definition="money default 0"></column>
+			</basic>
+		
+			<embedded name="realise">
+				<attribute-override name="visa">
+					<column name="visa_rea"></column>
+				</attribute-override>
+				<attribute-override name="auteur">
+					<column name="aut_visa_rea" ></column>
+				</attribute-override>
+				<attribute-override name="date">
+					<column name="date_visa_rea"></column>
+				</attribute-override>
+			</embedded>
+			<embedded name="previsionnel">
+				<attribute-override name="visa">
+					<column name="visa_prev" ></column>
+				</attribute-override>
+				<attribute-override name="auteur">
+					<column name="aut_visa_prev" ></column>
+				</attribute-override>
+				<attribute-override name="date">
+					<column name="date_visa_prev" ></column>
+				</attribute-override>
+			</embedded>
+			
+		</attributes>
+	</entity>
+	<entity class="fr.symphonie.budget.core.model.plt.Ecriture">
+		<table name="ctaecritureoppiece ">
+		</table>
+		<id-class class="fr.symphonie.budget.core.model.pk.EcriturePk"></id-class>
+		<attributes>
+			<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="numero">
+				<column name="no_ecr"></column>
+			</id>
+			<id name="numeroOP">
+				<column name="no_op"></column>
+			</id>
+			<basic name="type">
+				<column name="type_ecr"></column>
+			</basic>
+			<basic name="libelle">
+				<column name="lib_ecr"></column>
+			</basic>
+			<basic name="tiers">
+			</basic>
+			<basic name="sens">
+				<column name="sens_ecr"></column>
+			</basic>
+			<basic name="montant">
+				<column name="mt_ecr"></column>
+			</basic>
+			<basic name="exerciceOrigine">
+				<column name="exec_orig"></column>
+			</basic>
+			<basic name="typePiece">
+				<column name="typ_piece"></column>
+			</basic>
+			<basic name="numeroPiece">
+				<column name="piece"></column>
+			</basic>
+			
+			<basic name="numeroLigne1">
+				<column name="no_ltr"></column>
+			</basic>
+			<basic name="montantLigne1">
+				<column name="mt_ltr"></column>
+			</basic>
+			<basic name="numeroLigne2">
+				<column name="no_ltr_regul "></column>
+			</basic>
+			<basic name="montantLigne2">
+				<column name="mt_ltr_regul"></column>
+			</basic>
+			<basic name="exerciceLigne">
+				<column name=" num_exec_ltr"></column>
+			</basic>
+			<basic name="periode">
+				<column name=" periode_ltr"></column>
+			</basic>
+		</attributes>
+	</entity>
+	<entity class="fr.symphonie.budget.core.model.plt.VentillationCO">
+		<table name="plantresorerieventilco">
+		</table>
+		<id-class class="fr.symphonie.cpwin.model.pk.YearlySeqKey"></id-class>
+		<inheritance strategy="TABLE_PER_CLASS"></inheritance>
+		<attributes>
+		<id name="exercice">
+				<column name="num_exec"></column>
+			</id>
+			<id name="numero">
+				<column name="no_ltr"></column>
+			</id>
+			<basic name="budgetInitiale">
+				<column name="bi"></column>
+			</basic>
+		</attributes>
+	</entity>
+	<entity class="fr.symphonie.budget.core.model.plt.ParamCompteLtr">
+		<table name="paramCompteLtr">
+		</table>
+		<id-class class="fr.symphonie.cpwin.model.pk.YearlyCodeKey"></id-class>
+     		<attributes>
+     			<id name="exercice">
+     				<column name="num_exec"></column>
+     			</id>
+			<id name="code">
+				<column name="code_compte"></column>
+			</id>
+			<basic name="codeTiers">
+				<column name="code_tiers"></column>
+			</basic>
+			<basic name="noLtrDep">
+				<column name="no_Ltr_Dep"></column>
+			</basic>
+			<basic name="noLtrRec">
+				<column name="no_Ltr_Rec"></column>
+			</basic>
+			<embedded name="trace">
+			</embedded>
+		</attributes>
+	</entity>
+  
+  </entity-mappings>

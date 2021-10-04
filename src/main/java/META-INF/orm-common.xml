@@ -1,0 +1,59 @@
+<entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+  version="2.0">
+  
+	<embeddable class="fr.symphonie.util.model.SimpleEntity">
+		<attributes>
+			<basic name="code">
+				<column name="code_"/>
+			</basic>
+			<transient name="designation"/>
+		</attributes>
+	</embeddable>
+	<embeddable class="fr.symphonie.util.model.Trace">
+		<attributes>
+			<basic name="dateCreation">
+				<column name="date_crea" nullable="false"/>
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="auteurCreation">
+				<column name="aut_crea" nullable="false" length="8"/>
+			</basic>
+			<basic name="auteurMaj">
+				<column name="aut_maj" length="8" nullable="false"/>
+			</basic>
+			<basic name="dateMaj">
+				<column name="date_maj" nullable="false"/>
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+		</attributes>
+	</embeddable>
+<embeddable class="fr.symphonie.cpwin.model.Contact">
+		<attributes>
+			<basic name="fax">
+				<column length="15"></column>
+			</basic>
+			<basic name="telephone">
+				<column name="tel" length="15"></column>
+			</basic>
+			<basic name="mail">
+				<column length="50"/>
+			</basic>
+		</attributes>
+	</embeddable>
+	<embeddable class="fr.symphonie.cpwin.model.Visa">
+		<attributes>
+			<basic name="visa">
+				<column name="visa_"/>
+			</basic>
+			<basic name="auteur">
+				<column name="aut_"/>
+			</basic>
+			<basic name="date">
+				<column name="date_"/>
+			</basic>
+		</attributes>
+	</embeddable>
+  </entity-mappings>

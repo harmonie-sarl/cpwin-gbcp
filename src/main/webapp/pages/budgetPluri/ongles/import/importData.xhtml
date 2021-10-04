@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+		<p:panel id="DataImportPanel" style="width:100%;">
+		<div align="center" style="width: 100%;">
+				
+				<p:dataTable id="importVentil_dtt" var="imp" 
+				value="#{bpBean.importList}"
+					style="width:100%; text-align: center;" rowIndexVar="index"
+					emptyMessage="#{msgs['datatable.empty']}"
+					 paginator="true" 
+					rows="10">
+						<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['num.ligne']}" />
+						</f:facet>
+
+						<h:outputText value="#{imp.rowNum}"  />
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['nature']}" />
+						</f:facet>
+
+						<h:outputText value="#{imp.groupNat}"  />
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['destination']}" />
+						</f:facet>
+
+						<h:outputText value="#{imp.groupDest}" />
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['import.nature']}" />
+						</f:facet>						
+							<h:outputText  value="#{imp.nature}"/>
+						
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['import.destination']}" />
+						</f:facet>						
+							<h:outputText value="#{imp.destination}"/>
+						
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['import.programme']}" />
+						</f:facet>
+					<h:outputText value="#{imp.programme}"/>
+						
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['import.service']}" />
+						</f:facet>						
+							<h:outputText value="#{imp.service}"/>
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['montant']}" />
+						</f:facet>						
+							<h:outputText value="#{imp.montantAE}"/>
+					</p:column>
+					</p:dataTable>
+		</div>
+		</p:panel>
+		<div align="center" >
+		<p:commandButton disabled="#{not empty bpBean.importErrorList}" title=" "   value="#{msgs['btn.simulate']}" 
+		  update="detailsForm:onglets" 
+		actionListener="#{bpBean.simulateImport}"  >
+		
+				</p:commandButton>	
+				</div>
+	
+	</ui:composition>

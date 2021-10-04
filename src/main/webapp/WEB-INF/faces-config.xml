@@ -1,0 +1,758 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+ <application>
+  <action-listener>org.primefaces.application.DialogActionListener</action-listener>
+        <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
+        <view-handler>org.primefaces.application.DialogViewHandler</view-handler>
+        <navigation-handler>org.primefaces.mobile.application.MobileNavigationHandler</navigation-handler>
+ <!-- <variable-resolver>org.springframework.web.jsf.SpringBeanVariableResolver</variable-resolver> -->
+  <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+	<locale-config>
+   <default-locale>fr</default-locale>
+   <supported-locale>fr</supported-locale>
+  </locale-config>
+  <resource-bundle>
+   <base-name>ApplicationResources</base-name>
+   <var>msgs</var>
+  </resource-bundle>
+  <resource-bundle>
+   <base-name>ErrorMessage</base-name>
+   <var>errorMsgs</var>
+  </resource-bundle> 
+  <resource-bundle>
+   <base-name>config</base-name>
+   <var>config</var>
+  </resource-bundle>
+   <resource-bundle>
+   <base-name>edition</base-name>
+   <var>ed</var>
+  </resource-bundle>
+  <message-bundle>Messages</message-bundle>
+ </application>
+ <managed-bean>
+ <managed-bean-name>userBean</managed-bean-name>
+ <managed-bean-class>fr.symphonie.budget.ui.beans.UserBean</managed-bean-class>
+ <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+ <property-name>commonService</property-name>
+ <property-class>fr.symphonie.util.ICommonService</property-class>
+ <value>#{utilCommonService}</value>
+ </managed-property>
+ <managed-property>
+  	<property-name>savedContext</property-name>
+  	<property-class>fr.symphonie.web.jsf.beans.SavedContext</property-class>
+  	<value>#{savedContext}</value>
+  </managed-property>
+ </managed-bean>
+ <managed-bean>
+		<managed-bean-name>localeSelector</managed-bean-name>
+		<managed-bean-class>fr.symphonie.util.LocaleSelector</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>language</property-name>
+			<property-class>java.lang.String</property-class>
+			<value>fr</value>
+		</managed-property>
+	</managed-bean>
+	 <managed-bean>
+ 	<managed-bean-name>errorBean</managed-bean-name>
+ 	<managed-bean-class>fr.symphonie.web.jsf.beans.ErrorBean</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+ 	<description>sauvgarde des donnÃ©es utilisÃ©es durant la session</description>
+ 	<managed-bean-name>savedContext</managed-bean-name>
+ 	<managed-bean-class>fr.symphonie.web.jsf.beans.SavedContext</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+  <managed-bean>
+ 	<managed-bean-name>studentBean</managed-bean-name>
+ 	<managed-bean-class>fr.symphonie.tools.nantes.StudentBean</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+ 	<managed-bean-name>crcBean</managed-bean-name>
+ 	<managed-bean-class>fr.symphonie.tools.crc.CrcBean</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+ 	<managed-bean-name>signatBean</managed-bean-name>
+ 	<managed-bean-class>fr.symphonie.tools.signature.SignatureBean</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+  <managed-bean>
+ 	<managed-bean-name>initBean</managed-bean-name>
+ 	<managed-bean-class>fr.symphonie.common.InitializationBean</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+ 	<managed-bean-name>dpBean</managed-bean-name>
+ 	<managed-bean-class>fr.symphonie.tools.dp.DpBean</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+  <navigation-rule>
+  <from-view-id>*</from-view-id>
+  <navigation-case>
+   <from-outcome>home</from-outcome>
+   <to-view-id>/accueil.xhtml</to-view-id>
+  </navigation-case>
+</navigation-rule>
+
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>gestion_tiers</from-outcome>
+		<to-view-id>/pages/tiers/gestion_tiers.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>saisi_budget_pluri</from-outcome>
+		<to-view-id>/pages/budgetPluri/budgetPluriList.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>budgetPluriView</from-outcome>
+		<to-view-id>/pages/budgetPluri/budgetPluriView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>adressage_budget_pluri</from-outcome>
+		<to-view-id>/pages/budgetPluri/bi/ventillationCp_service.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>adressage_budget_pluri_cpDest</from-outcome>
+		<to-view-id>/pages/budgetPluri/bi/ventillationCp_dest.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ventillation_cp_gest</from-outcome>
+		<to-view-id>/pages/budgetPluri/bi/ventillationCp_gest.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>deploiement</from-outcome>
+		<to-view-id>/pages/budgetPluri/deploiement.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>adressage_budget_pluri_import</from-outcome>
+		<to-view-id>/pages/budgetPluri/adrBudgPlurImport.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+    <navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>saisi_etablissement_absorbe</from-outcome>
+		<to-view-id>/pages/agtCpt/saisi_etablissement_absorbe.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>notifier_etablissement_absorbe</from-outcome>
+		<to-view-id>/pages/agtCpt/notifier_etablissement_absorbe.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>avis_reglement</from-outcome>
+		<to-view-id>/pages/avis_reglement/avis_reglement.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>interlocuteur_recouvrement</from-outcome>
+		<to-view-id>/pages/agtCpt/interlocuteur_recouvrement.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>	
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>gestion_editions</from-outcome>
+		<to-view-id>/pages/editions/edition.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>	
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>situation_patrimoniale</from-outcome>
+		<to-view-id>/pages/editions/situation_patri.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>	
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>tableau_bord</from-outcome>
+		<to-view-id>/pages/tab_bord/tableau_de_bord.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>	
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>saisi_credit_paie</from-outcome>
+		<to-view-id>/pages/budgetPluri/saisi_credit_paie.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>saisi_credit_paie</from-outcome>
+		<to-view-id>/pages/budgetPluri/saisi_credit_paie.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>saisi_credit_paie</from-outcome>
+		<to-view-id>/pages/budgetPluri/saisi_credit_paie.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>saisi_credit_paie_br</from-outcome>
+		<to-view-id>/pages/budgetPluri/br/saisi_credit_paie.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ventil_gest_br</from-outcome>
+		<to-view-id>/pages/budgetPluri/br/ventillationCp_gest.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ventil_dest_br</from-outcome>
+		<to-view-id>/pages/budgetPluri/br/ventillationCp_dest.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ventil_serv_br</from-outcome>
+		<to-view-id>/pages/budgetPluri/br/ventillationCp_service.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ventil_ae_recette_origine</from-outcome>
+		<to-view-id>/pages/budgetPluri/bi/ventilRecetParOrigin.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>editions_br</from-outcome>
+		<to-view-id>/pages/editions/editionBR.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>donnees_externes</from-outcome>
+		<to-view-id>/pages/editions/extern_data.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>suivi_cp</from-outcome>
+		<to-view-id>/pages/budgetPluri/suivicp/suivi_cp.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>utilisateur</from-outcome>
+			<to-view-id>/pages/user/gestion_utilisateurs.xhtml</to-view-id>
+		</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>enreg_user_pop</from-outcome>
+		<to-view-id>/pages/user/enreg_user_pop.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ventilBrDestView</from-outcome>
+		<to-view-id>/pages/budgetPluri/br/ventilBrDestView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>interface_minefi</from-outcome>
+		<to-view-id>/pages/infocentre/interface_minefi.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<!--     <factory> -->
+<!--         <exception-handler-factory>org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory</exception-handler-factory> -->
+<!--     </factory> -->
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>validate_edition_dlg</from-outcome>
+		<to-view-id>/pages/editions/dialog/validate_edition_dlg.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>compte_financier</from-outcome>
+		<to-view-id>/pages/cpt_financier/compte_financier.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>param_bilan</from-outcome>
+		<to-view-id>/pages/cpt_financier/param_bilan.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>param_cr</from-outcome>
+		<to-view-id>/pages/cpt_financier/param_cr.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>val_bilan</from-outcome>
+		<to-view-id>/pages/cpt_financier/val_bilan.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>val_cr</from-outcome>
+		<to-view-id>/pages/cpt_financier/val_cr.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>val_cf</from-outcome>
+		<to-view-id>/pages/cpt_financier/val_cf.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>simul_tres</from-outcome>
+		<to-view-id>/pages/tresorerie/simulation/simulation.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ajust_tres</from-outcome>
+		<to-view-id>/pages/tresorerie/ajustement/ajustement.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ecrituresView</from-outcome>
+		<to-view-id>/pages/tresorerie/simulation/view/ecrituresView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ventil_tres</from-outcome>
+		<to-view-id>/pages/tresorerie/ventilation/ventilation.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ecritureView</from-outcome>
+		<to-view-id>/pages/tresorerie/simulation/view/ecritureView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>importTiers</from-outcome>
+		<to-view-id>/pages/tools/das/tiers/import.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>tiersView</from-outcome>
+		<to-view-id>/pages/tools/das/tiers/view/tiersView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>consult_tres</from-outcome>
+		<to-view-id>/pages/tresorerie/consultation/consultation.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>suivi_rec</from-outcome>
+		<to-view-id>/pages/budgetPluri/suivirecet/suivi_recette.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>import_honoraire</from-outcome>
+		<to-view-id>/pages/tools/das/honoraire/import.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>generer_honoraire</from-outcome>
+		<to-view-id>/pages/tools/das/honoraire/generer.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>suivi_tiers_honoraire</from-outcome>
+		<to-view-id>/pages/tools/das/honoraire/suivi_tiers.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>honoraireView</from-outcome>
+		<to-view-id>/pages/tools/das/honoraire/view/honoraireView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>consultTiers</from-outcome>
+		<to-view-id>/pages/tools/das/tiers/consult.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>modifDeploi</from-outcome>
+		<to-view-id>/pages/budgetPluri/deploiement/modification.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>confirmDepView</from-outcome>
+		<to-view-id>/pages/budgetPluri/deploiement/view/confirmDepView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>consultDeploi</from-outcome>
+		<to-view-id>/pages/budgetPluri/deploiement/consultation.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>init_tres</from-outcome>
+		<to-view-id>/pages/tresorerie/initialisation/initialisation.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>gts_import</from-outcome>
+		<to-view-id>/pages/tools/gts/import/import.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ref_artcile</from-outcome>
+		<to-view-id>/pages/tools/gts/referentiel/article/article.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>articleView</from-outcome>
+		<to-view-id>/pages/tools/gts/referentiel/article/view/articleView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>detailArticleView</from-outcome>
+		<to-view-id>/pages/tools/gts/referentiel/article/view/detailArticleView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ref_periode</from-outcome>
+		<to-view-id>/pages/tools/gts/referentiel/periode/periode.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+		<navigation-case>
+		<from-outcome>param_tres</from-outcome>
+		<to-view-id>/pages/tresorerie/parametrage/parametrage.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>paramView</from-outcome>
+		<to-view-id>/pages/tresorerie/parametrage/view/paramView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>gts_client</from-outcome>
+		<to-view-id>/pages/tools/gts/referentiel/client/client.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>periodeGtsView</from-outcome>
+		<to-view-id>/pages/tools/gts/referentiel/periode/view/periodeGtsView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>clientView</from-outcome>
+		<to-view-id>/pages/tools/gts/referentiel/client/view/clientView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>gts_generation</from-outcome>
+		<to-view-id>/pages/tools/gts/import/generation.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>gts_consultataion</from-outcome>
+		<to-view-id>/pages/tools/gts/import/consult.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>recetOriginView</from-outcome>
+		<to-view-id>/pages/budgetPluri/suivirecet/dialog/recet_origin_view.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>concil_tres</from-outcome>
+		<to-view-id>/pages/tresorerie/conciliation/conciliation.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>chargement_editions</from-outcome>
+		<to-view-id>/pages/editions/chargement.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>suivi_cf</from-outcome>
+		<to-view-id>/pages/budgetPluri/suiviCF/suiviCF.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>suivi_sf</from-outcome>
+		<to-view-id>/pages/budgetPluri/suiviSF/suiviSF.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>chargement_edit_br</from-outcome>
+		<to-view-id>/pages/editions/chargement_br.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>import_recette</from-outcome>
+		<to-view-id>/pages/tools/recette/import/import.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>suivi_ae</from-outcome>
+		<to-view-id>/pages/budgetPluri/suiviae/suivi_ae.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>PAYMEN_SEPA_saisie</from-outcome>
+		<to-view-id>/pages/tools/remboursement/PAYMEN_SEPA_Saisie.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>remboursement_saisie</from-outcome>
+		<to-view-id>/pages/tools/remboursement/remboursementSaisie.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>remboursement_consult</from-outcome>
+		<to-view-id>/pages/tools/remboursement/remboursementConsult.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>remboursement_gene</from-outcome>
+		<to-view-id>/pages/tools/remboursement/remboursementGenerer.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>meta4dai_saisi</from-outcome>
+		<to-view-id>/pages/tools/meta4dai/meta4DAISaisi.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>meta4dai_consult</from-outcome>
+		<to-view-id>/pages/tools/meta4dai/meta4DAIConsult.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>detailsEIView</from-outcome>
+		<to-view-id>/pages/tools/meta4dai/view/detailsEIView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>etudiant_chargement</from-outcome>
+		<to-view-id>/pages/tools/etudiants/loadScolarite.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>etudiant_miseajour</from-outcome>
+		<to-view-id>/pages/tools/etudiants/updateStudentData.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>etudiant_generation_dp</from-outcome>
+		<to-view-id>/pages/tools/etudiants/generationDP.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>crc_depense</from-outcome>
+		<to-view-id>/pages/tools/crc/depense.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>crc_recette</from-outcome>
+		<to-view-id>/pages/tools/crc/recette.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>signature</from-outcome>
+		<to-view-id>/pages/tools/signature/signature.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>signatureView</from-outcome>
+		<to-view-id>/pages/tools/signature/view/signatureView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>meta4dai_init</from-outcome>
+		<to-view-id>/pages/tools/meta4dai/initialisation/meta4DAIinit.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>gts_init</from-outcome>
+		<to-view-id>/pages/tools/gts/initialisation/gtsInit.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>generation_dp</from-outcome>
+		<to-view-id>/pages/tools/dp/generation.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+
+
+
+
+
+</faces-config>

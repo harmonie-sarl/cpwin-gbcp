@@ -1,0 +1,170 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+
+
+	
+	<p:panel id="tiersPanel" style="width:100%;" rendered="#{not empty impRecBean.objet}" >
+		
+		<h:panelGrid columns="5" cellspacing="20" style="width:100%; vertical-align:top;" >
+			<h:panelGrid columns="3"  cellpadding="20">
+				<p:outputLabel value="Tiers"></p:outputLabel>
+				<h:panelGroup>
+					<p:autoComplete id="tiers" disabled="#{impRecBean.validationCompleted}"
+						value="#{impRecBean.selectedTiers}" required="false" 
+						requiredMessage="#{errorMsgs['cpwin.required']}"
+						style="width: 30%;" size="30" converter="convert.tiers"
+						completeMethod="#{gestionTiersBean.autoCompleteTiers}" var="tiers"
+						itemLabel="#{tiers.description}" itemValue="#{tiers}"
+						minQueryLength="#{gestionTiersBean.minAjaxQL}"
+						maxResults="#{gestionTiersBean.maxAjaxResult}"
+						title="#{gestionTiersBean.ajaxTitleMsg}">
+						<p:ajax event="itemSelect"
+                          listener="#{impRecBean.onTiersSelected}"
+							update="globalMessage,selectedTiersdPanel,addBtn,amountPanel,tvaPanel"
+							process="@this" global="false" />
+
+					</p:autoComplete>
+					<p:message for="tiers" styleClass="error" />
+				</h:panelGroup>
+				<p:panelGrid id="selectedTiersdPanel" >
+					<f:facet name="header">
+
+						<p:row rendered="#{impRecBean.selectedTiers!=null}" >
+							<p:column style="text-align:center;width:7%">
+								<h:outputText styleClass="Label" value="#{msgs['code.tiers']}" />
+							</p:column>
+							<p:column style="text-align:center;width:8%">
+								<h:outputText styleClass="Label" value="#{msgs['nom']}" />
+							</p:column>
+					
+								<p:column style="text-align:center;width:13%">
+								<h:outputText styleClass="Label" value="#{msgs['adresse']}" />
+							</p:column>
+						
+						</p:row>
+					</f:facet>
+					<p:row rendered="#{impRecBean.selectedTiers!=null}">
+						<p:column>
+							<h:outputText value="#{impRecBean.selectedTiers.code}">
+
+							</h:outputText>
+						</p:column>
+						<p:column style="text-align:center;width:8%">
+							<h:outputText value="#{impRecBean.selectedTiers.nom}">
+
+							</h:outputText>
+						</p:column>
+					
+						<p:column style="text-align:center;width:13%">
+						
+						
+				<p:selectOneMenu id="adresseList" styleClass="ReadOnlyText" rendered="#{!impRecBean.adresseUnique}"
+			 value="#{impRecBean.selectedTiers.adresse.adresse}">
+
+			<f:selectItems value="#{impRecBean.selectedTiers.adressesList}" var="adr"
+				itemLabel="#{adr.adresse}" itemValue="#{adr.adresse}">
+			</f:selectItems>
+			<p:ajax process="@this" global="false"></p:ajax>
+		</p:selectOneMenu>
+							<h:outputText value="#{impRecBean.selectedTiers.adresse.adresse}" rendered="#{impRecBean.adresseUnique}">
+
+							</h:outputText>
+						</p:column>
+					
+					</p:row>
+
+				</p:panelGrid>
+				</h:panelGrid>
+				<h:panelGrid id="amountPanel" columns="2">
+					<h:outputLabel styleClass="espace_entre_label_value" rendered="#{impRecBean.selectedTiers!=null}"
+						style="font-weight:bold" value="#{msgs['montant']}" />
+
+					<p:inputText id="montant" value="#{impRecBean.amount}" rendered="#{impRecBean.selectedTiers!=null}" size="10" maxlength="32">
+						<p:ajax process="@this" update="addBtn"/>
+					</p:inputText>
+				</h:panelGrid>
+				<h:panelGrid id="tvaPanel" columns="2">
+					<h:outputLabel styleClass="espace_entre_label_value" rendered="#{impRecBean.selectedTiers!=null}"
+						style="font-weight:bold" value="#{msgs['taux.tva']}" />
+
+				<p:selectOneMenu id="tvaList" styleClass="ReadOnlyText" rendered="#{impRecBean.selectedTiers!=null}"
+			 value="#{impRecBean.tva}">
+
+			<f:selectItems value="#{impRecBean.listTva}" var="tva"
+				itemLabel="#{tva}" itemValue="#{tva}">
+			</f:selectItems>
+			<p:ajax process="@this" global="false"></p:ajax>
+		</p:selectOneMenu>
+				</h:panelGrid>
+			<p:commandButton title=" " value="#{msgs['btn.add']}" id="addBtn" actionListener="#{impRecBean.executeAddRecette}"  disabled="#{(impRecBean.selectedTiers==null) or (impRecBean.amount==null)}" 
+					update=":detailsForm,globalMessage,recet_list_dtt,selectedTiersdPanel,amountPanel,tvaPanel" >
+
+				</p:commandButton>
+       
+
+	</h:panelGrid>
+</p:panel>
+        	<p:dataTable id="recet_list_dtt"
+		rendered="#{not empty impRecBean.importedDataList}" var="recet" editable="true" editMode="cell"
+		style="width:100%;text-align:center" rowIndexVar="recetIndex"
+		emptyMessage="#{msgs['datatable.empty']}"
+		value="#{impRecBean.importedDataList}">
+		  <p:ajax event="cellEdit" listener="#{impRecBean.onRecetEdit}"  />
+		<p:columnGroup type="header">
+			<p:row style="text-align: center;">
+				<p:column headerText="#{msgs['tiers']}" />
+				<p:column headerText="#{msgs['montant']}" />
+				<p:column headerText="#{msgs['taux.tva']}" />
+				<p:column headerText="#{msgs['btn.supprimer']}" />
+			</p:row>
+		</p:columnGroup>
+		<p:column style="width:10%">
+			<h:outputText value="#{recet.tiers.description}" />
+		</p:column>
+		<p:column style="width:10%">
+			 <p:cellEditor>
+					<f:facet name="output"><h:outputText value="#{recet.montant}" >
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+					</f:facet>
+					 <f:facet name="input"><p:inputNumber  value="#{recet.montant}" >	
+					 </p:inputNumber>
+					
+					 </f:facet>
+					</p:cellEditor>
+			
+		</p:column>
+		<p:column style="width:10%">
+
+			<h:outputText value="#{recet.tauxTva}" styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		</p:column>
+			<p:column  style="text-align:center;width:5%">
+				<p:commandButton title=" " icon="deleteIcon" disabled="#{impRecBean.validationCompleted}"
+					onclick="PF('confSupprRecette').show();">
+					<f:setPropertyActionListener value="#{recet}"
+						target="#{impRecBean.recetToDelete}" />
+				</p:commandButton>
+					
+
+				</p:column>
+		<p:columnGroup type="footer">
+
+		</p:columnGroup>			
+			  	</p:dataTable>   
+			<div align="center" style="width: 100%;">
+		 
+		<p:commandButton title=" " value="#{msgs['budget.btn.export']}"
+			 immediate="true"
+			rendered="#{not empty impRecBean.importedDataList} and false" ajax="false">
+			<p:fileDownload value="#{impRecBean.xlsImportedDataList}" />
+		</p:commandButton>
+	</div>
+</ui:composition>

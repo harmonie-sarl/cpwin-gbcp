@@ -1,0 +1,148 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+
+
+		<div align="center">
+			<h:panelGroup>
+				
+			</h:panelGroup>
+		</div>
+        	<p:dataTable id="donneesCharges_dtt" sortBy="#{honoraire.beneficiaire.numero}"
+			rendered="#{dasBean.honoraires!=null}" var="honoraire"
+			style="width:100%;text-align:center" rowIndexVar="honoraireIndex"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{dasBean.honoraires}">
+ <p:columnGroup type="header">
+            <p:row  style="text-align: center;">
+                <p:column    colspan="4" headerText="#{msgs['tiers']}"  />
+                <p:column   colspan="11" headerText="#{msgs['remun.verse']}" />
+             <p:column  rowspan="2"  headerText="#{msgs['detail.honoraire']}" />
+            
+            </p:row>
+            <p:row style="text-align: center;">
+                <p:column   headerText="#{msgs['num.tiers']}" />
+                <p:column   headerText="#{msgs['raison.sociale']}" />
+                <p:column   headerText="#{msgs['login.lastname']}" />
+                <p:column   headerText="#{msgs['login.firstname']}" />
+                <p:column   headerText="#{msgs['honoraires']}" />
+         
+                <p:column   headerText="#{msgs['commissions']}" />
+                <p:column   headerText="#{msgs['courtage']}" />
+                <p:column   headerText="#{msgs['ristournes']}" />
+                <p:column   headerText="#{msgs['jetons.presence']}" />
+                <p:column   headerText="#{msgs['droit.auteur']}" />
+                <p:column   headerText="#{msgs['droit.invent']}" />
+                <p:column   headerText="#{msgs['autres.remun']}" />
+                <p:column   headerText="#{msgs['indemnites.remboursements']}" />
+                <p:column   headerText="#{msgs['avantetages.nature']}" />
+                <p:column   headerText="#{msgs['retenue.source']}" />
+           </p:row>
+           
+        </p:columnGroup>
+        
+			<p:column  style="width:10%">
+				<h:outputText value="#{honoraire.beneficiaire.numero}" />
+			</p:column>
+
+			<p:column  style="width:10%">
+				<h:outputText value="#{honoraire.beneficiaire.rs}" />
+			
+			
+			
+			</p:column>
+			<p:column  style="width:10%">
+				<h:outputText value="#{honoraire.beneficiaire.nom}" />
+			</p:column>
+			<p:column  style="width:10%">
+				<h:outputText value="#{honoraire.beneficiaire.prenom}" />
+			</p:column>
+			<p:column  style="width:10%">
+				<h:outputText value="#{honoraire.honoraires}" styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+			</p:column>
+			
+			<p:column  style="width:10%">
+				<h:outputText value="#{honoraire.commissions}" styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+			</p:column>
+			<p:column  style="width:10%">
+				<h:outputText value="#{honoraire.courtages}" styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+			</p:column>
+			<p:column  style="width:10%">
+				<h:outputText value="#{honoraire.ristournes}" styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+			</p:column>
+			<p:column  style="width:10%">
+				<h:outputText value="#{honoraire.jetonsPresence}" styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+			</p:column>
+			<p:column  style="width:10%">
+				<h:outputText value="#{honoraire.droitsAuteur}" styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+			</p:column>
+			<p:column  style="width:10%">
+				<h:outputText value="#{honoraire.droitsInventeur}" styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+			</p:column>
+			<p:column  style="width:10%">
+				<h:outputText value="#{honoraire.autresRemunerations}" styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+			</p:column>
+			<p:column 
+				style="width:10%">
+				<h:outputText value="#{honoraire.indemnitesRemb}" styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+			</p:column>
+			<p:column 
+				style="width:10%">
+				<h:outputText value="#{honoraire.avantagesEnNature}" styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+			</p:column>
+			<p:column  style="width:10%">
+				<h:outputText value="#{honoraire.retenueAlaSource}" styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+			</p:column>
+<p:column  style="width:10%">
+				<p:commandButton   title="#{msgs['detail.honoraire']}"  icon="searchIcon" 
+					actionListener="#{dasBean.openHonoraireDialog}"  >					
+					<f:setPropertyActionListener target="#{dasBean.selectedHonoraire}"
+						value="#{honoraire}" />
+		
+					<p:ajax event="dialogReturn"
+						update=":detailsForm:ongletsImport:donneesCharges_dtt" />
+				</p:commandButton>
+				
+				
+			</p:column>
+			  	</p:dataTable>   
+				 
+				
+
+
+
+
+
+
+
+
+
+
+</ui:composition>

@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGrid columns="2">
+		<h:outputLabel value="#{msgs['cpwin.exercice']}"
+			style="display:block;width:80px" />
+		<h:panelGroup>
+			<p:selectOneMenu id="exercList" styleClass="ReadOnlyText"
+				value="#{dataListBean.exec}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{loaderBean.allExecList}" var="exerc"
+					itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{gtsBean.exreciceLsitener}"
+					update=":detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+		</h:panelGroup>
+	</h:panelGrid>
+
+<h:panelGrid columns="2">
+		<h:outputLabel value="#{msgs['periode']}"
+			style="display:block;width:80px" />
+		<h:panelGroup>
+			<p:selectOneMenu id="periodeList" styleClass="ReadOnlyText"
+				value="#{gtsBean.numPeriode}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{gtsBean.periodesList}" var="periode"
+					itemLabel="#{periode.numero}" itemValue="#{periode.numero}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{gtsBean.periodeListener}"
+					update=":detailsForm,:enteteForm,globalMessage" />
+			</p:selectOneMenu>
+		</h:panelGroup>
+	</h:panelGrid>
+
+<h:panelGrid columns="2">
+				<h:outputText value="#{msgs['selectionner.fichier.gts']}" />
+
+	<h:panelGroup id="addDocPG">
+
+
+		<p:fileUpload label="#{msgs['parcourir']}" skinSimple="true"
+			invalidFileMessage="#{errorMsgs['invalid.file']}" id="fileUp"
+			fileUploadListener="#{gtsBean.fileUploadHandler}" auto="true"
+			image="/images/browse.png" mode="advanced" dragDropSupport="false"
+			multiple="false" height="48" width="48"
+			disabled="#{!gtsBean.commonRequiredDone}"
+			allowTypes="/(\.|\/)(xls)$/" event="click" update="globalMessage,:detailsForm,:enteteForm:importBtn" >
+		</p:fileUpload>
+		<p:message id="fileUpMsg" for="fileUp" styleClass="error" />
+
+	</h:panelGroup>
+</h:panelGrid>
+	<br />
+
+
+
+
+
+
+
+
+
+
+</ui:composition>

@@ -1,0 +1,594 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+
+</style>
+	<p:panel style="width:100%;" id="tab2Panel" >
+		<f:facet name="header">
+			<h:outputText value="#{msgs['tableau2']}"
+				style="font-weight: bold; text-align: center;" />
+		</f:facet>
+
+<div align="left">
+			<h:outputText value="#{editionBean.nomConfig}"
+				style="font-weight: bold; text-align: left;" />
+		</div>
+		<div align="center">
+			<h:outputText value="#{msgs['autorisation.budg']} "
+				style="font-weight: bold; text-align: center;color:#008000;" />
+
+			<h:outputText value="#{msgs['previsionnel']}"
+				style="font-weight: bold; text-align: center;color:#008000;"
+				rendered="#{editionBean.demat}" />
+		</div>
+		
+		
+	
+	 <p:row>
+          	<p:column colspan="6" rowspan="1">
+                    <div align="center">
+			<h:outputText value="#{dematBean.biBrDataLoaded}"
+				style="font-weight: bold; text-align: center;" 
+                 rendered="#{editionBean.demat}" />
+			
+	  	</div>
+				</p:column>
+				
+        </p:row>
+		<p:panelGrid style="width:100%; vertical-align:top;">	
+			
+		 <p:row>
+            <p:column colspan="6" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #008000;color: #FFFFFF;">
+					<h:outputText value="#{msgs['pour.votre.org.delib']}"
+					 />
+				</p:column>
+				
+        </p:row>
+ <p:row>
+          	<p:column colspan="6" rowspan="1">
+
+				</p:column>
+				
+        </p:row>
+
+	 <p:row>
+            <p:column colspan="3" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['depences']}" />
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				 <p:column colspan="2" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['recettes']}" />
+				</p:column>
+        </p:row>
+ <p:row>
+            <p:column  rowspan="1">
+
+				</p:column>
+				<p:column colspan="2" rowspan="1" style="text-align: center;">
+					<h:outputLabel value="#{msgs['montans']}" />
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1" style="text-align: center;">
+					<h:outputLabel value="#{msgs['montans']}" />
+				</p:column>
+
+				<p:column  rowspan="1">
+
+				</p:column>
+             </p:row>
+
+ <p:row>
+            <p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1" style="text-align: center;">
+					<h:outputLabel value="#{msgs['ae']}" />
+				</p:column>
+				<p:column  rowspan="1" style="text-align: center;">
+					<h:outputLabel value="#{msgs['cp']}" />
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+
+				<p:column  rowspan="1">
+
+				</p:column>
+             </p:row>
+ <p:row>
+            <p:column  rowspan="1"
+					style="font-weight: bold;text-align: right;">
+					<h:outputLabel value="#{msgs['personnel']}" />
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.depence.personnel.dataAE.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.depence.personnel.dataCP.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+						<h:outputText value="#{editionBean.editionBi.tab2.recetGlobal.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+
+				</p:column>
+
+				<p:column  rowspan="1"
+					style="text-align: left;font-weight: bold;">
+					<h:outputLabel value="#{msgs['recette.global']}" />
+				</p:column>
+             </p:row>
+
+
+			<p:row>
+            <p:column  rowspan="1"
+					style="font-style: italic;text-align: right;">
+					<h:outputLabel value="#{msgs['dont.contribu.emp.pens']}" />
+				</p:column>
+					<p:column  rowspan="1" style="text-align: center;" >					
+						<p:inputNumber  rendered="#{!editionBean.demat}" inputStyle="text-align: center" id="contribuAE" size="20" 
+							 onfocus="select();"  value="#{editionBean.editionBi.tab2.depence.contribution.dataAE.montant}">
+							<p:ajax  listener="#{editionBean.editionBi.refreshTotauxTab2}" process="@this" global="false"	></p:ajax>
+						</p:inputNumber>
+						
+							<h:outputText rendered="#{editionBean.demat}" value="#{editionBean.editionBi.tab2.depence.contribution.dataAE.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+					<p:column  rowspan="1" style="text-align: center;"  >			
+						<p:inputNumber id="contribuCP" rendered="#{!editionBean.demat}" inputStyle="text-align: center" size="20"
+							 onfocus="select();"  value="#{editionBean.editionBi.tab2.depence.contribution.dataCP.montant}">
+							<p:ajax  listener="#{editionBean.editionBi.refreshTotauxTab2}" process="@this" global="false"		></p:ajax>
+						</p:inputNumber>	
+						
+						<h:outputText rendered="#{editionBean.demat}" 
+					value="#{editionBean.editionBi.tab2.depence.contribution.dataCP.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>					
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.recette.dataR11.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column  rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['subvent.charges.serv.pub']}" />
+				</p:column>
+             </p:row>
+
+			<p:row>
+            <p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.recette.dataR12.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column  rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['autre.financ.etat']}" />
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.recette.dataR13.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column  rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['fisc.affect']}" />
+				</p:column>
+             </p:row>
+
+			<p:row>
+            <p:column  rowspan="1"
+					style="font-weight: bold;text-align: right;">
+					<h:outputLabel value="#{msgs['fonctionnement']}" />
+
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.depence.fonctionnement.dataAE.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.depence.fonctionnement.dataCP.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.recette.dataR14.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column  rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['autres.financ.pub']}" />
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.recette.dataR15.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column  rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['recet.propr']}" />
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+
+				<p:column  rowspan="1">
+
+				</p:column>
+             </p:row>
+
+			<p:row>
+            <p:column  rowspan="1"
+					style="font-weight: bold;text-align: right;">
+					<h:outputLabel value="#{msgs['intervention']}" />
+
+
+				</p:column>
+
+
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.depence.intervention.dataAE.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.depence.intervention.dataCP.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+
+				<p:column  rowspan="1">
+
+				</p:column>
+				
+             </p:row>
+			<p:row>
+            <p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+                     <h:outputText value="#{editionBean.editionBi.tab2.totalRecetFleche.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column  rowspan="1"
+					style="text-align: left;font-weight: bold;">
+					<h:outputLabel value="#{msgs['recette.flech']}*" />
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.recette.dataR22.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column  rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['financ.etat.flech']}" />
+				</p:column>
+             </p:row>
+
+			<p:row>
+            <p:column  rowspan="1"
+					style="font-weight: bold;text-align: right;">
+					<h:outputLabel value="#{msgs['invest']}" />
+
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.depence.investissement.dataAE.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.depence.investissement.dataCP.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.recette.dataR24.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column  rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['autre.financ.pub.flech']}" />
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.recette.dataR25.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column  rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['recet.propr.flech']}" />
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+
+				<p:column  rowspan="1">
+
+				</p:column>
+             </p:row>
+
+			<p:row>
+            <p:column  rowspan="1"
+					style="font-weight: bold;text-align: right;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['total.depns.ae']}" />
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;background-color: #D19275;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.totalDepAe.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;background-color: #D19275;font-weight: bold;">
+						<h:outputText value="#{editionBean.editionBi.tab2.totalDepCp.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;background-color: #D19275;">
+                      <h:outputText value="#{editionBean.editionBi.tab2.totalRecette.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column  rowspan="1"
+					style="text-align: left;font-weight: bold;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['total.recet']}" />
+				</p:column>
+             </p:row>
+
+			<p:row>
+            <p:column colspan="3" rowspan="1">
+
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				 <p:column colspan="2" rowspan="1">
+
+
+				</p:column>
+             </p:row>
+
+			<p:row>
+            <p:column colspan="2" 
+					style="font-weight: bold;text-align: right;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['sold.budg.exednt']}" />
+
+				</p:column>
+
+				<p:column  
+					style="text-align: center;background-color: #D19275;font-weight: bold;">
+					<h:outputText value="#{editionBean.editionBi.tab2.soldBudgExcedent.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column   style="text-align: center;">
+
+				</p:column>
+				<p:column  
+					style="text-align: center;font-weight: bold;background-color: #D19275;">
+                      <h:outputText value="#{editionBean.editionBi.tab2.soldBudgDeficit.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column  
+					style="text-align: left;font-weight: bold;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['sold.budg.deficit']}" />
+				</p:column>
+             </p:row>
+
+		</p:panelGrid>
+
+
+
+		<br />
+		<br />
+
+
+
+
+		<div align="left">
+			<h:outputText value="(*) #{msgs['montant.issu.tab.op.rec.flech']}"
+				styleClass="indication1" style="text-align: left;color: #2F4F4F;" />
+		</div>
+
+	</p:panel>
+
+
+
+
+
+</ui:composition>

@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+	<ui:define name="lastPrefexedTitle">
+
+	</ui:define>
+	<ui:define name="entetePage">
+		<ui:include src="../common/entete.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="enteteAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.Importer']}"
+			id="importBtn" update="globalMessage,:detailsForm:importPanel" immediate="true"
+			actionListener="#{dasBean.search}" 
+			disabled="#{!dasBean.requiredDataDone}"			>
+
+		</p:commandButton>
+		<ui:param name="statusRendered" value="true" />
+	</ui:define>
+
+	<ui:define name="search">
+
+
+	</ui:define>
+
+
+	<ui:define name="details">
+
+
+		<p:panel id="importPanel" style="width:100%;">
+			<div align="center">
+				<h:panelGroup id="btnPG">
+					<p:commandButton title=" " 	
+					rendered="#{dasBean.saveHonoraireAutorized}"					
+						value="#{msgs['btn.enregistrer']}"
+						actionListener="#{dasBean.save}"
+						update="globalMessage,@this,:detailsForm:importPanel" 
+						immediate="true">
+					</p:commandButton>
+				</h:panelGroup>
+			</div>
+
+			<p:tabView id="ongletsImport" style="width:100%;" cache="false" rendered="#{dasBean.dataHonoraireVisible}" >
+
+				<p:tab id="tabDonneChrg" rendered="#{dasBean.importDataHonoraireVsble}" title="#{msgs['donnees.chargees']} #{dasBean.honorairesCount}">
+					<ui:include src="./onglets/donnees_charges.xhtml" />
+				</p:tab>
+				
+				
+				<p:tab id="tabCodesErrones" rendered="#{dasBean.errorReportVisible}" title="#{msgs['budget.data.error.tab']} #{dasBean.notFoundHonoCount}">
+					<ui:include src="./onglets/codes_errones.xhtml" />				
+				</p:tab>
+
+			</p:tabView>
+
+
+
+
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+
+	</ui:define>
+</ui:composition>

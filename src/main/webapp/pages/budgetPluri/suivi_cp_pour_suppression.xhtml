@@ -1,0 +1,202 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+	<ui:define name="lastPrefexedTitle">
+					
+					</ui:define>
+
+	<ui:define name="entetePage">
+	<ui:include src="/snippets/budget/enteteSuiviCP.xhtml"></ui:include>
+		
+	
+	
+	
+	</ui:define>
+		<ui:define name="enteteAction">
+		<p:commandButton title=" " immediate="true" value="#{msgs['cpwin.btn.afficher']}" actionListener="#{bpBean.searchSuiviCp}"
+			 update=":detailsForm,globalMessage" >
+		</p:commandButton>
+	</ui:define>
+
+	<ui:define name="search">
+			
+	
+	</ui:define>
+
+
+	<ui:define name="details">
+
+		<p:panel  style="width:100%;" rendered="#{bpBean.globalSuiviCp!=null}">
+			
+			
+				<p:panel  style="width:100%;">
+			<h:panelGrid columns="9" style="width:80%; vertical-align:top;" >
+				
+		
+		
+		
+		<h:panelGrid columns="1">	
+			
+			<p:commandButton styleClass="Label" title=" " immediate="true" value="#{msgs['sur.ae.anterieur']}" actionListener="#{bpBean.loadSuiviCpAeAnt}"
+			 update="detailsForm:details_suivi_cp_ant,globalMessage" >
+		</p:commandButton>
+
+						<h:panelGrid columns="1">
+							<h:selectOneRadio   layout="pageDirection"
+								valueChangeListener="#{bpBean.trsOrgnAntChangeListener}"
+								value="#{bpBean.tiersOrigineAnt}" styleClass="boutonRadio">
+
+								<f:selectItem itemLabel="#{msgs['cpwin.tiers.origine']}"
+									itemValue="1" />
+								<f:selectItem itemLabel="#{msgs['tiers.beneficiaire']}"
+									itemValue="0" />
+
+								<p:ajax process="@this"
+									update="detailsForm:details_suivi_cp_ant,globalMessage" />
+							</h:selectOneRadio>
+						</h:panelGrid>
+
+
+
+					</h:panelGrid>
+			
+			<h:outputText  styleClass="Label" value="#{msgs['rap.01']}"  />
+			<h:outputText value="#{bpBean.antRap}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			<p:spacer width="40" height="10" />
+			<h:outputText  styleClass="Label" value="#{msgs['dp.emises']}" />
+				<h:outputText value="#{bpBean.antDpEmise}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			<p:spacer width="40" height="10" />
+			<h:outputText  styleClass="Label" value="#{msgs['reste.emettre']}" />
+				<h:outputText value="#{bpBean.antRae}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			</h:panelGrid>
+			<h:panelGrid  style="width:100%; vertical-align:top;" modal="true" id="details_suivi_cp_ant">
+			<ui:include src="/pages/budgetPluri/suivicp/panel/details_suivi_cp_ant.xhtml"></ui:include>
+			
+			</h:panelGrid>
+	<div align="center">
+			<p:commandButton  title=" " value="#{msgs['budget.btn.export']}" rendered="false" >
+
+		</p:commandButton>
+		</div>
+			
+			
+			
+			
+			
+			</p:panel>
+			
+			<p:panel  style="width:100%;">
+			<h:panelGrid columns="9" style="width:80%; vertical-align:top;" >
+			
+			
+		
+			<h:panelGrid columns="1">	
+			
+			<p:commandButton styleClass="Label" title=" " immediate="true" value="#{msgs['surae.exercice']}" actionListener="#{bpBean.loadSuiviCpAeExec}"
+			 update=":detailsForm,globalMessage" >
+		</p:commandButton>
+
+						<h:panelGrid columns="1">
+							<h:selectOneRadio   layout="pageDirection"
+								valueChangeListener="#{bpBean.trsOrgnExecChangeListener}"
+								value="#{bpBean.tiersOrigineExec}" styleClass="boutonRadio">
+
+								<f:selectItem itemLabel="#{msgs['cpwin.tiers.origine']}"
+									itemValue="1" />
+								<f:selectItem itemLabel="#{msgs['tiers.beneficiaire']}"
+									itemValue="0" />
+	
+								<p:ajax process="@this"
+									update="detailsForm:details_suivi_cp_exec,globalMessage" />
+							</h:selectOneRadio>
+						</h:panelGrid>
+
+
+
+					</h:panelGrid>
+			
+	
+			
+			<h:outputText  styleClass="Label" value="#{msgs['ej.saisi']}"/>
+			<h:outputText value="#{bpBean.execMtEj}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			<p:spacer width="60" height="10" />
+			<h:outputText  styleClass="Label" value="#{msgs['dp.emises']}" />
+			<h:outputText value="#{bpBean.execDpEmise}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			<p:spacer width="40" height="10" />
+			<h:outputText  styleClass="Label" value="#{msgs['reste.emettre']}" />
+			<h:outputText value="#{bpBean.execRae}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+				
+			</h:panelGrid>
+			<h:panelGrid  style="width:100%; vertical-align:top;" modal="true" id="details_suivi_cp_exec">
+			<ui:include src="/pages/budgetPluri/suivicp/panel/details_suivi_cp_exec.xhtml"></ui:include>
+			
+			</h:panelGrid>
+			</p:panel>
+			<p:panel  style="width:100%;">
+				<h:panelGrid columns="12" style="width:100%; vertical-align:top;" >
+		
+			<h:outputText  styleClass="Label" value="#{msgs['total']}: " />
+		
+			<h:outputText   styleClass="Label" value="#{msgs['credit.ouvert']}"/>
+				<h:outputText value="#{bpBean.creditOuvert}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			<p:spacer width="40" height="10" />
+			<h:outputText  styleClass="Label" value="#{msgs['total.ej']}"/>
+			<h:outputText value="#{bpBean.totalEj}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			<p:spacer width="50" height="10" />
+			<h:outputText   styleClass="Label" value="#{msgs['total.dp.emise']}"/>
+			<h:outputText value="#{bpBean.totalDpEmise}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			<p:spacer width="50" height="10" />
+			<h:outputText   styleClass="Label" value="#{msgs['reste.emettre']}"/>
+			<h:outputText value="#{bpBean.totalRae}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			</h:panelGrid>
+				</p:panel>
+				
+				
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+		
+	</ui:define>
+</ui:composition>

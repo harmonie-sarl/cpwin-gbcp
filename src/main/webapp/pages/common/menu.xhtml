@@ -1,0 +1,210 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+ 
+	<style type="text/css">
+			.ui-menu .ui-menu-item .ui-menu-item-label {
+				padding: .2em 1.7em;
+			}
+		</style>	
+		
+<h:form id="menuForm" >				
+<p:menubar autoSubmenuDisplay="true">			
+					
+	<p:submenu label="#{msgs['menu.budg.pluri.annuel']}" rendered="#{p:ifAnyGranted('ordo,AC,prod,gest') and (navigationBean.gbcp)}">
+	
+			<p:submenu label="#{msgs['menu.budg.pluri.bi']}" rendered="#{p:ifAnyGranted('ordo,AC,prod')}">									
+					<p:menuitem value="#{msgs['menu.saisi.cp']}" 	action="#{navigationBean.saisiBudgPluri}" ajax="false" icon="fa fa-edit" rendered="#{p:ifAnyGranted('ordo,AC')}" />
+					<p:menuitem value="#{msgs['btn.edition.situ.patrimo']}"	action="#{navigationBean.gotoSaisiNoDataBudg}" ajax="false" rendered="false"/>
+					<p:menuitem value="#{msgs['btn.edition.externe.data']}"	action="#{navigationBean.goToExterneData}" rendered="false" ajax="false" />
+					
+					<p:submenu label="#{msgs['menu.ventillation']}">	
+					<p:menuitem value="#{msgs['ventillation.service']}" action="#{navigationBean.adressageBudgPluriSaisi}" ajax="false" icon="fa fa-th-list" rendered="false"/>
+					<p:menuitem value="#{msgs['ventillation.ae.recette.origine']}" action="#{navigationBean.ventilationRectteParorigine}" ajax="false" icon="fa fa-th-list" rendered="#{p:ifGranted('ordo')}"/>
+					<p:menuitem value="#{msgs['ventillation.dest']}"  action="#{navigationBean.adressageBudgPluriCpDest}"	 ajax="false" icon="fa fa-cubes" rendered="#{p:ifGranted('ordo')}"/>
+					<p:menuitem value="#{msgs['ventillation.gest']}" action="#{navigationBean.ventillationCpGest}"   ajax="false" icon="fa fa-cube" rendered="#{p:ifGranted('ordo')}"/>
+					</p:submenu>
+					
+					<p:submenu label="#{msgs['menu.editions']}" rendered="#{p:ifAnyGranted('AC,ordo,prod')}" >	
+					<p:menuitem value="#{msgs['menu.saisi']}" action="#{navigationBean.goToGestionEditions}"  ajax="false" icon="fa fa-edit" />
+					<p:menuitem value="#{msgs['chargement']}" action="#{navigationBean.goToChargementEditions}"  ajax="false" icon="fa fa-refresh" />		
+					</p:submenu>					
+			</p:submenu>
+			
+			<p:submenu label="#{msgs['menu.budg.pluri.br']}" rendered="#{p:ifAnyGranted('ordo,AC,prod')}">
+					<p:menuitem value="#{msgs['menu.saisi.cp']}"	ajax="false" icon="fa fa-edit" action="#{navigationBean.saisiBR}" rendered="#{p:ifAnyGranted('ordo,AC')}" />
+					<p:submenu label="#{msgs['menu.ventillation']}" rendered="#{p:ifGranted('ordo')}" >							
+						<p:menuitem value="#{msgs['ventillation.dest']}"   ajax="false" icon="fa fa-th-list"  action="#{navigationBean.ventilDestBR}" disabled="true"  />
+						<p:menuitem value="#{msgs['ventillation.gest']}"   ajax="false" icon="fa fa-th-list"  action="#{navigationBean.ventilGestBR}" disabled="false"  />
+					</p:submenu>	
+					<p:submenu label="#{msgs['menu.editions']}" rendered="#{p:ifAnyGranted('AC,ordo,prod')}" >	
+							<p:menuitem value="#{msgs['menu.saisi']}" action="#{navigationBean.goToGestionEditionsBR}"   ajax="false" icon="fa fa-edit" />
+							<p:menuitem value="#{msgs['chargement']}" action="#{navigationBean.goToChargementEditBR}"  ajax="false" icon="fa fa-refresh" />
+					</p:submenu>			
+			</p:submenu>
+			
+			
+		
+			<p:submenu label="#{msgs['suivi']}"  rendered="#{p:ifAnyGranted('AC,ordo,prod,gest') and (navigationBean.suiviCpAuthorized || navigationBean.suiviRecetteAuthorized || navigationBean.suiviCFAuthorized)}"  >
+			
+					<p:menuitem value="#{msgs['ae']}" action="#{navigationBean.suiviAE}" ajax="false" disabled="false" rendered="false"  />
+					<p:menuitem value="#{msgs['cp']}" action="#{navigationBean.suiviCP}" ajax="false" disabled="false" rendered="#{navigationBean.suiviCpAuthorized}"  />
+					<p:menuitem value="#{msgs['recettes.minus']}" action="#{navigationBean.suiviREC}" ajax="false" disabled="false" rendered="#{navigationBean.suiviRecetteAuthorized}" />
+					<p:menuitem value="#{msgs['menu.compte.financier']}" action="#{navigationBean.goToSuiviCF}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('AC') and navigationBean.suiviCFAuthorized}"  />
+					<p:menuitem value="#{msgs['ctrlImputSF']}" action="#{navigationBean.goToSuiviSF}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('AC')}"  />
+			</p:submenu>
+			
+			
+			<p:submenu label="#{msgs['menu.budg.pluri.deploi']}"  rendered="#{p:ifGranted('ordo')}" >			
+					<p:menuitem value="#{msgs['menu.saisi']}" action="#{navigationBean.goToModifDeploi}" ajax="false" disabled="false"  />
+					<p:menuitem value="#{msgs['menu.consult']}" action="#{navigationBean.goToConsultDeploi}" ajax="false" disabled="false"  />			
+			</p:submenu>
+	
+             <p:submenu label="#{msgs['menu.tabl.bord']}"  rendered="#{p:ifAnyGranted('AC,ordo,prod')}" >
+                 <p:menuitem value="#{msgs['menu.tabl.bord.parenvelop']}" action="#{navigationBean.goToParEnvelop}" ajax="false" disabled="false"  />
+                 <p:menuitem value="#{msgs['menu.tabl.bord.parccdep']}" action="#{navigationBean.goToTbCompteDepense}" ajax="false" disabled="false"  />
+                 <p:menuitem value="#{msgs['menu.tabl.bord.parComptRecV2']}" action="#{navigationBean.goToParComptRecV2}" ajax="false" disabled="false" />
+                 <p:menuitem value="#{msgs['menu.tabl.bord.suiviCP']}" action="#{navigationBean.goToSuiviCP}" ajax="false" disabled="false" />
+                 <p:menuitem value="#{msgs['menu.tabl.bord.comptRenduGestion']}" action="#{navigationBean.goToComptRenduGestion}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo,prod')}" />
+                 <p:menuitem value="#{msgs['menu.tabl.bord.suiviAECP']}" action="#{navigationBean.suiviAE}" ajax="false" disabled="false" rendered="#{navigationBean.aeCpAuthorized}" />
+            </p:submenu>
+          
+            <p:submenu label="#{msgs['menu.tresorerie']}"  rendered="#{p:ifAnyGranted('AC,ordo,prod') and navigationBean.pltAuthorized}" >                
+                 <p:menuitem value="#{msgs['menu.ventillation']}" action="#{navigationBean.goToVentilTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}"  />
+                 <p:menuitem value="#{msgs['menu.initialisation']}" action="#{navigationBean.goToinitTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}" />
+                 <p:menuitem value="#{msgs['menu.simulation']}" action="#{navigationBean.goToSimulTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('AC')}" />
+                 <p:menuitem value="#{msgs['menu.ajustement']}" action="#{navigationBean.goToAjustTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}" />
+                 <p:menuitem value="#{msgs['menu.conciliation']}" action="#{navigationBean.goToConcilTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}" />
+                 <p:menuitem value="#{msgs['menu.consult']}" action="#{navigationBean.goToConsultTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}" />
+                 <p:menuitem value="#{msgs['menu.parametrage']}" action="#{navigationBean.goToParamTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}"  />
+              </p:submenu>
+               
+                  <p:menuitem value="#{msgs['menu.interface.minefi']}" action="#{navigationBean.goToInterfaceMinefi}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('AC')  and navigationBean.pltAuthorized}"  />
+         
+            <p:submenu label="#{msgs['menu.compte.financier']}"  rendered="#{p:ifAnyGranted('AC') and navigationBean.cfAuthorized}" >
+				<p:submenu label="#{msgs['bilan']}">
+                  <p:menuitem value="#{msgs['menu.parametrage']}" action="#{navigationBean.goToParamBilan}" ajax="false" /> 
+                  <p:menuitem value="#{msgs['validation']}" action="#{navigationBean.goToValBilan}" ajax="false"/> 
+                </p:submenu>
+                <p:submenu label="#{msgs['cr']}">
+                   <p:menuitem value="#{msgs['menu.parametrage']}" action="#{navigationBean.goToParamCR}" ajax="false"/> 
+                   <p:menuitem value="#{msgs['validation']}" action="#{navigationBean.goToValCR}" ajax="false"/> 
+                </p:submenu>            
+                <p:submenu label="#{msgs['cf']}">
+                  <p:menuitem value="#{msgs['menu.saisi']}" action="#{navigationBean.goToValCF}" ajax="false"/> 
+                </p:submenu>
+            </p:submenu>			
+	</p:submenu>
+
+	<p:submenu label="#{msgs['menu.outils']}">
+	
+				<p:submenu label="#{msgs['menu.cpwin']}" rendered="#{p:ifAnyGranted('AC,ordo,prod,gest')}" >					
+					<p:submenu label="#{msgs['tiers']}">
+						<p:menuitem value="#{msgs['menu.consult']}"	action="#{navigationBean.goToGestionTiers}" ajax="false"/>					
+					</p:submenu>
+				</p:submenu>
+			
+				<p:submenu label="#{msgs['menu.das']}" rendered="#{p:ifAnyGranted('DAS') and (navigationBean.das)}">					
+					<p:submenu label="#{msgs['tiers']}">
+						<p:menuitem value="#{msgs['importVentilation']}" ajax="false" action="#{navigationBean.goToImportTiersDas}"/>
+						<p:menuitem value="#{msgs['menu.consult']}"	action="#{navigationBean.goToConsultTiersDas}" ajax="false"/>					
+					</p:submenu>
+					<p:submenu label="#{msgs['honoraire']}" >
+						<p:menuitem value="#{msgs['importVentilation']}" ajax="false" action="#{navigationBean.importHonoraire}" />
+						<p:menuitem value="#{msgs['generer']}" action="#{navigationBean.genererHonoraire}" ajax="false" />
+						<p:menuitem value="#{msgs['suivi.tiers']}"	action="#{navigationBean.suiviHonoraire}" ajax="false" />
+					</p:submenu>
+				</p:submenu>
+				
+				<p:submenu label="#{msgs['billetterie']}" rendered="#{p:ifAnyGranted('GTS') and (navigationBean.gts)}">
+				<p:menuitem value="#{msgs['menu.initialisation']}" action="#{navigationBean.goToInitGTS}" ajax="false" disabled="false"  />	
+					<p:submenu label="#{msgs['referentiel']}">
+						<p:menuitem value="#{msgs['article']}" ajax="false"	action="#{navigationBean.goToGtsArtcile}" />
+						<p:menuitem value="#{msgs['periode']}" ajax="false"	action="#{navigationBean.goToGtsPeriode}" />
+						<p:menuitem value="#{msgs['clients']}" ajax="false" action="#{navigationBean.goToRefClient}"  />
+					</p:submenu>
+					<p:menuitem value="#{msgs['importVentilation']}" action="#{navigationBean.goToGtsImport}" ajax="false" />
+					<p:menuitem value="#{msgs['generation']}" action="#{navigationBean.goToGtsGeneration}" 	ajax="false" />
+					<p:menuitem value="#{msgs['menu.consult']}"	action="#{navigationBean.goToGtsConsultation}" ajax="false" />
+				</p:submenu>
+ 			<p:menuitem value="#{msgs['menu.import.recette']}" action="#{navigationBean.goToImportRecettes}" ajax="false" rendered="#{p:ifAnyGranted('ImpRec')}"  />
+ 			<p:menuitem value="#{msgs['menu.import.depense']}" action="#{navigationBean.goToImportDepenses}" ajax="false" rendered="false"  />
+ 			
+ 			<p:submenu label="#{msgs['menu.rembours.masse']}" rendered="#{p:ifAnyGranted('remb_saisie,remb_consult') and (navigationBean.rembSaisieAuthorized || navigationBean.rembSaisieRMHAuthorized || navigationBean.rembConsultAuthorized)}">
+ 			<p:submenu label="#{msgs['menu.saisi']}" rendered="#{p:ifAnyGranted('remb_saisie') and (navigationBean.rembSaisieAuthorized || navigationBean.rembSaisieRMHAuthorized)}">
+ 			<p:menuitem value="#{msgs['rembours.sepa']}" action="#{navigationBean.goToRemboursSaisie}" ajax="false" rendered="#{p:ifAnyGranted('remb_saisie') and (navigationBean.rembSaisieAuthorized)}" />
+ 			<p:menuitem value="#{msgs['rembours.RMH.DDFiP']}" action="#{navigationBean.goToPAYMEN_SEPA}" ajax="false" rendered="#{p:ifAnyGranted('remb_saisie') and (navigationBean.rembSaisieRMHAuthorized)}" />
+ 			</p:submenu>
+ 			<p:menuitem value="#{msgs['generation']}" action="#{navigationBean.goToRemboursGeneration}" ajax="false" rendered="#{p:ifAnyGranted('remb_generation') and (navigationBean.rembSaisieAuthorized )}"/>
+ 			<p:menuitem value="#{msgs['menu.consult']}" action="#{navigationBean.goToRemboursConsult}" ajax="false" rendered="#{p:ifAnyGranted('remb_consult') and (navigationBean.rembConsultAuthorized)}"/>
+ 			</p:submenu>
+ 			
+ 			<p:submenu label="#{msgs['menu.meta4Dai']}" rendered="#{navigationBean.meta4daiAuthorized}">
+ 			<p:menuitem value="#{msgs['menu.initialisation']}" action="#{navigationBean.goToInitMeta4Dai}" ajax="false" disabled="false"  />	
+ 			<p:menuitem value="#{msgs['menu.saisi']}" action="#{navigationBean.goToMeta4daiSaisie}" ajax="false" rendered="#{p:ifAnyGranted('meta4dai_saisie')}" />
+ 			<p:menuitem value="#{msgs['menu.consult']}" action="#{navigationBean.goToMeta4daiConsult}" ajax="false" rendered="#{p:ifAnyGranted('meta4dai_consult')}"  />
+ 			</p:submenu>
+ 			
+ 			<p:submenu label="#{msgs['menu.nantes.etudiant']}" rendered="#{navigationBean.nantesEtudiantAuthorized}">
+ 			
+ 			<p:menuitem value="#{msgs['menu.nantes.etudiant.chargement']}" action="#{navigationBean.goToChargementEtudiant}" ajax="false"/>
+ 			<p:menuitem value="#{msgs['menu.nantes.etudiant.miseAjour']}" action="#{navigationBean.goToMiseAjourEtudiant}" ajax="false"/>
+ 			<p:menuitem value="#{msgs['menu.nantes.etudiant.generationDP']}" action="#{navigationBean.goToGenerationDP}" ajax="false"/>
+ 			</p:submenu>
+ 			
+ 			<p:submenu label="#{msgs['menu.crc']}" rendered="#{navigationBean.crcAuthorized}">
+	 			<p:menuitem value="#{msgs['depenses.crc']}" action="#{navigationBean.goToCrcDepense}" ajax="false"/>
+	 			<p:menuitem value="#{msgs['recettes.minus']}" action="#{navigationBean.goToCrcRecette}" ajax="false"/> 			
+ 			</p:submenu>
+ 			<p:menuitem value="#{msgs['menu.signature']}" action="#{navigationBean.goToSignaturePage}" ajax="false" rendered="#{navigationBean.signAuthorized}"  />
+ 			
+ 			<p:menuitem value="#{msgs['dp.saisie']}" action="#{navigationBean.goToDpGeneration}" ajax="false" rendered="#{navigationBean.dpGenerationAuthorized}"  />
+	</p:submenu>
+					
+	<p:submenu label="#{msgs['menu.parametrage']}" rendered="#{p:ifAnyGranted('admin')}" >							
+			<p:menuitem value="#{msgs['menu.gestion.role']}"	action="#{navigationBean.parametrageUtilisateur}" ajax="false"/>
+	</p:submenu>
+								
+	<p:submenu label="#{msgs['cpwin.menu.option']}" >
+			<p:menuitem value="Logout" url="/logout" icon="fa fa-sign-out" rendered="#{savedContext.loggedIn}"/>
+			<p:menuitem value="#{msgs['login.detail']}" update="display"   oncomplete="PF('userDialog').show();" icon="fa fa-user" rendered="#{savedContext.loggedIn}"/>
+			<p:menuitem value="#{msgs['cpwin.menu.home']}"  action="home" ajax="false" icon="fa fa-home" />
+			<p:menuitem value="#{msgs['apropos.application']}" update="appDisplay" oncomplete="PF('appDialog').show();" icon="fa fa-info" rendered="#{savedContext.loggedIn}"/>
+	</p:submenu>
+			
+				
+</p:menubar>
+	<p:dialog header="#{msgs['login.detail']}" widgetVar="userDialog" resizable="false" width="300">
+
+                    <h:panelGrid id="display" columns="2" cellpadding="2">
+
+                        <f:facet name="header">
+                            <p:graphicImage value="/images/login.png"/>
+                        </f:facet>
+                        
+                        <h:outputText value="#{msgs['login.username']}" />
+                        <h:outputText value="#{userBean.user.login}" style="font-weight:bold"/>
+
+                        <h:outputText value="#{msgs['login.firstname']}" />
+                        <h:outputText value="#{userBean.user.firstName}" style="font-weight:bold"/>
+
+                        <h:outputText value="#{msgs['login.lastname']}" />
+                        <h:outputText value="#{userBean.user.lastName}" style="font-weight:bold"/>
+
+                        <h:outputText value="#{msgs['login.profile']}" />
+                        <h:outputText value="#{userBean.profileStr}"/>
+                    </h:panelGrid>
+        </p:dialog>
+        <p:dialog header="#{msgs['apropos.application']}" widgetVar="appDialog" resizable="false" width="300">
+
+                    <h:panelGrid id="appDisplay" columns="2" cellpadding="2">
+                        <h:outputText value="#{msgs['version']}" />
+                        <h:outputText value="#{config['app.version']}" style="font-weight:bold"/>
+                    </h:panelGrid>
+                </p:dialog>
+			</h:form>
+
+	</ui:composition>

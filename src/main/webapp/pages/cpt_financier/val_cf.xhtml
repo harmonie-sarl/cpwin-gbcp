@@ -1,0 +1,126 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+	<ui:define name="pageTitle"></ui:define>
+	<ui:define name="entetePage">
+	<ui:include src="./entete.xhtml">	
+	</ui:include>
+	<h:outputText value="#{msgs['export']}" />
+	<p:selectOneMenu styleClass="ReadOnlyText" disabled="true"
+			value="#{cfBean.codeExport}"  >
+			<f:selectItem itemValue="" itemLabel="-----" />
+			<f:selectItems value="#{cfBean.cfExportList}" var="exportItem"
+				itemLabel="#{exportItem.codeAndLibelle}" itemValue="#{exportItem.code}">
+			</f:selectItems>
+			<p:ajax process="@this"  update=":detailsForm,:enteteForm,globalMessage"/>
+		</p:selectOneMenu>
+	</ui:define>
+	<ui:define name="search">
+			
+	
+	</ui:define>
+	<ui:define name="enteteAction">
+			<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}" rendered="#{cfBean.requiredDataDone}"
+			update="globalMessage,:enteteForm, :detailsForm:budgetPanel" actionListener="#{cfBean.search}"  >
+	<ui:param name="statusRendered" value="true"/>
+		</p:commandButton>	
+			
+	</ui:define>
+
+	<ui:define name="details">
+
+		
+		<p:panel id="budgetPanel" style="width:100%;">
+		
+			<div align="center" style="width: 100%;">
+				<p:commandButton title=" " value="#{msgs['btn.enregistrer']}"
+						actionListener="#{cfBean.saveCfDataForDemat}" rendered="#{cfBean.cf!=null and false}" 
+						
+						update="globalMessage,:detailsForm" immediate="true">
+					</p:commandButton>
+			
+				<h:panelGroup>
+
+					<p:commandButton id="export_btn" title=" " value="#{msgs['budget.btn.export']}"
+						rendered="#{cfBean.cf!=null}"  ajax="false">
+						<p:fileDownload value="#{cfBean.xlsDematCFSaisie}" />
+					</p:commandButton>	
+					
+						<p:commandButton title=" " value="#{msgs['btn.valider']}"
+						actionListener="#{cfBean.validate}"  disabled="false" 
+						rendered="#{cfBean.cf!=null}and false" 
+						update="globalMessage,:detailsForm:budgetPanel" immediate="true">
+					</p:commandButton>	
+					<h:form>
+					<p:commandButton id="goInfocentre" value="#{msgs['btn.infocentre']}" 
+					onclick="this.form.target='_blank'" action ="#{cfBean.generateInfocentre}" ajax="false" 
+					rendered="#{cfBean.cf!=null}and false"    disabled="#{!cfBean.saveDematExecuted}" >
+						
+						</p:commandButton>		
+							</h:form>
+				</h:panelGroup>
+				
+			</div>
+			
+			
+		
+						
+				
+			
+					
+			
+			
+	<h:panelGroup   id="editionBiPG" >
+		<p:tabView id="ongletsEditionBi" style="width:100%;" rendered="#{cfBean.cf!=null}" 
+			cache="false"  activeIndex="1">
+        			
+        
+        				
+			<p:tab id="tab2" title="#{msgs['tab2']}" >
+				
+					<ui:include src="/pages/cpt_financier/onglets/ABE.xhtml" />
+				</p:tab>	
+					<p:tab id="tab3" title="#{msgs['tab3']}" >
+					<ui:include src="/pages/cpt_financier/onglets/tab3.xhtml" />
+				</p:tab>	
+					<p:tab id="tab4" title="#{msgs['tab4']}" >
+					<ui:include src="/pages/cpt_financier/onglets/EFE.xhtml" />
+				</p:tab>		
+
+			<p:tab id="tab6" title="#{msgs['tab6']}" >
+					<ui:include src="/pages/cpt_financier/onglets/tab6.xhtml" />
+				</p:tab>
+		<p:tab id="tab7e" title="#{msgs['tab7E']}">
+					<ui:include src="/pages/editions/onglets/tab7.xhtml" />
+				</p:tab>
+					<p:tab id="tab8" title="#{msgs['tab8']}" >
+					<ui:include src="/pages/cpt_financier/onglets/tab8.xhtml" />
+				</p:tab>
+		<p:tab id="rapprochement" title="#{msgs['rapprochement']}" >
+					<ui:include src="/pages/cpt_financier/onglets/rapprochement.xhtml" />
+				</p:tab>
+				<p:tab id="ctrlImputSF" title="#{msgs['ctrlImputSF']}" >
+					<ui:include src="/pages/cpt_financier/onglets/ctrlImputSF.xhtml" />
+				</p:tab>
+		</p:tabView>
+	</h:panelGroup>
+	
+		
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+		
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	 
+	 
+	 <div align="center" style="width: 100%;">
+		 <h:panelGrid>
+		<p:commandButton title=" " value="#{msgs['budget.btn.export']}"
+			 immediate="true"
+			rendered="#{sctBean.refundsByCustomer!=null}" ajax="false">
+			<p:fileDownload value="#{sctBean.xlsImportedCustomerList}" />
+		</p:commandButton>
+			</h:panelGrid>
+	</div>
+			
+	<p:dataTable id="byCustomerList_dtt" 
+		 var="customer" rendered="#{sctBean.refundsByCustomer!=null}"
+		style="width:100%;text-align:center" rowIndexVar="customerIndex"
+		emptyMessage="#{msgs['datatable.empty']}" 
+		value="#{sctBean.refundsByCustomer}">
+
+          <p:column headerText="#{msgs['num.vague']}"	style="text-align:left;width:5%">
+			<h:outputText value="#{customer.noVague}" />
+		</p:column>
+		<p:column headerText="#{msgs['rembours.nom.client']}"	style="text-align:left;width:15%">
+			<h:outputText value="#{customer.actor.fullName}" />
+		</p:column>
+		<p:column headerText="#{msgs['iban']}" style="text-align:left;width:15%">
+			<h:outputText value="#{customer.actor.iban}" />
+		</p:column>
+		<p:column headerText="#{msgs['bic']}" style="text-align:left;width:7%">
+			<h:outputText value="#{customer.actor.bic}" />
+		</p:column>
+		<p:column headerText="#{msgs['mode.paiement']}" style="text-align:left;width:7%">
+			<h:outputText value="#{customer.paymentMode}" />
+		</p:column>
+		
+		<p:column headerText="#{msgs['montant']}" style="width:10%">
+			<h:outputText value="#{customer.amount}" >
+             <f:convertNumber type="currency" currencySymbol="" />
+            </h:outputText>
+            <f:facet name="footer" >
+			<h:outputText style="vertical-align:top;align: left"
+				value="#{sctBean.refundsByCustomer.stream().map(customer->customer.amount).sum()}">
+				 <f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+		</f:facet>
+		</p:column>
+		<p:column headerText="#{msgs['cpwin.objet']}" style="text-align:left;width:10%">
+			<h:outputText value="#{customer.object}" />
+		</p:column>
+		<p:column headerText="#{msgs['numero.ecriture']}" style="text-align:left;width:10%">
+			<h:outputText value="#{customer.noEcriture}" />
+		</p:column>
+		<p:column headerText="#{msgs['cpwin.num.bordereau']}" style="text-align:left;width:10%">
+			<h:outputText value="#{customer.noBordereau}" />
+		</p:column>
+		<p:column headerText="#{msgs['rembours.date.bord']}" style="text-align:left;width:10%">
+			<h:outputText value="#{customer.dateBordereau}">
+			<f:convertDateTime pattern="dd/MM/yyyy" type="date" timeZone="Europe/Paris" />
+			</h:outputText>
+		</p:column>
+		
+		</p:dataTable>
+		
+	
+	
+	
+	
+	
+	</ui:composition>

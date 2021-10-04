@@ -1,0 +1,554 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+  
+        <style type="text/css">
+
+
+
+
+
+.detailTitle {	
+		text-align: center;
+		font-size: 9px;
+		color: black !important;
+}
+
+.detailValue {	
+	text-align: center;	
+	
+	background: white !important;
+	color: black !important;
+	font-weight: bold;
+	font-size: 8px;
+}
+
+.globalTitle {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+	text-align: left;
+	font-style: italic;
+}
+
+.globalValue {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+	text-align: center;
+	font-style: italic;
+}
+
+.th {
+	
+	background: grey !important;
+		border-color: grey !important;
+
+	
+}
+
+.td {
+		
+	color: black !important;
+    text-align: center;
+    font-size: 8px;
+	
+}
+
+
+
+
+</style>
+	<p:dataTable style="width:140%; text-align: center;"  scrollable="true" scrollHeight="250" scrollRows="15"  
+		value="#{bpBean.suiviAeCp}"
+		emptyMessage="#{msgs['datatable.empty']}"
+	rendered="#{bpBean.suiviAeCp!=null}"	 var="suivi"
+		>
+			<p:columnGroup type="header">
+				<p:row>	              
+				  <p:column  colspan="1" rowspan="2"
+						 headerText="#{msgs['dest']}">
+					</p:column>	
+					  <p:column  colspan="1" rowspan="2"
+						 headerText="#{msgs['import.nature']}">
+					</p:column>
+					  <p:column  colspan="1" rowspan="2"
+						headerText="#{msgs['service']}">
+					</p:column>	
+					  <p:column style="width:5%;"  colspan="1" rowspan="2"
+						 headerText="#{msgs['prog']}">
+					</p:column>	
+					  <p:column style="width:4%;" colspan="1" rowspan="2"
+						 headerText="Fléchées/&lt;br/&gt;Globalisées">
+					</p:column>	
+						  <p:column  colspan="5" rowspan="1"
+					 headerText="#{msgs['suiviae.opExercAnt']}">
+					</p:column>		
+					  <p:column  colspan="4" rowspan="1"
+						 headerText="#{msgs['suiviae.opExerCourant']}">
+					</p:column>		
+					  <p:column  colspan="4" rowspan="1"
+						 headerText="#{msgs['suiviae.donnConsol']}">
+					</p:column>	
+					  <p:column  colspan="1" rowspan="2"
+						 headerText="#{msgs['suiviae.nonEngage']}">
+					</p:column>		
+					 <p:column  colspan="1" rowspan="2"
+						 headerText="#{(msgs['suiviae.aPayerSur'])} #{(searchBean.exercice)}">
+					</p:column>		
+					  <p:column  colspan="1" rowspan="2"
+						 headerText="#{msgs['suiviae.cpVote']}">
+					</p:column>	
+					 <p:column  colspan="1" rowspan="2"
+					 headerText="#{msgs['suiviae.dispo']}">
+					</p:column>	
+					 <p:column  colspan="1" rowspan="2"
+						 headerText="#{msgs['suiviae.besoinCP']}">
+					</p:column>						
+					        </p:row>
+				<p:row >
+				    	  <p:column  colspan="1" rowspan="1"
+						 headerText="#{msgs['rap.cp']}">
+						
+					</p:column>	
+					 <p:column  colspan="1" rowspan="1"
+					 headerText="#{msgs['cred.annul']}">
+					</p:column>	
+					 <p:column  colspan="1" rowspan="1"
+						 headerText="#{msgs['suiviae.compl']}">
+					</p:column>	
+					 <p:column  colspan="1" rowspan="1"
+						 headerText="#{msgs['suiviae.dpAnt']}">
+					</p:column>	
+					 <p:column style="width:6%;" colspan="1" rowspan="1"
+						headerText="#{msgs['rap']}">
+					</p:column>	
+					 <p:column  colspan="1" rowspan="1"
+						headerText="#{msgs['suiviae.aeco']}">
+					</p:column>	
+					 <p:column  colspan="1" rowspan="1"
+						 headerText="#{msgs['suiviae.ej']}">
+					</p:column>	
+					 <p:column  colspan="1" rowspan="1"
+						 headerText="#{msgs['suiviae.dpex']}">
+					</p:column>	
+					 <p:column  colspan="1" rowspan="1"
+					 headerText="#{msgs['rap']}">
+					</p:column>	
+					 <p:column  colspan="1" rowspan="1"
+						 headerText="#{msgs['suiviae.dptot']}">
+					</p:column>	
+					 <p:column  colspan="1" rowspan="1"
+						 headerText="#{msgs['suiviae.dr']}">
+					</p:column>	
+					 <p:column  colspan="1" rowspan="1"
+						 headerText="#{msgs['suiviae.dpnet']}">
+					</p:column>	
+					 <p:column  colspan="1" rowspan="1"
+						 headerText="#{msgs['rap']}">
+					</p:column>	
+					  </p:row>
+					<p:row>
+           	 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="1" styleClass="detailValue">
+					
+					</p:column>
+						 	
+						 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="2" styleClass="detailValue">
+					</p:column>			
+					 	 	 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="3" styleClass="detailValue">
+					</p:column>		
+						 	 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="4" styleClass="detailValue">
+					</p:column>	
+					 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="5" styleClass="detailValue">
+					</p:column>	
+				  	 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="6" styleClass="detailValue">
+					</p:column>	
+						 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="7" styleClass="detailValue">
+					</p:column>
+						 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="8" styleClass="detailValue">
+					</p:column>
+						 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="9" styleClass="detailValue">
+					</p:column>
+						 <p:column style="width:12%; text-align: center;font-weight: bold;"
+						colspan="1" headerText="10&lt;br/&gt; =6+7+8-9" styleClass="detailValue">
+					</p:column>
+						 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="11" styleClass="detailValue">
+					</p:column>
+					 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="12" styleClass="detailValue">
+					</p:column>
+						 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="13" styleClass="detailValue">
+					</p:column>
+					 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="14 &lt;br/&gt;=12-13" styleClass="detailValue">
+					</p:column>
+						 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="15" styleClass="detailValue">
+					</p:column>
+						 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="16" styleClass="detailValue">
+					</p:column>
+						 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="17 &lt;br/&gt;=15-16" styleClass="detailValue">
+					</p:column>
+						 <p:column style="text-align:center;font-weight: bold;"
+						colspan="1" headerText="18 &lt;br/&gt;= 10+14-16" styleClass="detailValue">
+					</p:column>
+					 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="19 &lt;br/&gt;=11-12-8" styleClass="detailValue">
+					</p:column>
+						 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="20" styleClass="detailValue">
+					</p:column>
+						 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="21" styleClass="detailValue">
+					</p:column>
+					 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="22 &lt;br/&gt;=21-17" styleClass="detailValue">
+					</p:column>
+						 <p:column style="text-align: center;font-weight: bold;"
+						colspan="1" headerText="23 &lt;br/&gt;=18+19-20" styleClass="detailValue">
+					</p:column>
+						 
+				 
+        </p:row>
+			</p:columnGroup>
+		
+			
+		<p:column  >
+			<h:outputText styleClass="detailTitle"  value="#{suivi.codeDest}" />
+				
+		</p:column>
+		<p:column  >
+			
+			<h:outputText styleClass="detailTitle"  value="#{suivi.codeNature}" />
+			
+          
+		</p:column>
+		<p:column  >
+			<h:outputText styleClass="detailTitle"  value="#{suivi.codeService}" />
+		
+		</p:column>
+		<p:column>
+            <h:outputText styleClass="detailTitle" value="#{suivi.codeProg}" />
+        
+        </p:column>
+        <p:column>
+            <h:outputText styleClass="detailTitle" value="#{suivi.flechGlob}" />
+        
+        </p:column>
+	
+		<p:column>
+			
+			<h:outputText styleClass="detailTitle"  value="#{suivi.rapInitiale}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			
+		</p:column>
+			<p:column  >
+			
+			<h:outputText styleClass="detailTitle"  value="#{suivi.ca}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+		</h:outputText>
+		</p:column>
+		<p:column >
+		
+			<h:outputText styleClass="detailTitle"  value="#{suivi.compl}" >
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+		
+		</p:column>
+		<p:column  >
+			<h:outputText styleClass="detailTitle" value="#{suivi.dpAnt}" >
+			<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		
+		</p:column>
+		<p:column >
+		
+			<h:outputText styleClass="detailTitle"  value="#{suivi.rapAnt}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		
+		</p:column>
+			<p:column >
+		
+			<h:outputText styleClass="detailTitle" value="#{suivi.co}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			
+		</p:column>
+			<p:column >
+		
+			<h:outputText styleClass="detailTitle" value="#{suivi.ej}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+				
+		</p:column>
+		<p:column >
+		
+			<h:outputText styleClass="detailTitle" value="#{suivi.dpEx}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+				
+           
+		</p:column>
+			<p:column >
+		
+			<h:outputText styleClass="detailTitle" value="#{suivi.rapEx}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			
+		</p:column>
+		<p:column >
+		
+			<h:outputText styleClass="detailTitle" value="#{suivi.dpTot}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		
+		</p:column>
+		<p:column >
+			
+			<h:outputText styleClass="detailTitle" value="#{suivi.dr}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+				
+		</p:column>
+	
+		<p:column  >
+			<h:outputText styleClass="detailTitle" value="#{suivi.dpNet}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			
+		</p:column>
+		<p:column  >
+			<h:outputText styleClass="detailTitle" value="#{suivi.rapAct}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			
+		</p:column>
+		<p:column  >
+			<h:outputText styleClass="detailTitle" value="#{suivi.dispEj}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+				
+		</p:column>
+			<p:column  >
+			<h:outputText styleClass="detailTitle" style="text-align:left" value="#{suivi.rapDiff}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+				
+		</p:column>
+		<p:column styleClass="th"   >
+			<h:outputText styleClass="th"  value=" ">
+			
+			</h:outputText>
+		
+		</p:column>
+		<p:column  styleClass="th" >
+			<h:outputText styleClass="th"  value=" ">
+				
+			</h:outputText>
+			
+		</p:column>
+		<p:column  >
+			<h:outputText  styleClass="detailTitle" value="#{suivi.besoin}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+		
+		</p:column>
+		
+		<p:columnGroup type="footer"  >
+		
+		<p:row >
+		</p:row>
+				<p:row>	              
+				    <p:column   colspan="5" style="text-align:right" footerText="#{msgs['totaux']}" />
+                   
+                    <p:column  >
+              <f:facet name="footer"  >
+                     
+                     <h:outputText styleClass="td" value="#{bpBean.rapInitTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                         
+                    <p:column  >
+              <f:facet name="footer"  >
+                     
+                       <h:outputText styleClass="td" style="text-align:left" value="#{bpBean.caTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                          <p:column  >
+              <f:facet name="footer"  >
+                     
+                   <h:outputText styleClass="td" style="text-align:left" value="#{bpBean.complTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                         <p:column  >
+              <f:facet name="footer"  >
+                     
+                     <h:outputText styleClass="td" style="text-align:left" value="#{bpBean.dpAntTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                       <p:column  >
+              <f:facet name="footer"  >
+                     
+                     <h:outputText styleClass="td" style="text-align:left" value="#{bpBean.rapAntTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                          
+                    <p:column  >
+              <f:facet name="footer"  >
+                     
+                   <h:outputText styleClass="td" style="text-align:left" value="#{bpBean.coTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                               
+                    <p:column  >
+              <f:facet name="footer"  >
+                     
+                       <h:outputText styleClass="td" style="text-align:left" value="#{bpBean.ejTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                           <p:column  >
+              <f:facet name="footer"  >
+                     
+                        <h:outputText styleClass="td" value="#{bpBean.dpExTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                          <p:column  >
+              <f:facet name="footer"  >
+                     
+                    <h:outputText styleClass="td" value="#{bpBean.rapExTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                           
+                          <p:column  >
+              <f:facet name="footer"  >
+                     
+                    <h:outputText styleClass="td" value="#{bpBean.dpTotTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                          
+                          <p:column >
+              <f:facet name="footer"  >
+                     
+                     <h:outputText styleClass="td" value="#{bpBean.drTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                         <p:column  >
+              <f:facet name="footer"  >
+                     
+                    <h:outputText styleClass="td" value="#{bpBean.dpNetTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                         <p:column  >
+              <f:facet name="footer"  >
+                     
+                         <h:outputText styleClass="td" value="#{bpBean.rapActTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                            <p:column  >
+              <f:facet name="footer"  >
+                     
+                   <h:outputText styleClass="td" value="#{bpBean.dispEjTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                         <p:column  >
+              <f:facet name="footer"  >
+                     
+                  <h:outputText styleClass="td" value="#{bpBean.rapDiffTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                           <p:column  >
+              <f:facet name="footer"  >
+                     
+                       <h:outputText  styleClass="td" value="#{bpBean.totCpVote}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                         <p:column  >
+              <f:facet name="footer"  >
+                     
+                      <h:outputText  styleClass="td" value="#{(bpBean.totCpVote)-(bpBean.dpNetTotal)}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+                         <p:column  >
+              <f:facet name="footer"  >
+                     
+                     <h:outputText styleClass="td" value="#{bpBean.besoinTotal}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+            </h:outputText>
+              </f:facet>
+                       </p:column>
+		
+		</p:row>
+		
+		</p:columnGroup>
+
+
+	</p:dataTable>
+	<br />
+		<div align="center">
+		<h:panelGroup>
+
+					<p:commandButton id="export_btn" title=" " value="#{msgs['budget.btn.export']}"
+					 ajax="false">
+						<p:fileDownload value="#{bpBean.xlsSuiviAECP}" />
+					</p:commandButton>	
+					 
+					
+								
+				</h:panelGroup>
+				</div>
+				</ui:composition>

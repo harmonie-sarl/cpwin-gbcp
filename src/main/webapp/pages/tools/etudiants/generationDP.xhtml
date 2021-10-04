@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/tools/dp/generation.xhtml">
+	
+	<ui:define name="tiersSearch">
+		<h:selectOneRadio id="selectModeRadio" styleClass="boutonRadio" 
+					 value="#{studentBean.student}" valueChangeListener="#{dpBean.trsStudentChangeListener}" >
+					<f:selectItem  itemLabel="#{msgs['menu.nantes.etudiant']}"
+						itemValue="true" />
+					<f:selectItem itemLabel="#{msgs['autres']}"	itemValue="false" />						
+							<p:ajax process="@this" update="tiers,selectedTiersPanel,DPPanel,amountPanel,generer_btn,addBtn" global="false"  ></p:ajax>
+					
+				</h:selectOneRadio>
+						
+
+	            <h:outputText/>
+	            <h:outputText/>
+				<p:outputLabel value="#{msgs['tiers']}"/>
+				<h:panelGroup>
+					<p:autoComplete id="tiers" 
+						value="#{dpBean.selectedTiers}" required="false"
+						requiredMessage="#{errorMsgs['cpwin.required']}"
+						style="width: 30%;" size="30" 
+						completeMethod="#{studentBean.autoCompleteTiers}"
+						converter="convert.tiers" var="tiers"
+						itemLabel="#{tiers.description}" itemValue="#{tiers}"
+						minQueryLength="#{gestionTiersBean.minAjaxQL}"
+						maxResults="#{gestionTiersBean.maxAjaxResult}"
+						title="#{gestionTiersBean.ajaxTitleMsg}">
+						<p:ajax event="itemSelect"
+							listener="#{dpBean.onTiersSelected}" 
+							update="globalMessage,selectedTiersPanel,addBtn,amountPanel"
+							process="@this" global="false" />
+
+					</p:autoComplete>
+					<p:message for="tiers" styleClass="error" />
+				</h:panelGroup>
+	</ui:define>
+
+</ui:composition>

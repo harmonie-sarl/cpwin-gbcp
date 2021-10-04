@@ -1,0 +1,122 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+	
+		<h:panelGrid columns="2">
+				<h:outputLabel value="#{msgs['budget.ExerciceAE']}" style="display:block;width:100px"	 />
+				<h:panelGroup>
+					 <p:selectOneMenu  id="exercList"  styleClass="ReadOnlyText" value="#{searchBean.exercice}" >
+					 
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.exercicAeList}" var="exerc" 
+				itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax  listener="#{bpBean.onExerciceChange}"  process="@this" update="budgetCodeList,:detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+				</h:panelGroup>
+				</h:panelGrid>
+				
+					<h:panelGrid columns="3">
+				<h:outputLabel value="#{msgs['budget.code']}"	style="display:block;width:100px" />
+				<h:panelGroup>
+					 <p:selectOneMenu id="budgetCodeList"  styleClass="ReadOnlyText" value="#{searchBean.codeBudget}" >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.listBudgets}" var="budg"
+				itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax  process="@this" update=":detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+			
+				</h:panelGroup>
+				
+	           <p:commandButton   icon="fa fa-fw fa-info"  type="button" rendered="#{bpBean.budget!=null}" onclick="PF('info').show();" />
+				</h:panelGrid>
+	<p:dialog header="#{msgs['icon.information']}" widgetVar="info" showEffect="explode"  height="300">
+
+   <p:panelGrid   id="infoVisa">
+ 	<f:facet name="header">
+	 	<p:row>
+	 	<p:column colspan="3">VISA</p:column>
+	 	</p:row>
+        <p:row>
+        <p:column></p:column>
+        <p:column><h:outputText value="#{msgs['budget.visePAR']}"></h:outputText></p:column>
+        <p:column><h:outputText value="#{msgs['budget.le']}"></h:outputText></p:column>
+        </p:row>
+       </f:facet>
+        <p:row rendered="#{bpBean.budget.ordoAccept}">
+        
+        <p:column>
+        <p:outputLabel value="#{msgs['budget.visaOrdo']} : #{bpBean.budget.visaOrdo.visa}" />
+        </p:column>
+         <p:column>
+          <p:outputLabel value="#{bpBean.budget.visaOrdo.auteur}" size="7"  />
+         </p:column>
+         <p:column>
+            <p:outputLabel value="#{bpBean.budget.visaOrdo.date}" size="7" />
+        </p:column>
+        
+        </p:row>
+       
+          <p:row rendered="#{bpBean.budget.cfAccept || true}">
+          
+           <p:column>
+        <p:outputLabel value="#{msgs['budget.visaCF']} : #{bpBean.budget.visaCF.visa}" />
+        </p:column>
+         <p:column>
+          <p:outputLabel value="#{bpBean.budget.visaCF.auteur}" size="7"  />
+         </p:column>
+         <p:column>
+            <p:outputLabel value="#{bpBean.budget.visaCF.date}" size="7" />
+        </p:column>
+       
+        </p:row>
+         <p:row rendered="#{bpBean.budget.acAccept || true}" >
+           <p:column>
+        <p:outputLabel value="#{msgs['budget.visaAC']} : #{bpBean.budget.visaAC.visa}" />
+        </p:column>
+         <p:column>
+          <p:outputLabel value="#{bpBean.budget.visaAC.auteur}" size="7"  />
+         </p:column>
+         <p:column>
+            <p:outputLabel value="#{bpBean.budget.visaAC.date}" size="7" />
+        </p:column>
+          </p:row>
+         </p:panelGrid>
+         <p:panelGrid   id="infoEtat">
+        <f:facet name="header">
+	 	<p:row>
+	 	<p:column colspan="2">ETAT</p:column>
+	 	</p:row>
+	 	</f:facet>
+	 	<p:row>
+	 	<p:column>Etat CP</p:column>
+	 	<p:column > <p:outputLabel value="#{bpBean.budget.etatCp}"  /></p:column>
+	 	</p:row>
+	 	</p:panelGrid>
+	 	 <p:panelGrid   id="infohistory">
+	 	 <f:facet name="header">
+	 	<p:row>
+	 	<p:column colspan="3">MAJ</p:column>
+	 	</p:row>
+	 	</f:facet>
+        <p:row>
+        
+        <p:column>
+        <p:outputLabel value="#{msgs['autMaj']}" ></p:outputLabel>
+        </p:column>
+        <p:column>
+        <p:outputLabel value="#{bpBean.budget.trace.auteurMaj}" size="7" />
+        </p:column>
+         <p:column>
+        <p:outputLabel value="#{bpBean.budget.trace.dateMajF}" size="7" />
+        </p:column>
+
+		</p:row>
+   </p:panelGrid>
+          
+</p:dialog>
+			 
+		</ui:composition>

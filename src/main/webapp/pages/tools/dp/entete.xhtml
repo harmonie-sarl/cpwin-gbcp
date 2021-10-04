@@ -1,0 +1,260 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	
+		<p:panel style="width:100%;">
+		<h:panelGrid columns="4" style="width:50%;vertical-align:top;align: left;">
+		<h:panelGroup>
+			<h:outputLabel styleClass="espace_entre_label_value"
+						style="font-weight:bold" value="#{msgs['cpwin.exercice']}" />
+			<h:outputText value=" *" styleClass="required"></h:outputText>
+		</h:panelGroup>
+
+			<p:selectOneMenu styleClass="ReadOnlyText" 
+				value="#{dpBean.exercice}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{loaderBean.allExecList}" var="exec"
+					itemLabel="#{exec}" itemValue="#{exec}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{dpBean.onExerciceChange}" 
+					update="budgetCodeList,enteteForm,:detailsForm" />
+			</p:selectOneMenu>
+
+
+			<h:panelGroup>
+			<h:outputLabel styleClass="espace_entre_label_value"
+						style="font-weight:bold" value="#{msgs['budget.code']}" />
+						
+			
+				<h:outputText value=" *" styleClass="required"></h:outputText>
+			</h:panelGroup>
+			
+		<p:selectOneMenu id="budgetCodeList" styleClass="ReadOnlyText"
+				value="#{dpBean.codeBudget}">
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{dpBean.listBudgets}" var="budg"
+					itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{dpBean.reset}" global="false"
+					update="adressBudgPanel,enteteForm,:detailsForm"/>
+			</p:selectOneMenu>
+			
+
+		</h:panelGrid>
+	
+	
+</p:panel>
+		
+<p:panel id="adressBudgPanel" style="width:100%;" header="#{msgs['adresse.budgetaire']}" >
+
+				<h:panelGrid columns="8" style="width:100%;vertical-align:top;align: left;">
+					<h:panelGroup>
+						<h:outputLabel styleClass="espace_entre_label_value"
+							style="font-weight:bold" value="#{msgs['import.destination']}" />
+						<h:outputText value=" *" styleClass="required"></h:outputText>
+					</h:panelGroup>
+
+					<p:selectOneMenu id="destPg" styleClass="ReadOnlyText"  
+						value="#{dataListBean.codeDest}">
+
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{dataListBean.dpDestinationList}" var="dest"
+							itemLabel="#{dest.code}" itemValue="#{dest.code}">
+						</f:selectItems>
+						<p:ajax process="@this" listener="#{dpBean.selectLbListener}" update="detailsForm,noLbi,noEnv,cptProd,natPg,srvPg,progPg,compteTva,compteClient,enteteForm" />
+
+					</p:selectOneMenu>
+					<h:panelGroup>
+						<h:outputLabel styleClass="espace_entre_label_value"
+							style="font-weight:bold" value="#{msgs['import.nature']}" />
+
+						<h:outputText value=" *" styleClass="required"></h:outputText>
+					</h:panelGroup>
+					<p:selectOneMenu id="natPg" styleClass="ReadOnlyText"
+						value="#{dataListBean.codeNature}">
+
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{dataListBean.dpNatureList}" var="nature"
+							itemLabel="#{nature.code}" itemValue="#{nature.code}">
+						</f:selectItems>
+						<p:ajax process="@this"  listener="#{dpBean.selectLbListener}"
+						
+						update="detailsForm,noLbi,noEnv,cptProd,srvPg,progPg,enteteForm" />
+
+					</p:selectOneMenu>
+					<h:panelGroup>
+						<h:outputLabel styleClass="espace_entre_label_value"
+							style="font-weight:bold" value="#{msgs['service']}" />
+						<h:outputText value=" *" styleClass="required"></h:outputText>
+					</h:panelGroup>
+					<p:selectOneMenu id="srvPg" styleClass="ReadOnlyText" 
+						value="#{dataListBean.codeService}">
+
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{dataListBean.dpServiceList}" var="service"
+							itemLabel="#{service.code}" itemValue="#{service.code}">
+						</f:selectItems>
+						<p:ajax process="@this" listener="#{dpBean.selectLbListener}" update="detailsForm,noLbi,noEnv,progPg,cptProd" />
+					</p:selectOneMenu>
+					<h:panelGroup>
+						<h:outputLabel styleClass="espace_entre_label_value"
+							style="font-weight:bold" value="#{msgs['programme']}" />
+
+						<h:outputText value=" *" styleClass="required"></h:outputText>
+					</h:panelGroup>
+					<p:selectOneMenu id="progPg" styleClass="ReadOnlyText" 
+						value="#{dataListBean.codeProg}">
+
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{dataListBean.dpProgrammeList}" var="prog"
+							itemLabel="#{prog.code}" itemValue="#{prog.code}">
+						</f:selectItems>
+						<p:ajax process="@this" listener="#{dpBean.selectLbListener}" update="enteteForm,detailsForm,noLbi,noEnv,cptProd"  />
+					</p:selectOneMenu>
+					
+					<h:outputLabel styleClass="espace_entre_label_value" style="font-weight:bold" value="#{msgs['no.envoi']}" />
+					<h:outputLabel value="#{dpBean.noEnv}" id="noEnv" />
+
+					<h:outputLabel styleClass="espace_entre_label_value" 	style="font-weight:bold" value="#{msgs['no.lbi']}" />
+					<h:outputLabel value="#{dpBean.noLbi}" id="noLbi" />
+					
+					<h:outputLabel styleClass="espace_entre_label_value" 	style="font-weight:bold" value="#{msgs['nat.grp1']}" />
+					<h:outputLabel value="#{dpBean.groupNat}" id="natGrp" />
+
+				</h:panelGrid>
+			</p:panel>
+	
+	
+	<p:panel id="codePanel" style="width:100%;" >
+		<h:panelGrid  columns="6" 
+			style="width:60%;vertical-align:top;align: left;">
+			<h:panelGroup>
+				<h:outputLabel styleClass="espace_entre_label_value" 
+					style="font-weight:bold;" value="#{msgs['gestionnaire']}" />
+				<h:outputText value=" *"  styleClass="required"></h:outputText>
+			</h:panelGroup>
+			<p:selectOneMenu styleClass="ReadOnlyText" id="codeGest"
+				value="#{dataListBean.codeGest}" >
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{dataListBean.codeGestList}" var="gest"
+					itemLabel="#{gest}" itemValue="#{gest}">
+				</f:selectItems>
+				<p:ajax listener="#{dpBean.selectCodeGestListener}"
+					process="@this"
+					update="enteteForm,detailsForm,noEo,codePrm"></p:ajax>
+			</p:selectOneMenu>
+
+                <h:panelGroup>
+				<h:outputLabel 
+				style="font-weight:bold" value="#{msgs['etudiant.no.eo']}" />
+				<h:outputText value=" *" styleClass="required"></h:outputText>
+			</h:panelGroup>
+			<p:inputText id="noEo" value="#{dpBean.params.numeroEO}" size="10" 
+				maxlength="32">
+				<p:ajax  event="keyup"
+					process="@this"
+					update="enteteForm,detailsForm"></p:ajax>
+
+			</p:inputText>
+			
+			
+
+                <h:panelGroup>
+					<h:outputLabel styleClass="espace_entre_label_value"
+				style="font-weight:bold" value="#{msgs['etudiant.prm']}" />
+				<h:outputText value=" *" styleClass="required"></h:outputText>
+			</h:panelGroup>
+                  <p:inputText id="codePrm" value="#{dpBean.params.codePRM}" size="10" 
+				maxlength="32">
+				<p:ajax  event="keyup"
+					process="@this"
+					update="enteteForm,detailsForm"></p:ajax>
+
+			</p:inputText>
+
+
+          	
+		</h:panelGrid>
+	</p:panel>
+
+	<p:panel id="comptePanel" style="width:100%;" >
+		<h:panelGrid  columns="8" 
+			style="width:100%;vertical-align:top;align: left;">
+			<h:panelGroup>
+				<h:outputLabel styleClass="espace_entre_label_value"
+					style="font-weight:bold" value="#{msgs['compte.charge']}" />
+				<h:outputText value=" *" styleClass="required"></h:outputText>
+			</h:panelGroup>
+			<p:selectOneMenu styleClass="ReadOnlyText" id="cptProd"
+				value="#{dataListBean.compteCharge}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{dataListBean.compteChargeList}" var="cpt"
+					itemLabel="#{cpt.code}" itemValue="#{cpt.code}">
+				</f:selectItems>
+				<p:ajax listener="#{dpBean.selectCmptProdListener}"
+					process="@this"
+					update="enteteForm,detailsForm,compteTva,compteClient"></p:ajax>
+			</p:selectOneMenu>
+
+<h:panelGroup>
+				<h:outputLabel styleClass="espace_entre_label_value"
+				style="font-weight:bold" value="#{msgs['compte.tva']}" />
+				<h:outputText value=" *" styleClass="required"></h:outputText>
+			</h:panelGroup>
+			
+			
+			<p:inputText id="compteTva" value="#{dataListBean.compteTva}" size="10"
+				maxlength="32">
+				<p:ajax 
+					process="@this" event="keyup"
+					update=":detailsForm"></p:ajax>
+
+			</p:inputText>
+
+<h:panelGroup>
+					<h:outputLabel styleClass="espace_entre_label_value"
+				style="font-weight:bold" value="#{msgs['compte.tiers']}" />
+				<h:outputText value=" *" styleClass="required"></h:outputText>
+			</h:panelGroup>
+
+
+
+            <p:inputText  value="#{dataListBean.compteClient}" size="10" id="compteClient"
+				maxlength="32">
+				<p:ajax  event="keyup"
+					process="@this"
+					update="detailsForm"></p:ajax>
+
+			</p:inputText>
+		</h:panelGrid>
+	</p:panel>
+	<p:panel id="objectPanel"  style="width:100%;" >
+		<h:panelGrid columns="2">
+		<h:panelGroup>
+				<h:outputText value="#{msgs['objet.depense']}" />
+				<h:outputText value=" *" styleClass="required"></h:outputText>
+			</h:panelGroup>
+
+			<h:inputTextarea styleClass="ReadOnlyText" id="objet"
+				value="#{dpBean.objet}" style="text-align: left;" rows="2"
+				cols="50">
+				<f:validateLength minimum="1" maximum="255" />
+				<p:ajax process="@this" event="blur"
+					update="detailsForm"></p:ajax>
+
+			</h:inputTextarea>
+
+			
+		
+		</h:panelGrid>
+		</p:panel>
+		
+
+</ui:composition>

@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	
+	<ui:define name="lastPrefexedTitle" />
+	<ui:define name="entetePage">
+		<ui:include src="./common/entete.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="enteteAction" >
+	<p:commandButton title=" " value="#{msgs['cpwin.btn.Importer']}"
+			id="importBtn" update=":detailsForm:importPanel"
+			immediate="true" actionListener="#{daiBean.executeImport}"
+			disabled="#{!daiBean.importAutorized}">
+		</p:commandButton>
+	</ui:define>
+	
+	<ui:define name="search">
+	</ui:define>
+	<ui:define name="details">
+	<p:panel id="importPanel" style="width:100%;">
+	
+			<p:tabView id="ongletsImport" style="width:100%;" cache="false"	rendered="#{ daiBean.dataVisible}">
+
+				<p:tab id="tabDailist" rendered="#{daiBean.importedDaiDataVisible}"
+					title="#{msgs['budget.data.import.tab']} (#{daiBean.daiList.stream().count()})">
+
+					<ui:include src="./onglets/importedDataList.xhtml">
+					</ui:include>
+				</p:tab>
+			
+				<p:tab id="tabErreurs" rendered="#{daiBean.errorReportVisible}"
+					title="#{msgs['budget.data.error.tab']} (#{daiBean.errorReport.stream().count()})">
+
+					<ui:include src="./onglets/rapport_erreurs.xhtml" />
+
+				</p:tab>
+
+			</p:tabView>
+		</p:panel>
+	</ui:define>
+	
+	
+	
+	</ui:composition>

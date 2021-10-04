@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	
+	
+	<ui:define name="lastPrefexedTitle" />
+	<ui:define name="entetePage">
+		<ui:include src="./common/enteteConsult.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="enteteAction" >
+	<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}"
+			id="affichBtn" update=":enteteForm,:detailsForm:consultPanel"
+			immediate="true" actionListener="#{daiBean.searchConsultation}"
+			disabled="#{!daiBean.commonRequiredDone}">
+		</p:commandButton>
+	</ui:define>
+	<ui:define name="search">
+	</ui:define>
+	<ui:define name="details">
+	<p:panel id="consultPanel" style="width:100%;">
+			<div align="center">
+				<h:panelGroup id="btnPG">
+						<p:commandButton title=" " value="#{msgs['budget.btn.export']}"
+			 immediate="true"
+			rendered="#{daiBean.displayList!=null}" ajax="false">
+ 			<p:fileDownload value="#{daiBean.xlsImportedDisplayList}" /> 
+		</p:commandButton>
+				</h:panelGroup>
+			</div>
+     <br/>
+					<ui:include src="./onglets/suiviEIConsult.xhtml">
+					</ui:include>
+			
+		</p:panel>
+	</ui:define>
+	
+	
+	</ui:composition>

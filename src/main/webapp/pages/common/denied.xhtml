@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<f:view id="ACView" contentType="text/html">
+	<h:head>
+		<title><ui:insert name="title">ACCESS CONTROL</ui:insert></title>
+	</h:head>	
+		<h:body  >
+		<div style="margin-left: auto; margin-right: auto;	text-align: center; ">
+	
+		<h:form id="aaa">
+		
+			<p:panel  id="titreglobal" header="#{msgs['titre.pageError']}">
+				<br/>
+				<p:panel style="text-align: left; color:red;"  id="messageException"  header="#{msgs['pageError.message']}">
+				<div style="color:red; text-align: left;">
+					<h:outputText value="You don't have permission to access this page:" />
+					<h:outputText value="#{request.requestURL}"></h:outputText>
+					<br />
+					<p>
+					Please, return to the <a href="#{request.contextPath}">home page</a>
+  					</p>
+					</div>
+				</p:panel>
+				
+			</p:panel>
+		
+			<br />
+		</h:form>
+			</div>
+		</h:body>
+	</f:view>
+</ui:composition>

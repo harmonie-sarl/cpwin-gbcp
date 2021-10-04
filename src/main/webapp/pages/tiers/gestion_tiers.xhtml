@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+	<ui:define name="lastPrefexedTitle">
+					
+					</ui:define>
+	<ui:define name="entetePage">
+	</ui:define>
+	<ui:define name="searchPage">
+	
+							<ui:include src="/snippets/search_tiers.xhtml" />
+	</ui:define>
+	<ui:define name="searchAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}"
+			update="globalMessage,:detailsForm:tiersPanel, dateDuPg, dateAuPg" actionListener="#{gestionTiersBean.searchTiers}" >
+
+		</p:commandButton>
+		
+	</ui:define>
+	
+	
+<!-- 	ancien page -->
+	
+	<ui:define name="details">
+		
+		<p:panel id="tiersPanel" style="width:100%;" header="#{msgs['tiers']}">
+			<div align="center" style="width: 100%;">
+			
+				<p:dataTable id="tiers_dtt" rendered="#{gestionTiersBean.tiersList!=null}"
+					var="tiers" style="width:100%; text-align: center;" rowIndexVar="selectedIndex"
+					emptyMessage="#{msgs['datatable.empty']}" 
+					value="#{gestionTiersBean.tiersList}" paginator="true" rows="10">
+					<p:column headerText="#{msgs['code.tiers']}" style="width:10%">
+				
+						<p:commandLink action="#{gestionTiersBean.consultTiersWPage}"  ajax="false"
+						 update="globalMessage" >
+							<h:outputText value="#{tiers.code}"/>
+							
+							<f:param name="selectedTiersIndex" value="#{selectedIndex}"/> 
+						</p:commandLink>
+					</p:column>
+					<p:column headerText="#{msgs['nom']}" style="width:35%">
+						<h:outputText value="#{tiers.nom}"/>
+					</p:column>
+					<p:column headerText="#{msgs['cpwin.enseigne']}" style="width:35%">
+						<h:outputText value="#{tiers.enseigne}"/>
+					</p:column>
+					<p:column headerText="#{msgs['cpwin.num.siren']}" style="width:10%">
+						<h:outputText value="#{tiers.numSiren}"/>
+					</p:column>
+					<p:column headerText="#{msgs['cpwin.etat']}" style="width:5%">
+						<h:outputText value="#{tiers.libEtat}"/>
+					</p:column>
+					<p:column style="width:5%;" rendered="false">
+						<p:commandButton icon="updateIcon"  action="#{gestionTiersBean.updateTiersWPage}" immediate="true" ajax="false"
+								title="#{msgs['btn.modifier']}">
+							<f:param name="selectedTiersIndex" value="#{selectedIndex}"/>
+							
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				
+			<br/>
+			<h:panelGroup>					
+					<p:commandButton title=" " value="#{msgs['btn.add']}" ajax="false" rendered="false"
+						action="#{gestionTiersBean.addTiersWPage}">
+					</p:commandButton>
+					
+        	</h:panelGroup></div>
+		</p:panel>
+		
+	</ui:define>
+	
+</ui:composition>

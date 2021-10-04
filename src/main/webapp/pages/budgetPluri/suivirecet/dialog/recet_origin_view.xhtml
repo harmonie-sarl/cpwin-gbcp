@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>#{msgs['recette.origine']}</title>
+		<style type="text/css">
+.redStyle {
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+</style>
+	</h:head>
+
+	<h:body>
+		<h:form id="recetOriginForm">
+<p:messages id="recetOrigin_msg" showDetail="true"  
+ autoUpdate="true" styleClass="error" globalOnly="true"  />
+			<p:panel style="width:100%;" id="recetOriginPanel">
+				<h:panelGrid columns="4">
+
+					<h:outputLabel value="#{msgs['depense.niv.dest']}" />
+
+					<p:selectOneMenu styleClass="ReadOnlyText"
+						value="#{bpBean.depNivDest}">
+
+						<f:selectItem itemValue="" itemLabel="-----" />
+						<f:selectItems value="#{bpBean.recNivDestList}" var="niv"
+							itemLabel="#{niv}" itemValue="#{niv}">
+						</f:selectItems>
+					<p:ajax process="@this" listener="#{bpBean.onRecNivDestChange}" update="recetOriginPanel,recetOrigin_msg,recet_par_orig_bt_pg"></p:ajax>
+					</p:selectOneMenu>
+					<p:commandButton styleClass="Label" title=" " immediate="false"
+						value="#{msgs['cpwin.btn.afficher']}" disabled="#{empty bpBean.depNivDest}"
+						actionListener="#{bpBean.loadRecetOrigin}"
+						update="recetOriginPanel,recetOrigin_msg,recet_par_orig_bt_pg">
+					</p:commandButton>
+					<p:ajaxStatus id="status8" style="width:30px;height:30px;">
+						<f:facet name="start">
+							<h:graphicImage value="/images/ajax/ajax-loader-0.gif" />
+						</f:facet>
+						<f:facet name="complete">
+							<h:outputText value="" />
+						</f:facet>
+					</p:ajaxStatus>
+				</h:panelGrid>
+
+
+
+
+
+
+
+
+
+
+
+				<ui:include src="../panel/recet_par_orig.xhtml" />
+
+			</p:panel>
+
+
+			<h:panelGroup id="recet_par_orig_bt_pg">
+				<div align="center" style="width: 100%;">
+					
+			<p:commandButton  title=" " value="#{msgs['budget.btn.export']}" immediate="true"  rendered="#{(bpBean.recByOrigList!=null)and(not empty bpBean.recByOrigList)}"
+					ajax="false"  >
+					<p:fileDownload value="#{bpBean.xlsSuiviRecetOrigin}"  />
+		</p:commandButton>
+		
+					<p:commandButton value="#{msgs['btn.fermer']}" immediate="true"
+						actionListener="#{bpBean.closeTotalRectOrigin}">
+					</p:commandButton>
+				</div>
+			</h:panelGroup>
+		</h:form>
+	</h:body>
+</ui:composition>

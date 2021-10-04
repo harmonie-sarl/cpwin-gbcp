@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+	<ui:define name="lastPrefexedTitle">
+
+	</ui:define>
+	<ui:define name="entetePage">
+		<ui:include src="../common/entete_generation.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="enteteAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}"
+			id="searchBtn" update=":detailsForm:generationPanel" immediate="true"
+			actionListener="#{gtsBean.search}" 
+			disabled="#{!gtsBean.requiredDataDone}"	>
+
+		</p:commandButton>
+		<ui:param name="statusRendered" value="true" />		
+	</ui:define>
+
+	<ui:define name="search">
+
+
+	</ui:define>
+
+
+	<ui:define name="details">
+
+
+		<p:panel id="generationPanel" style="width:100%;">
+			<div align="center">
+			<h:panelGrid id="btn_grid" columns="4" cellspacing="20">		
+					
+					
+					<p:commandButton immediate="true" title="" rendered="#{gtsBean.generateAutorized}"
+					value="#{msgs['generer']}" id="generate_btn"
+					update="globalMessage,:detailsForm:generationPanel"
+					actionListener="#{gtsBean.generer}">
+
+				</p:commandButton>
+		
+				</h:panelGrid>
+			</div>
+
+			<p:tabView id="ongletsGeneration" style="width:100%;" cache="false" rendered="#{gtsBean.dataVisible}"  >
+
+				<p:tab id="tabRecetLigneBudg" rendered="#{gtsBean.importDataVisible}"
+				
+				 title="#{msgs['recettes.ligne.budgetaire']} #{gtsBean.recetLigneBudgCount}">
+				
+		
+										<ui:include src="./onglets/recet_ligne_budg.xhtml" />	
+				
+			
+				</p:tab>
+				<p:tab id="tabRecetCodeArtic" rendered="#{gtsBean.importDataVisible}" title="#{msgs['recettes.code.article']} #{gtsBean.recetCodeArticCount}">
+										<ui:include src="./onglets/recet_code_article.xhtml" />	
+				
+			
+				
+				
+			
+				</p:tab>
+				<p:tab id="tabLiqRcetGenr" rendered="#{gtsBean.liqRecetteVisible}" title="#{msgs['liquid.recet.generer']} #{gtsBean.liqRecetteCount}">
+				
+									<ui:include src="./onglets/liq_recet_gener.xhtml" />	
+				
+				</p:tab>
+				<p:tab id="tabLiqRcetDiffere" rendered="#{gtsBean.liqRecetteDiffVisible}" title="#{msgs['liquid.recet.diff.generer']} #{gtsBean.liqRecetteDiffCount}">
+				
+									<ui:include src="./onglets//liq_recet_diff_gener.xhtml" />	
+				
+				</p:tab>
+			
+
+			</p:tabView>
+
+
+
+
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+
+	</ui:define>
+</ui:composition>

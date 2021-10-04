@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+	<h:panelGroup id="dateLimitePG">
+		<h:outputLabel value="#{msgs['cpwin.dateLimite']}" for="dateLimite"
+			rendered="true" styleClass="espace_entre_label_value" />
+		<p:inputMask id="dateLimite" mask="99/99" size="4" required="true" requiredMessage="#{errorMsgs['cpwin.required']}"
+			value="#{tableauBordBean.dateLimiteStr}" validator="validator.dateLimite" >
+      
+			
+		</p:inputMask>
+		<h:outputLabel value="#{msgs['cpwin.dateLimite.dedault']}" for="dateLimite"
+			rendered="true"  />
+		<p:message for="dateLimite" styleClass="error" />
+	</h:panelGroup>
+</ui:composition>

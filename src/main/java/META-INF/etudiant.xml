@@ -1,0 +1,69 @@
+<entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+  version="2.0">
+	<entity class="fr.symphonie.tools.nantes.model.Etudiant">
+		<attributes>
+			<id name="matricule">
+			</id>
+			<basic name="password">
+				<column name="mot_passe"></column>
+			</basic>
+			<basic name="codeCpwin">
+				<column name="code_cpwin"></column>
+			</basic>
+			<basic name="nom">
+			</basic>
+			<basic name="prenom">
+			</basic>
+			<basic name="email">
+			</basic>
+			<basic name="status">
+			</basic>
+			<basic name="emailStatus">
+			</basic>
+			<basic name="emailDate">
+			</basic>
+			<embedded name="adresse">
+			</embedded>
+			<embedded name="iban">
+			</embedded>
+			<embedded name="trace">
+			</embedded>
+		</attributes>
+	</entity>
+	<embeddable class="fr.symphonie.cpwin.model.nantes.Adresse">
+		<attributes>
+		<basic name="numero">
+			<column name="no_adr"/>
+		</basic>
+			<basic name="adresse1">
+			</basic>
+			<basic name="adresse2">
+			</basic>
+			<basic name="codePostale">
+				<column name="code_post"></column>
+			</basic>
+			<basic name="ville">
+			</basic>
+			<basic name="pays">
+			</basic>
+		</attributes>
+	</embeddable>
+	<embeddable class="fr.symphonie.cpwin.model.nantes.Iban">
+		<attributes>
+		<basic name="numero">
+			<column name="no_iban"/>
+		</basic>
+			<basic name="iban">
+			</basic>
+			<basic name="detenteur">
+			</basic>
+			<basic name="bic">
+			</basic>
+		</attributes>
+	</embeddable>
+  
+  
+  </entity-mappings>

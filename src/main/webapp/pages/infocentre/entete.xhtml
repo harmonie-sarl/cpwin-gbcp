@@ -1,0 +1,105 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+	
+		<h:panelGrid columns="2">
+				<h:outputLabel value="#{msgs['cpwin.exercice']}" style="display:block;width:80px"	 />
+				<h:panelGroup>
+					 <p:selectOneMenu  id="exercList"  styleClass="ReadOnlyText" value="#{searchBean.exercice}" >
+					 
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.exercicAeList}" var="exerc" 
+				itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax  listener="#{dematBean.onExerciceChange}"  process="@this" update="budgetCodeList,:detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+				</h:panelGroup>
+				</h:panelGrid>
+				
+						<h:panelGrid columns="2">
+				<h:outputLabel value="#{msgs['budget.code']}"	style="display:block;width:100px" />
+				<h:panelGroup>
+					 <p:selectOneMenu id="budgetCodeList"  styleClass="ReadOnlyText" value="#{searchBean.codeBudget}" >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.listBudgets}" var="budg"
+				itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax listener="#{dematBean.reset}" process="@this" update="exportList,:detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+			
+				</h:panelGroup>
+				
+				</h:panelGrid>
+				
+				
+					
+	<h:panelGrid columns="3" id="exportList" >
+		<h:outputText value="#{msgs['export']}" />
+	<p:selectOneMenu styleClass="ReadOnlyText"
+			value="#{dematBean.codeExport}"  >
+			<f:selectItem itemValue="" itemLabel="-----" />
+			<f:selectItems value="#{dematBean.exportList}" var="exportItem"
+				itemLabel="#{exportItem.codeAndLibelle}" itemValue="#{exportItem.code}">
+			</f:selectItems>
+			<p:ajax process="@this"  update=":detailsForm,:enteteForm,globalMessage"
+			
+			 />
+		</p:selectOneMenu>
+			<h:panelGroup id="exportInfoButton" >		
+			 <p:commandButton   icon="fa fa-fw fa-info"     type="button" rendered="#{dematBean.selectedExport!=null}" onclick="PF('info').show();" />
+				</h:panelGroup>
+  </h:panelGrid>
+  <p:dialog header="#{msgs['icon.information']}" widgetVar="info" showEffect="explode"  height="60">
+
+		<p:panelGrid id="infoExport">
+			<f:facet name="header">
+				
+				<p:row>
+				<p:column>
+						<h:outputText value="#{msgs['code']}"></h:outputText>
+					</p:column>
+					<p:column>
+						<h:outputText value="#{msgs['libelle']}"></h:outputText>
+					</p:column>
+					<p:column>
+						<h:outputText value="#{msgs['mask']}"></h:outputText>
+					</p:column>
+						<p:column>
+						<h:outputText value="#{msgs['statut']}"></h:outputText>
+					</p:column>
+				</p:row>
+			</f:facet>
+			<p:row >
+
+				<p:column>
+					<p:outputLabel
+						value="#{dematBean.selectedExport.code}" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{dematBean.selectedExport.info.libelle}"
+						size="7" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="#{dematBean.selectedExport.info.maskDate}"
+						size="7" />
+				</p:column>
+				<p:column>
+					<p:outputLabel
+						value="#{dematBean.selectedExport.status}" />
+				</p:column>
+
+			</p:row>
+
+
+			
+			
+
+		</p:panelGrid>
+	
+	
+
+	</p:dialog>
+			 
+		</ui:composition>

@@ -1,0 +1,117 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+
+</style>
+
+
+
+<p:panel id="recapPanel" style="width:100%;"
+			rendered="#{bpBean.deploiementRecap!=null}"
+			header="#{msgs['credit.gest']}">
+   <div align="center" style="width: 100%;">
+
+
+				<br />
+				<p:dataTable id="recap_dtt"
+					rendered="#{bpBean.deploiementRecap!=null}" var="cpGest"
+					style="width:100%; text-align: center;" rowIndexVar="budgetIndex"
+					emptyMessage="#{msgs['datatable.empty']}"
+					value="#{bpBean.deploiementRecap}" paginator="true" rows="11">
+					
+					<p:column style="width:6%;">
+						<f:facet name="header">
+					<h:outputText value="#{msgs['code.gest']}" />
+				</f:facet>
+						<h:outputText value="#{cpGest.gestionnaire}" />
+						<f:facet name="footer">
+							<h:outputText value="#{msgs['total']}" />
+						</f:facet>
+					</p:column>
+					<p:column style="width:7%;">
+					<f:facet name="header">
+					<h:outputText value="#{msgs['credit.ouvert']}" />
+				</f:facet>
+						<h:outputText value="#{cpGest.creditOuvertTemp}">
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+							
+					</p:column>
+					<p:column style="width:7%;">
+				<f:facet name="header">
+					<h:outputText value="1- #{bpBean.getModifNatGrp(0)}" />
+				</f:facet>
+				<h:outputText value="#{cpGest.getMontant('1')}" />
+					<f:facet name="footer">
+							<h:outputText value="#{bpBean.getTotalMntNatGrp('1')}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+			</p:column>
+					
+				<p:column style="width:7%;">
+				<f:facet name="header">
+					<h:outputText value="2- #{bpBean.getModifNatGrp(1)}" />
+				</f:facet>
+				<h:outputText value="#{cpGest.getMontant('2')}" />
+				<f:facet name="footer">
+							<h:outputText value="#{bpBean.getTotalMntNatGrp('2')}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+			</p:column>
+						<p:column style="width:7%;">
+				<f:facet name="header">
+					<h:outputText value="3- #{bpBean.getModifNatGrp(2)}" />
+				</f:facet>
+				<h:outputText value="#{cpGest.getMontant('3')}" />
+				<f:facet name="footer">
+							<h:outputText value="#{bpBean.getTotalMntNatGrp('3')}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+			</p:column>
+					<p:column style="width:7%;">
+				<f:facet name="header">
+					<h:outputText value="4- #{bpBean.getModifNatGrp(3)}" />
+				</f:facet>
+				<h:outputText value="#{cpGest.getMontant('4')}" />
+				<f:facet name="footer">
+							<h:outputText value="#{bpBean.getTotalMntNatGrp('4')}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+			</p:column>
+					
+					<p:column style="width:7%;">
+					<f:facet name="header">
+					<h:outputText value="#{msgs['nouveau.disponible']}" />
+				</f:facet>
+							<h:panelGroup >
+								<h:outputText value="#{cpGest.disponible}"
+									 rendered="#{cpGest.disponible ge 0}" >
+									<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+								</h:outputText>
+								<h:outputText value="#{cpGest.disponible}"
+									styleClass="redStyle" rendered="#{cpGest.disponible lt 0}" >
+									<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+								</h:outputText>
+							</h:panelGroup>		
+									
+						
+					</p:column>
+				</p:dataTable>
+				<p:commandButton title=" "
+						rendered="#{not empty bpBean.deploiementRecap}"
+						value="#{msgs['btn.enregistrer']}"
+						actionListener="#{bpBean.saveDeploiement}"
+						update="globalMessage,:detailsForm,:enteteForm" immediate="true"
+						process="@this">
+					</p:commandButton>
+				</div>
+				</p:panel>
+</ui:composition>

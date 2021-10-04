@@ -1,0 +1,106 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panel style="width:100%;" id="ctrlImputSFPanel">
+		
+		<div align="center">
+			<h:outputText value="#{msgs['ctrlImputSF.title']} "
+				style="font-weight: bold; text-align: center;color:#008000;" />
+		</div>
+		<p:dataTable id="ventilation_dtt" var="ventilation"
+			style="width:100%; text-align: center;"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{cfBean.cfVentilationList}">
+			<p:columnGroup type="header">
+				<p:row styleClass="th" style="font-weight: bold;text-align: center;">
+					<p:column styleClass="th" rowspan="2"
+						headerText="#{msgs['compte']}"
+						style="width:10%;font-weight: bold;text-align: center;" />
+					<p:column styleClass="th" rowspan="2"
+						headerText="#{msgs['designation']}" />
+					<p:column styleClass="th" colspan="4"
+						headerText="#{msgs['enveloppe.budgetaire']}" />
+				</p:row>
+				<p:row style="font-weight: bold;text-align: center;">
+					<p:column styleClass="th" headerText="1" />
+					<p:column styleClass="th" headerText="2" />
+					<p:column styleClass="th" headerText="3" />
+					<p:column styleClass="th" headerText="4" />
+
+				</p:row>
+			</p:columnGroup>
+			<p:column>
+				<h:outputText style="font-size: 12px"
+					value="#{ventilation.account.code}" />
+			</p:column>
+			<p:column>
+				<h:outputText style="font-size: 12px"
+					value="#{ventilation.account.designation}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{ventilation.amount1}" style="font-size: 12px">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column>
+				<h:outputText value="#{ventilation.amount2}" style="font-size: 12px">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column>
+				<h:outputText value="#{ventilation.amount3}" style="font-size: 12px">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column>
+				<h:outputText value="#{ventilation.amount4}" style="font-size: 12px">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:columnGroup type="footer">
+            <p:row>
+                <p:column colspan="2" style="text-align:left" footerText="#{msgs['totaux']}" />
+					<p:column>
+						<f:facet name="footer">
+							<h:outputText 
+								value="#{cfBean.cfVentilationList.stream().map(item->item.amount1).sum()}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					
+					<p:column>
+						<f:facet name="footer">
+							<h:outputText 
+								value="#{cfBean.cfVentilationList.stream().map(item->item.amount2).sum()}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					
+					<p:column>
+						<f:facet name="footer">
+							<h:outputText 
+								value="#{cfBean.cfVentilationList.stream().map(item->item.amount3).sum()}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					
+					<p:column>
+						<f:facet name="footer">
+							<h:outputText 
+								value="#{cfBean.cfVentilationList.stream().map(item->item.amount4).sum()}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+					</p:column>
+					
+            </p:row>
+        </p:columnGroup>
+		</p:dataTable>
+	</p:panel>
+</ui:composition>

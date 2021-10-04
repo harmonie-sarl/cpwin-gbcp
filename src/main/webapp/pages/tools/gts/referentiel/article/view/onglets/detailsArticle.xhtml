@@ -1,0 +1,132 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+
+	
+
+		
+
+	
+
+
+		<div align="center" style="width: 100%;">
+<p:dataTable id="details_article_dtt"
+				rendered="#{gtsRefBean.selectedArticle.details!=null}" var="detail"
+				style="width:100%; text-align: center;" rowIndexVar="selectedIndex"
+				emptyMessage="#{msgs['datatable.empty']}"
+				value="#{gtsRefBean.selectedArticle.details}" paginator="true"
+				rows="10">
+
+				<p:column headerText="#{msgs['cpwin.exercice']}" style="width:10%">
+
+					<h:outputText value="#{detail.exercice}" />
+
+
+				</p:column>
+				<p:column headerText="#{msgs['code']}" style="width:10%">
+					<h:outputText value="#{detail.code}" />
+				</p:column>
+				<p:column headerText="#{msgs['prix.unitaire']}" style="width:10%">
+					<h:outputText value="#{detail.pu}">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="#{msgs['tva']}" style="width:10%">
+
+					<h:outputText value="#{detail.tva}">
+						<f:convertNumber type="currency" currencySymbol="">
+						</f:convertNumber>
+					</h:outputText>
+
+				</p:column>
+
+
+				<p:column headerText="#{msgs['import.destination']}"
+					style="width:10%">
+
+					<h:outputText value="#{detail.destination.description}" />
+
+
+				</p:column>
+				<p:column headerText="#{msgs['import.nature']}" style="width:10%">
+
+					<h:outputText value="#{detail.nature.description}" />
+
+
+				</p:column>
+				<p:column headerText="#{msgs['service']}" style="width:10%">
+
+					<h:outputText value="#{detail.service.description}" />
+
+
+				</p:column>
+				<p:column headerText="#{msgs['programme']}" style="width:10%">
+
+					<h:outputText value="#{detail.programme.description}" />
+
+
+				</p:column>
+				<p:column headerText="#{msgs['compte.produit']}" style="width:10%">
+
+					<h:outputText value="#{detail.compteProduit.description}" />
+
+
+				</p:column>
+
+				<p:column style="width:10%;" headerText="#{msgs['btn.modifier']}">
+
+
+					<p:commandButton title="#{msgs['btn.modifier']}" style="height:25px"
+						icon="fa fa-fw fa-edit"
+						actionListener="#{gtsRefBean.gotoUpdateDetailArticle}">
+						<f:setPropertyActionListener
+							target="#{gtsRefBean.selectedDetailArtc}" value="#{detail}" />
+
+						<p:ajax event="dialogReturn" update="details_article_dtt" />
+					</p:commandButton>
+
+				</p:column>
+				<p:column style="width:13%;" headerText="#{msgs['btn.supprimer']}" >					
+					<p:commandButton title=" " icon="fa fa-fw fa-remove" 
+					onclick="PF('confSupprDetailArtc').show();" style="height:25px">
+					<f:setPropertyActionListener
+							target="#{gtsRefBean.selectedDetailArtc}" value="#{detail}" />
+					<p:ajax event="dialogReturn" update="details_article_dtt" />
+				</p:commandButton>
+				</p:column>	
+			</p:dataTable>
+
+		<br />
+			<h:panelGroup>
+				<p:commandButton title=" " rendered="#{gtsRefBean.addDetailAutorized}"
+					actionListener="#{gtsRefBean.gotoAddDetailArticle}"
+					value="#{msgs['associer.exerc']}">
+
+					<p:ajax event="dialogReturn" update="details_article_dtt" />
+
+				</p:commandButton>
+
+			</h:panelGroup>
+		</div>
+	
+	<p:confirmDialog message="#{msgs['confirm.suppression.article.detail']}"
+			header="" widgetVar="confSupprDetailArtc" modal="true">
+			<h:panelGrid width="100%" style="text-align: center;">
+				<h:panelGroup>
+					<p:commandButton value="#{msgs['btn.valider']}"
+						oncomplete="PF('confSupprDetailArtc').hide();"
+						actionListener="#{gtsRefBean.deleteArticleDetail}"
+						update="articleForm" />
+					<p:commandButton value="#{msgs['btn.annuler']}"
+						onclick="PF('confSupprDetailArtc').hide();" type="button" />
+				</h:panelGroup>
+			</h:panelGrid>
+		</p:confirmDialog>
+
+</ui:composition>

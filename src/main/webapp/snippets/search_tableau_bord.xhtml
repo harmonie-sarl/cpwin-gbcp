@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<h:panelGrid columns="4">
+				<h:outputLabel value="#{msgs['budget.ExerciceAE']}" style="display:block;width:90px"	 />
+				<h:panelGroup>
+					 <p:selectOneMenu  id="exercList"  styleClass="ReadOnlyText" value="#{searchBean.exercice}" >
+					 
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.exercicAeList}" var="exerc" 
+				itemLabel="#{exerc}" itemValue="#{exerc}">
+				</f:selectItems>
+				<p:ajax  listener="#{bpBean.onExerciceChange}"  process="@this" update="budgetCodeList,:detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+				</h:panelGroup>
+				
+		
+				<h:outputLabel value="#{msgs['budget.code']}"	style="display:block;width:100px" />
+				<h:panelGroup>
+					 <p:selectOneMenu id="budgetCodeList"  styleClass="ReadOnlyText" value="#{searchBean.codeBudget}" >
+				<f:selectItem itemValue="" itemLabel="-----"  />
+				<f:selectItems value="#{loaderBean.listBudgets}" var="budg"
+				itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax  process="@this" update=":detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+			
+				</h:panelGroup>
+				
+				</h:panelGrid>
+	<h:panelGrid columns="3" id="dateArretPanel"  rendered="#{bpBean.compRendGestAction}">
+	
+	<h:outputLabel value="#{msgs['arret.situation.au']}" styleClass="espace_entre_label_value" style="display:block;width:140px"/>
+      <p:calendar id="dateArret" pattern="dd/MM/yyyy" navigator="true" style="display:block;width:260px"
+				value="#{searchBean.dateArret}" showOn="button" 
+				
+				converterMessage="#{errorMsgs['date.format.invalide']}"
+				validator="validator.format.date">	
+				<p:ajax event="dateSelect"  listener="#{searchBean.onDateArretSelect}" update=":detailsForm,:enteteForm">
+				</p:ajax>					
+		</p:calendar>					
+		<p:message showSummary="false" for="dateArret" />
+    </h:panelGrid>
+   <h:panelGrid columns="2">
+    <p:commandButton title=" " value="#{msgs['cpwin.btn.imprimer.pdf']}" disabled="#{!bpBean.imprButton}"  	ajax="false">
+					<p:fileDownload value="#{commonBean.tBStream}"  />
+							<p:ajax  update="globalMessage" />
+						</p:commandButton>
+	 <p:commandButton title=" " value="#{msgs['cpwin.btn.imprimer.excel']}"  disabled="#{!bpBean.imprButton}" 	ajax="false">
+				<p:fileDownload value="#{bpBean.xlsTB}" />	
+						<p:ajax  update="globalMessage" />
+						</p:commandButton>
+			</h:panelGrid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+</ui:composition>

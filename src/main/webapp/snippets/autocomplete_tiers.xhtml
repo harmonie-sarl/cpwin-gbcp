@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+
+<p:autoComplete id="tiers" value="#{gestionTiersBean.tiers}" 
+				required="false" requiredMessage="#{errorMsgs['cpwin.required']}"
+				style="width: 88%;" size="40" forceSelection="true"
+				completeMethod="#{gestionTiersBean.autoCompleteTiers}"
+				converter="convert.tiers" var="tiers"
+				itemLabel="#{tiers.description}" itemValue="#{tiers}"
+				minQueryLength="#{gestionTiersBean.minAjaxQL}"
+				maxResults="#{gestionTiersBean.maxAjaxResult}"
+				title="#{gestionTiersBean.ajaxTitleMsg}">
+		
+			</p:autoComplete>
+			<p:message for="tiers" styleClass="error" />
+			
+			</ui:composition>

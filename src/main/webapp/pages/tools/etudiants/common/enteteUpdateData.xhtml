@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+		
+			<h:outputLabel  value="#{msgs['cpwin.exercice']}" />
+			<p:selectOneMenu styleClass="ReadOnlyText" 
+				value="#{studentBean.exercice}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{loaderBean.allExecList}" var="exec"
+					itemLabel="#{exec}" itemValue="#{exec}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{studentBean.onExerciceChange}" 
+					update="budgetCodeList,statusfolderList,:enteteForm,:detailsForm" />
+			</p:selectOneMenu>
+         
+         <h:outputLabel 	 value="#{msgs['budget.code']}" />
+			
+			<p:selectOneMenu id="budgetCodeList" styleClass="ReadOnlyText"
+				value="#{studentBean.codeBudget}">
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{studentBean.listBudgets}" var="budg"
+					itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{studentBean.reset}" global="false"
+					update=":enteteForm,:detailsForm"/>
+			</p:selectOneMenu>
+			
+		
+			<h:panelGrid id="statusfolderList" columns="2" rendered="#{studentBean.commonRequiredDone}">
+				<h:outputLabel value="#{msgs['nat.dossier']}" 
+			styleClass="espace_entre_label_value" />
+				<p:selectOneMenu styleClass="ReadOnlyText"
+				value="#{studentBean.selectedStatus}" 
+                  disabled="#{!studentBean.commonRequiredDone}" >
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{studentBean.folderStatus}" var="status"
+					itemLabel="#{status.libelle}" itemValue="#{status}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{studentBean.onStatusChange}"
+					update=":detailsForm,:enteteForm" />
+			</p:selectOneMenu>
+			</h:panelGrid>
+   
+  
+</ui:composition>

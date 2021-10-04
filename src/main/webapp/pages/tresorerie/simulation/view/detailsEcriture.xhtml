@@ -1,0 +1,105 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+	.col1 {
+	width: 15%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col2 {
+	width: 10%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+</style>
+	<h:panelGroup style="width:100%;" id="detailsEcriturePG">
+
+		
+		<h:panelGrid columns="6" cellspacing="20" style="width:100%; vertical-align:top;"  columnClasses="col1,col2">
+			<h:outputText value="#{msgs['numero.ecriture']}" />
+			<h:outputText value="#{pltBean.selectedEcriture.numero}" />
+			<h:outputText value="#{msgs['numero.operation']}" />
+			<h:outputText value="#{pltBean.selectedEcriture.numeroOP}" />
+			<h:outputText value="#{msgs['type.ecriture']}" />
+			<h:outputText value="#{pltBean.selectedEcriture.type}" />
+			<h:outputText value="#{msgs['tiers']}" />
+			<h:outputText value="#{pltBean.selectedEcriture.tiers}" />
+			<h:outputText value="#{msgs['libelle.ecriture']}" />
+			<h:outputText value="#{pltBean.selectedEcriture.libelle}" />
+				<h:panelGroup />	<h:panelGroup />
+			
+			<h:outputText value="#{msgs['debit']}" />
+			<h:outputText value="#{pltBean.selectedEcriture.debit}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<h:outputText value="#{msgs['credit']}" />
+			<h:outputText value="#{pltBean.selectedEcriture.credit}">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			<h:outputText value="#{msgs['piece']}" />
+			<h:outputText
+				value="#{pltBean.selectedEcriture.exerciceOrigine}/#{pltBean.selectedEcriture.typePiece}/#{pltBean.selectedEcriture.numeroPiece}" />
+				</h:panelGrid>
+		
+				<h:panelGrid columns="4" cellspacing="20">
+			
+			<h:outputText value="#{msgs['no.ltr1']}" />
+			<p:selectOneMenu styleClass="ReadOnlyText"
+				value="#{pltBean.selectedEcriture.numLig1Str}">
+				<p:ajax process="@this" global="false"></p:ajax>
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{pltBean.allNoLignes}" var="no"
+					itemDisabled="#{no.required}" itemLabel="#{no.designation}"
+					itemValue="#{no.code}">
+				</f:selectItems>
+			</p:selectOneMenu>			
+				<h:outputText value="#{msgs['mt.ltr1']}" />
+				<h:panelGrid columns="2">
+				<p:inputNumber size="11" id="montantTemp1"
+					value="#{pltBean.selectedEcriture.montantTemp1}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+				
+			</h:panelGrid>
+			<h:outputText value="#{msgs['no.ltr2']}" />
+			<p:selectOneMenu styleClass="ReadOnlyText"  
+				value="#{pltBean.selectedEcriture.numLig2Str}">
+				<p:ajax process="@this" global="false"  ></p:ajax>
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{pltBean.allNoLignes}" var="no"
+					itemDisabled="#{no.required}" itemLabel="#{no.designation}"
+					itemValue="#{no.code}">
+				</f:selectItems>
+			</p:selectOneMenu>
+			<h:outputText value="#{msgs['mt.ltr2']}" />
+					<h:panelGrid columns="2" >	
+					<p:inputNumber size="11" id="montantTemp2"
+				value="#{pltBean.selectedEcriture.montantTemp2}">
+				<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+			</p:inputNumber>
+			<p:commandButton title="#{msgs['ajuster']}" icon="fa fa-adjust"
+				disabled="false"
+				actionListener="#{pltBean.selectedEcriture.ajusterMontant2}"
+				update=":ecritureForm:montantTemp2" >
+			</p:commandButton>
+					
+					</h:panelGrid>
+			
+		</h:panelGrid>
+	</h:panelGroup>
+</ui:composition>

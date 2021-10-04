@@ -1,0 +1,140 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+		<ui:define name="lastPrefexedTitle">
+
+	</ui:define>
+	<ui:define name="pageTitle">#{msgs['crc.consul.pj']}</ui:define>
+	<ui:define name="entetePage">
+		<ui:include src="entete.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="enteteAction" >
+	<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}"
+			id="affichBtn" update=":detailsForm"
+			immediate="true" actionListener="#{crcBean.executeSearch}"
+			disabled="#{!crcBean.requiredDataDone}">
+		</p:commandButton>
+	</ui:define>
+	<ui:define name="search">
+
+			
+		
+
+
+
+	</ui:define>
+	<ui:define name="details">
+	<p:panel id="mdtPanel" style="width:100%;" >
+	
+	
+	<br />
+	<p:dataTable id="crc_list_dtt" 
+		 var="crc" rendered="#{crcBean.crcList!=null}"
+		style="width:100%;text-align:center" rowIndexVar="creditIndex" 
+		emptyMessage="#{msgs['datatable.empty']}"
+		value="#{crcBean.crcList}" paginator="true"	rows="15">
+		<p:columnGroup type="header">
+						<p:row>
+						<p:column headerText="#{msgs['crc.num.compte']}" style="text-align:center; width:7%" rowspan="2"  />
+						<p:column headerText="#{msgs['crc.num.dp']}" style="text-align:center; width:7%" rowspan="2" rendered="#{crcBean.gbcp}" />
+						<p:column headerText="#{msgs['crc.mandat.or']}" style="text-align:center; width:7%" rowspan="2" rendered="#{!crcBean.gbcp}" />
+						<p:column headerText="#{msgs['cpwin.type']}" style="text-align:center; width:7%" rowspan="2" />
+						<p:column headerText="#{msgs['cpwin.objet']}" style="text-align:center" rowspan="2" />
+						<p:column headerText="#{msgs['mnt.htd']}" style="text-align:center;width:10%" rowspan="2" />
+						<p:column headerText="#{msgs['telech.pj']}" style="text-align:center;width:15%"  colspan="2"/>
+						
+						</p:row>
+						<p:row>
+						<p:column headerText="#{msgs['nombre.pieces']}" style="text-align:center"  />
+						<p:column headerText="#{msgs['consult.pj']}" style="text-align:center"  />
+						</p:row>
+						</p:columnGroup>
+							 <p:column>
+                              <h:outputText value="#{crc.accountNumber}" />  
+                          </p:column>
+						 <p:column>
+                              <h:outputText value="#{crc.pieceNumber}" />  
+                          </p:column>
+                          <p:column>
+                              <h:outputText value="#{crc.type}" />  
+                          </p:column>
+                           <p:column>
+                              <h:outputText value="#{crc.object}" />  
+                          </p:column>
+                           <p:column>
+                              <h:outputText value="#{crc.amount}" >
+                              <f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+                              </h:outputText>  
+                          </p:column>
+                          <p:column>
+                              <h:outputText value="#{crc.pjCount}" />  
+                          </p:column>
+                           <p:column>
+                            <p:commandButton value="#{msgs['telech']}" rendered="#{crc.pjCount!=0}" disabled="#{crc.content==null}" oncomplete="PF('dlgpdf').show()"  update="detailsForm:dlgpdf"  icon="searchIcon" title=" " > 
+                           <f:setPropertyActionListener value="#{crc}" target="#{crcBean.selectedCrc}"></f:setPropertyActionListener>
+           
+                           </p:commandButton>
+                              </p:column>
+		
+		
+		<p:columnGroup type="footer">
+            <p:row>
+              <p:column   colspan="4" style="text-align:right" footerText="#{msgs['totaux']}" />
+                 <p:column>
+                 <f:facet name="footer">
+							<h:outputText 
+								value="#{crcBean.crcList.stream().map(item->item.amount).sum()}">
+								<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							</h:outputText>
+						</f:facet>
+                 </p:column> 
+                  <p:column>
+                 
+                 </p:column> 
+                  <p:column>
+                 
+                 </p:column> 
+                   
+            </p:row>
+		</p:columnGroup>	
+		
+	
+		
+		</p:dataTable>
+		<br/>
+		<div align="center">
+		
+		<h:panelGrid columns="1" >
+		
+			<p:commandButton title="#{msgs['imprimer.tout']}" rendered="#{crcBean.crcList!=null}" disabled="#{crcBean.globalContent==null}"
+				value="#{msgs['imprimer.tout']}" id="print_btn"
+				 oncomplete="PF('dlgGlobalPdf').show()"  update="detailsForm:dlgGlobalPdf" >
+			</p:commandButton>
+		   
+		   
+			</h:panelGrid>
+	</div>
+	</p:panel>
+	<p:dialog id="dlgpdf" header="#{crcBean.pieceFileName}" widgetVar="dlgpdf"   dynamic="true"   fitViewport="true" position="right,top"      showEffect="explode" height="500" width="50%">
+               <p:media id="mediaPiecePdf" value="#{crcBean.piecePdfStream}" cache="false" player="pdf" width="100%" height="500px"/>              
+     </p:dialog> 
+     
+     <p:dialog id="dlgGlobalPdf" header="#{crcBean.globalFileName}" widgetVar="dlgGlobalPdf"   dynamic="true"   fitViewport="true" position="right,top"      showEffect="explode" height="500" width="50%">
+               <p:media id="mediaGlobalPdf" value="#{crcBean.globalPdfStream}" cache="false" player="pdf" width="100%" height="500px"/>              
+     </p:dialog>   
+	</ui:define>
+	
+	
+	</ui:composition>

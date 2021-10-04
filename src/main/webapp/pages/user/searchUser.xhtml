@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"	>
+	<p:panel id="searchPanel" header="#{msgs['zoneRecherche']}"
+		style="width:100%;padding:0;margin:0;">
+		<h:panelGrid id="searchTable" columns="3"
+			columnClasses="search_col1,,entete_col4,entete_col5">
+			<h:panelGrid columns="6" cellpadding="0" cellspacing="10">
+				<h:panelGroup id="loginPG">
+					<h:outputLabel value="#{msgs['login']}" for="login" rendered="true"
+						styleClass="espace_entre_label_value" />
+					<p:inputText id="login" required="false" value="#{userBean.login}"
+						requiredMessage="#{errorMsgs['required']}">
+						<p:ajax event="change" pocess="@this" />
+					</p:inputText>
+					<p:message for="login" styleClass="error" />
+				</h:panelGroup>
+				<h:panelGroup id="userNamePG">
+					<h:outputLabel value="#{msgs['nom']}" for="userName"
+						rendered="true" styleClass="espace_entre_label_value" />
+					<p:inputText id="userName" required="false"
+						requiredMessage="#{errorMsgs['required']}"
+						value="#{userBean.selectedName}">
+
+						<p:ajax event="change" pocess="@this" />
+					</p:inputText>
+
+					<p:message for="userName" styleClass="error" />
+				</h:panelGroup>
+			</h:panelGrid>
+			<h:panelGroup>
+				<p:commandButton value="#{msgs['btn.afficher']}"	actionListener="#{userBean.searchUsers}" 
+				update=":detailsForm:detailsPanel"/>
+				
+			</h:panelGroup>
+
+		</h:panelGrid>
+	</p:panel>
+</ui:composition>
+
+
+
+
+
+

@@ -1,0 +1,415 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+.ui-state-disabled, .ui-widget-content .ui-state-disabled,
+	.ui-widget-header .ui-state-disabled {
+	opacity: .77;
+	filter: Alpha(Opacity = 35);
+	background-image: none;
+}
+
+.totalTitle {
+	text-align: left;
+	font-weight: bold;
+	background: #feeebd !important;
+	font-size: 9.5px;
+}
+
+.totalFooter {
+	color: #383838 !important;
+	background: #F0E68C !important;
+	border-color: grey !important;
+	font-size: 9.5px;
+	text-align: right;
+}
+
+.totalValue {
+	font-weight: bold;
+	background: #feeebd !important;
+}
+
+.detailTitle {
+	text-align: left;
+}
+
+.detailValue {
+	text-align: center;
+}
+
+.biInputValue {   
+    border: 2px solid #00FF00 !important;  
+}
+
+.globalTitle {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+	text-align: left;
+	font-style: italic;
+}
+
+.globalValue {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+	text-align: center;
+	font-style: italic;
+}
+
+.th {
+	color: #383838 !important;
+	background: #D19275 !important;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+}
+
+.td {
+	color: #383838 !important;
+	background: #F0E68C !important;
+	border-color: grey !important;
+	font-size: 9.5px;
+}
+
+.ui-datatable .ui-datatable-data td {
+	font-size: 65% !important;
+}
+
+.ui-datatable thead {
+	font-size: 65% !important;
+}
+</style>
+	<h:panelGroup style="width:100%;">
+
+		<p:dataTable sortBy="#{encaiss.ligne.ordre}"
+			rendered="#{pltBean.planVentil!=null}" var="encaiss"
+			style="width:100%;" rowIndexVar="encaissIndex"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{pltBean.planVentil.encaissements}">
+			<p:columnGroup type="header">
+				<p:row>
+					
+           	 <p:column
+						colspan="16" headerText="#{msgs['encaissements']}" styleClass="th">
+					</p:column>
+				
+					
+								 
+        </p:row>
+				<p:row styleClass="th" style="font-weight: bold;text-align: center;">
+						              
+				  <p:column styleClass="th" colspan="2" style="width:15%;">
+					</p:column>	
+					 <p:column styleClass="th" colspan="1" style="width:5%;"
+						headerText="#{msgs['cpwin.numero']}">
+					</p:column>
+				  <p:column styleClass="th" colspan="1" style="width:7%;"
+						headerText="#{msgs['bi']}">
+					</p:column>				
+				 <p:column styleClass="th" colspan="1" style="width:7%;"
+						headerText="#{msgs['janvier']}">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" style="width:7%;"
+						headerText="#{msgs['fevrier']}">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['mars']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['avril']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['mai']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['juin']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['juillet']}" style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['aout']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['septembre']}" style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['octobre']}" style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['novembre']}" style="width:8%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['decembre']}" style="width:8%;">
+					</p:column>
+				
+					
+        </p:row>         
+			
+			</p:columnGroup>
+			
+			<p:column colspan="2"  rendered="#{!encaiss.comptable}" 
+				styleClass="#{(encaiss.global)?'globalTitle':'detailTitle'}">
+				<h:outputText value="#{encaiss.ligne.libelle}" />
+			</p:column>
+			<p:column   rendered="#{!encaiss.comptable}" 
+					styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<h:outputText value="#{encaiss.ligne.numero}"  rendered="#{!encaiss.global}" />
+			</p:column>
+			<p:column rendered="#{!encaiss.comptable}" 
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();"  inputStyleClass="#{encaiss.biDisabled?'':'biInputValue'}" value="#{encaiss.budgetInitiale}"  disabled="#{(encaiss.biDisabled)||(pltBean.janvierClos)}" rendered="#{!encaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>			
+			<p:column rendered="#{!encaiss.comptable}" 
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant01}" disabled="#{!pltBean.periodEditable(1)}" rendered="#{!encaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!encaiss.comptable}" 
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant02}"  disabled="#{!pltBean.periodEditable(2)}" rendered="#{!encaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!encaiss.comptable}" 
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant03}" disabled="#{!pltBean.periodEditable(3)}" rendered="#{!encaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!encaiss.comptable}" 
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant04}"  disabled="#{!pltBean.periodEditable(4)}" rendered="#{!encaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!encaiss.comptable}" 
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant05}"  disabled="#{!pltBean.periodEditable(5)}" rendered="#{!encaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!encaiss.comptable}" 
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant06}"  disabled="#{!pltBean.periodEditable(6)}" rendered="#{!encaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!encaiss.comptable}" 
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant07}"  disabled="#{!pltBean.periodEditable(7)}" rendered="#{!encaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!encaiss.comptable}" 
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant08}"  disabled="#{!pltBean.periodEditable(8)}" rendered="#{!encaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!encaiss.comptable}" 
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant09}"  disabled="#{!pltBean.periodEditable(9)}" rendered="#{!encaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!encaiss.comptable}" 
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant10}"  disabled="#{!pltBean.periodEditable(10)}" rendered="#{!encaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!encaiss.comptable}" 
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant11}"  disabled="#{!pltBean.periodEditable(11)}" rendered="#{!encaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!encaiss.comptable}" 
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant12}"  disabled="#{!pltBean.periodEditable(12)}" rendered="#{!encaiss.global}" >
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+		
+		
+			<p:columnGroup type="footer">
+				
+			</p:columnGroup>
+		</p:dataTable>
+
+		
+		<p:dataTable sortBy="#{decaiss.ligne.ordre}" var="decaiss" id="decaiss_dtt"
+			style="width:100%; text-align: center;"
+			rendered="#{pltBean.planVentil!=null}" rowIndexVar="decaissIndex"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{pltBean.planVentil.decaissements}">
+			<p:columnGroup type="header">        
+					<p:row>
+					
+           	 <p:column
+						 colspan="16"
+						headerText="#{msgs['decaissements']}" styleClass="th">
+					</p:column>
+					
+										 
+				
+        </p:row>
+		<p:row styleClass="th" style="font-weight: bold;text-align: center;">
+						              
+				  <p:column styleClass="th" colspan="2" style="width:15%;">
+					</p:column>	
+					 <p:column styleClass="th" colspan="1" style="width:5%;"
+						headerText="#{msgs['cpwin.numero']}">
+					</p:column>
+				  <p:column styleClass="th" colspan="1" style="width:7%;"
+						headerText="#{msgs['bi']}">
+					</p:column>				
+				 <p:column styleClass="th" colspan="1" style="width:7%;"
+						headerText="#{msgs['janvier']}">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" style="width:7%;"
+						headerText="#{msgs['fevrier']}">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['mars']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['avril']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['mai']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['juin']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['juillet']}" style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['aout']}"
+						style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['septembre']}" style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['octobre']}" style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['novembre']}" style="width:8%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['decembre']}" style="width:8%;">
+					</p:column>
+				
+					
+        </p:row> 
+			</p:columnGroup>
+		
+			<p:column colspan="2" rendered="#{!decaiss.comptable}" 
+				styleClass="#{(decaiss.global)?'globalTitle':'detailTitle'}">
+				<h:outputText value="#{decaiss.ligne.libelle}" />
+			</p:column>
+				<p:column rendered="#{!decaiss.comptable}" 
+					styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<h:outputText value="#{decaiss.ligne.numero}"  rendered="#{!decaiss.global}"/>
+			</p:column>
+			<p:column rendered="#{!decaiss.comptable}" 
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber  size="8" onfocus="select();" inputStyleClass="#{decaiss.biDisabled?'':'biInputValue'}" value="#{decaiss.budgetInitiale}"   disabled="#{(decaiss.biDisabled)||(pltBean.janvierClos)}"  rendered="#{!decaiss.global}">
+					<p:ajax process="@this" update="detailsForm:decaiss_dtt" global="false" listener="#{pltBean.planVentil.refreshBudgetInitial}"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!decaiss.comptable}" 
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant01}"  disabled="#{!pltBean.periodEditable(1)}" rendered="#{!decaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!decaiss.comptable}" 
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant02}"  disabled="#{!pltBean.periodEditable(2)}" rendered="#{!decaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!decaiss.comptable}" 
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant03}"  disabled="#{!pltBean.periodEditable(3)}" rendered="#{!decaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!decaiss.comptable}" 
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant04}"  disabled="#{!pltBean.periodEditable(4)}" rendered="#{!decaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!decaiss.comptable}" 
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant05}"  disabled="#{!pltBean.periodEditable(5)}" rendered="#{!decaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!decaiss.comptable}" 
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant06}"  disabled="#{!pltBean.periodEditable(6)}" rendered="#{!decaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!decaiss.comptable}" 
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant07}" disabled="#{!pltBean.periodEditable(7)}" rendered="#{!decaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!decaiss.comptable}" 
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant08}" disabled="#{!pltBean.periodEditable(8)}" rendered="#{!decaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!decaiss.comptable}" 
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant09}" disabled="#{!pltBean.periodEditable(9)}" rendered="#{!decaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!decaiss.comptable}" 
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant10}" disabled="#{!pltBean.periodEditable(10)}" rendered="#{!decaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!decaiss.comptable}" 
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant11}" disabled="#{!pltBean.periodEditable(11)}" rendered="#{!decaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+			<p:column rendered="#{!decaiss.comptable}" 
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant12}" disabled="#{!pltBean.periodEditable(12)}" rendered="#{!decaiss.global}">
+					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
+				</p:inputNumber>
+			</p:column>
+		
+			
+			<p:columnGroup type="footer">
+				
+				
+	
+			</p:columnGroup>
+		</p:dataTable>
+	</h:panelGroup>
+</ui:composition>

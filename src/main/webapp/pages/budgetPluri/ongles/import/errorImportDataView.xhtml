@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:panel id="errorDataPanel" style="width:100%;">
+			<div align="center" style="width: 100%;">
+				
+				<p:dataTable id="error_dtt"  var="error"
+					style="width:100%; text-align: center;" rowIndexVar="errorIndex"
+					emptyMessage="#{msgs['datatable.empty']}"
+					value="#{bpBean.importErrorList}" paginator="true"
+					rows="10">
+				<p:column style="width:7%;">
+					<f:facet name="header">
+						<h:outputText value="#{msgs['error.message']}" />
+					</f:facet>
+					<h:outputText value="#{error.errorMessage}">
+
+
+					</h:outputText>
+
+				</p:column>
+				<p:column  style="width:7%;" >
+						<f:facet name="header">
+							<h:outputText value="#{msgs['error.numRow']}" />
+						</f:facet>
+                    <h:outputText value="#{error.rowKey}"/>
+						
+					</p:column>
+					<p:column style="width:7%;">
+                       <f:facet name="header">
+							<h:outputText value="#{msgs['error.attribut']}" />
+						</f:facet>
+						<h:outputText value="#{error.attribut}" />
+					</p:column>
+						<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['error.value']}" />
+						</f:facet>
+						<h:outputText value="#{error.value}" />
+					</p:column>
+				
+					
+						
+				</p:dataTable>
+				<br />
+			</div>
+		</p:panel>
+	
+	</ui:composition>

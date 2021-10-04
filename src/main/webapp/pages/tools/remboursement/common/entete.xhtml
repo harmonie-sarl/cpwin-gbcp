@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+		
+			<h:outputLabel  value="#{msgs['cpwin.exercice']}" />
+			<p:selectOneMenu styleClass="ReadOnlyText" 
+				value="#{sctBean.exercice}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{loaderBean.allExecList}" var="exec"
+					itemLabel="#{exec}" itemValue="#{exec}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{sctBean.onExerciceChange}" 
+					update="budgetCodeList,globalMessage,:enteteForm,:detailsForm" />
+			</p:selectOneMenu>
+         
+			
+			<h:outputLabel 	 value="#{msgs['budget.code']}" />
+			
+			<p:selectOneMenu id="budgetCodeList" styleClass="ReadOnlyText"
+				value="#{sctBean.codeBudget}">
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{sctBean.listBudgets}" var="budg"
+					itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{sctBean.reset}" global="false"
+					update="globalMessage,:enteteForm,:detailsForm"/>
+			</p:selectOneMenu>
+      
+			
+			<h:panelGrid columns="2">
+			<h:outputText value="#{msgs['selectionner.fichier']}"  />
+
+			<h:panelGroup id="addDocPG">
+				<p:fileUpload label="#{msgs['parcourir']}" skinSimple="true" 
+					invalidFileMessage="#{errorMsgs['invalid.file']}" id="fileUp"
+					fileUploadListener="#{sctBean.fileUploadHandler}" auto="true"
+					image="/images/browse.png" mode="advanced" dragDropSupport="false"
+					multiple="false" height="48" width="48" 
+					disabled="#{!sctBean.commonRequiredDone}"
+					allowTypes="/(\.|\/)(xls)$/" event="click"
+					update="globalMessage,:detailsForm,:enteteForm">
+				</p:fileUpload>
+				<p:message id="fileUpMsg" for="fileUp" styleClass="error" />
+			</h:panelGroup>
+			</h:panelGrid>
+    <h:outputLabel value="#{sctBean.sourceFileName}" rendered="#{(sctBean.commonRequiredDone) and (sctBean.importFileUploadEvent !=null) }"/>
+  
+</ui:composition>

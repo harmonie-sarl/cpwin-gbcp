@@ -1,0 +1,655 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+	<p:panel style="width:100%;" id="raprochPanel">
+		<f:facet name="header">
+		</f:facet>
+		<div align="left"></div>
+		<div align="center"></div>
+		<p:panelGrid style="width:100%; vertical-align:top;">		
+		 <p:row>
+            <p:column colspan="6" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #008000;color: #FFFFFF;">
+				</p:column>				
+        </p:row>
+ <p:row>
+          	<p:column colspan="6" rowspan="1">
+				</p:column>				
+        </p:row>
+	 <p:row>
+            <p:column colspan="2" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['depenses.budgetaires.cp']}" />
+				</p:column>
+			
+				 <p:column colspan="3" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['plan.tresorerie']}" />
+				</p:column>
+					 <p:column colspan="1" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['ecarts']}" />
+				</p:column>
+        </p:row>
+ <p:row>
+            <p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>
+				<p:column colspan="1" rowspan="2"
+					style="font-weight: bold;text-align: center;">
+					<h:outputLabel value="#{msgs['sur.recettes.globalisees']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="2"
+					style="font-weight: bold;text-align: center;">
+					<h:outputLabel value="#{msgs['sur.recettes.flechees']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="2"
+					style="font-weight: bold;text-align: center;">
+					<h:outputLabel value="#{msgs['total']}" />
+				</p:column>
+				<p:column colspan="1" rowspan="2">
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>				
+             </p:row>
+ <p:row>
+            <p:column rowspan="1"
+					style="font-weight: bold;text-align: right;">
+					<h:outputLabel value="#{msgs['personnel']}" />
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.depence.personnel.dataCP.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.recGlobalPers}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.recFlechePers}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{cfBean.cfRapproche.totPers}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{cfBean.cfRapproche.ecartPers}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column rowspan="1">
+				</p:column>
+					 <p:column rowspan="1">
+				</p:column>
+					 <p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column rowspan="1">
+				</p:column>
+					 <p:column rowspan="1">
+				</p:column>
+					 <p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column rowspan="1"
+					style="font-weight: bold;text-align: right;">
+					<h:outputLabel value="#{msgs['fonctionnement']}" />
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.depence.fonctionnement.dataCP.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.recGlobalFonc}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.recFlecheFonc}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{cfBean.cfRapproche.totFonc}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{cfBean.cfRapproche.ecartFonc}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column rowspan="1">
+				</p:column>
+					 <p:column rowspan="1">
+				</p:column>
+					 <p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column rowspan="1">
+				</p:column>
+					 <p:column rowspan="1">
+				</p:column>
+					 <p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column rowspan="1"
+					style="font-weight: bold;text-align: right;">
+					<h:outputLabel value="#{msgs['intervention']}" />
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.depence.intervention.dataCP.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.recGlobalInter}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.recFlecheInter}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{cfBean.cfRapproche.totInter}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{cfBean.cfRapproche.ecartInter}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>				
+             </p:row>
+			<p:row>
+            <p:column rowspan="1">
+				</p:column>
+					 <p:column rowspan="1">
+				</p:column>
+					 <p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column rowspan="1">
+				</p:column>
+					 <p:column rowspan="1">
+				</p:column>
+					 <p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column rowspan="1"
+					style="font-weight: bold;text-align: right;">
+					<h:outputLabel value="#{msgs['invest']}" />
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.depence.investissement.dataCP.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.recGlobalInves}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.recFlecheInves}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{cfBean.cfRapproche.totInves}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{cfBean.cfRapproche.ecartInves}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+             </p:row>
+		</p:panelGrid>
+		<br />
+		<br />
+		<p:panelGrid style="width:100%; vertical-align:top;">
+ <p:row>
+            <p:column colspan="2" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['recet.budg']}" />
+				</p:column>			
+				 <p:column colspan="" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['plan.tresorerie']}" />
+				</p:column>
+					 <p:column colspan="1" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['ecarts']}" />
+				</p:column>        
+</p:row>
+			<p:row>
+           	<p:column rowspan="1"
+					style="text-align: left;font-weight: bold;">
+					<h:outputLabel value="#{msgs['recette.global']}" />
+				</p:column>
+					<p:column rowspan="1" style="text-align: center;font-weight: bold;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.recetGlobal.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{cfBean.cfRapproche.totalRecetGlobalise}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+
+				</p:column>
+					<p:column rowspan="1" style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{cfBean.cfRapproche.ecartRecetGlobalise}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+
+				</p:column>
+				
+             </p:row>
+			<p:row>
+            <p:column rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['subvent.charges.serv.pub']}" />
+				</p:column>
+				<p:column rowspan="1"  style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.recette.dataR11.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.subChrgSrvc}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.ecartSubChrgSrvc}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>			
+             </p:row>
+			<p:row>
+				<p:column rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['autre.financ.etat']}" />
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.recette.dataR12.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.autrFinancEtat}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.ecartAutrFinancEtat}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+			<p:row>
+           <p:column rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['fisc.affect']}" />
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.recette.dataR13.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.fiscAffecte}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.ecartFiscAffecte}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+			<p:row>
+         <p:column rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['autres.financ.pub']}" />
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.recette.dataR14.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.autrFinancPub}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.ecartAutrFinancPub}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+			<p:row>
+           	<p:column rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['recet.propr']}" />
+				</p:column>
+			<p:column rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.recette.dataR15.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.recetPropre}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.ecartRecetPropre}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>				
+             </p:row>
+			<p:row>
+				<p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>				
+             </p:row>
+			<p:row>
+          <p:column rowspan="1"
+					style="text-align: left;font-weight: bold;">
+					<h:outputLabel value="#{msgs['recette.flech']}*" />
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;font-weight: bold;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.totalRecetFleche.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{cfBean.cfRapproche.totalRecetFleche}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{cfBean.cfRapproche.ecartRecetFleche}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+			<p:row>
+          <p:column rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['financ.etat.flech']}" />
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.recette.dataR22.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.financEtatFleche}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.ecartFinancEtatFleche}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+			<p:row>
+           <p:column rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['autre.financ.pub.flech']}" />
+				</p:column>
+			<p:column rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.recette.dataR24.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.autreFinancPubFleche}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.ecartAutreFinancPubFleche}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				             </p:row>
+			<p:row>
+				<p:column rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['recet.propr.flech']}" />
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.recette.dataR25.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.recetPropreFleche}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			<p:column rowspan="1" style="text-align: center;">
+					<h:outputText value="#{cfBean.cfRapproche.ecartRecetPropreFleche}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             </p:row>
+			<p:row>
+            <p:column rowspan="1">
+				</p:column>
+				 <p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>
+				<p:column rowspan="1">
+				</p:column>				
+             </p:row>
+			<p:row>
+				<p:column rowspan="1"
+					style="text-align: left;font-weight: bold;background-color: #D19275;">
+					<h:outputLabel value="#{msgs['total.recet']}" />
+				</p:column>
+				<p:column rowspan="1"
+					style="text-align: center;font-weight: bold;background-color: #D19275;">
+					<h:outputText
+						value="#{cfBean.cfRapproche.tab2.totalRecette.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1"
+					style="text-align: center;font-weight: bold;background-color: #D19275;">
+					<h:outputText value="#{cfBean.cfRapproche.totalRecette}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column rowspan="1"
+					style="text-align: center;font-weight: bold;background-color: #D19275;">
+					<h:outputText value="#{cfBean.cfRapproche.ecartTotalRecette}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>								
+             </p:row>
+		</p:panelGrid>
+		<br />
+		<br />
+		<div align="left">
+			<h:outputText value="(*) #{msgs['montant.issu.tab.op.rec.flech']}"
+				styleClass="indication1" style="text-align: left;color: #2F4F4F;" />
+		</div>
+	</p:panel>
+</ui:composition>

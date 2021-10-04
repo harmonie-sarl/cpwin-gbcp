@@ -1,0 +1,126 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:subview id="Mdt_avec_retSbv">
+		<div align="center"><p:dataTable id="mdtop_dtt" var="piece"
+			style="width:100%; text-align: center;" rendered="#{avisReglementBean.mandatAvecRetList!=null}"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{avisReglementBean.mandatAvecRetList}" paginator="true" rows="10">
+			<p:column headerText="#{msgs['cpwin.exercice']}" style="width:5%">
+				<h:outputText value="#{piece.exercice}" />
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.budget']}" style="width:5%">
+				<h:outputText value="#{piece.codeBudget}"/>
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.type.piece']}" style="width:5%">
+				<h:outputText value="#{piece.typePiece}"/>
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.num.piece']}" style="width:5%">
+				<h:outputText value="#{piece.numPiece}"/>
+			</p:column>
+			<p:column style="width:5%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.exercice']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.du.mandat']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.dorigine']}"/>
+				</f:facet>
+				<h:outputText value="#{piece.exerciceMdtOrig}"/>
+			</p:column>
+			<p:column style="width:5%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.num.mandat']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.dorigine']}"/>
+				</f:facet>
+				<h:outputText value="#{piece.numMdtOrig}"/>
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.num.bordereau']}" style="width:5%">
+				<h:outputText value="#{piece.numBord}"/>
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.tiers.origine']}" style="width:10%">
+				<h:outputText value="#{piece.tiersOrig}"/>
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.tiers.cessionnaire']}" style="width:10%">
+				<h:outputText value="#{piece.tiersCess}"/>
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.objet']}" style="width:15%">
+				<h:outputText value="#{piece.libelle}"/>
+			</p:column>
+			<p:column headerText="#{msgs['cpwin.montant']}" style="width:6%">
+				<h:outputText value="#{piece.montant}"
+					styleClass="montantStyle">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column style="width:6%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.montant']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.de.cession']}"/>
+				</f:facet>
+				<h:outputText value="#{piece.montantCess}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			</p:column>
+			<p:column style="width:6%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.montant']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.des.oppositions']}"/>
+				</f:facet>
+				<h:outputText value="#{piece.montantOpp}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			</p:column>
+			<p:column style="width:6%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.montant']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.des.retenues']}"/>
+				</f:facet>
+				<h:outputText value="#{piece.montantRet}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			</p:column>
+			<p:column style="width:6%">
+				<f:facet name="header">
+					<h:outputText value="#{msgs['cpwin.montant']}"/>
+					<br/>
+					<h:outputText value="#{msgs['cpwin.des.reglements']}"/>
+				</f:facet>
+				<h:outputText value="#{piece.montantReg}"
+					styleClass="montantStyle">
+					 <f:convertNumber type="currency" currencySymbol=""></f:convertNumber> 
+				</h:outputText>
+			</p:column>
+		</p:dataTable><br />
+		<h:panelGroup id="btnPG">
+			<p:commandButton id="printPdfBTN" rendered="#{(avisReglementBean.mandatAvecRetList!=null)and (not empty avisReglementBean.mandatAvecRetList)}"
+				value="#{msgs['btn.notifier']}" disabled="#{(avisReglementBean.dejaTraite) || (avisReglementBean.notifieAvecRet)}"
+				actionListener="#{avisReglementBean.notifierMdtAvecRet}" update="btnPG">
+			</p:commandButton>			
+			<p:commandButton id="printPdfBTN2" ajax="false" rendered="#{(avisReglementBean.mandatAvecRetList!=null)and (not empty avisReglementBean.mandatAvecRetList)}"
+				value="#{msgs['cpwin.btn.imprimer']}" disabled="#{(!avisReglementBean.dejaTraite) and (!avisReglementBean.notifieAvecRet)}"
+				action="#{avisReglementBean.imprimerMdtAvecRet}">
+			</p:commandButton>
+			<p:ajaxStatus id="status3" style="width:16px;height:16px;" rendered="#{(avisReglementBean.mandatAvecRetList!=null)and (not empty avisReglementBean.mandatAvecRetList)}">
+				<f:facet name="start">
+					<h:graphicImage value="/images/ajax/ajax-loader-0.gif" />
+				</f:facet>
+				<f:facet name="complete">
+					<h:outputText value="" />
+				</f:facet>
+			</p:ajaxStatus>
+		</h:panelGroup>
+		</div>
+	</f:subview>
+
+</ui:composition>

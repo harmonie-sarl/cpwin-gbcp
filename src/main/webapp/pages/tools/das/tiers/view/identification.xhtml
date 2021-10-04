@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+</style>
+
+
+<h:panelGrid columns="4" cellspacing="10">
+            <h:outputText value="#{msgs['siret']}" />	
+            <p:inputText value="#{dasBean.selectedTiers.siret}" size="14" maxlength="14"></p:inputText>
+
+           <h:panelGroup />
+		   <h:panelGroup />
+		     <h:outputText value="#{msgs['login.lastname']}" />
+				<p:inputText value="#{dasBean.selectedTiers.nom}" size="30"  maxlength="30" ></p:inputText>
+				<h:outputText value="#{msgs['login.firstname']}" />
+				<p:inputText value="#{dasBean.selectedTiers.prenom}" size="20"  maxlength="20"  ></p:inputText>
+
+               <h:outputText value="#{msgs['raison.sociale']}" />
+				<p:inputText value="#{dasBean.selectedTiers.rs}"  size="50" maxlength="50" >
+				
+				 
+				</p:inputText>
+				
+				 <h:outputText value="#{msgs['das.profession']}" />
+				<p:inputText value="#{dasBean.selectedTiers.profession}"  size="30" maxlength="30"  ></p:inputText>
+				
+
+
+
+</h:panelGrid>
+
+
+</ui:composition>

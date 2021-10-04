@@ -1,0 +1,195 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<style type="text/css">
+	.globalTitle {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 7px;
+	text-align: center;
+	
+}
+	.detailTitle {	
+		text-align: center;
+}
+</style>	
+        		
+			<p:treeTable  rendered="#{impRecBean.liqRecetteList!=null}" expandMode="self"
+			var="detail" style="width:132%; text-align: center;"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{impRecBean.liqRecetteTree}"  >
+			
+	<p:columnGroup type="header" >
+			<p:row style="text-align: center;">
+                <p:column rowspan="2" style="width:5%;font-size: 75%" headerText="#{msgs['periode']}" />
+             
+                <p:column rowspan="2" style="width:4%;font-size: 75%" headerText="#{msgs['dest']}" />
+               
+                <p:column rowspan="2" style="width:5%;font-size: 75%" headerText="#{msgs['service']}" />
+                <p:column rowspan="2" style="width:5%;font-size: 75%" headerText="#{msgs['gts.nature']}" />
+                <p:column rowspan="2" style="width:4%;font-size: 75%" headerText="#{msgs['prog']}" />
+
+                <p:column rowspan="2" style="width:5%;font-size: 75%" headerText="#{msgs['no.lrec']}" />
+                <p:column colspan="10" style="width:47%;font-size: 75%" headerText="#{msgs['cpwin.tiers.orig']}" />
+              
+              <p:column rowspan="2" style="width:16%;font-size: 75%" headerText="#{msgs['cpwin.objet']}" />
+                
+           
+                
+				
+				<p:column rowspan="2" style="width:4%;font-size: 75%" headerText="#{msgs['numero']}" />
+			
+				<p:column rowspan="2" style="width:6%;font-size: 75%" headerText="#{msgs['quantite']}" />
+				<p:column rowspan="2" style="width:6%;font-size: 75%" headerText="#{msgs['prix.unit']}" />
+			
+				
+				<p:column rowspan="2" style="width:6%;font-size: 75%" headerText="#{msgs['taux.tva']}" />
+				<p:column rowspan="2" style="width:5%;font-size: 75%" headerText="#{msgs['mnt.tva']}" />
+				<p:column rowspan="2" style="width:5%;font-size: 75%" headerText="#{msgs['mnt.ht']}" />
+				<p:column rowspan="2" style="width:5%;font-size: 75%" headerText="#{msgs['mnt.ttc']}" />
+				<p:column rowspan="2" style="width:4%;font-size: 75%" headerText="#{msgs['differe']}" />
+			
+			</p:row>
+			<p:row style="text-align: center;">
+				<p:column colspan="1"  style="font-size: 75%" 	headerText="#{msgs['code']}" />
+				<p:column colspan="3" style="font-size: 75%"	headerText="#{msgs['nom']}" />
+				<p:column colspan="6"  style="font-size: 75%"	headerText="#{msgs['adresse']}" />
+
+			</p:row>
+
+
+		</p:columnGroup>
+
+<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.periodOfParent}" />
+		</p:column>
+
+<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.destOfParent}" />
+		</p:column>
+		<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.servOfParent}" />
+		</p:column>
+
+	<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.natOfParent}" />
+		</p:column>
+
+		<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.progOfParent}" />
+		</p:column>
+
+<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.numeroOfParent}" />
+		</p:column>
+
+
+<p:column colspan="1" style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.codeTrsOrigParent}" />
+		</p:column>
+		
+		<p:column colspan="3" style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.nameTrsParent}" />
+		</p:column>
+		<p:column colspan="6" style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.adressTrsParent}" />
+		</p:column>
+			<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.objectOfParent}" />
+		</p:column>	
+				
+			<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.numeroOfChild}" />					
+		</p:column>
+			
+		<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.quantiteOfChild}" />		
+		</p:column>
+		<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.puOfChild}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>			
+		</p:column>
+	
+		
+		<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+			<h:outputText value="#{detail.tauxTvaOfChild}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>		
+		</p:column>
+		<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+					<h:outputText value="#{detail.mntTvaOfChild}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>		
+		</p:column>
+		<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+					<h:outputText value="#{detail.mntHtOfChild}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>				
+		</p:column>
+		<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+					<h:outputText value="#{detail.mntTtcOfChild}"
+				styleClass="montantStyle">
+				<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>		
+		</p:column>	
+			<p:column style="font-size: 80%" styleClass="#{(detail.parent)?'globalTitle':'detailTitle'}">
+					<p:selectBooleanCheckbox value="#{detail.liqRecette.differe}" rendered="#{detail.parent}">
+
+				</p:selectBooleanCheckbox>	
+		</p:column>		
+		<p:columnGroup type="footer" >
+			<p:row style="text-align: center;">
+				<p:column style="font-size: 75%" colspan="20">
+					<f:facet name="footer">
+						<h:outputText value="#{msgs['totaux']}">
+						</h:outputText>
+					</f:facet>
+				</p:column>
+				
+				<p:column style="font-size: 75%" />
+				<p:column style="font-size: 75%">
+					<f:facet name="footer">
+						<h:outputText value="#{impRecBean.totalMntTvaLiqReq}"
+							styleClass="montantStyle">
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+				</p:column>
+				<p:column style="font-size: 75%">
+					<f:facet name="footer">
+						<h:outputText value="#{impRecBean.totalMntHtLiqReq}"
+							styleClass="montantStyle">
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+				</p:column>
+				<p:column style="font-size: 75%">
+					<f:facet name="footer">
+						<h:outputText value="#{impRecBean.totalMntTtcLiqReq}"
+							styleClass="montantStyle">
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+				</p:column>
+					<p:column style="font-size: 75%" />
+			</p:row>
+		</p:columnGroup>	
+						
+	</p:treeTable> 
+				 	<div align="center" style="width: 100%;">
+		<p:commandButton title=" " value="#{msgs['budget.btn.export']}" 
+			immediate="true" rendered="#{not empty impRecBean.liqRecetteList}and false"
+			ajax="false">
+			<p:fileDownload value="#{impRecBean.xlsLiqRecette}" />
+		</p:commandButton>
+	</div>
+</ui:composition>

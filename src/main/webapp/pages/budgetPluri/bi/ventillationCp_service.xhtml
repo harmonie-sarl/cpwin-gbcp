@@ -1,0 +1,130 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+
+</style>
+	</ui:define>
+	<ui:define name="pageTitle">#{msgs['datatable.buget.pluri.annuel.adressage']}</ui:define>
+	<ui:define name="entetePage">
+		<ui:include src="/snippets/budget/entete.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="search">		
+		
+	</ui:define>
+	<ui:define name="enteteAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}" 
+			update=":enteteForm, :detailsForm:TotalPannel, :detailsForm:envelopPanel" actionListener="#{bpBean.searchBudgetForAdressage}" >
+
+		</p:commandButton>
+	</ui:define>
+
+	<ui:define name="details">
+
+		<p:panel id="TotalPannel" style="width:100%;">
+			<h:panelGrid columns="4" cellpadding="0" cellspacing="10"
+				columnClasses="filter_col1,filter_col2,filter_col3,filter_col4">
+				
+				<h:outputLabel value="#{msgs['montant.ae']}"
+					styleClass="espace_entre_label_value" />
+				<h:outputText value="#{bpBean.budget.montantAE}" >
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</h:panelGrid>
+		</p:panel>
+		<p:panel id="envelopPanel" style="width:100%;">
+			<div align="center" style="width: 100%;">
+				
+				<p:treeTable id="adress_dtt" 
+					rendered="#{not empty bpBean.budget.listEnvelopBudgView}" var="envelop"
+					style="width:100%; text-align: left;" rowIndexVar="envelopIndex"
+					emptyMessage="#{msgs['datatable.empty']}"
+					value="#{bpBean.adressageTree}" paginator="true"
+					rows="10">					 
+					 
+					<p:column  style="width:7%;" >
+						<f:facet name="header">
+							<h:outputText value="#{msgs['nature']}" />
+						</f:facet>
+                    <h:outputText value="#{envelop.codeAndLibGroupNat}"/>
+						
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['destination']}" />
+						</f:facet>
+
+						<h:outputText value="#{envelop.codeAndLibGroupDest}" />
+					</p:column>
+						<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['nature.destination']}" />
+						</f:facet>
+
+						<h:outputText value="#{envelop.natureDestination}" />
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['service']}" />
+						</f:facet>
+						<h:outputText value="#{envelop.codeAndLibServ}" />
+						
+					</p:column>
+				
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['programme']}" />
+						</f:facet>
+						<h:outputText value="#{envelop.codeAndLibProg}" />
+						
+					</p:column>
+					<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['montant.ae']}" />
+						</f:facet>
+						<h:outputText value="#{envelop.montantAE}">
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+						
+					</p:column>
+						<p:column style="width:7%;">
+						<f:facet name="header">
+							<h:outputText value="#{msgs['budget.resteAV']}" />
+						</f:facet>
+						<h:outputText value="#{envelop.adressResteAV}" rendered="#{envelop.envelop}">
+
+							<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+						
+					</p:column>
+					<p:column style="width:5%;">
+						
+					
+						<p:commandButton icon="fa fa-search" immediate="true" actionListener="#{bpBean.chooseEnvelopForAdress}"
+							rendered="#{envelop.envelop}">
+						<f:setPropertyActionListener target="#{bpBean.envelopBudg}" value="#{envelop}"/>
+						<p:ajax event="dialogReturn" listener="#{bpBean.onNodeExpand}" update=":detailsForm:envelopPanel" />
+						
+						</p:commandButton>
+				
+					</p:column>
+    	
+				</p:treeTable>
+				<br />
+			</div>		
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+		
+	</ui:define>
+</ui:composition>

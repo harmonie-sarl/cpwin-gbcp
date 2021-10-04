@@ -1,0 +1,152 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+
+	<ui:define name="head">
+		<style type="text/css">
+.totalStyle {
+	font-size: 10px;
+}
+
+.montantStyle {
+	font-size: 10px;
+	text-align: center;
+}
+
+.coldr1 {
+	text-align: left;
+}
+.coldr2 {
+	text-align: center;
+}
+.totcoldr1 {
+	text-align: left;
+	background-color: #FFFF99;
+}
+.totcoldr2 {
+	text-align: center;
+	background-color: #FFFF99;
+}
+.separator {
+	background-color: #FDD44B;
+}
+.treeFont {
+	background-color: #FDD44B;
+}
+.total {
+	background-color: #FDD44B;
+	font-size: 10px;
+	text-align: center;
+	font-weight:bold;
+}
+.indication {
+	font-size: 10px;
+	text-align: left;
+}
+</style>
+	</ui:define>
+
+	<ui:define name="pageTitle">#{msgs['datatable.banque.absorbee.saisi.entete']}</ui:define>
+	<ui:define name="entetePage">
+		
+	</ui:define>
+	<ui:define name="search">
+	<p:panel id="searchZone" style="border:1;padding:0;margin:0;">
+			  <ui:param name="searchRendered" value="true"></ui:param>
+			
+				 <p:panel id="searchPanel" header="#{msgs['zoneRecherche']}"  rendered="#{searchRendered}" style="width:100%;padding:0;margin:0;" >
+				<h:panelGrid id="searchTable" columns="3" columnClasses="search_col1,,entete_col4,entete_col5">
+				<h:panelGrid columns="4" cellpadding="0" cellspacing="10" columnClasses="filter_colB1,filter_colB2,filter_colB3,filter_colB4">		
+						<ui:include src="/snippets/search_etablissement.xhtml" />
+				</h:panelGrid>
+				<p:commandButton value="#{msgs['cpwin.btn.afficher']}"
+					actionListener="#{agentCptBean.searchBanquesAbsorbes}"
+					update="detailsForm:absorptionsPanel,globalMessage">
+				</p:commandButton>
+				<h:panelGroup>
+				<p:ajaxStatus id="status2" style="width:16px;height:16px;">
+					<f:facet name="start">
+						<h:graphicImage value="/images/ajax/ajax-loader-0.gif" />
+					</f:facet>
+					<f:facet name="complete">
+						<h:outputText value="" />
+					</f:facet>
+				</p:ajaxStatus>
+		</h:panelGroup>
+			</h:panelGrid>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+	
+	
+	<ui:define name="details">
+
+	<p:panel id="absorptionsPanel" style="width:100%;" header="#{msgs['etablissements.absorbes']}">
+		<div align="center"><p:dataTable id="saisiEtabAbs_dtt"
+			rendered="#{agentCptBean.banquesList!=null}" var="etabAbs"
+			style="width:100%; text-align: center;" rowIndexVar="selectedIndex"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{agentCptBean.banquesList}" paginator="true" rows="10">
+			
+			<p:column headerText="#{msgs['code.banque']}" style="width:25%">
+				<h:outputText value="#{etabAbs.codeBanque}" />
+			</p:column>
+			<p:column headerText="#{msgs['designation']}" style="width:40%">
+				<h:outputText value="#{etabAbs.nom}" />
+			</p:column>
+			<p:column headerText="#{msgs['date.fin.diffusion']}" style="width:15%">
+				<h:outputText value="#{etabAbs.finDiffusion}">
+					<f:convertDateTime pattern="dd/MM/yyyy" type="date" timeZone="Europe/Paris"/>
+				</h:outputText>
+			</p:column>
+			<p:column headerText="#{msgs['nombre.ibans.ouverts']}" style="width:15%">
+				<h:outputText value="#{etabAbs.openedIbans}">
+				</h:outputText>
+			</p:column>
+			<p:column style="width:5%;">
+					<f:facet name="header">
+					</f:facet>
+					<p:commandButton icon="updateIcon"
+						update="detailsForm:etabMsg,detailsForm:etabPG,globalMessage"
+						actionListener="#{agentCptBean.preUpdateBanque}"
+						title="#{msgs['btn.modifier']}"
+						onclick="PF('etabAbsPopUp').show();">
+						<f:param name="selectedEtab" value="#{selectedIndex}" />
+					</p:commandButton>
+				</p:column>
+		</p:dataTable>
+		<br/>
+			<h:panelGroup>
+					<p:commandButton title=" " value="#{msgs['btn.add']}" update="detailsForm:absorptionsPanel,detailsForm:etabMsg,globalMessage,detailsForm:etabPG"
+						actionListener="#{agentCptBean.preCreateBanque}" onclick="PF('etabAbsPopUp').show();">
+					</p:commandButton>
+					<p:commandButton value="#{msgs['cpwin.btn.excel']}" ajax="false" id="exportBTN" rendered="#{(agentCptBean.banquesList!=null) and (not empty agentCptBean.banquesList)}">
+						<p:dataExporter type="xls" target="saisiEtabAbs_dtt"
+							fileName="#{msgs['cpwin.excel.saisi.etablissement']}" excludeColumns="4"
+							postProcessor="#{agentCptBean.postProcessSaisiEtabAbsorbes}" />
+					</p:commandButton>
+        	</h:panelGroup></div>
+	</p:panel>
+		<p:dialog position="center" width="650" height="350" modal="true"
+			header="#{msgs['etablissement.absorbe']}"
+			widgetVar="etabAbsPopUp">
+			<div><p:messages id="etabMsg" globalOnly="true"
+				showDetail="true" /></div>
+			<h:panelGroup id="etabPG">
+				<ui:include src="/pages/agtCpt/etablissement_absorbe_view.xhtml" />
+				<div align="center"><h:panelGroup>
+					<p:commandButton value="#{msgs['btn.valider']}" oncomplete="if(args.isValid) etabAbsPopUp.hide()"
+						actionListener="#{agentCptBean.addOrUpdateBanque}"
+						update="detailsForm:etabMsg,globalMessage,detailsForm:etabPG,detailsForm:absorptionsPanel" />
+					<p:commandButton value="#{msgs['btn.fermer']}" update="globalMessage"
+						onclick="PF('etabAbsPopUp').hide();" type="button" />
+				</h:panelGroup></div>
+				<div align="left"><h:outputText
+					value="(*) #{msgs['required']}" styleClass="required" /></div>
+			</h:panelGroup>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

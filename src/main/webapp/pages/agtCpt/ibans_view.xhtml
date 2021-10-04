@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<style type="text/css">
+.col1 {
+	width: 20%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col2 {
+	width: 80%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+</style>
+	<h:panelGrid columns="2" style="width:100%; vertical-align:top;"
+		columnClasses="col1,col2">
+		<h:outputText value="#{msgs['code.tiers']}"/>
+		<h:outputText value="#{agentCptBean.tiers.code}"/>
+		<h:outputText value="#{msgs['designation']}"/>
+		<h:outputText value="#{agentCptBean.tiers.nom}"/>
+		<h:outputText value="#{msgs['code.banque']}"/>
+		<h:outputText value="#{agentCptBean.tiers.banque.codeBanque}"/>
+	</h:panelGrid>
+	<div align="center">
+		<p:dataTable id="ibans_dtt"
+			rendered="#{agentCptBean.ibansList!=null}" var="iban"
+			style="width:100%; text-align: center;"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{agentCptBean.ibansList}" paginator="true" rows="5">
+			<p:column headerText="#{msgs['iban']}" style="width:40%">
+				<h:outputText value="#{iban.iban}" />
+			</p:column>
+			<p:column headerText="#{msgs['detenteur']}" style="width:60%">
+				<h:outputText value="#{iban.detenteur}" />
+			</p:column>
+			<p:column headerText="Bic" style="width:60%">
+				<h:outputText value="#{iban.bic}" />
+			</p:column>
+			<p:column headerText="Ouvert" style="width:60%">
+				<h:outputText value="#{iban.ouvertB?'Oui':'Non'}" />
+			</p:column>
+		</p:dataTable></div>
+</ui:composition>

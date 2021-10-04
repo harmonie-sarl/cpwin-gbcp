@@ -1,0 +1,135 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	
+	<ui:define name="head">
+		<style type="text/css"/>
+	</ui:define>
+	<ui:define name="lastPrefexedTitle"/>
+	<ui:define name="entetePage">
+		<ui:include src="./common/entete.xhtml"/>
+	</ui:define>
+
+	<ui:define name="searchPage">
+		<h:panelGrid id="virementPG" columns="9"
+		style="width:85%;vertical-align:top;align: left;">
+
+
+		<h:outputLabel value="#{msgs['programme']}" />
+		<h:selectBooleanCheckbox id="programEnabled"
+			value="#{sctBean.programEnabled}">
+			<p:ajax listener="#{sctBean.resetProgram}" process="@this"
+				update=":enteteForm,codeProgram,tvaList,objet" />
+		</h:selectBooleanCheckbox>
+		<h:panelGroup id="codeProgram">
+
+
+			<p:selectOneMenu id="progrList" styleClass="ReadOnlyText"
+				disabled="#{!sctBean.programEnabled}" style="width:80px;"
+				onfocus="select();" editable="true" value="#{sctBean.codeProg}">
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{loaderBean.listPrograme}" var="prog"
+					itemLabel="#{prog.code}" itemValue="#{prog.code}">
+				</f:selectItems>
+				<p:ajax process="@this"
+					update=":enteteForm,objet,globalMessage,enteteForm:addDocPG,:detailsForm" />
+			</p:selectOneMenu>
+
+		</h:panelGroup>
+		<h:outputLabel styleClass="espace_entre_label_value"
+			value="#{msgs['tva']}" />
+		<p:selectOneMenu id="tvaList" styleClass="ReadOnlyText"
+			disabled="#{!sctBean.programEnabled}" value="#{sctBean.tva}">
+
+			<f:selectItems value="#{sctBean.listTva}" var="tva"
+				itemLabel="#{tva}" itemValue="#{tva}">
+			</f:selectItems>
+			<p:ajax process="@this"></p:ajax>
+		</p:selectOneMenu>
+		<h:panelGroup>
+			<h:outputText value="#{msgs['cpwin.objet']}" />
+
+		</h:panelGroup>
+		<h:inputTextarea styleClass="ReadOnlyText" id="objet"
+			value="#{sctBean.objet}" style="text-align: left;" rows="2" cols="50">
+			<f:validateLength minimum="1" maximum="255" />
+			<p:ajax process="@this"
+				update="enteteForm:addDocPG,:detailsForm,:enteteForm"/>
+		</h:inputTextarea>
+	</h:panelGrid>
+	</ui:define>
+	
+	<ui:define name="searchAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.Importer']}"
+			id="importBtn" update="globalMessage,:detailsForm:importPanel"
+			immediate="true" actionListener="#{sctBean.importer}"
+			disabled="#{!sctBean.requiredDataDone}">
+		</p:commandButton>
+
+	</ui:define>
+
+	<ui:define name="details">
+	
+		<p:panel id="importPanel" style="width:100%;">
+		<div align="center">
+		<h:panelGroup rendered="#{ sctBean.importedDataVisible}">
+			<p:commandButton immediate="true" title=""
+				value="#{msgs['login.btn.valider']}" id="rmh_validate_btn"
+				update="rmh_generate_btn,globalMessage,:detailsForm:importPanel"
+				disabled="#{sctBean.validateRMH}"
+				actionListener="#{sctBean.validateRMH}">
+			</p:commandButton>
+			<p:commandButton immediate="true" title="" value="#{msgs['generer']}"
+				id="rmh_generate_btn" disabled="#{!sctBean.generateRMHAutorized}"
+				update="exportFile,globalMessage,:detailsForm:importPanel,enteteForm"
+				actionListener="#{sctBean.genererRMH}">
+			</p:commandButton>
+			<p:commandButton id="exportFile" ajax="false" disabled="#{!sctBean.generateRMHExecuted}"
+						title="#{msgs['btn.enregistrer']}" icon="downloadIcon">
+						<p:fileDownload value="#{sctBean.rmhFile}" />
+			</p:commandButton>
+		</h:panelGroup>
+	</div>
+	<br />
+			<p:tabView id="ongletsImport" style="width:100%;" cache="false"	rendered="#{ sctBean.dataVisible}">
+
+				<p:tab id="tabSepaFrlist" rendered="#{sctBean.importedDataVisible}"
+					title="#{msgs['sepa.paiement.fr']} (#{sctBean.sepaFrPaymentList.stream().count()})">
+
+					<ui:include src="./onglets/sepaFrPaymentList.xhtml">
+					<ui:param name="sepaMode" value="RMH" />
+					</ui:include>
+				</p:tab>
+				<p:tab id="tabSepaHorsFrlist"
+					rendered="#{ sctBean.importedDataVisible}"
+					title="#{msgs['sepa.paiement.nofr']} (#{sctBean.nonSepaFrPaymentList.stream().count()})">
+					<ui:include src="./onglets/sepaHorsFrPaymentList.xhtml">
+					<ui:param name="sepaMode" value="RMH" />
+					</ui:include>
+				</p:tab>
+				
+				<p:tab id="tabHorsSepalist"
+					rendered="#{sctBean.importedDataVisible}"
+					title="#{msgs['sepa.paiement.hors']} (#{sctBean.nonSepaPaymentList.stream().count()})">
+
+					<ui:include src="./onglets/horsSepaPaymentList.xhtml">
+					<ui:param name="sepaMode" value="RMH" />
+					</ui:include>
+
+				</p:tab>
+
+				<p:tab id="tabErreurs" rendered="#{sctBean.errorReportVisible}"
+					title="#{msgs['budget.data.error.tab']} (#{sctBean.errorReport.stream().count()})">
+
+					<ui:include src="./onglets/rapport_erreurs.xhtml" />
+
+				</p:tab>
+
+			</p:tabView>
+		</p:panel>
+	</ui:define>
+	
+</ui:composition>

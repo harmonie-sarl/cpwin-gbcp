@@ -1,0 +1,113 @@
+<entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+  version="2.0">
+  
+ <entity class="fr.symphonie.cpwin.model.sepa.Bic">
+	 	<table name="tiersbic">
+	 	</table>
+	 	<id-class class="fr.symphonie.cpwin.model.pk.SepaBicPK"></id-class>
+	 	<attributes>
+	 		<id name="bankCode">
+	 			<column name="code_banque"/>
+	 		</id>
+	 		<id name="counterBankCode">
+	 			<column name="code_gui"/>
+	 		</id>
+	 		<basic name="value">
+	 		<column name="bic"/>
+	 		</basic>
+	 
+	 	</attributes>
+	 </entity>
+ <entity class="fr.symphonie.tools.sct.model.RefundsItem">
+ 	<table name="CtaRemb">
+ 	</table>
+ 	<attributes>
+ 		<id name="id">
+ 			<column column-definition="numeric"></column>
+ 			<generated-value strategy="IDENTITY"></generated-value>
+ 		</id>
+ 		<basic name="amount">
+ 			<column name="montant" column-definition="money"></column>
+ 		</basic>
+ 		<basic name="noEcriture">
+ 			<column name="reglt_ecr"></column>
+ 		</basic>
+ 		<basic name="noBordereau">
+ 			<column name="bordreg_no"></column>
+ 		</basic>
+ 		<basic name="dateBordereau">
+ 			<column name="bordreg_date"></column>
+ 		</basic>
+ 		<basic name="object">
+ 			<column name="objet"></column>
+ 		</basic>
+ 		<basic name="exercice">
+ 			<column name="premb_exec"></column>
+ 		</basic>
+ 		<basic name="paymentMode">
+ 			<column name="mode_paie"></column>
+ 		</basic>
+ 		<basic name="noVague">
+ 			<column name="no_vague"></column>
+ 		</basic>
+ 		<embedded name="actor">
+ 			<attribute-override name="name">
+ 				<column name="nom"></column>
+ 			</attribute-override>
+ 			<attribute-override name="firstName">
+ 				<column name="prenom" table="CtaRemb"></column>
+ 			</attribute-override>
+ 			<attribute-override name="code">
+ 				<column name="Matricule" table="CtaRemb"></column>
+ 			</attribute-override>
+ 		</embedded>
+ 	</attributes>
+ </entity>
+ <entity class="fr.symphonie.tools.sct.model.RefundsBatch">
+ 	<table name="CtaRembVague">
+ 	</table>
+ 	<attributes>
+ 		<id name="id">
+ 			<column column-definition="Numeric"></column>
+ 			<generated-value strategy="IDENTITY"></generated-value>
+ 		</id>
+ 		<basic name="exercice">
+ 			<column name="num_exec"></column>
+ 		</basic>
+ 		<basic name="numero">
+ 			<column name="no_vague"></column>
+ 		</basic>
+ 		<basic name="fileName">
+ 			<column name="nom_fichier"></column>
+ 		</basic>
+ 		<basic name="crc32">
+ 		</basic>
+ 		<embedded name="trace">
+ 		</embedded>
+ 	</attributes>
+ </entity>
+ 
+	 <embeddable class="fr.symphonie.cpwin.model.sepa.Actor">
+		<attributes>
+			<basic name="name">
+				
+			</basic>
+			<basic name="iban">
+				
+			</basic>
+			<basic name="bic">
+				
+			</basic>
+			<basic name="firstName">
+				
+			</basic>
+			<basic name="code">
+				
+			</basic>
+		</attributes>
+	</embeddable>
+	
+  </entity-mappings>

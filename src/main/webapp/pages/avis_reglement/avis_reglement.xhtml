@@ -1,0 +1,122 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+
+	<ui:define name="head">
+		<style type="text/css">
+.totalStyle {
+	font-size: 10px;
+}
+
+.montantStyle {
+	font-size: 10px;
+	text-align: center;
+}
+
+.coldr1 {
+	text-align: left;
+}
+.coldr2 {
+	text-align: center;
+}
+.totcoldr1 {
+	text-align: left;
+	background-color: #FFFF99;
+}
+.totcoldr2 {
+	text-align: center;
+	background-color: #FFFF99;
+}
+.separator {
+	background-color: #FDD44B;
+}
+.treeFont {
+	background-color: #FDD44B;
+}
+.total {
+	background-color: #FDD44B;
+	font-size: 10px;
+	text-align: center;
+	font-weight:bold;
+}
+.indication {
+	font-size: 10px;
+	text-align: left;
+}
+</style>
+	</ui:define>
+
+	<ui:define name="pageTitle">#{msgs['datatable.tb.avis.reglement.entete']}</ui:define>
+	<ui:define name="entetePage">
+	</ui:define>
+	<ui:define name="search">
+		<p:panel id="searchZone" style="border:1;padding:0;margin:0;">
+			<ui:param name="searchRendered" value="true"></ui:param>
+			<p:panel id="searchPanel" header="#{msgs['zoneRecherche']}"  rendered="#{searchRendered}" style="width:100%;padding:0;margin:0;" >
+				<h:panelGrid id="searchTable" columns="3" columnClasses="search_col1,entete_col4,entete_col5">
+					<h:panelGrid columns="5" cellpadding="0" cellspacing="10" columnClasses="filter_col5,filter_colB4,filter_colB4,filter_colB3,filter_col5">		
+							<ui:include src="/snippets/search_avis_reglement.xhtml" />
+					</h:panelGrid>
+					<p:commandButton id="searchBtn" value="#{msgs['cpwin.btn.afficher']}"
+						actionListener="#{avisReglementBean.searchMandatsOp}" disabled="#{avisReglementBean.disableButton}"
+						update="detailsForm:ongletsAvis,globalMessage,detailsForm:searchPanel">
+					</p:commandButton>
+					<h:panelGroup>
+						<p:ajaxStatus id="status2" style="width:16px;height:16px;">
+							<f:facet name="start">
+								<h:graphicImage value="/images/ajax/ajax-loader-0.gif" />
+							</f:facet>
+							<f:facet name="complete">
+								<h:outputText value="" />
+							</f:facet>
+						</p:ajaxStatus>
+					</h:panelGroup>
+				</h:panelGrid>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+	<ui:define name="details">
+
+
+		<div align="center" style="width: 100%;">
+		<h:panelGrid
+			id="ongletsAvis" style="width:100%;vertical-align:top;">
+			<p:tabView id="ongletsTB" style="width:100%;" dynamic="false"
+				cache="true">
+				<p:tab id="syntheseTab"
+					title="#{msgs['cpwin.onglet.mandats.op']}">
+					<ui:include src="/pages/avis_reglement/onglets/mandats_op.xhtml" />
+				</p:tab>
+				<p:tab id="mdt_sans_retTab" rendered="#{!avisReglementBean.sansReglement}"
+					title="#{msgs['cpwin.onglet.mandats.sans.retenues']}">
+					<ui:include src="/pages/avis_reglement/onglets/mandats_sans_retenue.xhtml" />
+				</p:tab>
+				<p:tab id="mdt_avec_retTab" rendered="#{!avisReglementBean.sansReglement}"
+					title="#{msgs['cpwin.onglet.mandats.avec.retenues']}">
+					<ui:include src="/pages/avis_reglement/onglets/mandats_avec_retenue.xhtml" />
+				</p:tab>
+				<p:tab id="mdt_sans_regltTab" rendered="#{avisReglementBean.sansReglement}"
+					title="#{msgs['cpwin.onglet.mandats.sans.reglement']}">
+					<ui:include src="/pages/avis_reglement/onglets/mandats_sans_reglement.xhtml" />
+				</p:tab>
+				<p:tab id="operationsTab"
+					title="#{msgs['cpwin.onglet.operations']}">
+					<ui:include src="/pages/avis_reglement/onglets/operations.xhtml" />
+				</p:tab>
+				<p:tab id="piecesTab"
+					title="#{msgs['cpwin.onglet.pieces']}">
+					<ui:include src="/pages/avis_reglement/onglets/pieces.xhtml" />
+				</p:tab>
+			</p:tabView>
+		</h:panelGrid> <br />
+		<h:panelGroup id="buttonPG">
+			<p:commandButton id="fermerBTN" ajax="false" immediate="true"
+				value="#{msgs['btn.fermer']}"
+				action="home">
+			</p:commandButton>
+		</h:panelGroup></div>
+	</ui:define>
+</ui:composition>
