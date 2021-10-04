@@ -76,7 +76,7 @@ public class PsLrecCree extends GenericGtsPs {
 		inputs.put(document, null);
 		inputs.put(tiers_orig, liqRec.getTiersOrigine());
 		inputs.put(debiteur, liqRec.getDebiteur());
-		inputs.put(code_cat, "1");
+		inputs.put(code_cat,liqRec.getTiers().isRegisseur()?"3": "1");
 		inputs.put(no_inv, null);
 		inputs.put(piece_externe, 0);
 		inputs.put(type_piece_externe, null);

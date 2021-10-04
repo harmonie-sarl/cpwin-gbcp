@@ -209,7 +209,7 @@ Contient les interfaces utilisateur et l'accés à la base de données CPWin
   <profile>
   <id>GBCP</id>
    <activation>
-  <activeByDefault>true</activeByDefault>
+  <activeByDefault>false</activeByDefault>
   </activation>
   <properties>
   <app.name>${project.artifactId}</app.name>
@@ -225,7 +225,7 @@ Contient les interfaces utilisateur et l'accés à la base de données CPWin
   <profile>
   <id>GTS</id>
    <activation>
-  <activeByDefault>false</activeByDefault>
+  <activeByDefault>true</activeByDefault>
   </activation>
   <properties>
   <app.name>gts</app.name>
