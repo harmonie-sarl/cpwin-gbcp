@@ -550,7 +550,13 @@ public void setSelectedStatus(EtudiantStatus selectedStatus) {
 	this.selectedStatus = selectedStatus;
 }
 public  EtudiantStatus[] getFolderStatus() {
-    return EtudiantStatus.values();
+	List<EtudiantStatus> result= new ArrayList<EtudiantStatus>();
+	for(EtudiantStatus item : EtudiantStatus.values()) {
+		if(item!=EtudiantStatus.FERME) {
+			result.add(item);
+		}
+	}
+	return result.toArray(new EtudiantStatus[4]);
 }
 public boolean isTranfertAutorized() {
 	if(!isRequirmentsStatus())return false;
