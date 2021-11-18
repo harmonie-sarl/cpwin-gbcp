@@ -16,7 +16,7 @@ Contient les interfaces utilisateur et l'accés à la base de données CPWin
 
   <properties>
 		<web-com.version>3.5.0</web-com.version>
-		<cpwin-model.version>3.4.5</cpwin-model.version>
+		<cpwin-model.version>3.4.6</cpwin-model.version>
 		<cpwin-core.version>1.0</cpwin-core.version>
  		<maven-war-plugin-version>2.1.1</maven-war-plugin-version>
  		<interne-scope>compile</interne-scope> 
@@ -95,11 +95,11 @@ Contient les interfaces utilisateur et l'accés à la base de données CPWin
   <groupId>fr.symphonie</groupId>
   <artifactId>cpwin-model</artifactId>
   </dependency>
-      <dependency>     
-  <groupId>fr.symphonie</groupId>
-  <artifactId>sepa</artifactId>
-  <version>2.0.0</version>
-  </dependency>
+<!--       <dependency>      -->
+<!--   <groupId>fr.symphonie</groupId> -->
+<!--   <artifactId>sepa</artifactId> -->
+<!--   <version>2.0.0</version> -->
+<!--   </dependency> -->
   
   <!-- DOCX et Excel -->
   <dependency>
@@ -209,7 +209,7 @@ Contient les interfaces utilisateur et l'accés à la base de données CPWin
   <profile>
   <id>GBCP</id>
    <activation>
-  <activeByDefault>false</activeByDefault>
+  <activeByDefault>true</activeByDefault>
   </activation>
   <properties>
   <app.name>${project.artifactId}</app.name>
@@ -225,7 +225,7 @@ Contient les interfaces utilisateur et l'accés à la base de données CPWin
   <profile>
   <id>GTS</id>
    <activation>
-  <activeByDefault>true</activeByDefault>
+  <activeByDefault>false</activeByDefault>
   </activation>
   <properties>
   <app.name>gts</app.name>

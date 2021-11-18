@@ -68,20 +68,20 @@ public class Test {
 		calendar.set(Calendar.DAY_OF_MONTH, maxDay);
 		System.out.print(calendar.getTime());
 	}
-	public static void readPainXml() {
-		JAXBContext jaxbContext;
-		try {
-			jaxbContext = JAXBContext.newInstance(symphonie.fr.sepa.model.pain.sct.fr.ObjectFactory.class);
-		
-		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		symphonie.fr.sepa.model.pain.sct.fr.Document sepaObj = ((JAXBElement<symphonie.fr.sepa.model.pain.sct.fr.Document>) jaxbUnmarshaller.unmarshal(new File("E:\\Travail\\Demandes\\GBCP\\2021\\03-LaCasemate\\P_CCSTI-VirS02_12.sepa_03.xml"))).getValue();
-		System.out.printf("size %d", sepaObj.getCstmrCdtTrfInitn().getPmtInf().size());
-		System.out.printf("MsgId %s", sepaObj.getCstmrCdtTrfInitn().getGrpHdr().getMsgId());
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public static void readPainXml() {
+//		JAXBContext jaxbContext;
+//		try {
+//			jaxbContext = JAXBContext.newInstance(symphonie.fr.sepa.model.pain.sct.fr.ObjectFactory.class);
+//		
+//		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+//		symphonie.fr.sepa.model.pain.sct.fr.Document sepaObj = ((JAXBElement<symphonie.fr.sepa.model.pain.sct.fr.Document>) jaxbUnmarshaller.unmarshal(new File("E:\\Travail\\Demandes\\GBCP\\2021\\03-LaCasemate\\P_CCSTI-VirS02_12.sepa_03.xml"))).getValue();
+//		System.out.printf("size %d", sepaObj.getCstmrCdtTrfInitn().getPmtInf().size());
+//		System.out.printf("MsgId %s", sepaObj.getCstmrCdtTrfInitn().getGrpHdr().getMsgId());
+//		} catch (JAXBException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	public static void relirPDF() {
 		Path pdfPath = Paths.get("E:\\Travail\\Demandes\\GBCP\\2020\\10-CRC\\test\\CRC\\MDT2020A841_1.pdf");
 		try {
