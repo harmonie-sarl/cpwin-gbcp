@@ -237,10 +237,11 @@ public double getOldMontantAE() {
 	}
 	public double getTotalMntCreditPaie() {
 		double result = 0d;
-//		if (listCreditPaiement != null)
 			for (CreditPaiement creditPaie : getCpList()) {
 				result += creditPaie.getMontant();
 			}
+		result=Helper.round(result, 2);
+		logger.debug("getTotalMntCreditPaie: "+ result);
 		return result;
 	}
 	public boolean isReserve(){
