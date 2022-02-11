@@ -2923,10 +2923,12 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 			else {
 				logger.debug("controlerMntValOrdoBi, listVentCp.size()=" + listVentCp.size());
 				totalVaration = getTotalMntCpDest(listVentCp);
+				
 				if (evelopp.getTotalMntCreditPaie() != totalVaration)
 					natGrpCodesList.add(evelopp.getCodeAndLibGroupNat());
 				logger.debug("controlerMntValOrdoBr, natGrpCodesList.size()=" + natGrpCodesList.size());
 			}
+			
 
 		}
 		if (natGrpCodesList.isEmpty())
@@ -2953,6 +2955,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 			if (mnt != null)
 				result += mnt.doubleValue();
 		}
+		result=Helper.round(result,2);
 		logger.info("getTotalMntCpDest(list) : result " + result);
 		return result;
 	}
