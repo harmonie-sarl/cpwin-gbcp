@@ -16,6 +16,7 @@
 		<mapping-file>META-INF/orm-meta4dai.xml</mapping-file>
 		<mapping-file>META-INF/etudiant.xml</mapping-file>
 		<mapping-file>META-INF/signature.xml</mapping-file>
+		<mapping-file>META-INF/lemans-bt.xml</mapping-file>
 		
 		<!-- GTS -->
 		 <!--  -->

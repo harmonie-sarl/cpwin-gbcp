@@ -28,6 +28,7 @@ import fr.symphonie.cpwin.model.pk.SepaBicPK;
 import fr.symphonie.cpwin.model.sepa.Actor;
 import fr.symphonie.cpwin.model.sepa.Bic;
 import fr.symphonie.cpwin.model.sepa.Protocol;
+import fr.symphonie.tools.common.model.FileImportTrace;
 import fr.symphonie.tools.meta4dai.model.PaymentItem;
 import fr.symphonie.tools.meta4dai.model.Period;
 import fr.symphonie.tools.nantes.model.Etudiant;
@@ -354,6 +355,27 @@ public class CommonDao implements fr.symphonie.common.core.ICommonDao{
 			listTiers = query.getResultList();
 		logger.debug("findTiersList: size={}",listTiers.size());
 		return listTiers;
+	}
+
+	@Override
+	public List<FileImportTrace> getImportHistoryList(Integer exercice, String moduleName, long crc32) {
+		List<FileImportTrace> result = null;
+		
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<FileImportTrace> cq = cb.createQuery(FileImportTrace.class);
+		Root<FileImportTrace> root = cq.from(FileImportTrace.class);
+		cq.select(root);
+		Predicate p = cb.conjunction();
+		
+			p = cb.and(p, cb.equal(root.get("exercice"), exercice));
+			p = cb.and(p, cb.equal(root.get("crc32"), crc32));
+			p = cb.and(p, cb.equal(root.get("module"), moduleName));
+			
+			cq.where(p);
+			TypedQuery<FileImportTrace> query = em.createQuery(cq);
+			result = query.getResultList();
+
+		return result;
 	}
 
 }

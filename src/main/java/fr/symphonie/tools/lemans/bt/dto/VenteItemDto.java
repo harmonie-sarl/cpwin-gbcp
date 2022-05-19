@@ -1,10 +1,10 @@
-package fr.symphonie.tools.lemans.bt.model;
+package fr.symphonie.tools.lemans.bt.dto;
 
 import fr.symphonie.impor.AttributImport;
 import fr.symphonie.impor.ConfigImport;
 import fr.symphonie.impor.Importable;
 
-public class ImportedData implements Importable {
+public class VenteItemDto implements Importable {
 
 	@Override
 	public void setValue(AttributImport attributConfig, Object value) {

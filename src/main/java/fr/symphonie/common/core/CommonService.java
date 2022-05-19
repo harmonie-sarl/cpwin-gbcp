@@ -35,6 +35,7 @@ import fr.symphonie.cpwin.model.sepa.Actor;
 import fr.symphonie.cpwin.model.sepa.Bic;
 import fr.symphonie.cpwin.model.sepa.Protocol;
 import fr.symphonie.exception.MissingConfiguration;
+import fr.symphonie.tools.common.model.FileImportTrace;
 import fr.symphonie.tools.meta4dai.DisplayStruct;
 import fr.symphonie.tools.meta4dai.model.LbData;
 import fr.symphonie.tools.meta4dai.model.PaymentItem;
@@ -389,6 +390,16 @@ private ICommonDao commonDao;
 	@Override
 	public List<Integer> getMeta4DaiExercices() {
 		return commonDao.getMeta4DaiExercices();
+	}
+	@Override
+	public List<FileImportTrace> getImportHistoryList(Integer exercice, String moduleName, long crc32) {
+		return commonDao.getImportHistoryList(exercice,moduleName,crc32);
+	}
+	@Override
+	@Transactional
+	public void saveImportTrace(FileImportTrace vague) {
+		commonDao.insert(vague);	
+		
 	}
 	
 }
