@@ -146,4 +146,25 @@ public class DialogHelper {
 		Map<String, Object> options=initOptions(true, true, false, 550, 1100);
 		openDialog(sourceName, options);
 	}
+	
+	public static void openSpectacleDialog(){
+		String sourceName="spectacleView";
+		Map<String, Object> options=initOptions(true, true, false, 670, 1250);
+		openDialog(sourceName, options);
+	}
+	public static void openDetailSpectacleDialog(){
+		String sourceName="detailSpectacleView";
+		Map<String, Object> options=initOptions(true, true, false, 500, 1200);
+		openDialog(sourceName, options);
+	}
+	public static void openPeriodeLemansDialog(){
+		String sourceName="periodeLemansView";
+		Map<String, Object> options=initOptions(true, true, false, 200, 450);
+		openDialog(sourceName, options);
+	}
+	public static void openClientLemansDialog(){
+		String sourceName="clientLemansView";
+		Map<String, Object> options=initOptions(true, true, false, 400, 1000);
+		openDialog(sourceName, options);
+	}
 }

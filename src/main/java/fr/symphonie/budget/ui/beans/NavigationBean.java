@@ -118,6 +118,12 @@ public class NavigationBean implements Serializable {
 //    private static final String  META4DAI_PERIODE_OUTCOME="meta4dai_periode";
 //    private static final String  META4DAI_LBC_OUTCOME="meta4dai_lbc";
     private static final String  GENERATION_DP_OUTCOME="generation_dp";
+    private static final String  LEMANS_SPECTACLE_OUTCOME="lemans_ref_spectacle";
+    private static final String  LEMANS_PERIODE_OUTCOME="lemans_ref_periode";
+    private static final String  LEMANS_CLIENT_OUTCOME="lemans_ref_client";
+    
+    
+    
     
     
     
@@ -327,6 +333,9 @@ public class NavigationBean implements Serializable {
 		INITIALIZE_META4DAI(META4DAI_INIT_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_META4DAI,MsgEntry.MENU_INITIALISATION),
 		INITIALIZE_GTS(GTS_INIT_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_BILLETTERIE,MsgEntry.MENU_INITIALISATION),
 		DP_GENERATION(GENERATION_DP_OUTCOME,Menu.MENU_TOOLS,MsgEntry.DP_SAISIE),
+		LEMANS_SPECTACLE(LEMANS_SPECTACLE_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.MENU_SPECTACLE),
+		LEMANS_PERIODE(LEMANS_PERIODE_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.MENU_PERIODE),
+		LEMANS_CLIENT(LEMANS_CLIENT_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.MENU_CLIENT),
 		;
 		
 		
@@ -643,7 +652,8 @@ public class NavigationBean implements Serializable {
 		MENU_ETUDIANT(MsgEntry.ETUDIANT),
 		MENU_CRC(MsgEntry.CRC),
 		MENU_TOOLS(MsgEntry.MENU_OUTILS),
-		MENU_SIGNATURE(MsgEntry.MENU_SIGNATURE);
+		MENU_SIGNATURE(MsgEntry.MENU_SIGNATURE),
+		MENU_LEMANS_BILLETTERIE(MsgEntry.MENU_LEMANS_BILLETTERIE)
 		;
 		private Libelle libelle;
 		Menu(String msgKey){
@@ -814,6 +824,9 @@ private ImportRecetteBean getImportRecetteBean()
 	}
 private DematBean getDematBean(){
 	return (DematBean)Helper.findBean("dematBean");
+}
+private GenericBean getLemanRefBean(){
+	return (GenericBean)Helper.findBean("lemansRefBean");
 }
 public String goToImportTiersDas()
 {	
@@ -1251,6 +1264,24 @@ private void deploiement() {
 		IBasicBean bean = BudgetHelper.getDpBean();
 		return prepare(Action.DP_GENERATION,bean);
 	}
+	public String goToLemansSpectacle() {
+		getLemanRefBean().reset();
+		prepare(Action.LEMANS_SPECTACLE);
+		return Action.LEMANS_SPECTACLE.getOutcome();
+	}
+	public String goToLemansPeriode() {
+		getDataListBean().reset();
+		getLemanRefBean().reset();
+		prepare(Action.LEMANS_PERIODE);
+		return Action.LEMANS_PERIODE.getOutcome();
+	}
+	
+	 public String goToLemansClient()
+	 {
+		 getLemanRefBean().reset();
+		 prepare(Action.LEMANS_CLIENT);
+		 return Action.LEMANS_CLIENT.getOutcome();
+	 }
 	
 	
 }
