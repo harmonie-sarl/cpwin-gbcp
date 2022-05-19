@@ -245,7 +245,8 @@ public class NavigationBean implements Serializable {
 		META4DAI,
 		NantesEtudiant,
 		CRC,
-		SIGNATURE, DP_GENERATION
+		SIGNATURE, DP_GENERATION,
+		LEMANS_BILLETTERIE
 	}
 	
 	public enum Action {
@@ -1047,6 +1048,9 @@ private void deploiement() {
 	public boolean isDpGenerationAuthorized() {
 		return checkLicence(Licence.DP_GENERATION);
 	}
+	public boolean isLemansBilletterieAuthorized() {
+		return checkLicence(Licence.LEMANS_BILLETTERIE);
+	}
 	private boolean checkLicence( Licence licence) {
 		String configuredValue="0";
 		try {
@@ -1092,6 +1096,9 @@ private void deploiement() {
 			break;
 		case DP_GENERATION:
 			configuredValue=AppCfgConfig.getInstance().getDpGenerationLicence();
+			break;
+		case LEMANS_BILLETTERIE:
+			configuredValue=AppCfgConfig.getInstance().getLemansBilletterieLicence();
 			break;
 		default:
 			break;

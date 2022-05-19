@@ -101,6 +101,7 @@ public class AppCfgConfig {
 	private ConfigParam signatureLicence=new ConfigParam("fsignature") ;
 	
 	private ConfigParam dpGenerationLicence=new ConfigParam("fdpGeneration") ;
+	private ConfigParam leMansBilletterieLicence=new ConfigParam("lemans-bt") ;
 	
 	/**
 	 * Déclaration des properties config
@@ -306,6 +307,10 @@ public class AppCfgConfig {
 		
 	
 		return Boolean.valueOf(configuredValue);
+	}
+	public String getLemansBilletterieLicence() throws MissingConfiguration{
+		
+		return getDbConfigValue(leMansBilletterieLicence);
 	}
 	
 }
