@@ -473,6 +473,9 @@ public class MsgEntry {
 	public static final String SIGNATURE_MAIL_MESSAGE="signature.mail.message";
 	public static final String SIGNATURE_DUPLICAT="signature.duplicat";
 	
+	/** Pour module billetterie lemans**/
+	public static final String MENU_LEMANS_BILLETTERIE = "billetterie.lemans";
+	public static final String MENU_SPECTACLE = "spectacle";
 	public static final String DUPLICAT_CRC_MSG ="rembours.import.crc";
 	
 	
