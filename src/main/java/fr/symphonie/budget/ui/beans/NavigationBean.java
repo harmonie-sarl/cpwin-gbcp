@@ -1276,7 +1276,7 @@ private void deploiement() {
 		return Action.LEMANS_PERIODE.getOutcome();
 	}
 	
-	 public String LEMANS()
+	 public String goToLemansClient()
 	 {
 		 getLemanRefBean().reset();
 		 prepare(Action.LEMANS_CLIENT);
