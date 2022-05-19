@@ -764,6 +764,20 @@
 		<to-view-id>/pages/tools/lemans/referentiel/periode/periode.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>spectacleView</from-outcome>
+		<to-view-id>/pages/tools/lemans/referentiel/spectacle/view/spectacleView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>detailSpectacleView</from-outcome>
+		<to-view-id>/pages/tools/lemans/referentiel/spectacle/view/detailSpectacleView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
 
 
 
