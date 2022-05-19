@@ -1,0 +1,116 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+	<ui:define name="lastPrefexedTitle">
+					
+					</ui:define>
+	<ui:define name="entetePage">
+		<ui:include src="/pages/tools/lemans/common/entete_spectacle.xhtml" />
+
+	</ui:define>
+	<ui:define name="search">
+
+	</ui:define>
+	<ui:define name="enteteAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}"
+			update=":detailsForm:articlesPanel"
+			actionListener="#{gtsRefBean.search}">
+
+		</p:commandButton>
+		<ui:param name="statusRendered" value="true" />
+	</ui:define>
+	<ui:define name="searchAction">
+
+
+	</ui:define>
+
+
+
+
+	<ui:define name="details">
+			
+		<p:panel id="articlesPanel" style="width:100%;" header="#{msgs['liste.spectacles']}">
+			<p:messages id="articleErrorMsg" showDetail="true" autoUpdate="true"
+			styleClass="error" globalOnly="true" />
+			<div align="center" style="width: 100%;">
+				<p:dataTable id="articles_dtt" rendered="#{gtsRefBean.listArticles!=null}"
+					var="article" style="width:70%; text-align: center;align: center;" rowIndexVar="selectedIndex"
+					emptyMessage="#{msgs['datatable.empty']}" 
+					value="#{gtsRefBean.listArticles}" paginator="true" rows="10">
+					<p:column headerText="#{msgs['code']}" style="width:20%">
+				
+						<h:outputText value="#{article.code}"/>
+							
+						
+					</p:column>
+					<p:column headerText="#{msgs['libelle']}" style="width:40%">
+						<h:outputText value="#{article.libelle}"/>
+					</p:column>
+					
+					
+					
+					<p:column style="width:10%;" headerText="#{msgs['btn.modifier']}" >						
+
+
+						<p:commandButton title="#{msgs['btn.modifier']}" 
+						icon="fa fa-fw fa-edit"
+							actionListener="#{gtsRefBean.gotoUpdateArticle}">
+							<f:setPropertyActionListener target="#{gtsRefBean.selectedArticle}"
+								value="#{article}" />
+
+							<p:ajax event="dialogReturn" update=":detailsForm:articlesPanel" />
+						</p:commandButton>
+
+					</p:column>
+					<p:column style="width:13%;" headerText="#{msgs['btn.supprimer']}" >					
+					<p:commandButton title=" " icon="fa fa-fw fa-remove" 
+					onclick="PF('confSupprArticle').show();" style="height:20px">
+					<f:setPropertyActionListener target="#{gtsRefBean.selectedArticle}"
+								value="#{article}" />
+					<p:ajax event="dialogReturn" update=":detailsForm:articlesPanel" />
+						</p:commandButton>
+				</p:column>
+				</p:dataTable>
+				
+			<br/>
+			<h:panelGroup>
+					<p:commandButton title=" " 
+					actionListener="#{gtsRefBean.gotoAddArticle}"
+						value="#{msgs['btn.add']}" >
+
+						<p:ajax event="dialogReturn" update=":detailsForm:articlesPanel" />
+
+					</p:commandButton>
+
+				</h:panelGroup>
+				</div>
+		</p:panel>
+		
+			<p:confirmDialog message="#{msgs['confirm.suppression.article']}"
+			header="" widgetVar="confSupprArticle" modal="true">
+			<h:panelGrid width="100%" style="text-align: center;">
+				<h:panelGroup>
+					<p:commandButton value="#{msgs['btn.valider']}"
+						oncomplete="PF('confSupprArticle').hide();"
+						actionListener="#{gtsRefBean.delete}"
+						update="detailsForm:articlesPanel" />
+					<p:commandButton value="#{msgs['btn.annuler']}"
+						onclick="PF('confSupprArticle').hide();" type="button" />
+				</h:panelGroup>
+			</h:panelGrid>
+		</p:confirmDialog>
+	</ui:define>
+	
+</ui:composition>
