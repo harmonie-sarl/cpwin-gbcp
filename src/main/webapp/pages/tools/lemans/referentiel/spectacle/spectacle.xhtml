@@ -25,8 +25,8 @@
 	</ui:define>
 	<ui:define name="enteteAction">
 		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}"
-			update=":detailsForm:articlesPanel"
-			actionListener="#{gtsRefBean.search}">
+			update=":detailsForm:spectaclesPanel"
+			actionListener="#{lemansRefBean.search}">
 
 		</p:commandButton>
 		<ui:param name="statusRendered" value="true" />
@@ -41,22 +41,22 @@
 
 	<ui:define name="details">
 			
-		<p:panel id="articlesPanel" style="width:100%;" header="#{msgs['liste.spectacles']}">
-			<p:messages id="articleErrorMsg" showDetail="true" autoUpdate="true"
+		<p:panel id="spectaclesPanel" style="width:100%;" header="#{msgs['liste.spectacles']}">
+			<p:messages id="spectacleErrorMsg" showDetail="true" autoUpdate="true"
 			styleClass="error" globalOnly="true" />
 			<div align="center" style="width: 100%;">
-				<p:dataTable id="articles_dtt" rendered="#{gtsRefBean.listArticles!=null}"
-					var="article" style="width:70%; text-align: center;align: center;" rowIndexVar="selectedIndex"
+				<p:dataTable id="spectacles_dtt" rendered="#{lemansRefBean.listSpectacles!=null}"
+					var="spectacle" style="width:70%; text-align: center;align: center;" rowIndexVar="selectedIndex"
 					emptyMessage="#{msgs['datatable.empty']}" 
-					value="#{gtsRefBean.listArticles}" paginator="true" rows="10">
+					value="#{lemansRefBean.listSpectacles}" paginator="true" rows="10">
 					<p:column headerText="#{msgs['code']}" style="width:20%">
 				
-						<h:outputText value="#{article.code}"/>
+						<h:outputText value="#{spectacle.code}"/>
 							
 						
 					</p:column>
 					<p:column headerText="#{msgs['libelle']}" style="width:40%">
-						<h:outputText value="#{article.libelle}"/>
+						<h:outputText value="#{spectacle.libelle}"/>
 					</p:column>
 					
 					
@@ -66,20 +66,20 @@
 
 						<p:commandButton title="#{msgs['btn.modifier']}" 
 						icon="fa fa-fw fa-edit"
-							actionListener="#{gtsRefBean.gotoUpdateArticle}">
-							<f:setPropertyActionListener target="#{gtsRefBean.selectedArticle}"
-								value="#{article}" />
+							actionListener="#{lemansRefBean.gotoUpdateSpectacle}">
+							<f:setPropertyActionListener target="#{lemansRefBean.selectedSpectacle}"
+								value="#{spectacle}" />
 
-							<p:ajax event="dialogReturn" update=":detailsForm:articlesPanel" />
+							<p:ajax event="dialogReturn" update=":detailsForm:spectaclesPanel" />
 						</p:commandButton>
 
 					</p:column>
 					<p:column style="width:13%;" headerText="#{msgs['btn.supprimer']}" >					
 					<p:commandButton title=" " icon="fa fa-fw fa-remove" 
-					onclick="PF('confSupprArticle').show();" style="height:20px">
-					<f:setPropertyActionListener target="#{gtsRefBean.selectedArticle}"
-								value="#{article}" />
-					<p:ajax event="dialogReturn" update=":detailsForm:articlesPanel" />
+					onclick="PF('confSupprSpectacle').show();" style="height:20px">
+					<f:setPropertyActionListener target="#{lemansRefBean.selectedSpectacle}"
+								value="#{spectacle}" />
+					<p:ajax event="dialogReturn" update=":detailsForm:spectaclesPanel" />
 						</p:commandButton>
 				</p:column>
 				</p:dataTable>
@@ -87,10 +87,10 @@
 			<br/>
 			<h:panelGroup>
 					<p:commandButton title=" " 
-					actionListener="#{gtsRefBean.gotoAddArticle}"
+					actionListener="#{lemansRefBean.gotoAddSpectacle}"
 						value="#{msgs['btn.add']}" >
 
-						<p:ajax event="dialogReturn" update=":detailsForm:articlesPanel" />
+						<p:ajax event="dialogReturn" update=":detailsForm:spectaclesPanel" />
 
 					</p:commandButton>
 
@@ -98,16 +98,16 @@
 				</div>
 		</p:panel>
 		
-			<p:confirmDialog message="#{msgs['confirm.suppression.article']}"
-			header="" widgetVar="confSupprArticle" modal="true">
+			<p:confirmDialog message="#{msgs['confirm.suppression.spectacle']}"
+			header="" widgetVar="confSupprSpectacle" modal="true">
 			<h:panelGrid width="100%" style="text-align: center;">
 				<h:panelGroup>
 					<p:commandButton value="#{msgs['btn.valider']}"
-						oncomplete="PF('confSupprArticle').hide();"
-						actionListener="#{gtsRefBean.delete}"
-						update="detailsForm:articlesPanel" />
+						oncomplete="PF('confSupprSpectacle').hide();"
+						actionListener="#{lemansRefBean.delete}"
+						update="detailsForm:spectaclesPanel" />
 					<p:commandButton value="#{msgs['btn.annuler']}"
-						onclick="PF('confSupprArticle').hide();" type="button" />
+						onclick="PF('confSupprSpectacle').hide();" type="button" />
 				</h:panelGroup>
 			</h:panelGrid>
 		</p:confirmDialog>
