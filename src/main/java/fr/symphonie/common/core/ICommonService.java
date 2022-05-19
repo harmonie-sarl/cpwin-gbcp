@@ -14,6 +14,7 @@ import fr.symphonie.cpwin.model.sepa.Actor;
 import fr.symphonie.cpwin.model.sepa.Bic;
 import fr.symphonie.cpwin.model.sepa.Protocol;
 import fr.symphonie.exception.MissingConfiguration;
+import fr.symphonie.tools.common.model.FileImportTrace;
 import fr.symphonie.tools.meta4dai.DisplayStruct;
 import fr.symphonie.tools.meta4dai.model.LbData;
 import fr.symphonie.tools.meta4dai.model.PaymentItem;
@@ -143,6 +144,11 @@ public List<Integer> getOpenedExerciceList();
 List<Integer> getMeta4DaiExercices();
 
 List<Integer> getVagueExercises();
+
+// FileImport trace
+public List<FileImportTrace> getImportHistoryList(Integer exercice,String moduleName, long crc32);
+
+public void saveImportTrace(FileImportTrace vague);
 
 
 }

@@ -3,6 +3,29 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
   version="2.0">
+  <entity class="fr.symphonie.tools.common.model.FileImportTrace">
+ 	<table name="importVague">
+ 	</table>
+ 	<attributes>
+ 		<id name="id">
+ 			<column column-definition="Numeric"></column>
+ 			<generated-value strategy="IDENTITY"></generated-value>
+ 		</id>
+ 		<basic name="exercice">
+ 			<column name="num_exec"></column>
+ 		</basic>
+ 		<basic name="module">
+ 			<column name="module"></column>
+ 		</basic>
+ 		<basic name="fileName">
+ 			<column name="nom_fichier"></column>
+ 		</basic>
+ 		<basic name="crc32">
+ 		</basic>
+ 		<embedded name="trace">
+ 		</embedded>
+ 	</attributes>
+ </entity>
   
 	<embeddable class="fr.symphonie.util.model.SimpleEntity">
 		<attributes>
