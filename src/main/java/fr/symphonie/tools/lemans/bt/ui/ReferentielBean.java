@@ -24,26 +24,22 @@ import fr.symphonie.common.util.MsgEntry;
 import fr.symphonie.common.util.Util;
 import fr.symphonie.cpwin.model.Adresse;
 import fr.symphonie.tools.common.DataListBean;
+import fr.symphonie.tools.common.model.ImportPeriod;
 import fr.symphonie.tools.das.ui.DasBean;
-
-
-
-
-
 import fr.symphonie.tools.gts.model.PeriodeEnum;
-
 import fr.symphonie.tools.lemans.bt.core.LemansService;
 import fr.symphonie.tools.lemans.bt.model.Client;
-//import fr.symphonie.tools.lemans.bt.model.ImportedData;
-import fr.symphonie.tools.lemans.bt.model.Period;
 import fr.symphonie.tools.lemans.bt.model.Spectacle;
 import fr.symphonie.tools.lemans.bt.model.SpectacleDetails;
 import fr.symphonie.util.HandlerJSFMessage;
 import fr.symphonie.util.Helper;
 import fr.symphonie.util.model.SimpleEntity;
+import lombok.Getter;
+import lombok.Setter;
 
 @ManagedBean(name="lemansRefBean")
 @SessionScoped
+
 public class ReferentielBean extends GenericBean implements Serializable{
 
 
@@ -61,26 +57,30 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	private String tvaSpectacle;
 	private Integer numPeriode;
 	private List<Spectacle> listSpectacles;
-	private List<Period> listPeriodes;
+	@Getter
+	@Setter
+	private List<ImportPeriod> listPeriodes;
 	
 	private Spectacle selectedSpectacle;
 	private SpectacleDetails selectedDetailSpec;
 	private static final String AUTRE="Autre";
-	private Period selectedPeriode;
-	private String codeGts;
+	@Getter
+	@Setter
+	private ImportPeriod selectedPeriode;
+	private String codeClient;
     private List<Client> listClients;
 	private Client selectedClient;
 
 	private boolean updateMode;
 	private boolean updateDetailMode;
 	private List<String> listTvaSpectacle;
-	
-	private List<Integer> listNumPeriode;
+	@Setter
+	private List<String> listNumPeriode;
 
 	
 	public void resetDynamicList() {		
 		setListSpectacles(null);
-		setListPeriodes(null);
+		this.listPeriodes	=	null;
 		setListClients(null);
 	}
 
@@ -102,10 +102,10 @@ public class ReferentielBean extends GenericBean implements Serializable{
 			resultSize=getListSpectacles().size();
 			break;
 		case LEMANS_PERIODE:			
-			setListPeriodes(service.getPeriodes(getExercice(),getNumPeriode(),null));
+		//	setListPeriodes(com.getPeriodes(getExercice(),getNumPeriode(),null));
 			break;
 		case LEMANS_CLIENT:
-			searchCondition=BudgetHelper.prepareSearchKey(getCodeGts());
+			searchCondition=BudgetHelper.prepareSearchKey(getCodeClient());
 			setListClients(service.getClientLemansList(searchCondition));
 			resultSize=getListClients().size();
 			loadAdressClient();
@@ -135,7 +135,7 @@ public class ReferentielBean extends GenericBean implements Serializable{
 		setSelectedSpectacle(null);
 		setSelectedDetailSpec(null);
 		setSelectedPeriode(null);
-		setCodeGts(null);
+		setCodeClient(null);
 		setSelectedClient(null);
 		setTvaSpectacle(null);
 		setUpdateMode(false);
@@ -260,9 +260,9 @@ private <T extends Object> void afterSave(T entity) {
 	switch (getCurrentAction()) {
 	
 	case GTS_PERIODE:
-		Period periode=(Period)entity;
+		ImportPeriod periode=(ImportPeriod)entity;
 		if(!isUpdateMode())
-		getListNumPeriode().add(periode.getNumero());
+		getListNumPeriode().add(periode.getCode());
 	case GTS_CLIENT:
 		loadAdressClient();
 		break;		
@@ -397,7 +397,7 @@ private boolean checkDupicated()
 			setListSpectacles((List<Spectacle>) list);
 			break;
 		case LEMANS_PERIODE:
-			setListPeriodes((List<Period>) list);
+			setListPeriodes((List<ImportPeriod>) list);
 			break;
 		case LEMANS_CLIENT:
 			setListClients((List<Client>) list);
@@ -412,7 +412,7 @@ private boolean checkDupicated()
 			setSelectedSpectacle((Spectacle) o);
 			break;
 		case LEMANS_PERIODE:
-			setSelectedPeriode((Period) o);
+			setSelectedPeriode((ImportPeriod) o);
 			break;
 		case LEMANS_CLIENT:
 			setSelectedClient((Client) o);
@@ -554,12 +554,12 @@ private boolean checkDupicated()
 		this.numPeriode = numPeriode;
 		resetDynamicList();
 	}
-	public List<Period> getListPeriodes() {
-		return listPeriodes;
-	}
-	public void setListPeriodes(List<Period> listPeriodes) {
-		this.listPeriodes = listPeriodes;
-	}
+//	public List<Period> getListPeriodes() {
+//		return listPeriodes;
+//	}
+//	public void setListPeriodes(List<Period> listPeriodes) {
+//		this.listPeriodes = listPeriodes;
+//	}
 	/**
 	 * prération de la mise à jour 
 	 * d'une période
@@ -570,17 +570,17 @@ private boolean checkDupicated()
 		DialogHelper.openPeriodeLemansDialog();
 	}
 	
-	public Period getSelectedPeriode() {
-		return selectedPeriode;
+//	public Period getSelectedPeriode() {
+//		return selectedPeriode;
+//	}
+//	public void setSelectedPeriode(Period selectedPeriode) {
+//		this.selectedPeriode = selectedPeriode;
+//	}
+	public String getCodeClient() {
+		return codeClient;
 	}
-	public void setSelectedPeriode(Period selectedPeriode) {
-		this.selectedPeriode = selectedPeriode;
-	}
-	public String getCodeGts() {
-		return codeGts;
-	}
-	public void setCodeGts(String codeGts) {
-		this.codeGts = codeGts;
+	public void setCodeClient(String codeGts) {
+		this.codeClient = codeGts;
 		resetDynamicList();
 	}
 	public List<Client> getListClients() {
@@ -636,15 +636,15 @@ private boolean checkDupicated()
 	{
 		setUpdateMode(false);
 		getDataListBean().reset();
-		Period periode=new Period();
+		ImportPeriod periode=new ImportPeriod();
 		periode.setEtat(PeriodeEnum.OUVERT);
 		periode.setTrace(Helper.createTrace());
 		periode.setExercice(getExercice());
 		Integer maxNumero=0;
-		for(Integer num:getListNumPeriode()){
-			if(num.compareTo(maxNumero)>0)maxNumero=num;
+		for(String num:getListNumPeriode()){
+			//if(num.compareTo(maxNumero)>0)maxNumero=num;
 		}
-		periode.setNumero(maxNumero.intValue()+1);
+		periode.setCode(""+(maxNumero.intValue()+1));
 		setSelectedPeriode(periode);	
 		DialogHelper.openPeriodeLemansDialog();
 	}
@@ -859,14 +859,13 @@ private boolean checkDupicated()
 			return true;
 		}
 }
-	public List<Integer> getListNumPeriode() {
+	public List<String> getListNumPeriode() {
 		if(listNumPeriode==null){
-			if(getExercice()!=null)
-				setListNumPeriode(service.getListNumPeriode(getExercice()));
+			if(getExercice()!=null) {
+				//setListNumPeriode(service.getListNumPeriode(getExercice()));
+			}
 		}
 		return listNumPeriode;
 	}
-	public void setListNumPeriode(List<Integer> listNumPeriode) {
-		this.listNumPeriode = listNumPeriode;
-	}
+	
 }

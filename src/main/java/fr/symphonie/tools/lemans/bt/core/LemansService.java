@@ -10,10 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.symphonie.budget.core.dao.IJdbcHelper;
-import fr.symphonie.tools.gts.model.PeriodeEnum;
 import fr.symphonie.tools.lemans.bt.model.Client;
-//import fr.symphonie.tools.lemans.bt.model.ImportedData;
-import fr.symphonie.tools.lemans.bt.model.Period;
 import fr.symphonie.tools.lemans.bt.model.Spectacle;
 import fr.symphonie.tools.lemans.bt.model.SpectacleDetails;
 
@@ -55,13 +52,13 @@ public class LemansService {
 		return dao.getSpectacle(code);
 	}
 
-	public List<Period> getPeriodes(Integer exercice, Integer numPeriode, Boolean ferme) {
-		return dao.getPeriodes(exercice,numPeriode,ferme);
-	}
-
-	public List<Integer> getListNumPeriode(Integer exercice) {
-		return dao.getListNumPeriode(exercice);
-	}
+//	public List<Period> getPeriodes(Integer exercice, Integer numPeriode, Boolean ferme) {
+//		return dao.getPeriodes(exercice,numPeriode,ferme);
+//	}
+//
+//	public List<Integer> getListNumPeriode(Integer exercice) {
+//		return dao.getListNumPeriode(exercice);
+//	}
 
 	public List<Client> getClientLemansList(String searchCondition) {
 		return dao.getClientLemansList(searchCondition);

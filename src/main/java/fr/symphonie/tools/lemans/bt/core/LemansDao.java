@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
@@ -20,8 +19,6 @@ import org.springframework.stereotype.Repository;
 import fr.symphonie.common.util.Constant;
 import fr.symphonie.tools.gts.model.LiqRecette;
 import fr.symphonie.tools.lemans.bt.model.Client;
-//import fr.symphonie.tools.lemans.bt.model.ImportedData;
-import fr.symphonie.tools.lemans.bt.model.Period;
 import fr.symphonie.tools.lemans.bt.model.Spectacle;
 import fr.symphonie.tools.lemans.bt.model.SpectacleDetails;
 
@@ -100,6 +97,7 @@ public class LemansDao {
 		return result.get(0);
 
 	}
+	/*
 	public List<Period> getPeriodes(Integer exercice, Integer numPeriode, Boolean ferme ) {
 		List<Period> result = null;
 		
@@ -138,7 +136,7 @@ public class LemansDao {
 		result = query.getResultList();
 		return result;
 	}
-
+*/
 
 
 
