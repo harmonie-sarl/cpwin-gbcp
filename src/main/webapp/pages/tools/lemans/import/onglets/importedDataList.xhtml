@@ -1,0 +1,134 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<style type="text/css">
+	
+	.noneStyle {
+	color: #000000;
+	background-color: none;
+      }
+
+.redStyle {
+	color: #FFFFFF;
+	background-color: #FF0000;
+    }
+   </style>
+		<div align="center">
+		
+		<h:panelGrid columns="5">
+			<p:commandButton immediate="true" title=""
+				value="#{msgs['btn.simulate']}" id="dai_simulate_btn"
+				update=":detailsForm:importPanel,:enteteForm" disabled="#{!daiBean.simulationAutorized}"
+				actionListener="#{daiBean.executeSimulation}">
+			</p:commandButton>
+			<p:commandButton immediate="true" title="" disabled="#{!daiBean.addToParamAutorized}"
+				value="#{msgs['ajout.param']}" id="addTo_param_btn"
+				update=":detailsForm:importPanel"
+				actionListener="#{daiBean.executeAddToParam}">
+			</p:commandButton>
+		<h:panelGroup  rendered="true">
+			<p:commandButton immediate="true" title=""
+				value="#{msgs['login.btn.valider']}" id="dai_validate_btn"
+				update=":detailsForm:importPanel,:enteteForm"  disabled="#{!daiBean.validationAutorized}"
+				actionListener="#{daiBean.executeValidation}">
+			</p:commandButton>
+		</h:panelGroup>
+		    <p:commandButton title=" " value="#{msgs['budget.btn.export']}"  rendered="#{(daiBean.daiList!=null)and(daiBean.periodEditable)}"
+			 immediate="true"
+			 ajax="false">
+			<p:fileDownload value="#{daiBean.xlsImportedDaiList}" />
+		   </p:commandButton>
+		     <p:commandButton title=" " value="#{msgs['budget.btn.export']}" rendered="#{(daiBean.daiList!=null)and(!daiBean.periodEditable)}"
+			 immediate="true" ajax="false">
+			<p:fileDownload value="#{daiBean.xlsDaiTraiteList}" />
+		   </p:commandButton>
+			</h:panelGrid>
+	</div>
+	<br />
+	<p:dataTable id="imported_dai_dtt" scrollable="true"
+		scrollHeight="300" scrollRows="20" sortBy="#{dai.lb.direction}"
+		rendered="#{daiBean.daiList!=null}" var="dai"
+		style="width:100%;text-align:center" rowIndexVar="creditIndex"
+		emptyMessage="#{msgs['datatable.empty']}"
+		value="#{daiBean.daiList}">
+		
+		<p:column headerText="#{msgs['cp.ei']}"  style="text-align:center;width:5%" >
+			<h:outputText value="#{dai.noEI}" />
+		</p:column>
+		<p:column headerText="#{msgs['periode']}" style="text-align: center;width:6%" >
+			<h:outputText value="#{dai.period}" />
+		</p:column>
+		<p:column headerText="#{msgs['object.ei']}" style="text-align:center;width:20%">
+			<h:outputText value="#{dai.objetEI}" />
+		</p:column>
+		<p:column headerText="#{msgs['montant']}" style="text-align:center;width:10%">
+			<h:outputText value="#{dai.amount}" >
+			<f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+			  <f:facet name="footer" >
+			<h:outputText style="vertical-align:top;align: center; font-size: 12px;"
+				value="#{daiBean.daiList.stream().map(dai->dai.amount).sum()}">
+				 <f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+		</f:facet>
+		</p:column>
+		<p:column headerText="#{msgs['disponible.ei']}" style="width:10%" rendered="#{daiBean.periodEditable}" >
+			<h:outputText value="#{dai.dispoEi}">
+				<f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+			 <f:facet name="footer" >
+			<h:outputText style="vertical-align:top;align: center; font-size: 12px;"
+				value="#{daiBean.daiList.stream().map(dai->dai.dispoEi).sum()}">
+				 <f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+		</f:facet>
+		
+		</p:column>
+		<p:column headerText="#{msgs['disponible.apres']}"	style="text-align:center;width:10%" rendered="#{daiBean.periodEditable}">
+			<h:outputText value="#{dai.dispoApres}"  rendered="#{dai.dispoApres ge 0}" >
+			<f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+			<h:outputText value="#{dai.dispoApres}"
+			styleClass="redStyle" rendered="#{dai.dispoApres lt 0}" >
+			<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+			</h:outputText>
+			 <f:facet name="footer" >
+			<h:outputText style="vertical-align:top;align: center; font-size: 12px;"
+				value="#{daiBean.daiList.stream().map(dai->dai.dispoApres).sum()}">
+				 <f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+		</f:facet>
+		</p:column>
+		<p:column headerText="#{msgs['code.dest']}" style="text-align:center;width:10%">
+			<h:outputText value="#{dai.lb.destination}" />
+		</p:column>
+		<p:column headerText="#{msgs['code.nature']}" style="text-align:center;width:10%">
+			<h:outputText value="#{dai.lb.nature}" />
+		</p:column>
+		<p:column headerText="#{msgs['import.service']}" style="text-align:center;width:10%">
+			<h:outputText value="#{dai.lb.service}" />
+		</p:column>
+			<p:column headerText="#{msgs['code.direction']}" style="text-align:center;width:10%">
+			<h:outputText value="#{dai.lb.direction}" />
+		</p:column>
+		<p:column headerText="#{msgs['import.programme']}"	style="text-align:center;width:10%">
+			<h:outputText value="#{dai.lb.programme}" />
+		</p:column>
+		<p:column headerText="#{msgs['param.absent']}"	style="text-align:center;width:10%">
+			<h:outputText value="#{dai.notFoundEI?'O':'N'}" />
+		</p:column>
+		<p:column headerText="#{msgs['btn.add']}"  	style="text-align:center;width:10%">
+		<p:selectBooleanCheckbox disabled="#{!dai.notFoundEI}"
+			 value="#{dai.addEiRequest}" >
+			 <p:ajax   process="@this" update=":detailsForm,:enteteForm" />
+			 </p:selectBooleanCheckbox>
+		</p:column>
+		<p:column headerText="#{msgs['num.dai']}"	style="text-align:center;width:10%">
+			<h:outputText value="#{dai.noDAI}" />
+		</p:column>
+	</p:dataTable>
+	
+	</ui:composition>

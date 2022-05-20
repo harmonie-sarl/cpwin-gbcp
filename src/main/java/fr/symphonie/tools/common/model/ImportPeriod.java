@@ -1,14 +1,18 @@
-package fr.symphonie.tools.lemans.bt.model;
+package fr.symphonie.tools.common.model;
 
 import fr.symphonie.tools.gts.model.PeriodeEnum;
 import fr.symphonie.util.model.OuiNonEnum;
 import fr.symphonie.util.model.Trace;
 import lombok.Data;
 @Data
-public class Period {
+public class ImportPeriod {
+	private Integer id;
 	private Integer exercice;
-	private Integer numero;
+	private String budget;
+	private String module;
+	private String code;
 	private String etat;
+	private String object;
 	private boolean closed;
 	private Trace trace;
 	

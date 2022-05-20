@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+		
+			<h:outputLabel  value="#{msgs['cpwin.exercice']}" />
+			<p:selectOneMenu styleClass="ReadOnlyText" 
+				value="#{btBean.exercice}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{loaderBean.allExecList}" var="exec"
+					itemLabel="#{exec}" itemValue="#{exec}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{btBean.onExerciceChange}" 
+					update="budgetCodeList,periodeList,:enteteForm,:detailsForm" />
+			</p:selectOneMenu>
+         
+         <h:outputLabel 	 value="#{msgs['budget.code']}" />
+			
+			<p:selectOneMenu id="budgetCodeList" styleClass="ReadOnlyText"
+				value="#{btBean.codeBudget}">
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{btBean.listBudgets}" var="budg"
+					itemLabel="#{budg}" itemValue="#{budg}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{btBean.reset}" global="false"
+					update=":enteteForm,:detailsForm"/>
+			</p:selectOneMenu>
+			
+			<h:panelGrid columns="2">
+		<h:outputLabel value="#{msgs['periode']}"
+			style="display:block;width:80px" />
+		<h:panelGroup>
+			<p:selectOneMenu id="periodeList" styleClass="ReadOnlyText"
+				value="#{btBean.codePeriod}">
+
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{btBean.periodList}" var="periode"
+					itemLabel="#{periode.code} - #{periode.object} - #{periode.etat.libelle}" itemValue="#{periode.code}">
+				</f:selectItems>
+				<p:ajax process="@this" listener="#{btBean.onPeriodChange}"
+					update=":detailsForm,:enteteForm" />
+				
+			</p:selectOneMenu>
+		</h:panelGroup>
+	</h:panelGrid>
+      
+			
+			<h:panelGrid columns="2">
+			<h:outputText value="#{msgs['selectionner.fichier']}"  />
+
+			<h:panelGroup id="addDocPG">
+				<p:fileUpload label="#{msgs['parcourir']}" skinSimple="true" 
+					invalidFileMessage="#{errorMsgs['invalid.file']}" id="fileUp"
+					fileUploadListener="#{btBean.fileUploadHandler}" auto="true"
+					image="/images/browse.png" mode="advanced" dragDropSupport="false"
+					multiple="false" height="48" width="48" 
+					disabled="#{!btBean.requiredDataDone}"
+					allowTypes="/(\.|\/)(xls)$/" event="click"
+					update=":detailsForm,:enteteForm">
+				</p:fileUpload>
+				<p:message id="fileUpMsg" for="fileUp" styleClass="error" />
+			</h:panelGroup>
+			</h:panelGrid>
+    <h:outputLabel value="#{btBean.sourceFileName}" rendered="#{(btBean.commonRequiredDone) and (btBean.importFileUploadEvent !=null) }"/>
+  
+</ui:composition>

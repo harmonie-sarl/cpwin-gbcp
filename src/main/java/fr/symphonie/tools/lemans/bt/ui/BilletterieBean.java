@@ -16,8 +16,10 @@ import fr.symphonie.common.util.Util;
 import fr.symphonie.tools.common.CommonToolsBean;
 import fr.symphonie.tools.common.excel.IExcelImportor;
 import fr.symphonie.tools.common.model.FileImportTrace;
+import fr.symphonie.tools.common.model.ImportPeriod;
 import fr.symphonie.tools.lemans.bt.dto.VenteDto;
 import fr.symphonie.tools.lemans.bt.dto.VenteItemDto;
+import fr.symphonie.tools.meta4dai.DaiInterfaceBean.TaskEnum;
 import fr.symphonie.util.HandlerJSFMessage;
 import fr.symphonie.util.Helper;
 import fr.symphonie.util.model.SimpleEntity;
@@ -36,6 +38,12 @@ public class BilletterieBean extends CommonToolsBean {
 	private List<VenteDto> ventes = null;
 	@Getter
 	private List<VenteItemDto> venteDetails = null;
+	/**
+	 * Input elements
+	 */
+	private String codePeriod;
+	private List<ImportPeriod> periodList;
+	private List<String> periodExerciseList;
 
 	public void fileUploadHandler(FileUploadEvent event) {
 		importService.fileUploadHandler(event);
@@ -137,5 +145,21 @@ public class BilletterieBean extends CommonToolsBean {
 		getCommonService().saveImportTrace(vague);	
 		log.debug("saveImportTrace : end");
 	}
+	public List<ImportPeriod> getPeriodList() {
+		if(CollectionUtils.isEmpty(periodList))load(TaskEnum.PERIOD);
+		return periodList;
+	}
+	private void load(TaskEnum task) {
+		log.debug("load {} ...",task.name());	
+		switch(task) {
+		case PERIOD:
+			//this.periodList = getCommonService().getMeta4daiPeriodList(getExerciceInt(), getCodeBudget());
+			break;
+		}
+		log.debug("load {} .END.",task.name());
+	}
+	public enum TaskEnum {
+		PERIOD
+}
 
 }
