@@ -235,11 +235,11 @@ public class ReferentielBean extends GenericBean implements Serializable{
 		T entity=getCurrentEntity();
 
 		logger.info("addOrUpdate()  entity={}",entity);
-//		if(!checkDupicated())return;
-//	    if(!checkRequiredElements())return;
-//	    if(!checkIntegrityElements())return;
+		if(!checkDupicated())return;
+	    if(!checkRequiredElements())return;
+	    if(!checkIntegrityElements())return;
 		try {	
-			//entity=service.save(entity);
+			entity=service.save(entity);
 	
 			afterSave(entity);
 			
@@ -599,7 +599,7 @@ private boolean checkDupicated()
 	public void gotoUpdateClient()
 	{
 		setUpdateMode(true);
-		DialogHelper.openClientDialog();
+		DialogHelper.openClientLemansDialog();
 	}
 	/**
 	 * chargement 
@@ -620,7 +620,7 @@ private boolean checkDupicated()
 		Client client=new Client();
 		client.setTrace(Helper.createTrace());
 		setSelectedClient(client);
-		DialogHelper.openClientDialog();
+		DialogHelper.openClientLemansDialog();
 	}
 	@Override
 	public Integer getExercice() {
