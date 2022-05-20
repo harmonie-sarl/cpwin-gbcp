@@ -151,7 +151,7 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	@Override
 	public boolean isRequiredDataDone() {
 		switch (getCurrentAction()) {
-		case GTS_PERIODE:
+		case LEMANS_PERIODE:
 			return (getExercice()!=null);	
 		default:
 			return true;
@@ -259,11 +259,11 @@ private <T extends Object> void afterSave(T entity) {
 	getCurrentList().add(entity);
 	switch (getCurrentAction()) {
 	
-	case GTS_PERIODE:
+	case LEMANS_PERIODE:
 		ImportPeriod periode=(ImportPeriod)entity;
 		if(!isUpdateMode())
 		getListNumPeriode().add(periode.getCode());
-	case GTS_CLIENT:
+	case LEMANS_CLIENT:
 		loadAdressClient();
 		break;		
 	default:
@@ -289,7 +289,7 @@ private boolean checkDupicated()
 		Client loadedC=service.getClient(getSelectedClient().getCode().trim());
 		logger.info("loadedC: "+loadedC);
         if(loadedC!=null){
-            msgKey=MsgEntry.DUPLICATE_CLIENT_GTS_MSG;
+            msgKey=MsgEntry.DUPLICATE_CLIENT_LEMANS_MSG;
        }
 		 break;			 
 	default:
@@ -579,8 +579,8 @@ private boolean checkDupicated()
 	public String getCodeClient() {
 		return codeClient;
 	}
-	public void setCodeClient(String codeGts) {
-		this.codeClient = codeGts;
+	public void setCodeClient(String codeClient) {
+		this.codeClient = codeClient;
 		resetDynamicList();
 	}
 	public List<Client> getListClients() {
