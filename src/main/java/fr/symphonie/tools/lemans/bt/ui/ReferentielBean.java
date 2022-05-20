@@ -235,11 +235,11 @@ public class ReferentielBean extends GenericBean implements Serializable{
 		T entity=getCurrentEntity();
 
 		logger.info("addOrUpdate()  entity={}",entity);
-		if(!checkDupicated())return;
-	    if(!checkRequiredElements())return;
-	    if(!checkIntegrityElements())return;
+//		if(!checkDupicated())return;
+//	    if(!checkRequiredElements())return;
+//	    if(!checkIntegrityElements())return;
 		try {	
-			entity=service.save(entity);
+			//entity=service.save(entity);
 	
 			afterSave(entity);
 			
@@ -729,7 +729,7 @@ private boolean checkDupicated()
 			  if(isWithChild()) return;
 			  if(isUsedByImport(entity)) return;
 			try {	
-				   service.remove(entity);
+				  // service.remove(entity);
 					afterDelete(entity);
 			} catch (Exception e) {
 				e.printStackTrace();
