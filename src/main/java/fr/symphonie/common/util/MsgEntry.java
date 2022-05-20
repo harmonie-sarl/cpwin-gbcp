@@ -480,6 +480,7 @@ public class MsgEntry {
 	public static final String SUPPR_DETAIL_SPECTACLE = "suppression.spectacle";
 	public static final String DUPLICATE_SPECTACLE_MSG = "spectacle.existe";
 	public static final String DUPLICAT_CRC_MSG ="rembours.import.crc";
+	public static final String DUPLICATE_CLIENT_LEMANS_MSG = "client.lemans.existe";
 	
 	
 	
