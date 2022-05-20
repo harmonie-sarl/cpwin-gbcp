@@ -29,6 +29,7 @@ import fr.symphonie.cpwin.model.sepa.Actor;
 import fr.symphonie.cpwin.model.sepa.Bic;
 import fr.symphonie.cpwin.model.sepa.Protocol;
 import fr.symphonie.tools.common.model.FileImportTrace;
+import fr.symphonie.tools.common.model.ImportPeriod;
 import fr.symphonie.tools.meta4dai.model.PaymentItem;
 import fr.symphonie.tools.meta4dai.model.Period;
 import fr.symphonie.tools.nantes.model.Etudiant;
@@ -373,6 +374,29 @@ public class CommonDao implements fr.symphonie.common.core.ICommonDao{
 			
 			cq.where(p);
 			TypedQuery<FileImportTrace> query = em.createQuery(cq);
+			result = query.getResultList();
+
+		return result;
+	}
+
+	@Override
+	public List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName) {
+		List<ImportPeriod> result = null;
+		
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<ImportPeriod> cq = cb.createQuery(ImportPeriod.class);
+		Root<ImportPeriod> root = cq.from(ImportPeriod.class);
+		cq.select(root);
+		Predicate p = cb.conjunction();
+		
+			p = cb.and(p, cb.equal(root.get("exercice"), exercice));
+			if(StringUtils.isNotBlank(codeBudget))
+			p = cb.and(p, cb.equal(root.get("budget"), codeBudget));
+			if(StringUtils.isNotBlank(moduleName))
+			p = cb.and(p, cb.equal(root.get("module"), moduleName));
+			
+			cq.where(p);
+			TypedQuery<ImportPeriod> query = em.createQuery(cq);
 			result = query.getResultList();
 
 		return result;

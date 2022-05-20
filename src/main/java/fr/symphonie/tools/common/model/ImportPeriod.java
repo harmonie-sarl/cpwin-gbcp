@@ -57,6 +57,15 @@ public class ImportPeriod {
 	    if(etat==null) return false;	    
 		return etat.getOrdre()<=PeriodeEnum.CHARGE.getOrdre();
 	}
+
+	public Integer getNumero() {
+		try {
+			return Integer.valueOf(getCode());
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	
 }

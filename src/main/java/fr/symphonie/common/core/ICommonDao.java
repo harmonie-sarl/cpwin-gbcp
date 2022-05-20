@@ -10,6 +10,7 @@ import fr.symphonie.cpwin.model.sepa.Actor;
 import fr.symphonie.cpwin.model.sepa.Bic;
 import fr.symphonie.cpwin.model.sepa.Protocol;
 import fr.symphonie.tools.common.model.FileImportTrace;
+import fr.symphonie.tools.common.model.ImportPeriod;
 import fr.symphonie.tools.meta4dai.model.PaymentItem;
 import fr.symphonie.tools.meta4dai.model.Period;
 import fr.symphonie.tools.nantes.model.Etudiant;
@@ -60,5 +61,7 @@ public interface  ICommonDao {
 	List<Integer> getVagueExercises();
 
 	List<FileImportTrace> getImportHistoryList(Integer exercice, String moduleName, long crc32);
+
+	List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName);
 
 }

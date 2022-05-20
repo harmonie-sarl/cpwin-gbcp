@@ -36,6 +36,7 @@ import fr.symphonie.cpwin.model.sepa.Bic;
 import fr.symphonie.cpwin.model.sepa.Protocol;
 import fr.symphonie.exception.MissingConfiguration;
 import fr.symphonie.tools.common.model.FileImportTrace;
+import fr.symphonie.tools.common.model.ImportPeriod;
 import fr.symphonie.tools.meta4dai.DisplayStruct;
 import fr.symphonie.tools.meta4dai.model.LbData;
 import fr.symphonie.tools.meta4dai.model.PaymentItem;
@@ -400,6 +401,10 @@ private ICommonDao commonDao;
 	public void saveImportTrace(FileImportTrace vague) {
 		commonDao.insert(vague);	
 		
+	}
+	@Override
+	public List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName) {
+		return commonDao.getPeriodList(exercice,codeBudget,moduleName);
 	}
 	
 }

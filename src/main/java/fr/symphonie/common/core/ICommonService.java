@@ -15,6 +15,7 @@ import fr.symphonie.cpwin.model.sepa.Bic;
 import fr.symphonie.cpwin.model.sepa.Protocol;
 import fr.symphonie.exception.MissingConfiguration;
 import fr.symphonie.tools.common.model.FileImportTrace;
+import fr.symphonie.tools.common.model.ImportPeriod;
 import fr.symphonie.tools.meta4dai.DisplayStruct;
 import fr.symphonie.tools.meta4dai.model.LbData;
 import fr.symphonie.tools.meta4dai.model.PaymentItem;
@@ -149,6 +150,8 @@ List<Integer> getVagueExercises();
 public List<FileImportTrace> getImportHistoryList(Integer exercice,String moduleName, long crc32);
 
 public void saveImportTrace(FileImportTrace vague);
+
+public List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName);
 
 
 }
