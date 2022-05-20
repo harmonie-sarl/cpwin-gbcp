@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.symphonie.budget.core.dao.IJdbcHelper;
 import fr.symphonie.tools.gts.model.PeriodeEnum;
 import fr.symphonie.tools.lemans.bt.model.Client;
-import fr.symphonie.tools.lemans.bt.model.ImportedData;
+//import fr.symphonie.tools.lemans.bt.model.ImportedData;
 import fr.symphonie.tools.lemans.bt.model.Period;
 import fr.symphonie.tools.lemans.bt.model.Spectacle;
 import fr.symphonie.tools.lemans.bt.model.SpectacleDetails;
@@ -82,19 +82,19 @@ public class LemansService {
 		return dao.removeSpectacleDetail(detail);
 	}
 	
-	@Transactional
-	public void saveImport(Integer numExec, List<ImportedData> list, Period periode) {
-//		jdbcHelper.deleteGtsImport(numExec, periode.getNumero());
-		dao.deleteLemansImport(numExec, periode.getNumero());
-		periode.setEtat(PeriodeEnum.CHARGE);
-		dao.saveList(list);
-		dao.save(periode);
-	}
+//	@Transactional
+//	public void saveImport(Integer numExec, List<ImportedData> list, Period periode) {
+////		jdbcHelper.deleteGtsImport(numExec, periode.getNumero());
+//		dao.deleteLemansImport(numExec, periode.getNumero());
+//		periode.setEtat(PeriodeEnum.CHARGE);
+//		dao.saveList(list);
+//		dao.save(periode);
+//	}
 	
-	public List<ImportedData> getImportedData(Integer exercice, Integer numPeriode, String codeSpectacle, String codeClient)
-	{
-		return dao.getImportedData(exercice, numPeriode,codeSpectacle,codeClient);
-	}
+//	public List<ImportedData> getImportedData(Integer exercice, Integer numPeriode, String codeSpectacle, String codeClient)
+//	{
+//		return dao.getImportedData(exercice, numPeriode,codeSpectacle,codeClient);
+//	}
 
 	public String[] getCtaCompteImput(Integer exercice, String imputHtd) {
 		return jdbcHelper.getCtaCompteImput(exercice, imputHtd);

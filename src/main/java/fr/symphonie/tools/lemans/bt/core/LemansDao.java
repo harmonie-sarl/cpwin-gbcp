@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
 import fr.symphonie.common.util.Constant;
 import fr.symphonie.tools.gts.model.LiqRecette;
 import fr.symphonie.tools.lemans.bt.model.Client;
-import fr.symphonie.tools.lemans.bt.model.ImportedData;
+//import fr.symphonie.tools.lemans.bt.model.ImportedData;
 import fr.symphonie.tools.lemans.bt.model.Period;
 import fr.symphonie.tools.lemans.bt.model.Spectacle;
 import fr.symphonie.tools.lemans.bt.model.SpectacleDetails;
@@ -211,52 +211,52 @@ public class LemansDao {
 		 return spectacle;
 			}
 
-	public List<ImportedData> getImportedData(Integer exercice, Integer numPeriode, String codeSpectacle, String codeClient) {
-		logger.debug("getImportedData(exercice={},  numPeriode={})",exercice,numPeriode);
-		List<ImportedData> result = null;
-
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<ImportedData> cq = cb.createQuery(ImportedData.class);
-		Root<ImportedData> root = cq.from(ImportedData.class);
-		cq.select(root);
-
-		Predicate p = cb.conjunction();
-		if(exercice!=null)
-		p = cb.and(p, cb.equal(root.get("exercice"), exercice));
-		if (numPeriode != null)
-			p = cb.and(p, cb.equal(root.get("numero"), numPeriode));
-		if(codeSpectacle!=null)
-			p = cb.and(p, cb.equal(root.get("codeSpectacle"), codeSpectacle));
-		if(codeClient!=null)
-			p = cb.and(p, cb.equal(root.get("codeClient"), codeClient));
-		cq.where(p);
-		TypedQuery<ImportedData> query = em.createQuery(cq);
-		result = query.getResultList();
-		
-		logger.debug("getImportedData() nombre de résultats: {}",result==null?0:result.size());
-		
-		return result;
-
-	}
-	public void deleteLemansImport(Integer numExec, Integer numero) {
-		
-		
-//		logger.info("delete Import(exercice="+exercice+", periode"+ periode+")");
-//		String requete="delete from gts_import where num_exec=? and no_periode=?";
-//		jdbcTemplate.update(requete,new Object[] {exercice,periode});	
-	
-		 CriteriaBuilder cb = this.em.getCriteriaBuilder();
-			CriteriaDelete<ImportedData> delete =cb.createCriteriaDelete(ImportedData.class);
-			Root<ImportedData> root = delete.from(ImportedData.class);
-			Predicate p = cb.conjunction();
-			p = cb.and(p, cb.equal(root.get("exercice"),numExec));
-			p = cb.and(p, cb.equal(root.get("numero"), numero));
-			
-			
-			delete.where(p);
-			em.createQuery(delete).executeUpdate();
-	}
-	
+//	public List<ImportedData> getImportedData(Integer exercice, Integer numPeriode, String codeSpectacle, String codeClient) {
+//		logger.debug("getImportedData(exercice={},  numPeriode={})",exercice,numPeriode);
+//		List<ImportedData> result = null;
+//
+//		CriteriaBuilder cb = em.getCriteriaBuilder();
+//		CriteriaQuery<ImportedData> cq = cb.createQuery(ImportedData.class);
+//		Root<ImportedData> root = cq.from(ImportedData.class);
+//		cq.select(root);
+//
+//		Predicate p = cb.conjunction();
+//		if(exercice!=null)
+//		p = cb.and(p, cb.equal(root.get("exercice"), exercice));
+//		if (numPeriode != null)
+//			p = cb.and(p, cb.equal(root.get("numero"), numPeriode));
+//		if(codeSpectacle!=null)
+//			p = cb.and(p, cb.equal(root.get("codeSpectacle"), codeSpectacle));
+//		if(codeClient!=null)
+//			p = cb.and(p, cb.equal(root.get("codeClient"), codeClient));
+//		cq.where(p);
+//		TypedQuery<ImportedData> query = em.createQuery(cq);
+//		result = query.getResultList();
+//		
+//		logger.debug("getImportedData() nombre de résultats: {}",result==null?0:result.size());
+//		
+//		return result;
+//
+//	}
+//	public void deleteLemansImport(Integer numExec, Integer numero) {
+//		
+//		
+////		logger.info("delete Import(exercice="+exercice+", periode"+ periode+")");
+////		String requete="delete from gts_import where num_exec=? and no_periode=?";
+////		jdbcTemplate.update(requete,new Object[] {exercice,periode});	
+//	
+//		 CriteriaBuilder cb = this.em.getCriteriaBuilder();
+//			CriteriaDelete<ImportedData> delete =cb.createCriteriaDelete(ImportedData.class);
+//			Root<ImportedData> root = delete.from(ImportedData.class);
+//			Predicate p = cb.conjunction();
+//			p = cb.and(p, cb.equal(root.get("exercice"),numExec));
+//			p = cb.and(p, cb.equal(root.get("numero"), numero));
+//			
+//			
+//			delete.where(p);
+//			em.createQuery(delete).executeUpdate();
+//	}
+//	
 	public List<LiqRecette> getLiqRecettes(Integer exercice, Integer numPeriode,Boolean differe) {
 		logger.debug("getLiqRecettes(exercice={},  numPeriode={}, differe={})", exercice, numPeriode,differe);
 		List<LiqRecette> result = null;

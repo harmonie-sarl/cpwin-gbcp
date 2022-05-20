@@ -34,7 +34,7 @@ import fr.symphonie.tools.gts.model.PeriodeEnum;
 
 import fr.symphonie.tools.lemans.bt.core.LemansService;
 import fr.symphonie.tools.lemans.bt.model.Client;
-import fr.symphonie.tools.lemans.bt.model.ImportedData;
+//import fr.symphonie.tools.lemans.bt.model.ImportedData;
 import fr.symphonie.tools.lemans.bt.model.Period;
 import fr.symphonie.tools.lemans.bt.model.Spectacle;
 import fr.symphonie.tools.lemans.bt.model.SpectacleDetails;
@@ -769,38 +769,38 @@ private boolean checkDupicated()
 			
 		}
 	private boolean isUsedByImport(Object entity) {
-		List<ImportedData> list=null;
-		
-		String errorMsg=null,errorKey=null;
-		Object[] params=null;
-		if(entity==null)return false;
-		if(entity instanceof SpectacleDetails){
-			SpectacleDetails instance=(SpectacleDetails)entity;
-			list=service.getImportedData(instance.getExercice(), null,instance.getCode(),null);
-			if(list.isEmpty())return false;
-			errorKey="gts.detail.spectacle.used";
-			params=new Object[]{instance.getExercice(),instance.getCode()};
-			
-		}
-		else if(entity instanceof Client){
-			Client instance=(Client)entity;
-			list=service.getImportedData(null, null,null,instance.getCode());
-			if(list.isEmpty())return false;
-			errorKey="gts.client.used";
-			params=new Object[]{instance.getCode()};
-		}
-		else if(entity instanceof Period){
-			Period instance=(Period)entity;
-			list=service.getImportedData(instance.getExercice(), instance.getNumero(),null,null);
-			if(list.isEmpty())return false;
-			errorKey="gts.periode.used";
-			params=new Object[]{instance.getNumero(),instance.getExercice()};
-		}
-		if(errorKey!=null){
-			errorMsg=HandlerJSFMessage.formatMessage(HandlerJSFMessage.getErrorMessage(errorKey),params );
-			HandlerJSFMessage.addErrorMessage(errorMsg);
-			return true;
-		}
+//		List<ImportedData> list=null;
+//		
+//		String errorMsg=null,errorKey=null;
+//		Object[] params=null;
+//		if(entity==null)return false;
+//		if(entity instanceof SpectacleDetails){
+//			SpectacleDetails instance=(SpectacleDetails)entity;
+//			list=service.getImportedData(instance.getExercice(), null,instance.getCode(),null);
+//			if(list.isEmpty())return false;
+//			errorKey="gts.detail.spectacle.used";
+//			params=new Object[]{instance.getExercice(),instance.getCode()};
+//			
+//		}
+//		else if(entity instanceof Client){
+//			Client instance=(Client)entity;
+//			list=service.getImportedData(null, null,null,instance.getCode());
+//			if(list.isEmpty())return false;
+//			errorKey="gts.client.used";
+//			params=new Object[]{instance.getCode()};
+//		}
+//		else if(entity instanceof Period){
+//			Period instance=(Period)entity;
+//			list=service.getImportedData(instance.getExercice(), instance.getNumero(),null,null);
+//			if(list.isEmpty())return false;
+//			errorKey="gts.periode.used";
+//			params=new Object[]{instance.getNumero(),instance.getExercice()};
+//		}
+//		if(errorKey!=null){
+//			errorMsg=HandlerJSFMessage.formatMessage(HandlerJSFMessage.getErrorMessage(errorKey),params );
+//			HandlerJSFMessage.addErrorMessage(errorMsg);
+//			return true;
+//		}
 		
 		return false;
 	}
