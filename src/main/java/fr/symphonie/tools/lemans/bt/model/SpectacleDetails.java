@@ -32,7 +32,7 @@ public class SpectacleDetails {
 	private Integer noLbi;
 	
 	
-	public void setArticle(Spectacle spectacle) {
+	public void setSpectacle(Spectacle spectacle) {
 		this.spectacle = spectacle;
 		if(spectacle!=null)setCode(spectacle.getCode());
 	}

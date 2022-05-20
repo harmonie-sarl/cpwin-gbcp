@@ -476,6 +476,9 @@ public class MsgEntry {
 	/** Pour module billetterie lemans**/
 	public static final String MENU_LEMANS_BILLETTERIE = "billetterie.lemans";
 	public static final String MENU_SPECTACLE = "spectacle";
+	public static final String DUPLICATE_SPECTACLE_DETAIL_MSG = "spectacle.detail.existe";
+	public static final String SUPPR_DETAIL_SPECTACLE = "suppression.spectacle";
+	public static final String DUPLICATE_SPECTACLE_MSG = "spectacle.existe";
 	public static final String DUPLICAT_CRC_MSG ="rembours.import.crc";
 	
 	
