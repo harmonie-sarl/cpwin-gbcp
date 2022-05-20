@@ -25,6 +25,7 @@ import fr.symphonie.tools.common.DataListBean;
 import fr.symphonie.tools.crc.CrcBean;
 import fr.symphonie.tools.das.ui.DasBean;
 import fr.symphonie.tools.gts.ui.GtsBean;
+import fr.symphonie.tools.lemans.bt.ui.BilletterieBean;
 import fr.symphonie.tools.meta4dai.DaiInterfaceBean;
 import fr.symphonie.tools.nantes.StudentBean;
 import fr.symphonie.tools.recette.ImportRecetteBean;
@@ -121,6 +122,7 @@ public class NavigationBean implements Serializable {
     private static final String  LEMANS_SPECTACLE_OUTCOME="lemans_ref_spectacle";
     private static final String  LEMANS_PERIODE_OUTCOME="lemans_ref_periode";
     private static final String  LEMANS_CLIENT_OUTCOME="lemans_ref_client";
+    private static final String  LEMANS_IMPORT_OUTCOME="lemans_import";
     
     
     
@@ -336,6 +338,7 @@ public class NavigationBean implements Serializable {
 		LEMANS_SPECTACLE(LEMANS_SPECTACLE_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.MENU_SPECTACLE),
 		LEMANS_PERIODE(LEMANS_PERIODE_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.MENU_PERIODE),
 		LEMANS_CLIENT(LEMANS_CLIENT_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.MENU_CLIENT),
+		LEMANS_IMPORT(LEMANS_IMPORT_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,MsgEntry.IMPORT),
 		;
 		
 		
@@ -828,6 +831,9 @@ private DematBean getDematBean(){
 private GenericBean getLemanRefBean(){
 	return (GenericBean)Helper.findBean("lemansRefBean");
 }
+private BilletterieBean getBtBean(){
+	return (BilletterieBean)Helper.findBean("btBean");
+}
 public String goToImportTiersDas()
 {	
 
@@ -1282,7 +1288,15 @@ private void deploiement() {
 		 prepare(Action.LEMANS_CLIENT);
 		 return Action.LEMANS_CLIENT.getOutcome();
 	 }
-	
+	 
+	 public String goToLemansImport()
+	 {
+		 getBtBean().reset();	 
+		 prepare(Action.LEMANS_IMPORT);
+		 return Action.LEMANS_IMPORT.getOutcome();
+		 
+	 }
+	 
 	
 }
 

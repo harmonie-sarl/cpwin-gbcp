@@ -95,6 +95,7 @@ import fr.symphonie.tools.common.DataListBean;
 import fr.symphonie.tools.dp.DpBean;
 import fr.symphonie.tools.gts.core.GtsService;
 import fr.symphonie.tools.gts.ui.ReferentielBean;
+import fr.symphonie.tools.lemans.bt.core.LemansService;
 import fr.symphonie.tools.signature.SignatureBean;
 import fr.symphonie.util.HandlerJSFMessage;
 import fr.symphonie.util.Helper;
@@ -582,5 +583,9 @@ public class BudgetHelper {
 	}
 	public static boolean getBooleanConfigParam(String key) {
 		return Boolean.parseBoolean(HandlerJSFMessage.getConfigParam(key));
+	}
+	public static LemansService getLemansService() {
+		String beanName = "lemanService";
+		return (LemansService) Helper.findBean(beanName);
 	}
 }

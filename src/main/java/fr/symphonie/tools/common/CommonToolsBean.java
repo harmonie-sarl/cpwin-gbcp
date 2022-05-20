@@ -125,5 +125,20 @@ public abstract class CommonToolsBean implements IBasicBean{
 	public void setImportFileUploadEvent(FileUploadEvent importFileUploadEvent) {
 		this.importFileUploadEvent = importFileUploadEvent;
 	}
+	public void displayMessage(String msgKey, String msgArg, boolean isWarn) {
+
+		if (msgKey == null)
+			return;
+		String msg = HandlerJSFMessage.getErrorMessage(msgKey);
+		if (msgArg != null) {
+			msg = HandlerJSFMessage.formatMessage(msg, new Object[] { msgArg });
+		}
+
+		if (isWarn)
+			HandlerJSFMessage.addWarnMessage(msg);
+		else
+			HandlerJSFMessage.addErrorMessage(msg);
+
+	}
 	
 }

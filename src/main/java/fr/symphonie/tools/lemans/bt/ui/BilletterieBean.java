@@ -1,6 +1,7 @@
 package fr.symphonie.tools.lemans.bt.ui;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -19,11 +20,11 @@ import fr.symphonie.tools.common.model.FileImportTrace;
 import fr.symphonie.tools.common.model.ImportPeriod;
 import fr.symphonie.tools.lemans.bt.dto.VenteDto;
 import fr.symphonie.tools.lemans.bt.dto.VenteItemDto;
-import fr.symphonie.tools.meta4dai.DaiInterfaceBean.TaskEnum;
 import fr.symphonie.util.HandlerJSFMessage;
 import fr.symphonie.util.Helper;
 import fr.symphonie.util.model.SimpleEntity;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @ManagedBean(name = "btBean")
@@ -41,9 +42,21 @@ public class BilletterieBean extends CommonToolsBean {
 	/**
 	 * Input elements
 	 */
+	@Getter
+	@Setter
 	private String codePeriod;
 	private List<ImportPeriod> periodList;
 	private List<String> periodExerciseList;
+	
+	/**
+	 * For controle
+	 */
+	@Getter
+	@Setter
+	private boolean oldDataLoading;
+	@Getter
+	@Setter
+	private boolean importCompleted;
 
 	public void fileUploadHandler(FileUploadEvent event) {
 		importService.fileUploadHandler(event);
@@ -153,7 +166,7 @@ public class BilletterieBean extends CommonToolsBean {
 		log.debug("load {} ...",task.name());	
 		switch(task) {
 		case PERIOD:
-			//this.periodList = getCommonService().getMeta4daiPeriodList(getExerciceInt(), getCodeBudget());
+			this.periodList = getCommonService().getPeriodList(getExerciceInt(), getCodeBudget(),getModuleName());
 			break;
 		}
 		log.debug("load {} .END.",task.name());
@@ -161,5 +174,112 @@ public class BilletterieBean extends CommonToolsBean {
 	public enum TaskEnum {
 		PERIOD
 }
+	public void onPeriodChange()
+	{
+		resetDynamicList();
+		resetStatus();
+		setImportFileUploadEvent(null);
+		checkPeriod() ;
+		if(isOldDataLoading()) {
+			
+		}
+	
+	}
+
+	private boolean  checkPeriod()
+	{
+		ImportPeriod selectedPeriod=getSelectedPeriod();
+		ImportPeriod periodeBefore=null;
+		String msgArg=null, msgKey=null;
+		boolean isWarn=false;
+		
+		if(selectedPeriod==null) return false;
+		if(selectedPeriod.getEtat()==null)return false;
+		switch (selectedPeriod.getEtat()) {
+		case TRAITE:
+			msgKey=MsgEntry.PERIODE_TRAITE_ERROR;
+			msgArg=selectedPeriod.getCode();
+			setOldDataLoading(true);
+			break;
+		case CHARGE:
+			msgKey=MsgEntry.PERIODE_CHARGE_WARN;
+			msgArg=selectedPeriod.getCode();
+			isWarn=true;
+			setOldDataLoading(true);
+			break;
+		case OUVERT:
+			if(selectedPeriod.getNumero()>1) {
+				periodeBefore=getPeriod(selectedPeriod.getNumero()-1);
+				if(periodeBefore!=null)	
+				{
+					msgArg=Integer.toString(periodeBefore.getNumero());
+					if(periodeBefore.isOuvert()) {
+						msgKey=MsgEntry.PERIODE_PRECEDENTE_NON_TRAITEE;
+						setCodePeriod(null);
+					}
+					else if(periodeBefore.isCharge()) {
+						msgKey=MsgEntry.PERIODE_PRECEDENTE_ENCOURS;
+						isWarn=true;
+					}
+				}	
+			}
+			
+			break;	
+		default:
+			break;
+		}
+		
+		displayMessage(msgKey,msgArg,isWarn);
+		if(msgKey==null || isWarn)return true;			
+		return false;
+		
+		
+	}
+public ImportPeriod getSelectedPeriod() {		
+	ImportPeriod p= getPeriod(getCodePeriod());
+		log.debug("getSelectedPeriod: code={}, period={}",getCodePeriod(),p);
+		return p;
+	}
+private ImportPeriod getPeriod(String code)
+{
+	log.debug("getPeriod: code='{}'",code);
+	if(getPeriodList()==null) return null;
+	Optional<ImportPeriod> optional = getPeriodList().stream().
+		filter(p -> p.getCode().equalsIgnoreCase(code))
+		.findFirst();
+
+	return optional.isPresent()?optional.get():null;
+
+}
+private ImportPeriod getPeriod(int numero) {
+	
+	if(getPeriodList()==null) return null;
+	Optional<ImportPeriod> optional = getPeriodList().stream().
+		filter(p -> p.getNumero()==numero)
+		.findFirst();
+	return optional.isPresent()?optional.get():null;
+}
+
+
+	private void resetStatus() {
+		setImportCompleted(false);
+		
+	}
+
+	private void resetDynamicList() {
+		// TODO Auto-generated method stub
+		
+	}
+	public boolean isRequiredDataDone() {
+		log.debug("isRequiredDataDone: isCommonRequiredDone={}",isCommonRequiredDone());
+		if (!isCommonRequiredDone())
+			return false;
+		if (getSelectedPeriod() == null)
+			return false;
+		if(getSelectedPeriod().isTraite())
+			return false;
+
+		return true;
+	}
 
 }
