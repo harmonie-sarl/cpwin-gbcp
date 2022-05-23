@@ -4,6 +4,7 @@
     <artifactId>web-common</artifactId>
     <groupId>tn.harmonie</groupId>
     <version>4.3.0</version>
+ <!-- <relativePath/> -->
   </parent>
   <groupId>fr.symphonie</groupId>
   <artifactId>budget</artifactId>
@@ -26,10 +27,12 @@ Contient les interfaces utilisateur et l'accés à la base de données CPWin
 		   <maven.compiler.source>1.8</maven.compiler.source>
     	<maven.compiler.target>1.8</maven.compiler.target>
     	<lombok.version>1.18.16</lombok.version>
+    	<liquibase-version>4.10.0</liquibase-version>
 
   </properties>
   
   <dependencies>
+  
 <dependency>
     <groupId>com.sun.mail</groupId>
     <artifactId>javax.mail</artifactId>
@@ -149,6 +152,32 @@ Contient les interfaces utilisateur et l'accés à la base de données CPWin
 	<version>${lombok.version}</version>
 	<scope>${externe-scope}</scope>
 </dependency>
+<dependency>
+    <groupId>org.liquibase</groupId>
+     <artifactId>liquibase-core</artifactId>
+      <version>${liquibase-version}</version>
+</dependency>
+ <dependency>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <version>${liquibase-version}</version>
+    </dependency>
+
+  <!--
+<dependency>
+    <groupId>sybase</groupId>
+     <artifactId>jconn</artifactId>
+      <version>4_RELEASE</version>
+    <scope>provided</scope>
+</dependency>
+-->
+
+<dependency>
+    <groupId>net.sourceforge.jtds</groupId>
+    <artifactId>jtds</artifactId>
+    <version>1.3.1</version>
+</dependency>
+
   </dependencies>
   <developers>
     <developer>
@@ -210,6 +239,31 @@ Contient les interfaces utilisateur et l'accés à la base de données CPWin
                 <failOnMissingWebXml>false</failOnMissingWebXml>    
             </configuration>
         </plugin>
+         <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <version>${liquibase-version}</version>
+        <configuration>                  
+            <propertyFile>src/main/resources/liquibase.properties</propertyFile>
+        </configuration>
+         <dependencies>
+            <dependency>
+                <groupId>org.liquibase.ext</groupId>
+                <artifactId>liquibase-hibernate5</artifactId>
+                <version>${liquibase-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>1.7.3.RELEASE</version>
+            </dependency>
+        </dependencies>                
+    </plugin> 
 	</plugins>
 </build>
 <profiles>

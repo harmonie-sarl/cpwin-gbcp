@@ -509,8 +509,8 @@ private boolean checkDupicated()
     }
 	private void completeCompteImput(SpectacleDetails detail){
 		String[] compteImput=service.getCtaCompteImput(getExercice(),detail.getCompteProduit().getCode());
-		detail.setImputTtc(compteImput[0]);
-		detail.setImputTva(compteImput[1]);
+		detail.setCompteClient(compteImput[0]);
+		//detail.setImputTva(compteImput[1]);
 	}
 	public void setService(LemansService service) {
 		this.service = service;
@@ -642,7 +642,7 @@ private boolean checkDupicated()
 		periode.setExercice(getExercice());
 		Integer maxNumero=0;
 		for(String num:getListNumPeriode()){
-			//if(num.compareTo(maxNumero)>0)maxNumero=num;
+		//	if(num.compareTo(maxNumero)>0)maxNumero=num;
 		}
 		periode.setCode(""+(maxNumero.intValue()+1));
 		setSelectedPeriode(periode);	
