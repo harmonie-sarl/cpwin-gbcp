@@ -3,19 +3,32 @@ package fr.symphonie.tools.lemans.bt.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import fr.symphonie.util.model.Trace;
 import lombok.Data;
 @Data
+@Entity
+@Table(name = "bt_spectacle")
 public class Spectacle {
+	@Id
+	@Column(length = 20)
 	private String code;
+	@Column(length = 50)
 	private String libelle;
 	
 	/**
 	 * Détails par exercice
 	 */
+	@OneToMany(mappedBy = "spectacle")
 	private List<SpectacleDetails> details= new ArrayList<SpectacleDetails>();
+	@Embedded
 	private Trace trace;
 	@Transient
 	private SpectacleDetails detail;
@@ -53,14 +66,6 @@ public class Spectacle {
 			if(d.getExercice()==exercice) return d;
 		}
 		return null;
-	}
-
-	public SpectacleDetails getDetail() {
-		return detail;
-	}
-
-	public void setDetail(SpectacleDetails detail) {
-		this.detail = detail;
 	}
 	
 }

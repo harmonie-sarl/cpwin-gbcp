@@ -22,6 +22,11 @@
     <context:component-scan base-package="fr.symphonie.budget,fr.symphonie.util.dao,fr.symphonie.tools,fr.symphonie.common.core,fr.symphonie.cpwin.core"/>
 	
 	<context:load-time-weaver/>
+	<!-- liquibase bean -->
+	<bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase" lazy-init="false">
+    <property name="dataSource" ref="dataSource" />
+    <property name="changeLog" value="classpath:liquibase-changeLog.xml" />
+  </bean>
 	
 	<!-- JPA EntityManagerFactory -->
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"

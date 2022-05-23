@@ -2,6 +2,11 @@ package fr.symphonie.tools.lemans.bt.model;
 
 
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import fr.symphonie.cpwin.model.Adresse;
@@ -10,12 +15,20 @@ import fr.symphonie.util.model.OuiNonEnum;
 import fr.symphonie.util.model.Trace;
 import lombok.Data;
 @Data
+@Entity
+@Table(name = "bt_client")
 public class Client {
+@Id
 private String code;
+@Column
 private String nom;
+@Column(name = "code_cpwin",length = 10)
 private String codeCpwin;
+@Column(name = "no_adr")
 private Integer noAdresseCpwin;
+@Column(name = "est_regisseur")
 private boolean regisseur;
+@Embedded
 private Trace trace;
 @Transient
 private Tiers tiersCpwin;

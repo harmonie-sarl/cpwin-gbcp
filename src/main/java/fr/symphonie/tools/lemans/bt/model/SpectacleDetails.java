@@ -1,34 +1,82 @@
 package fr.symphonie.tools.lemans.bt.model;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import fr.symphonie.util.model.SimpleEntity;
 import fr.symphonie.util.model.Trace;
 import lombok.Data;
 @Data
+@Entity
+@Table(name = "bt_detailSpectacle")
+@IdClass(value = fr.symphonie.cpwin.model.pk.YearlyCodeKey.class)
 public class SpectacleDetails {
+	@Id
+	@Column(name = "num_exec")
 	private Integer exercice;
 	/**
 	 * Code Spectacle
 	 */
+	@Id
+	@Column(name = "code_spectacle")
 	private String code;
 	/**
 	 * Le taux TVA
 	 */
+	@Column(name = "taux_tva")
 	private float tva;
 	/**
 	 * Adresse budgétaire
 	 */
+	@Embedded
+	@AttributeOverrides({
+	@AttributeOverride(name="code",column = @Column(name="code_dest")),
+	//@AttributeOverride(name="designation",column = @Column(name="lib_dest"))
+	})
 	private SimpleEntity destination;
+	@Embedded
+	@AttributeOverrides({
+	@AttributeOverride(name="code",column = @Column(name="code_nature")),
+	//@AttributeOverride(name="designation",column = @Column(name="lib_nature"))
+	})
 	private SimpleEntity nature;
+	@Embedded
+	@AttributeOverrides({
+	@AttributeOverride(name="code",column = @Column(name="code_service")),
+	//@AttributeOverride(name="designation",column = @Column(name="lib_service"))
+	})
 	private SimpleEntity service;
+	@Embedded
+	@AttributeOverrides({
+	@AttributeOverride(name="code",column = @Column(name="code_prog")),
+	//@AttributeOverride(name="designation",column = @Column(name="lib_prog"))
+	})
 	private SimpleEntity programme;
 	/**
 	 * Compte de produit
 	 */
+	@Embedded
+	@AttributeOverrides({
+	@AttributeOverride(name="code",column = @Column(name="cpt_produit")),
+	//@AttributeOverride(name="designation",column = @Column(name="lib_cpt_prod"))
+	})
 	private SimpleEntity compteProduit;
-	private String imputTtc;
-	private String imputTva;
+	@Column(name = "cpt_tiers",length = 10)
+	private String compteClient;;
+	@Embedded
 	private Trace trace;
+	@ManyToOne
+	@JoinColumn(name = "code_spectacle",insertable = false,updatable = false)
 	private Spectacle spectacle;
+	@Column(name = "no_lbi")
 	private Integer noLbi;
 	
 	
