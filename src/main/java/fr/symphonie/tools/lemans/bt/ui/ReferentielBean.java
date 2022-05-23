@@ -29,6 +29,7 @@ import fr.symphonie.tools.das.ui.DasBean;
 import fr.symphonie.tools.gts.model.PeriodeEnum;
 import fr.symphonie.tools.lemans.bt.core.LemansService;
 import fr.symphonie.tools.lemans.bt.model.Client;
+import fr.symphonie.tools.lemans.bt.model.ModePaiement;
 import fr.symphonie.tools.lemans.bt.model.Spectacle;
 import fr.symphonie.tools.lemans.bt.model.SpectacleDetails;
 import fr.symphonie.util.HandlerJSFMessage;
@@ -76,6 +77,16 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	private List<String> listTvaSpectacle;
 	@Setter
 	private List<String> listNumPeriode;
+	
+	@Getter
+	@Setter
+	private String codePaiement;
+	@Getter
+	@Setter
+	private List<ModePaiement> listModesP;
+	@Getter
+	@Setter
+	private ModePaiement selectedModPaiment;
 
 	
 	public void resetDynamicList() {		
@@ -866,6 +877,15 @@ private boolean checkDupicated()
 			}
 		}
 		return listNumPeriode;
+	}
+public void gotoAddModPaiment(){
+		
+		setUpdateMode(false);
+		getDataListBean().reset();
+		ModePaiement mp=new ModePaiement();
+		mp.setTrace(Helper.createTrace());
+		setSelectedModPaiment(mp);
+		DialogHelper.openModPDialog();
 	}
 	
 }
