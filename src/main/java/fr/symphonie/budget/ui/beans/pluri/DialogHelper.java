@@ -167,4 +167,10 @@ public class DialogHelper {
 		Map<String, Object> options=initOptions(true, true, false, 400, 1000);
 		openDialog(sourceName, options);
 	}
+	public static void openModPDialog(){
+		String sourceName="mPaimentLemansView";
+		Map<String, Object> options=initOptions(true, true, false, 400, 1000);
+		openDialog(sourceName, options);
+	}
+	
 }
