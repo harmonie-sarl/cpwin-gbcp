@@ -599,7 +599,7 @@ private boolean checkDupicated()
 	public void gotoUpdateClient()
 	{
 		setUpdateMode(true);
-		DialogHelper.openClientDialog();
+		DialogHelper.openClientLemansDialog();
 	}
 	/**
 	 * chargement 
@@ -620,7 +620,7 @@ private boolean checkDupicated()
 		Client client=new Client();
 		client.setTrace(Helper.createTrace());
 		setSelectedClient(client);
-		DialogHelper.openClientDialog();
+		DialogHelper.openClientLemansDialog();
 	}
 	@Override
 	public Integer getExercice() {
@@ -729,7 +729,7 @@ private boolean checkDupicated()
 			  if(isWithChild()) return;
 			  if(isUsedByImport(entity)) return;
 			try {	
-				   service.remove(entity);
+				  // service.remove(entity);
 					afterDelete(entity);
 			} catch (Exception e) {
 				e.printStackTrace();

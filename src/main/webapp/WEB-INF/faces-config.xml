@@ -778,6 +778,27 @@
 		<to-view-id>/pages/tools/lemans/referentiel/spectacle/view/detailSpectacleView.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>lemans_import</from-outcome>
+		<to-view-id>/pages/tools/lemans/import/import.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>lemans_ref_client</from-outcome>
+		<to-view-id>/pages/tools/lemans/referentiel/client/client.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>clientLemansView</from-outcome>
+		<to-view-id>/pages/tools/lemans/referentiel/client/view/clientView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
 
 
 
