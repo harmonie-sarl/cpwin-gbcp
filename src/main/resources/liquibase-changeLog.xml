@@ -86,4 +86,12 @@
             <column name="dateMaj" type="datetime"/>
         </createTable>
     </changeSet>
+     <changeSet author="wedevzone" id="rename-columns-dateMaj">
+     <renameColumn tableName="import_periode" oldColumnName="dateMaj" newColumnName="date_maj"/>
+      <renameColumn tableName="import_vague" oldColumnName="dateMaj" newColumnName="date_maj"/>
+       <renameColumn tableName="bt_client" oldColumnName="dateMaj" newColumnName="date_maj"/>
+        <renameColumn tableName="bt_spectacle" oldColumnName="dateMaj" newColumnName="date_maj"/>
+         <renameColumn tableName="bt_detailSpectacle" oldColumnName="dateMaj" newColumnName="date_maj"/>
+      
+    </changeSet>
     </databaseChangeLog>

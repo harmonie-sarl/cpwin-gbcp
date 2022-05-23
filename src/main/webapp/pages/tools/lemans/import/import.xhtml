@@ -24,12 +24,6 @@
 	
 			<p:tabView id="ongletsImport" style="width:100%;" cache="false"	rendered="#{ btBean.dataVisible}">
 
-				<p:tab id="tabDailist" rendered="#{btBean.importedDaiDataVisible}"
-					title="#{msgs['budget.data.import.tab']} (#{btBean.daiList.stream().count()})">
-
-					<ui:include src="./onglets/importedDataList.xhtml">
-					</ui:include>
-				</p:tab>
 			
 				<p:tab id="tabErreurs" rendered="#{btBean.errorReportVisible}"
 					title="#{msgs['budget.data.error.tab']} (#{btBean.errorReport.stream().count()})">
