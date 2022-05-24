@@ -5,10 +5,10 @@
 	xmlns:p="http://primefaces.org/ui">
 
       <p:dataTable sortBy="#{erreur.code}"
-		rendered="#{daiBean.errorReport!=null}" var="erreur"
+		rendered="#{btBean.errorReport!=null}" var="erreur"
 		style="width:100%;text-align:center" rowIndexVar="erreurIndex"
 		emptyMessage="#{msgs['datatable.empty']}"
-		value="#{daiBean.errorReport}">
+		value="#{btBean.errorReport}">
 
 		<p:column headerText="#{msgs['error.numRow']}" style="width:30%">
 			<h:outputText value="#{erreur.ordre}" />

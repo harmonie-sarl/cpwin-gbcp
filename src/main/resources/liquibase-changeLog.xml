@@ -94,4 +94,21 @@
          <renameColumn tableName="bt_detailSpectacle" oldColumnName="dateMaj" newColumnName="date_maj"/>
       
     </changeSet>
+    <changeSet author="wedevzone" id="initialisation-periode-BT">
+    <insert tableName="import_periode" dbms="sybase"  >
+   			<column name="code_budg" value="A"/>
+            <column name="closed" valueBoolean="false" />
+            <column name="code" value="1"/>
+            <column name="etat" value="OUVERT"/>
+            <column name="num_exec" valueNumeric="2020"/>
+            <column name="module" value="LEMANS_BT"/>
+            <column name="object" value="PERIODE 1 POUR TEST"/>
+            <column name="aut_crea" value="CBS"/>
+            <column name="aut_maj" value="CBS"/>
+            <column name="date_crea" valueDate="getdate()"/>
+            <column name="date_maj" valueDate="getdate()"/>
+   
+    </insert>
+    
+    </changeSet>
     </databaseChangeLog>
