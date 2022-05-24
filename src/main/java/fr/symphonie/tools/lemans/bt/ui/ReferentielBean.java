@@ -32,6 +32,7 @@ import fr.symphonie.tools.lemans.bt.model.Client;
 import fr.symphonie.tools.lemans.bt.model.ModePaiement;
 import fr.symphonie.tools.lemans.bt.model.Spectacle;
 import fr.symphonie.tools.lemans.bt.model.SpectacleDetails;
+import fr.symphonie.tools.lemans.bt.model.TypeTiersEnum;
 import fr.symphonie.util.HandlerJSFMessage;
 import fr.symphonie.util.Helper;
 import fr.symphonie.util.model.SimpleEntity;
@@ -887,5 +888,8 @@ public void gotoAddModPaiment(){
 		setSelectedModPaiment(mp);
 		DialogHelper.openModPDialog();
 	}
+public TypeTiersEnum[] getTiersTypes() {
+    return TypeTiersEnum.values();
+}
 	
 }

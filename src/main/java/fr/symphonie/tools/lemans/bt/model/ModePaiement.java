@@ -15,5 +15,6 @@ public class ModePaiement {
 	private Boolean frais;
 	
 	private Trace trace;
-
+	
+	
 }

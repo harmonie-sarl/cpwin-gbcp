@@ -55,13 +55,16 @@
 			<p:inputText value="#{lemansRefBean.selectedModPaiment.designation}"  size="80" />
 			
 						<h:outputText value="#{lemansRefBean.selectedModPaiment.code}" rendered="#{lemansRefBean.updateMode}"></h:outputText>
-	<h:panelGroup>
+	<h:outputLabel style="font-weight:bold" styleClass="espace_entre_label_value" value="#{msgs['tiers']}" />
+		<p:selectOneMenu id="typetierslist" styleClass="ReadOnlyText"
+			value="#{lemansRefBean.selectedModPaiment.tiers}">
 
-			<h:outputLabel styleClass="espace_entre_label_value"
-				style="font-weight:bold" value="#{msgs['tiers']}" />
-<h:outputText 	  styleClass="required"></h:outputText>
-		</h:panelGroup>
-			<p:inputText value="#{lemansRefBean.selectedModPaiment.tiers}"  size="80" />
+			<f:selectItem itemValue="" itemLabel="-----" />
+			<f:selectItems value="#{lemansRefBean.tiersTypes}" var="tiers"
+				itemLabel="#{tiers.libelle}" itemValue="#{tiers}">
+			</f:selectItems>
+		
+		</p:selectOneMenu>
    
   
 			<h:panelGroup>
