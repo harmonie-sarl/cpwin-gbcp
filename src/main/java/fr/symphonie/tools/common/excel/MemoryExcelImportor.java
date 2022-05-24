@@ -7,7 +7,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 @Scope("prototype")
-@Qualifier("memory")
 public class MemoryExcelImportor implements IExcelImportor{
 	private byte[] contents;
 	@Getter

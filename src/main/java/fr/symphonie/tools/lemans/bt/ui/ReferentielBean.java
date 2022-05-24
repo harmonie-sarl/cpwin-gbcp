@@ -29,6 +29,7 @@ import fr.symphonie.tools.das.ui.DasBean;
 import fr.symphonie.tools.gts.model.PeriodeEnum;
 import fr.symphonie.tools.lemans.bt.core.LemansService;
 import fr.symphonie.tools.lemans.bt.model.Client;
+import fr.symphonie.tools.lemans.bt.model.ModePaiement;
 import fr.symphonie.tools.lemans.bt.model.Spectacle;
 import fr.symphonie.tools.lemans.bt.model.SpectacleDetails;
 import fr.symphonie.util.HandlerJSFMessage;
@@ -76,6 +77,16 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	private List<String> listTvaSpectacle;
 	@Setter
 	private List<String> listNumPeriode;
+	
+	@Getter
+	@Setter
+	private String codePaiement;
+	@Getter
+	@Setter
+	private List<ModePaiement> listModesP;
+	@Getter
+	@Setter
+	private ModePaiement selectedModPaiment;
 
 	
 	public void resetDynamicList() {		
@@ -235,11 +246,11 @@ public class ReferentielBean extends GenericBean implements Serializable{
 		T entity=getCurrentEntity();
 
 		logger.info("addOrUpdate()  entity={}",entity);
-//		if(!checkDupicated())return;
-//	    if(!checkRequiredElements())return;
-//	    if(!checkIntegrityElements())return;
+		if(!checkDupicated())return;
+	    if(!checkRequiredElements())return;
+	    if(!checkIntegrityElements())return;
 		try {	
-			//entity=service.save(entity);
+			entity=service.save(entity);
 	
 			afterSave(entity);
 			
@@ -509,8 +520,8 @@ private boolean checkDupicated()
     }
 	private void completeCompteImput(SpectacleDetails detail){
 		String[] compteImput=service.getCtaCompteImput(getExercice(),detail.getCompteProduit().getCode());
-		detail.setImputTtc(compteImput[0]);
-		detail.setImputTva(compteImput[1]);
+		detail.setCompteClient(compteImput[0]);
+		//detail.setImputTva(compteImput[1]);
 	}
 	public void setService(LemansService service) {
 		this.service = service;
@@ -599,7 +610,7 @@ private boolean checkDupicated()
 	public void gotoUpdateClient()
 	{
 		setUpdateMode(true);
-		DialogHelper.openClientDialog();
+		DialogHelper.openClientLemansDialog();
 	}
 	/**
 	 * chargement 
@@ -620,7 +631,7 @@ private boolean checkDupicated()
 		Client client=new Client();
 		client.setTrace(Helper.createTrace());
 		setSelectedClient(client);
-		DialogHelper.openClientDialog();
+		DialogHelper.openClientLemansDialog();
 	}
 	@Override
 	public Integer getExercice() {
@@ -642,7 +653,7 @@ private boolean checkDupicated()
 		periode.setExercice(getExercice());
 		Integer maxNumero=0;
 		for(String num:getListNumPeriode()){
-			//if(num.compareTo(maxNumero)>0)maxNumero=num;
+		//	if(num.compareTo(maxNumero)>0)maxNumero=num;
 		}
 		periode.setCode(""+(maxNumero.intValue()+1));
 		setSelectedPeriode(periode);	
@@ -866,6 +877,15 @@ private boolean checkDupicated()
 			}
 		}
 		return listNumPeriode;
+	}
+public void gotoAddModPaiment(){
+		
+		setUpdateMode(false);
+		getDataListBean().reset();
+		ModePaiement mp=new ModePaiement();
+		mp.setTrace(Helper.createTrace());
+		setSelectedModPaiment(mp);
+		DialogHelper.openModPDialog();
 	}
 	
 }

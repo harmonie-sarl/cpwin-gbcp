@@ -4,13 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import fr.symphonie.common.util.MsgEntry;
 import fr.symphonie.common.util.Util;
@@ -20,6 +19,7 @@ import fr.symphonie.tools.common.model.FileImportTrace;
 import fr.symphonie.tools.common.model.ImportPeriod;
 import fr.symphonie.tools.lemans.bt.dto.VenteDto;
 import fr.symphonie.tools.lemans.bt.dto.VenteItemDto;
+import fr.symphonie.tools.meta4dai.model.Period;
 import fr.symphonie.util.HandlerJSFMessage;
 import fr.symphonie.util.Helper;
 import fr.symphonie.util.model.SimpleEntity;
@@ -32,8 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BilletterieBean extends CommonToolsBean {
 
-	@Autowired
-	@Qualifier("memory")
+	@ManagedProperty (value="#{memoryExcelImportor}")
+	@Setter
 	private IExcelImportor importService;
 	@Getter
 	private List<VenteDto> ventes = null;
@@ -278,6 +278,33 @@ private ImportPeriod getPeriod(int numero) {
 			return false;
 		if(getSelectedPeriod().isTraite())
 			return false;
+
+		return true;
+	}
+	public boolean isImportAutorized() {
+
+		if (!isRequiredDataDone())
+			return false;
+		if (getImportFileUploadEvent() == null)
+			return false;
+		if(!isPeriodEditable()) return false;
+
+		return true;
+	}
+	public boolean isPeriodEditable() {
+		ImportPeriod p=getSelectedPeriod();
+		if(p==null) return false;
+		if(p.isTraite())return false;
+		
+		return true;
+	}
+	public boolean isDataVisible()
+	   {
+		if(isErrorReportVisible()) return true;
+		if(isImportedDataVisible())return true;
+		return false; 
+	   }
+	public boolean isImportedDataVisible() {
 
 		return true;
 	}

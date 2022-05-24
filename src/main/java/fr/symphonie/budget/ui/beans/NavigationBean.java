@@ -123,6 +123,8 @@ public class NavigationBean implements Serializable {
     private static final String  LEMANS_PERIODE_OUTCOME="lemans_ref_periode";
     private static final String  LEMANS_CLIENT_OUTCOME="lemans_ref_client";
     private static final String  LEMANS_IMPORT_OUTCOME="lemans_import";
+    private static final String  LEMANS_MPAIEMENT_OUTCOME="lemans_ref_modPaiement";
+    
     
     
     
@@ -339,6 +341,7 @@ public class NavigationBean implements Serializable {
 		LEMANS_PERIODE(LEMANS_PERIODE_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.MENU_PERIODE),
 		LEMANS_CLIENT(LEMANS_CLIENT_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.MENU_CLIENT),
 		LEMANS_IMPORT(LEMANS_IMPORT_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,MsgEntry.IMPORT),
+		LEMANS_MODE_PAIELMENT(LEMANS_MPAIEMENT_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.REMB_MODE_PAIEMENT),
 		;
 		
 		
@@ -1296,6 +1299,16 @@ private void deploiement() {
 		 return Action.LEMANS_IMPORT.getOutcome();
 		 
 	 }
+	 
+	 public String goToLemansModePaiment()
+	 {
+		 getLemanRefBean().reset();	 
+		 prepare(Action.LEMANS_MODE_PAIELMENT);
+		 return Action.LEMANS_MODE_PAIELMENT.getOutcome();
+		 
+	 }
+	 
+	 
 	 
 	
 }
