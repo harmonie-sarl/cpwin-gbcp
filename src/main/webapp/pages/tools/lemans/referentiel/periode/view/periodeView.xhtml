@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>#{msgs['modifier.periode']}</title>
+	<style type="text/css">
+</style>
+</h:head>
+
+<h:body>
+	<h:form id="periodeForm">
+		<p:messages id="periodeMsg" showDetail="true" autoUpdate="true"
+			styleClass="error" globalOnly="true" />
+
+
+		<div align="center" style="width: 100%;">
+			<p:commandButton value="#{msgs['btn.valider']}"
+				actionListener="#{lemansRefBean.addOrUpdate}">
+			</p:commandButton>
+
+			<p:commandButton value="#{msgs['btn.fermer']}"
+				actionListener="#{lemansRefBean.closeCurrentDialog}" immediate="true">
+
+
+			</p:commandButton>
+		</div>
+		<p:panel style="width:100%;">
+
+			<h:panelGrid columns="4"
+				style="width:100%; vertical-align:top;align: left;"
+				columnClasses="colDataTable">
+
+				<h:outputLabel styleClass="espace_entre_label_value"
+					style="font-weight:bold" value="#{msgs['cpwin.exercice']}" />
+
+
+				<h:outputText value="#{lemansRefBean.selectedPeriode.exercice}" />
+
+				<h:outputLabel styleClass="espace_entre_label_value"
+					style="font-weight:bold" value="#{msgs['numero']}" />
+
+
+				<h:outputText value="#{lemansRefBean.selectedPeriode.numero}" />
+				<h:outputLabel styleClass="espace_entre_label_value"
+					style="font-weight:bold" value="#{msgs['cpwin.etat']}" />
+
+
+				<h:outputText value="#{lemansRefBean.selectedPeriode.etat}" />
+				<h:outputLabel styleClass="espace_entre_label_value"
+					style="font-weight:bold" value="#{msgs['ferme']}" />
+
+
+
+				<p:selectBooleanCheckbox value="#{lemansRefBean.selectedPeriode.closed}"
+					disabled="#{!lemansRefBean.selectedPeriode.editable}">
+
+				</p:selectBooleanCheckbox>
+			</h:panelGrid>
+		</p:panel>
+		<br />
+
+
+	</h:form>
+</h:body>
+
+</html>
