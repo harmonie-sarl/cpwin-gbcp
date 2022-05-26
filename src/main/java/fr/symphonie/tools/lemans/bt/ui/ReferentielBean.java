@@ -18,6 +18,7 @@ import fr.symphonie.budget.ui.beans.GenericBean;
 import fr.symphonie.budget.ui.beans.GestionTiersBean;
 import fr.symphonie.budget.ui.beans.NavigationBean.Action;
 import fr.symphonie.budget.ui.beans.pluri.DialogHelper;
+import fr.symphonie.common.core.ICommonService;
 import fr.symphonie.common.util.BudgetHelper;
 import fr.symphonie.common.util.Constant;
 import fr.symphonie.common.util.MsgEntry;
@@ -53,6 +54,8 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	
 	@ManagedProperty (value="#{lemanService}")
 	private LemansService service;
+	//@ManagedProperty (value="#{commonService}")
+	//private  ICommonService iCommonService;
 	
 	private String codeSpectacle;
 	private String tvaSpectacle;
@@ -94,6 +97,9 @@ public class ReferentielBean extends GenericBean implements Serializable{
 		this.listPeriodes	=	null;
 		setListClients(null);
 	}
+	protected ICommonService getCommonService() {
+		return BudgetHelper.getCommonService();
+	}
 
     /**
      * toutes les opération de recherche
@@ -113,7 +119,11 @@ public class ReferentielBean extends GenericBean implements Serializable{
 			resultSize=getListSpectacles().size();
 			break;
 		case LEMANS_PERIODE:			
-		//	setListPeriodes(com.getPeriodes(getExercice(),getNumPeriode(),null));
+			//setListPeriodes(service.getPeriodes(getExercice(),getNumPeriode(),null));
+			
+			setListPeriodes(getCommonService().getPeriodList( getExercice(),getCodeBudget(),getModuleName()));
+			
+			
 			break;
 		case LEMANS_CLIENT:
 			searchCondition=BudgetHelper.prepareSearchKey(getCodeClient());
@@ -329,6 +339,8 @@ private boolean checkDupicated()
             }             
              break;
 		case LEMANS_PERIODE:
+			
+			
 			 break;		
 		case LEMANS_CLIENT:
 			   if(!getSelectedClient().checkRequired()){
@@ -565,12 +577,12 @@ private boolean checkDupicated()
 		this.numPeriode = numPeriode;
 		resetDynamicList();
 	}
-//	public List<Period> getListPeriodes() {
-//		return listPeriodes;
-//	}
-//	public void setListPeriodes(List<Period> listPeriodes) {
-//		this.listPeriodes = listPeriodes;
-//	}
+	//public List<ImportPeriod> getListPeriodes() {
+		//return listPeriodes;
+	//}
+	//public void setListPeriodes(List<ImportPeriod> listPeriodes) {
+		//this.listPeriodes = listPeriodes;
+	//}
 	/**
 	 * prération de la mise à jour 
 	 * d'une période
@@ -581,12 +593,13 @@ private boolean checkDupicated()
 		DialogHelper.openPeriodeLemansDialog();
 	}
 	
-//	public Period getSelectedPeriode() {
-//		return selectedPeriode;
-//	}
-//	public void setSelectedPeriode(Period selectedPeriode) {
-//		this.selectedPeriode = selectedPeriode;
-//	}
+	//public ImportPeriod getSelectedPeriode() {
+		//return selectedPeriode;
+	//}
+	//public void setSelectedPeriode(ImportPeriod selectedPeriode) {
+		//this.selectedPeriode = selectedPeriode;
+	//}
+	
 	public String getCodeClient() {
 		return codeClient;
 	}
@@ -887,5 +900,8 @@ public void gotoAddModPaiment(){
 		setSelectedModPaiment(mp);
 		DialogHelper.openModPDialog();
 	}
+private String getModuleName() {
+	return "LEMANS_BT";
+}
 	
 }
