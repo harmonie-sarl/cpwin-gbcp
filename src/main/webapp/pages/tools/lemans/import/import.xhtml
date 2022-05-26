@@ -23,10 +23,16 @@
 	<p:panel id="importPanel" style="width:100%;">
 	
 			<p:tabView id="ongletsImport" style="width:100%;" cache="false"	rendered="#{ btBean.dataVisible}">
-				<p:tab id="tabBTlist" rendered="#{btBean.importedDataVisible}"
+			
+				<p:tab id="tabVentelist" rendered="#{btBean.importedDataVisible}"
 					title="#{msgs['budget.data.import.tab']} (#{btBean.ventes.stream().count()})">
 
-					<ui:include src="./onglets/importedDataList.xhtml">
+					<ui:include src="./onglets/venteList.xhtml">
+					</ui:include>
+				</p:tab><p:tab id="tabDetailslist" rendered="#{btBean.importedDataVisible}"
+					title="#{msgs['budget.data.import.tab']} (#{btBean.venteDetails.stream().count()})">
+
+					<ui:include src="./onglets/venteDetailsList.xhtml">
 					</ui:include>
 				</p:tab>
 			
