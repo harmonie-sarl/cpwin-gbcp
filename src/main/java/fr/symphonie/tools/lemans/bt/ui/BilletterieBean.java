@@ -17,11 +17,12 @@ import fr.symphonie.tools.common.CommonToolsBean;
 import fr.symphonie.tools.common.excel.IExcelImportor;
 import fr.symphonie.tools.common.model.FileImportTrace;
 import fr.symphonie.tools.common.model.ImportPeriod;
-import fr.symphonie.tools.lemans.bt.dto.VenteDto;
-import fr.symphonie.tools.lemans.bt.dto.VenteItemDto;
+import fr.symphonie.tools.lemans.bt.model.Vente;
+import fr.symphonie.tools.lemans.bt.model.VenteItem;
 import fr.symphonie.util.HandlerJSFMessage;
 import fr.symphonie.util.Helper;
 import fr.symphonie.util.model.SimpleEntity;
+import fr.symphonie.util.model.Trace;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -35,9 +36,9 @@ public class BilletterieBean extends CommonToolsBean {
 	@Setter
 	private IExcelImportor importService;
 	@Getter
-	private List<VenteDto> ventes = null;
+	private List<Vente> ventes = null;
 	@Getter
-	private List<VenteItemDto> venteDetails = null;
+	private List<VenteItem> venteDetails = null;
 	/**
 	 * Input elements
 	 */
@@ -56,8 +57,12 @@ public class BilletterieBean extends CommonToolsBean {
 	@Getter
 	@Setter
 	private boolean importCompleted;
+	@Getter
+	@Setter
+	private boolean saveCompleted;
 
 	public void fileUploadHandler(FileUploadEvent event) {
+		reset();
 		setImportFileUploadEvent(event);
 		importService.fileUploadHandler(event);
 		try {
@@ -77,23 +82,62 @@ public class BilletterieBean extends CommonToolsBean {
 	public void executeImport() {
 		int VENTE_SHEET_NO = 0;
 		int PAIEMENT_SHEET_NO = 1;
-		this.ventes = importService.importFile(VENTE_SHEET_NO, VenteDto.class);
-		if (!isErrorReportVisible()) {
-			this.venteDetails = importService.importFile(PAIEMENT_SHEET_NO, VenteItemDto.class);
+		this.ventes = importService.importFile(VENTE_SHEET_NO, Vente.class);
+		if (!hasErrors()) {
+			this.venteDetails = importService.importFile(PAIEMENT_SHEET_NO, VenteItem.class);
+		}
+		if (!hasErrors()) {
+			processData();
+			fillCompletData();
+		}
+		setImportCompleted(true);
+		
+
+	}
+
+	private void fillCompletData() {
+		Trace trace = Helper.createTrace();
+		if (ventes != null) {
+			ventes.stream().forEach(v -> {
+				v.setExercice(getExerciceInt());
+				v.setBudget(getCodeBudget());
+				v.setPeriode(getCodePeriod());
+				v.setTrace(trace);
+			});
+		}
+		if (venteDetails != null) {
+			venteDetails.stream().forEach(v -> {
+				v.setExercice(getExerciceInt());
+				v.setBudget(getCodeBudget());
+				v.setPeriode(getCodePeriod());
+				v.setTrace(trace);
+			});
 		}
 
+	}
+
+	private void processData() {
+		checkData();
+		
+	}
+
+	private void checkData() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public void executeSaveData() {
 
 		try {
-			saveImportTrace();
+			FileImportTrace vague = saveImportTrace();
+			getCommonService().saveList(ventes);
+			getCommonService().saveList(venteDetails);
 
-			// String message =
-			// HandlerJSFMessage.formatMessage(HandlerJSFMessage.getMessage(MsgEntry.REMB_VALIDATION_MSG),new
-			// Object[] { getNextNoVague()});
-			// HandlerJSFMessage.addInfoMessage(message);
-			HandlerJSFMessage.addInfo(MsgEntry.SUCCES);
+			 String message = HandlerJSFMessage.formatMessage(HandlerJSFMessage.getMessage(MsgEntry.REMB_VALIDATION_MSG),new
+			 Object[] { vague.getId()});
+			 HandlerJSFMessage.addInfoMessage(message);
+			 setSaveCompleted(true);
+//			HandlerJSFMessage.addInfo(MsgEntry.SUCCES);
 		} catch (Exception e) {
 			e.printStackTrace();
 			HandlerJSFMessage.addErrorMessage(Util.getErrorMessageFromException(MsgEntry.FAILED, e));
@@ -102,9 +146,11 @@ public class BilletterieBean extends CommonToolsBean {
 	}
 
 	public boolean isErrorReportVisible() {
-		if (CollectionUtils.isEmpty(getErrorReport()))
-			return false;
+		if (!hasErrors())	return false;
 		return true;
+	}
+	public boolean hasErrors(){
+		return !getErrorReport().isEmpty();
 	}
 
 	public List<SimpleEntity> getErrorReport() {
@@ -147,7 +193,7 @@ public class BilletterieBean extends CommonToolsBean {
 	private String getModuleName() {
 		return "LEMANS_BT";
 	}
-	private void saveImportTrace() {
+	private FileImportTrace saveImportTrace() {
 		log.debug("saveImportTrace ...");
 		FileImportTrace vague=FileImportTrace.builder()
 				.exercice(getExerciceInt())
@@ -157,7 +203,8 @@ public class BilletterieBean extends CommonToolsBean {
 				.trace(Helper.createTrace())
 				.build();
 		getCommonService().saveImportTrace(vague);	
-		log.debug("saveImportTrace : end");
+		log.debug("saveImportTrace: vagueId={} : end",vague.getId());
+		return vague;
 	}
 	public List<ImportPeriod> getPeriodList() {
 		if(CollectionUtils.isEmpty(periodList))load(TaskEnum.PERIOD);
@@ -236,6 +283,11 @@ public class BilletterieBean extends CommonToolsBean {
 		
 		
 	}
+	public boolean isSaveAutorized() {
+		if (isSaveCompleted())
+			return false;
+		return true;
+	}
 public ImportPeriod getSelectedPeriod() {		
 	ImportPeriod p= getPeriod(getCodePeriod());
 		log.debug("getSelectedPeriod: code={}, period={}",getCodePeriod(),p);
@@ -264,6 +316,7 @@ private ImportPeriod getPeriod(int numero) {
 
 	private void resetStatus() {
 		setImportCompleted(false);
+		setSaveCompleted(false);
 		
 	}
 

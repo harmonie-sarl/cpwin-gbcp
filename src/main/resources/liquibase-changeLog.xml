@@ -108,7 +108,43 @@
             <column name="date_crea" valueDate="getdate()"/>
             <column name="date_maj" valueDate="getdate()"/>
    
-    </insert>
-    
+    </insert>    
+    </changeSet>
+     <changeSet author="wedevzone" id="1653571295794-2">
+        <createTable tableName="bt_vente">
+            <column name="num_encaiss" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="bt_ventePK"/>
+            </column>           
+            <column name="num_exec" type="INT"/>
+            <column name="code_budg" type="VARCHAR(1)"/>
+            <column name="periode" type="VARCHAR(3)"/>
+            <column name="date_encaiss" type="datetime"/>
+            <column name="mode_paie" type="VARCHAR(10)"/>
+            <column name="montant" type="numeric(19, 2)"/>
+            <column name="nomPayeur" type="VARCHAR(50)"/>            
+            <column name="aut_crea" type="VARCHAR(10)"/>
+            <column name="aut_maj" type="VARCHAR(10)"/>
+            <column name="date_crea" type="datetime"/>
+            <column name="date_Maj" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="wedevzone" id="1653571295794-3">
+        <createTable tableName="tb_detailsVente">
+            <column autoIncrement="true" name="id" type="numeric">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tb_detailsVentePK"/>
+            </column>           
+            <column name="num_exec" type="INT"/>
+            <column name="code_budg" type="VARCHAR(1)"/>
+            <column name="periode" type="VARCHAR(3)"/>
+            <column name="dateRep" type="datetime"/>
+            <column name="montant" type="numeric(19, 2)"/>
+            <column name="num_encaiss" type="INT"/>
+            <column name="code_spectacle" type="VARCHAR(10)"/>
+            <column name="objet" type="VARCHAR(50)"/>            
+            <column name="aut_crea" type="VARCHAR(10)"/>
+            <column name="aut_maj" type="VARCHAR(10)"/>
+            <column name="date_crea" type="datetime"/>
+            <column name="date_Maj" type="datetime"/>
+        </createTable>
     </changeSet>
     </databaseChangeLog>
