@@ -1,0 +1,22 @@
+Generate a ChangeLog From an Existing Database
+We can use the plugin to generate a changelog from an existing database:
+
+mvn liquibase:generateChangeLog
+Here are the liquibase properties:
+
+changeLogFile=classpath:liquibase-changeLog.xml
+#url=jdbc:sybase:Tds:SRV-DEV-01:5000/Moulins
+url=jdbc:jtds:sybase://SRV-DEV-01:5000/Moulins
+username=sa
+password=sybase
+#driver=com.sybase.jdbc4.jdbc.SybDriver
+driver=net.sourceforge.jtds.jdbc.Driver
+referenceUrl=hibernate:spring:fr.symphonie.tools.common.model?dialect=org.hibernate.dialect.SybaseDialect
+diffChangeLogFile=src/main/resources/liquibase-diff-changeLog.xml
+outputChangeLogFile=src/main/resources/liquibase-outputChangeLog.xml
+
+
+mvn liquibase:diff
+
+
+
