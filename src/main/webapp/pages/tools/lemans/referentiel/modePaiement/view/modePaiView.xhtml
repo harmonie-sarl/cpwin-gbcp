@@ -58,10 +58,13 @@
 	<h:panelGroup>
 
 			<h:outputLabel styleClass="espace_entre_label_value"
-				style="font-weight:bold" value="#{msgs['tiers']}" />
-<h:outputText 	  styleClass="required"></h:outputText>
+				style="font-weight:bold" value="#{msgs['client.regisseur']}" />
 		</h:panelGroup>
-			<p:inputText value="#{lemansRefBean.selectedModPaiment.tiers}"  size="80" />
+			
+			
+				<p:selectBooleanCheckbox value="#{lemansRefBean.selectedModPaiment.regisseur}">
+
+				</p:selectBooleanCheckbox>
    
   
 			<h:panelGroup>

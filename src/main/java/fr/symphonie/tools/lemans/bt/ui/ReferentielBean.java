@@ -359,6 +359,8 @@ private boolean checkDupicated()
 			return true;
 		case LEMANS_CLIENT:
 			return true;	
+		case LEMANS_MODE_PAIELMENT:
+			return true;	
 		default:
 			return true;
 		}
@@ -376,6 +378,9 @@ private boolean checkDupicated()
 			break;
 		case LEMANS_CLIENT:
 			entity=(T) getSelectedClient();
+			break;
+		case LEMANS_MODE_PAIELMENT:
+			entity=(T) getSelectedModPaiment();
 			break;
 		default:
 			break;
@@ -395,6 +400,9 @@ private boolean checkDupicated()
 		case LEMANS_CLIENT:
 			list=(List<T>) getListClients();
 			break;
+		case LEMANS_MODE_PAIELMENT:
+			list=(List<T>) getListModesP();
+			break;
 		default:
 			break;
 		}
@@ -413,6 +421,9 @@ private boolean checkDupicated()
 		case LEMANS_CLIENT:
 			setListClients((List<Client>) list);
 			break;
+		case LEMANS_MODE_PAIELMENT:
+			setListModesP((List<ModePaiement>) list);
+			break;
 		default:
 			break;
 		}
@@ -427,6 +438,9 @@ private boolean checkDupicated()
 			break;
 		case LEMANS_CLIENT:
 			setSelectedClient((Client) o);
+			break;
+		case LEMANS_MODE_PAIELMENT:
+			setSelectedModPaiment((ModePaiement) o);
 			break;
 		default:
 			break;
