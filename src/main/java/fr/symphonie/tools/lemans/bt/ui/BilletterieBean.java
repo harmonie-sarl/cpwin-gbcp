@@ -19,7 +19,6 @@ import fr.symphonie.tools.common.model.FileImportTrace;
 import fr.symphonie.tools.common.model.ImportPeriod;
 import fr.symphonie.tools.lemans.bt.dto.VenteDto;
 import fr.symphonie.tools.lemans.bt.dto.VenteItemDto;
-import fr.symphonie.tools.meta4dai.model.Period;
 import fr.symphonie.util.HandlerJSFMessage;
 import fr.symphonie.util.Helper;
 import fr.symphonie.util.model.SimpleEntity;
@@ -46,7 +45,7 @@ public class BilletterieBean extends CommonToolsBean {
 	@Setter
 	private String codePeriod;
 	private List<ImportPeriod> periodList;
-	private List<String> periodExerciseList;
+	//private List<String> periodExerciseList;
 	
 	/**
 	 * For controle
@@ -59,6 +58,7 @@ public class BilletterieBean extends CommonToolsBean {
 	private boolean importCompleted;
 
 	public void fileUploadHandler(FileUploadEvent event) {
+		setImportFileUploadEvent(event);
 		importService.fileUploadHandler(event);
 		try {
 			List<FileImportTrace> vagueList = getCommonService().getImportHistoryList(getExerciceInt(),getModuleName(), importService.getCrc32Value());
@@ -135,6 +135,7 @@ public class BilletterieBean extends CommonToolsBean {
 
 	@Override
 	public void reset() {
+		resetDynamicList();
 		importService.reset();
 
 	}
@@ -267,7 +268,8 @@ private ImportPeriod getPeriod(int numero) {
 	}
 
 	private void resetDynamicList() {
-		// TODO Auto-generated method stub
+		this.ventes			=	null;
+		this.venteDetails	=	null;
 		
 	}
 	public boolean isRequiredDataDone() {
@@ -306,7 +308,10 @@ private ImportPeriod getPeriod(int numero) {
 	   }
 	public boolean isImportedDataVisible() {
 
-		return true;
+		return !CollectionUtils.isEmpty(getVentes());
+	}
+	public String getSourceFileName() {
+		return (getImportFileUploadEvent()!=null ?getImportFileUploadEvent().getFile().getFileName():"");
 	}
 
 }
