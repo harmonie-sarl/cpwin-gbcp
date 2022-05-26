@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<style type="text/css">
+	
+	.noneStyle {
+	color: #000000;
+	background-color: none;
+      }
+
+.redStyle {
+	color: #FFFFFF;
+	background-color: #FF0000;
+    }
+   </style>
+		
+	<p:dataTable id="imported_detail_dtt" scrollable="true"
+		scrollHeight="300" scrollRows="20" 
+		rendered="#{btBean.venteDetails!=null}" var="detail"
+		style="width:100%;text-align:center" rowIndexVar="creditIndex"
+		emptyMessage="#{msgs['datatable.empty']}"
+		value="#{btBean.venteDetails}">
+		
+		<p:column headerText="dateRep"  style="text-align:center;width:5%" >
+			<h:outputText value="#{detail.dateRep}" >
+			<f:convertDateTime pattern="dd/MM/yyyy" type="date" timeZone="Europe/Paris" />
+			</h:outputText>
+		</p:column>
+		<p:column headerText="numEncaiss" style="text-align: center;width:6%" >
+			<h:outputText value="#{detail.numEncaiss}" />
+		</p:column>
+		<p:column headerText="objet" style="text-align:center;width:20%">
+			<h:outputText value="#{detail.objet}" />
+		</p:column>
+		<p:column headerText="#{msgs['montant']}" style="text-align:center;width:10%">
+			<h:outputText value="#{detail.montant}" >
+			<f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+			  <f:facet name="footer" >
+			<h:outputText style="vertical-align:top;align: center; font-size: 12px;"
+				value="#{btBean.venteDetails.stream().map(detail->detail.montant).sum()}">
+				 <f:convertNumber type="currency" currencySymbol="" />
+			</h:outputText>
+		</f:facet>
+		</p:column>
+		<p:column headerText="numSpectacle" style="text-align:center;width:10%">
+			<h:outputText value="#{detail.numSpectacle}" />
+		</p:column>
+	</p:dataTable>
+	
+	</ui:composition>
