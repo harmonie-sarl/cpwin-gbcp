@@ -32,7 +32,6 @@ import fr.symphonie.tools.lemans.bt.model.Client;
 import fr.symphonie.tools.lemans.bt.model.ModePaiement;
 import fr.symphonie.tools.lemans.bt.model.Spectacle;
 import fr.symphonie.tools.lemans.bt.model.SpectacleDetails;
-import fr.symphonie.tools.lemans.bt.model.TypeTiersEnum;
 import fr.symphonie.util.HandlerJSFMessage;
 import fr.symphonie.util.Helper;
 import fr.symphonie.util.model.SimpleEntity;
@@ -360,6 +359,8 @@ private boolean checkDupicated()
 			return true;
 		case LEMANS_CLIENT:
 			return true;	
+		case LEMANS_MODE_PAIELMENT:
+			return true;	
 		default:
 			return true;
 		}
@@ -377,6 +378,9 @@ private boolean checkDupicated()
 			break;
 		case LEMANS_CLIENT:
 			entity=(T) getSelectedClient();
+			break;
+		case LEMANS_MODE_PAIELMENT:
+			entity=(T) getSelectedModPaiment();
 			break;
 		default:
 			break;
@@ -396,6 +400,9 @@ private boolean checkDupicated()
 		case LEMANS_CLIENT:
 			list=(List<T>) getListClients();
 			break;
+		case LEMANS_MODE_PAIELMENT:
+			list=(List<T>) getListModesP();
+			break;
 		default:
 			break;
 		}
@@ -414,6 +421,9 @@ private boolean checkDupicated()
 		case LEMANS_CLIENT:
 			setListClients((List<Client>) list);
 			break;
+		case LEMANS_MODE_PAIELMENT:
+			setListModesP((List<ModePaiement>) list);
+			break;
 		default:
 			break;
 		}
@@ -428,6 +438,9 @@ private boolean checkDupicated()
 			break;
 		case LEMANS_CLIENT:
 			setSelectedClient((Client) o);
+			break;
+		case LEMANS_MODE_PAIELMENT:
+			setSelectedModPaiment((ModePaiement) o);
 			break;
 		default:
 			break;
@@ -888,8 +901,5 @@ public void gotoAddModPaiment(){
 		setSelectedModPaiment(mp);
 		DialogHelper.openModPDialog();
 	}
-public TypeTiersEnum[] getTiersTypes() {
-    return TypeTiersEnum.values();
-}
 	
 }
