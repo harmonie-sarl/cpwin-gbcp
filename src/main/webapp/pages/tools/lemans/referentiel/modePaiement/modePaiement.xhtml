@@ -72,7 +72,7 @@
 
 						<p:commandButton title="#{msgs['btn.modifier']}" 
 						icon="fa fa-fw fa-edit"
-							actionListener="#{lemansRefBean.gotoUpdateClient}">
+							actionListener="#{lemansRefBean.gotoUpdateModPaiment}">
 							<f:setPropertyActionListener target="#{lemansRefBean.selectedModPaiment}"
 								value="#{mode}"  />
 
@@ -83,9 +83,9 @@
 					</p:column>
 					<p:column style="width:20%;" headerText="#{msgs['btn.supprimer']}" >					
 					<p:commandButton title=" " icon="fa fa-fw fa-remove" 
-					onclick="PF('confSupprClient').show();" style="height:20px">
+					onclick="PF('confSupprModPaiement').show();" style="height:20px">
 					<f:setPropertyActionListener target="#{lemansRefBean.selectedModPaiment}"
-								value="#{client}" />
+								value="#{mode}" />
 				<p:ajax event="dialogReturn"  update=":detailsForm:modPaimentPanel" />
 				</p:commandButton>
 				</p:column>	
@@ -103,16 +103,16 @@
 
 				</h:panelGroup></div>
 		</p:panel>
-		<p:confirmDialog message="#{msgs['confirm.suppression.client']}"
-			header="" widgetVar="confSupprClient" modal="true">
+		<p:confirmDialog message="#{msgs['confirm.suppression.modePai']}"
+			header="" widgetVar="confSupprModPaiement" modal="true">
 			<h:panelGrid width="100%" style="text-align: center;">
 				<h:panelGroup>
 					<p:commandButton value="#{msgs['btn.valider']}"
-						oncomplete="PF('confSupprClient').hide();"
+						oncomplete="PF('confSupprModPaiement').hide();"
 						actionListener="#{lemansRefBean.delete}"
 						update="detailsForm:modPaimentPanel" />
 					<p:commandButton value="#{msgs['btn.annuler']}"
-						onclick="PF('confSupprClient').hide();" type="button" />
+						onclick="PF('confSupprModPaiement').hide();" type="button" />
 				</h:panelGroup>
 			</h:panelGrid>
 		</p:confirmDialog>

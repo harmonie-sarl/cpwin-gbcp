@@ -51,7 +51,8 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	private static final long serialVersionUID = -2630437756702391656L;
 	private static final Logger logger = LoggerFactory.getLogger(DasBean.class);
 	
-	@ManagedProperty (value="#{lemanService}")
+	@ManagedProperty (value="#{lemansService}")
+	@Setter
 	private LemansService service;
 	
 	private String codeSpectacle;
@@ -120,6 +121,12 @@ public class ReferentielBean extends GenericBean implements Serializable{
 			setListClients(service.getClientLemansList(searchCondition));
 			resultSize=getListClients().size();
 			loadAdressClient();
+			break;
+		case LEMANS_MODE_PAIELMENT:
+			searchCondition=BudgetHelper.prepareSearchKey(getCodePaiement());
+			setListModesP(service.getModPaiementList(searchCondition));
+			resultSize=getListModesP().size();
+			//loadAdressClient();
 			break;
 		default:
 			break;
@@ -297,6 +304,7 @@ private boolean checkDupicated()
 	case LEMANS_PERIODE:
 		 break;	
 	case LEMANS_CLIENT:
+		logger.info("checkDupicated-service: "+service);
 		Client loadedC=service.getClient(getSelectedClient().getCode().trim());
 		logger.info("loadedC: "+loadedC);
         if(loadedC!=null){
@@ -537,9 +545,9 @@ private boolean checkDupicated()
 		detail.setCompteClient(compteImput[0]);
 		//detail.setImputTva(compteImput[1]);
 	}
-	public void setService(LemansService service) {
-		this.service = service;
-	}
+//	public void setService(LemansService service) {
+//		this.service = service;
+//	}
 
 	public String getTvaSpectacle() {
 		float tva=getSelectedDetailSpec().getTva();
@@ -666,9 +674,9 @@ private boolean checkDupicated()
 		periode.setTrace(Helper.createTrace());
 		periode.setExercice(getExercice());
 		Integer maxNumero=0;
-		for(String num:getListNumPeriode()){
+		//for(String num:getListNumPeriode()){
 		//	if(num.compareTo(maxNumero)>0)maxNumero=num;
-		}
+		//}
 		periode.setCode(""+(maxNumero.intValue()+1));
 		setSelectedPeriode(periode);	
 		DialogHelper.openPeriodeLemansDialog();
@@ -754,7 +762,7 @@ private boolean checkDupicated()
 			  if(isWithChild()) return;
 			  if(isUsedByImport(entity)) return;
 			try {	
-				  // service.remove(entity);
+				   service.remove(entity);
 					afterDelete(entity);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -901,5 +909,10 @@ public void gotoAddModPaiment(){
 		setSelectedModPaiment(mp);
 		DialogHelper.openModPDialog();
 	}
+public void gotoUpdateModPaiment()
+{
+	setUpdateMode(true);
+	DialogHelper.openModPDialog();
+}
 	
 }
