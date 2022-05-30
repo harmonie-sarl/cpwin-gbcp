@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import fr.symphonie.common.util.Constant;
 import fr.symphonie.tools.gts.model.LiqRecette;
 import fr.symphonie.tools.lemans.bt.model.Client;
+import fr.symphonie.tools.lemans.bt.model.ModePaiement;
 import fr.symphonie.tools.lemans.bt.model.Spectacle;
 import fr.symphonie.tools.lemans.bt.model.SpectacleDetails;
 
@@ -312,6 +313,31 @@ public class LemansDao {
 	
 		TypedQuery<Integer> query = em.createQuery(cq);
 		List<Integer> result = query.getResultList();
+		return result;
+	}
+	public List<ModePaiement> getModPaiLemansList(String searchCondition) {
+		logger.debug("getModPaiLemansList : searchCondition={}",searchCondition);
+		List<ModePaiement> result = null;
+		
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+			CriteriaQuery<ModePaiement> cq = cb.createQuery(ModePaiement.class);
+			Root<ModePaiement> root = cq.from(ModePaiement.class);
+			cq.select(root).distinct(true);
+			
+			if(!Strings.isBlank(searchCondition)){
+			Predicate p = cb.conjunction();	
+			Expression<String> codeExp=root.get("Code");
+			Expression<String> libelleExp=root.get("designation");	
+			Predicate pOR = cb.like(codeExp, searchCondition);
+			pOR = cb.or(pOR, cb.like(libelleExp, searchCondition));
+			p = cb.and(p,pOR);
+			cq.where(p);
+			}
+			
+			TypedQuery<ModePaiement> query = em.createQuery(cq);
+			if(Strings.isBlank(searchCondition))query.setMaxResults(Constant.maxResult);
+			result = query.getResultList();
+			logger.debug("getModPaiLemansList : size of result --> {}",result.size());
 		return result;
 	}
 	

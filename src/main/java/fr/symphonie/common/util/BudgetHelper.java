@@ -585,7 +585,7 @@ public class BudgetHelper {
 		return Boolean.parseBoolean(HandlerJSFMessage.getConfigParam(key));
 	}
 	public static LemansService getLemansService() {
-		String beanName = "lemanService";
+		String beanName = "lemansService";
 		return (LemansService) Helper.findBean(beanName);
 	}
 }

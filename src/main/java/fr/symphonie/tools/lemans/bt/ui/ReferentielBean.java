@@ -3,6 +3,7 @@ package fr.symphonie.tools.lemans.bt.ui;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -52,7 +53,8 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	private static final long serialVersionUID = -2630437756702391656L;
 	private static final Logger logger = LoggerFactory.getLogger(DasBean.class);
 	
-	@ManagedProperty (value="#{lemanService}")
+	@ManagedProperty (value="#{lemansService}")
+	@Setter
 	private LemansService service;
 	//@ManagedProperty (value="#{commonService}")
 	//private  ICommonService iCommonService;
@@ -79,7 +81,7 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	private boolean updateDetailMode;
 	private List<String> listTvaSpectacle;
 	@Setter
-	private List<String> listNumPeriode;
+	private List<Integer> listNumPeriode;
 	
 	@Getter
 	@Setter
@@ -118,18 +120,21 @@ public class ReferentielBean extends GenericBean implements Serializable{
 			setListSpectacles(service.getSpectacles(searchCondition));
 			resultSize=getListSpectacles().size();
 			break;
-		case LEMANS_PERIODE:			
-			//setListPeriodes(service.getPeriodes(getExercice(),getNumPeriode(),null));
-			
+		case LEMANS_PERIODE:						
 			setListPeriodes(getCommonService().getPeriodList( getExercice(),getCodeBudget(),getModuleName()));
-			
-			
+
 			break;
 		case LEMANS_CLIENT:
 			searchCondition=BudgetHelper.prepareSearchKey(getCodeClient());
 			setListClients(service.getClientLemansList(searchCondition));
 			resultSize=getListClients().size();
 			loadAdressClient();
+			break;
+		case LEMANS_MODE_PAIELMENT:
+			searchCondition=BudgetHelper.prepareSearchKey(getCodePaiement());
+			setListModesP(service.getModPaiementList(searchCondition));
+			resultSize=getListModesP().size();
+			//loadAdressClient();
 			break;
 		default:
 			break;
@@ -283,7 +288,7 @@ private <T extends Object> void afterSave(T entity) {
 	case LEMANS_PERIODE:
 		ImportPeriod periode=(ImportPeriod)entity;
 		if(!isUpdateMode())
-		getListNumPeriode().add(periode.getCode());
+		getListNumPeriode().add(periode.getNumero());
 	case LEMANS_CLIENT:
 		loadAdressClient();
 		break;		
@@ -307,6 +312,7 @@ private boolean checkDupicated()
 	case LEMANS_PERIODE:
 		 break;	
 	case LEMANS_CLIENT:
+		logger.info("checkDupicated-service: "+service);
 		Client loadedC=service.getClient(getSelectedClient().getCode().trim());
 		logger.info("loadedC: "+loadedC);
         if(loadedC!=null){
@@ -549,9 +555,9 @@ private boolean checkDupicated()
 		detail.setCompteClient(compteImput[0]);
 		//detail.setImputTva(compteImput[1]);
 	}
-	public void setService(LemansService service) {
-		this.service = service;
-	}
+//	public void setService(LemansService service) {
+//		this.service = service;
+//	}
 
 	public String getTvaSpectacle() {
 		float tva=getSelectedDetailSpec().getTva();
@@ -674,13 +680,16 @@ private boolean checkDupicated()
 	{
 		setUpdateMode(false);
 		getDataListBean().reset();
-		ImportPeriod periode=new ImportPeriod();
-		periode.setEtat(PeriodeEnum.OUVERT);
-		periode.setTrace(Helper.createTrace());
-		periode.setExercice(getExercice());
+		ImportPeriod periode=ImportPeriod.builder()
+		.etat(PeriodeEnum.OUVERT.getStatus())
+		.trace(Helper.createTrace())
+		.exercice(getExercice())
+		.budget(getCodeBudget())
+		.module(getModuleName())
+		.build();
 		Integer maxNumero=0;
-		for(String num:getListNumPeriode()){
-		//	if(num.compareTo(maxNumero)>0)maxNumero=num;
+		for(Integer num:getListNumPeriode()){
+			if(num.compareTo(maxNumero)>0)maxNumero=num;
 		}
 		periode.setCode(""+(maxNumero.intValue()+1));
 		setSelectedPeriode(periode);	
@@ -767,7 +776,7 @@ private boolean checkDupicated()
 			  if(isWithChild()) return;
 			  if(isUsedByImport(entity)) return;
 			try {	
-				  // service.remove(entity);
+				   service.remove(entity);
 					afterDelete(entity);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -897,10 +906,12 @@ private boolean checkDupicated()
 			return true;
 		}
 }
-	public List<String> getListNumPeriode() {
+	public List<Integer> getListNumPeriode() {
 		if(listNumPeriode==null){
 			if(getExercice()!=null) {
-				//setListNumPeriode(service.getListNumPeriode(getExercice()));
+			listNumPeriode=getAllListPeriodes().stream()
+					.map(p ->p.getNumero())
+					.collect(Collectors.toList());
 			}
 		}
 		return listNumPeriode;
@@ -917,5 +928,16 @@ public void gotoAddModPaiment(){
 private String getModuleName() {
 	return "LEMANS_BT";
 }
-	
+public void gotoUpdateModPaiment()
+{
+	setUpdateMode(true);
+	DialogHelper.openModPDialog();
+}
+
+public List<ImportPeriod> getAllListPeriodes() {
+	if (!isRequiredDataDone())
+		return new ArrayList<ImportPeriod>();
+	return getCommonService().getPeriodList(getExercice(), getCodeBudget(), getModuleName());
+
+}
 }

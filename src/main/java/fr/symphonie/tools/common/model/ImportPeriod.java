@@ -30,13 +30,13 @@ public class ImportPeriod {
 	private Integer exercice;
 	@Column(name = "code_budg")
 	private String budget;
-	@Column
+	@Column(length = 20)
 	private String module;
-	@Column
+	@Column(length = 3)
 	private String code;
-	@Column
+	@Column(length = 20)
 	private String etat;
-	@Column
+	@Column(length = 50)
 	private String object;
 	@Column
 	private boolean closed;
