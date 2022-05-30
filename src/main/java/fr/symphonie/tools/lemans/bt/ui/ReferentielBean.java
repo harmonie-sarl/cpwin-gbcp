@@ -473,7 +473,7 @@ private boolean checkDupicated()
 		float tva = 0f;
 		SpectacleDetails detailArtic = getSelectedDetailSpec();
 		tva = detailArtic == null ? 0f : detailArtic.getTva();
-		if (getListTvaArtcile().contains(Float.toString(tva))) {
+		if (getListTvaSpectacle().contains(Float.toString(tva))) {
 			setTvaSpectacle(Float.toString(tva));
 		} else
 			setTvaSpectacle(AUTRE);
@@ -753,7 +753,7 @@ private boolean checkDupicated()
 	/***
 	 *  mise à jour des valeurs 
 	 *  pour le bean DataListBean
-	 *  à partir de l'objet SpectacleDetails
+	 *  à partir de l'objet SpectacleDetails 
 	 * @param detail
 	 */
 	private void refreshDataListValues(SpectacleDetails detail) {
@@ -853,7 +853,7 @@ private boolean checkDupicated()
 		return false;
 	}
 
-	public List<String> getListTvaArtcile() {
+	public List<String> getListTvaSpectacle() {
 		if(listTvaSpectacle==null)
 		{
 			listTvaSpectacle= new ArrayList<>();
