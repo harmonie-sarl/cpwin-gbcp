@@ -3,6 +3,7 @@ package fr.symphonie.tools.lemans.bt.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ public class Spectacle {
 	/**
 	 * Détails par exercice
 	 */
-	@OneToMany(mappedBy = "spectacle",fetch = FetchType.EAGER,  orphanRemoval = true)
+	@OneToMany(mappedBy = "spectacle",fetch = FetchType.EAGER,  orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<SpectacleDetails> details= new ArrayList<SpectacleDetails>();
 	@Embedded
 	private Trace trace;

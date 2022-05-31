@@ -803,7 +803,7 @@ private boolean checkDupicated()
 				loaded=service.removeSpectacleDetail(detail);
 				setSelectedSpectacle(loaded);
 		
-				getListSpectacles().set(getListSpectacles().indexOf(getListSpectacles()), loaded);
+				getListSpectacles().set(getListSpectacles().indexOf(getSelectedSpectacle()), loaded);
 				 getSelectedSpectacle().getDetails().remove(detail);
 				   logger.info(" getSelectedSpectacle().getDetails(): {}", getSelectedSpectacle().getDetails().size());
 			} catch (Exception e) {
