@@ -186,6 +186,7 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	}
 	
 	public void resetEnteteList() {
+		setListNumPeriode(null);
 	}
 	
 	@Override
@@ -907,16 +908,18 @@ private boolean checkDupicated()
 			return true;
 		}
 }
-	public List<Integer> getListNumPeriode() {
-		if(listNumPeriode==null){
-			if(getExercice()!=null) {
-			listNumPeriode=getAllListPeriodes().stream()
-					.map(p ->p.getNumero())
-					.collect(Collectors.toList());
-			}
+
+public List<Integer> getListNumPeriode() {
+	logger.info("getListNumPeriode() --start");
+	if (listNumPeriode == null) {
+		if (getExercice() != null) {
+
+			listNumPeriode = getAllListPeriodes().stream().map(p -> p.getNumero()).collect(Collectors.toList());
+			logger.info(" getListNumPeriode() {}", listNumPeriode.size());
 		}
-		return listNumPeriode;
 	}
+	return listNumPeriode;
+}
 public void gotoAddModPaiment(){
 		
 		setUpdateMode(false);
@@ -942,9 +945,15 @@ public void gotoUpdateModPaiment()
 
 }*/
 public List<ImportPeriod> getAllListPeriodes() {
-	if (!isRequiredDataDone())
+	logger.info("getAllListPeriodes() --start");
+	if (!isRequiredDataDone()) 
 		return new ArrayList<ImportPeriod>();
-	return getCommonService().getPeriodList(getExercice(), getCodeBudget(), getModuleName(),getCodePeriode());
+	
+	 List<ImportPeriod> periodList = getCommonService().getPeriodList(getExercice(), getCodeBudget(), getModuleName(),getCodePeriode());
+	if(periodList!=null)
+	 logger.info(" getAllListPeriodes(): {} -->  End",periodList.stream().map(p -> p.getCode()).collect(Collectors.toList()));
+	return periodList;
+	
 
 }
 private String getCodePeriode() {

@@ -14,7 +14,7 @@
 				<f:selectItems value="#{loaderBean.allExecList}" var="exerc"
 					itemLabel="#{exerc}" itemValue="#{exerc}">
 				</f:selectItems>
-				<p:ajax process="@this" listener="#{lemansRefBean.execListener}"
+				<p:ajax process="@this" listener="#{lemansRefBean.onExerciceChange}"
 					update=":detailsForm,:enteteForm" />
 			</p:selectOneMenu>
 		</h:panelGroup>
