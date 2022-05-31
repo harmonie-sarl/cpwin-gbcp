@@ -63,5 +63,6 @@ public interface  ICommonDao {
 	List<FileImportTrace> getImportHistoryList(Integer exercice, String moduleName, long crc32);
 
 	List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName);
+	List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName,String code);
 
 }

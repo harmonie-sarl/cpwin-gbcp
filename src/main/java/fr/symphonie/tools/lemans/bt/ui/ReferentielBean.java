@@ -27,7 +27,6 @@ import fr.symphonie.common.util.Util;
 import fr.symphonie.cpwin.model.Adresse;
 import fr.symphonie.tools.common.DataListBean;
 import fr.symphonie.tools.common.model.ImportPeriod;
-import fr.symphonie.tools.das.ui.DasBean;
 import fr.symphonie.tools.gts.model.PeriodeEnum;
 import fr.symphonie.tools.lemans.bt.core.LemansService;
 import fr.symphonie.tools.lemans.bt.model.Client;
@@ -51,16 +50,17 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -2630437756702391656L;
-	private static final Logger logger = LoggerFactory.getLogger(DasBean.class);
+	private static final Logger logger = LoggerFactory.getLogger(ReferentielBean.class);
 	
 	@ManagedProperty (value="#{lemansService}")
 	@Setter
 	private LemansService service;
 	//@ManagedProperty (value="#{commonService}")
 	//private  ICommonService iCommonService;
-	
+	private String codePeriode;
 	private String codeSpectacle;
 	private String tvaSpectacle;
+	
 	private Integer numPeriode;
 	private List<Spectacle> listSpectacles;
 	@Getter
@@ -112,7 +112,7 @@ public class ReferentielBean extends GenericBean implements Serializable{
 		Integer resultSize=0;
 		
 		Action action=BudgetHelper.getNavigationBean().getCurrentAction();
-		logger.debug("search for action : {} ",action);
+		logger.debug("search for action : {}, codePeriode={},numperiode={} ",action,getCodePeriode(),getNumPeriode());
 		try {
 		switch(action){
 		case LEMANS_SPECTACLE:
@@ -120,8 +120,9 @@ public class ReferentielBean extends GenericBean implements Serializable{
 			setListSpectacles(service.getSpectacles(searchCondition));
 			resultSize=getListSpectacles().size();
 			break;
-		case LEMANS_PERIODE:						
-			setListPeriodes(getCommonService().getPeriodList( getExercice(),getCodeBudget(),getModuleName()));
+		case LEMANS_PERIODE:
+			String codePeriode	=	getNumPeriode()!=null?""+getNumPeriode():null;
+			setListPeriodes(getCommonService().getPeriodList( getExercice(),getCodeBudget(),getModuleName(),codePeriode));
 
 			break;
 		case LEMANS_CLIENT:
@@ -185,6 +186,7 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	}
 	
 	public void resetEnteteList() {
+		setListNumPeriode(null);
 	}
 	
 	@Override
@@ -906,16 +908,18 @@ private boolean checkDupicated()
 			return true;
 		}
 }
-	public List<Integer> getListNumPeriode() {
-		if(listNumPeriode==null){
-			if(getExercice()!=null) {
-			listNumPeriode=getAllListPeriodes().stream()
-					.map(p ->p.getNumero())
-					.collect(Collectors.toList());
-			}
+
+public List<Integer> getListNumPeriode() {
+	logger.info("getListNumPeriode() --start");
+	if (listNumPeriode == null) {
+		if (getExercice() != null) {
+
+			listNumPeriode = getAllListPeriodes().stream().map(p -> p.getNumero()).collect(Collectors.toList());
+			logger.info(" getListNumPeriode() {}", listNumPeriode.size());
 		}
-		return listNumPeriode;
 	}
+	return listNumPeriode;
+}
 public void gotoAddModPaiment(){
 		
 		setUpdateMode(false);
@@ -934,10 +938,26 @@ public void gotoUpdateModPaiment()
 	DialogHelper.openModPDialog();
 }
 
-public List<ImportPeriod> getAllListPeriodes() {
+/*public List<ImportPeriod> getAllListPeriodes() {
 	if (!isRequiredDataDone())
 		return new ArrayList<ImportPeriod>();
 	return getCommonService().getPeriodList(getExercice(), getCodeBudget(), getModuleName());
 
+}*/
+public List<ImportPeriod> getAllListPeriodes() {
+	logger.info("getAllListPeriodes() --start");
+	if (!isRequiredDataDone()) 
+		return new ArrayList<ImportPeriod>();
+	
+	 List<ImportPeriod> periodList = getCommonService().getPeriodList(getExercice(), getCodeBudget(), getModuleName(),getCodePeriode());
+	if(periodList!=null)
+	 logger.info(" getAllListPeriodes(): {} -->  End",periodList.stream().map(p -> p.getCode()).collect(Collectors.toList()));
+	return periodList;
+	
+
 }
+private String getCodePeriode() {
+	return codePeriode;
+}
+
 }

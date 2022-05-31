@@ -406,5 +406,10 @@ private ICommonDao commonDao;
 	public List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName) {
 		return commonDao.getPeriodList(exercice,codeBudget,moduleName);
 	}
+	@Override
+	public List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName,String code) {
+		return commonDao.getPeriodList(exercice,codeBudget,moduleName,code);
+	}
+	
 	
 }

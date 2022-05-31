@@ -402,4 +402,30 @@ public class CommonDao implements fr.symphonie.common.core.ICommonDao{
 		return result;
 	}
 
+
+@Override
+public List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName,String code) {
+	List<ImportPeriod> result = null;
+	logger.debug("getPeriodList: code={}",code);
+	CriteriaBuilder cb = em.getCriteriaBuilder();
+	CriteriaQuery<ImportPeriod> cq = cb.createQuery(ImportPeriod.class);
+	Root<ImportPeriod> root = cq.from(ImportPeriod.class);
+	cq.select(root);
+	Predicate p = cb.conjunction();
+	
+		p = cb.and(p, cb.equal(root.get("exercice"), exercice));
+		if(StringUtils.isNotBlank(codeBudget))
+		p = cb.and(p, cb.equal(root.get("budget"), codeBudget));
+		if(StringUtils.isNotBlank(moduleName))
+		p = cb.and(p, cb.equal(root.get("module"), moduleName));
+		if(StringUtils.isNotBlank(code))
+			p = cb.and(p, cb.equal(root.get("code"),code ));
+		
+		cq.where(p);
+		TypedQuery<ImportPeriod> query = em.createQuery(cq);
+		result = query.getResultList();
+
+	return result;
+}
+
 }

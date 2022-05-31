@@ -152,6 +152,8 @@ public List<FileImportTrace> getImportHistoryList(Integer exercice,String module
 public void saveImportTrace(FileImportTrace vague);
 
 public List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName);
+public List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName,String code);
+
 
 
 }
