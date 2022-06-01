@@ -696,7 +696,9 @@ private boolean checkDupicated()
 		periode.setCode(""+(maxNumero.intValue()+1));
 		setSelectedPeriode(periode);	
 		DialogHelper.openPeriodeLemansDialog();
+		
 	}
+	
 	public boolean isUpdateMode() {
 		return updateMode;
 	}
