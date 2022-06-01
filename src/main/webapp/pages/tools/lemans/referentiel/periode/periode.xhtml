@@ -88,6 +88,7 @@
 								value="#{periode}" />
 				<p:ajax event="dialogReturn" update=":detailsForm:periodesPanel" />
 						</p:commandButton>
+						
 				</p:column>
 				</p:dataTable>
 				
@@ -97,7 +98,7 @@
 					actionListener="#{lemansRefBean.gotoAddPeriode}"
 						value="#{msgs['btn.add']}" >
 
-						<p:ajax event="dialogReturn" update=":detailsForm:periodesPanel" />
+						<p:ajax event="dialogReturn" update=":detailsForm:periodesPanel,:enteteForm:numero" />
 
 					</p:commandButton>
 
@@ -110,7 +111,7 @@
 					<p:commandButton value="#{msgs['btn.valider']}"
 						oncomplete="PF('confSupprPeriode').hide();"
 						actionListener="#{lemansRefBean.delete}"
-						update="detailsForm:periodesPanel" />
+						update="detailsForm:periodesPanel,:enteteForm" />
 					<p:commandButton value="#{msgs['btn.annuler']}"
 						onclick="PF('confSupprPeriode').hide();" type="button" />
 				</h:panelGroup>
