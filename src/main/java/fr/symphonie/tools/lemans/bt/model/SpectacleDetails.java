@@ -75,7 +75,7 @@ public class SpectacleDetails {
 	@Embedded
 	private Trace trace;
 	@ManyToOne
-	@JoinColumn(name = "code_spectacle",insertable = false,updatable = false)
+	@JoinColumn(name = "code_spectacle",referencedColumnName = "code",  insertable = false,updatable = false)
 	@ToString.Exclude
 	private Spectacle spectacle;
 	@Column(name = "no_lbi")

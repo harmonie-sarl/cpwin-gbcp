@@ -27,6 +27,7 @@ import fr.symphonie.common.util.Util;
 import fr.symphonie.cpwin.model.Adresse;
 import fr.symphonie.tools.common.DataListBean;
 import fr.symphonie.tools.common.model.ImportPeriod;
+
 import fr.symphonie.tools.gts.model.PeriodeEnum;
 import fr.symphonie.tools.lemans.bt.core.LemansService;
 import fr.symphonie.tools.lemans.bt.model.Client;
@@ -62,6 +63,8 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	private String tvaSpectacle;
 	
 	private Integer numPeriode;
+	@Getter
+	@Setter
 	private List<Spectacle> listSpectacles;
 	@Getter
 	@Setter
@@ -212,12 +215,7 @@ public class ReferentielBean extends GenericBean implements Serializable{
 		this.codeSpectacle = codeSpectacle;
 		resetDynamicList();
 	}
-	public List<Spectacle> getListSpectacles() {
-		return listSpectacles;
-	}
-	public void setListSpectacles(List<Spectacle> listSpectacles) {
-		this.listSpectacles = listSpectacles;
-	}
+	
 	
 	/**
 	 * prération de la mise à jour 
@@ -472,16 +470,16 @@ private boolean checkDupicated()
 
 	private void positionnerTvaSpectacle() {
 		float tva = 0f;
-		SpectacleDetails detailArtic = getSelectedDetailSpec();
-		tva = detailArtic == null ? 0f : detailArtic.getTva();
+		SpectacleDetails detailSpec = getSelectedDetailSpec();
+		tva = detailSpec == null ? 0f : detailSpec.getTva();
 		if (getListTvaSpectacle().contains(Float.toString(tva))) {
 			setTvaSpectacle(Float.toString(tva));
 		} else
 			setTvaSpectacle(AUTRE);
 	}
 	
-	public void setSelectedDetailSpec(SpectacleDetails selectedDetailArtc) {
-		this.selectedDetailSpec = selectedDetailArtc;
+	public void setSelectedDetailSpec(SpectacleDetails selectedDetailSpec) {
+		this.selectedDetailSpec = selectedDetailSpec;
 		refreshDataListValues(this.selectedDetailSpec);
 		positionnerTvaSpectacle();
 		
@@ -796,20 +794,16 @@ private boolean checkDupicated()
 		
 	}
 
-
 	public void deleteSpectacleDetail(){
-		Spectacle loaded=null;
+		//Spectacle loaded=null;
 		logger.info("deleteSpectacleDetail()--start");
 			SpectacleDetails detail=getSelectedDetailSpec();
 			if(isUsedByImport(detail)) return;
 			try {	
-				   
-				loaded=service.removeSpectacleDetail(detail);
-				setSelectedSpectacle(loaded);
 		
-				getListSpectacles().set(getListSpectacles().indexOf(getSelectedSpectacle()), loaded);
-				 getSelectedSpectacle().getDetails().remove(detail);
-				   logger.info(" getSelectedSpectacle().getDetails(): {}", getSelectedSpectacle().getDetails().size());
+			 getSelectedSpectacle().getDetails().remove(detail);
+			 service.save( getSelectedSpectacle());
+			
 			} catch (Exception e) {
 				e.printStackTrace();
 				HandlerJSFMessage.addErrorMessage(Util.getErrorMessageFromException(MsgEntry.FAILED, e));
@@ -819,6 +813,7 @@ private boolean checkDupicated()
 		
 			
 		}
+
 	private boolean isUsedByImport(Object entity) {
 //		List<ImportedData> list=null;
 //		
