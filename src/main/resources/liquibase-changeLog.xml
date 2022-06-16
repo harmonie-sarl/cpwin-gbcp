@@ -147,4 +147,8 @@
             <column name="date_Maj" type="datetime"/>
         </createTable>
     </changeSet>
+    <changeSet author="wedevzone" id="1653571295794-4">
+    <renameTable newTableName="bt_detailsVente" oldTableName="tb_detailsVente"/>
+    </changeSet>
+    
     </databaseChangeLog>

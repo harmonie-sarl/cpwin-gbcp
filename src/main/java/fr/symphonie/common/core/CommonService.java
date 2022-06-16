@@ -220,7 +220,8 @@ private ICommonDao commonDao;
 	@Override
 	@Transactional
 	public <T> void saveList(List<T> list) {
-		for(T item:list) commonDao.insert(item);
+		//for(T item:list) commonDao.insert(item);
+		commonDao.saveList(list);
 		
 	}
 	@Override

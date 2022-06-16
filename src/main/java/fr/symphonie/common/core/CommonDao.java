@@ -401,5 +401,21 @@ public class CommonDao implements fr.symphonie.common.core.ICommonDao{
 
 		return result;
 	}
+	@Override
+	public <T> void saveList(List<T> list) {
+		int batchSize=Constant.batch_size;
+		logger.info("saveList: batchSize={}, list size={}",batchSize,list.size());
+		int i = 0;
+		for(T obj:list){
+			em.persist(obj);
+            i++;            
+			if (i % batchSize == 0) {
+                em.flush();
+                em.clear();
+            }           
+        }
+        em.flush();
+        em.clear();
+	}
 
 }

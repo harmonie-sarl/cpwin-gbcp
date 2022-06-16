@@ -22,7 +22,7 @@ import fr.symphonie.util.model.Trace;
 import lombok.Data;
 @Data
 @Entity
-@Table(name = "tb_detailsVente")
+@Table(name = "bt_detailsVente")
 public class VenteItem implements Importable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

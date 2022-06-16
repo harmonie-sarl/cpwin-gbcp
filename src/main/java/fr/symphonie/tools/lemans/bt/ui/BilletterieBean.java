@@ -129,9 +129,10 @@ public class BilletterieBean extends CommonToolsBean {
 	public void executeSaveData() {
 
 		try {
-			FileImportTrace vague = saveImportTrace();
+			
 			getCommonService().saveList(ventes);
 			getCommonService().saveList(venteDetails);
+			FileImportTrace vague = saveImportTrace();
 
 			 String message = HandlerJSFMessage.formatMessage(HandlerJSFMessage.getMessage(MsgEntry.REMB_VALIDATION_MSG),new
 			 Object[] { vague.getId()});
@@ -182,6 +183,7 @@ public class BilletterieBean extends CommonToolsBean {
 	@Override
 	public void reset() {
 		resetDynamicList();
+		setImportFileUploadEvent(null);
 		importService.reset();
 
 	}

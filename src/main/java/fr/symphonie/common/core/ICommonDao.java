@@ -64,4 +64,6 @@ public interface  ICommonDao {
 
 	List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName);
 
+	<T> void saveList(List<T> list);
+
 }
