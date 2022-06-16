@@ -151,4 +151,22 @@
     <renameTable newTableName="bt_detailsVente" oldTableName="tb_detailsVente"/>
     </changeSet>
     
+     <changeSet author="wedevzone" id="1653576675001-2">
+        <createTable tableName="bt_modpaie">
+            <column name="Code" type="VARCHAR(10)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="bt_modpaiePK"/>
+            </column>
+            <column name="designation" type="VARCHAR(50)"/>
+            <column name="avec_frais" type="BIT" defaultValueBoolean="false">
+             <constraints nullable="false" />
+            </column>
+            <column name="est_regisseur" type="BIT" defaultValueBoolean="false">
+             <constraints nullable="false" />
+            </column>
+            <column name="aut_crea" type="VARCHAR(10)"/>
+            <column name="aut_maj" type="VARCHAR(10)"/>
+            <column name="date_crea" type="datetime"/>
+            <column name="date_Maj" type="datetime"/>
+        </createTable>
+    </changeSet>
     </databaseChangeLog>

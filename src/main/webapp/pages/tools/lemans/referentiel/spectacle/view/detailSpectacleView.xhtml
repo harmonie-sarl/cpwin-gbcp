@@ -69,13 +69,7 @@
 				<h:panelGroup />
 				<h:panelGroup />
 
-				<h:outputLabel styleClass="espace_entre_label_value"
-					style="font-weight:bold" value="#{msgs['prix.unitaire']}" />
-				<p:inputNumber inputStyle="text-align: left"
-					value="#{lemansRefBean.selectedDetailSpec.pu}" onfocus="select();">
 
-           
-				</p:inputNumber>
 
 
 
@@ -98,7 +92,7 @@
 					
 					<p:commandButton title="#{msgs['activate.select.list']}" icon="fa fa-list" 
 						rendered="#{lemansRefBean.tvaSpectacleAutre}"
-						actionListener="#{lemansRefBean.resettvaSpectacle}" update="tvaPg">
+						actionListener="#{lemansRefBean.resetTvaSpectacle}" update="tvaPg">
 						<f:param name="cpDestIndex" value="#{cpDestIndex}" />
 					</p:commandButton>
 					<p:inputNumber rendered="#{lemansRefBean.tvaSpectacleAutre}"

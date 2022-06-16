@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import fr.symphonie.util.model.SimpleEntity;
 import fr.symphonie.util.model.Trace;
 import lombok.Data;
+import lombok.ToString;
 @Data
 @Entity
 @Table(name = "bt_detailSpectacle")
@@ -74,7 +75,8 @@ public class SpectacleDetails {
 	@Embedded
 	private Trace trace;
 	@ManyToOne
-	@JoinColumn(name = "code_spectacle",insertable = false,updatable = false)
+	@JoinColumn(name = "code_spectacle",referencedColumnName = "code",  insertable = false,updatable = false)
+	@ToString.Exclude
 	private Spectacle spectacle;
 	@Column(name = "no_lbi")
 	private Integer noLbi;

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fr.symphonie.budget.core.dao.IJdbcHelper;
 import fr.symphonie.tools.lemans.bt.model.Client;
+import fr.symphonie.tools.lemans.bt.model.ModePaiement;
 import fr.symphonie.tools.lemans.bt.model.Spectacle;
 import fr.symphonie.tools.lemans.bt.model.SpectacleDetails;
 
@@ -167,5 +168,8 @@ public class LemansService {
 //	public List<Integer> getGtsExercices() {
 //		return dao.getGtsExercices();
 //	}
+	public List<ModePaiement> getModPaiementList(String searchCondition) {
+		return dao.getModPaiLemansList(searchCondition);
+	}
 
 }

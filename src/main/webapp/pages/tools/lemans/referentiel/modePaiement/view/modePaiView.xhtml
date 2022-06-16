@@ -54,8 +54,8 @@
 		</h:panelGroup>
 			<p:inputText value="#{lemansRefBean.selectedModPaiment.designation}"  size="80" />
 			
-						<h:outputText value="#{lemansRefBean.selectedModPaiment.code}" rendered="#{lemansRefBean.updateMode}"></h:outputText>
-	<h:panelGroup>
+						
+		<h:panelGroup>
 
 			<h:outputLabel styleClass="espace_entre_label_value"
 				style="font-weight:bold" value="#{msgs['client.regisseur']}" />
@@ -65,9 +65,8 @@
 				<p:selectBooleanCheckbox value="#{lemansRefBean.selectedModPaiment.regisseur}">
 
 				</p:selectBooleanCheckbox>
-   
-  
-			<h:panelGroup>
+							
+		<h:panelGroup>
 
 			<h:outputLabel styleClass="espace_entre_label_value"
 				style="font-weight:bold" value="#{msgs['avec.frais']}" />
@@ -77,7 +76,6 @@
 				<p:selectBooleanCheckbox value="#{lemansRefBean.selectedModPaiment.frais}">
 
 				</p:selectBooleanCheckbox>
-
 		</h:panelGrid>
 </p:panel>
 		<br />

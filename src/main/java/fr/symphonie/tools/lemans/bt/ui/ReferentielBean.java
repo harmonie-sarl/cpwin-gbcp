@@ -3,6 +3,7 @@ package fr.symphonie.tools.lemans.bt.ui;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -18,6 +19,7 @@ import fr.symphonie.budget.ui.beans.GenericBean;
 import fr.symphonie.budget.ui.beans.GestionTiersBean;
 import fr.symphonie.budget.ui.beans.NavigationBean.Action;
 import fr.symphonie.budget.ui.beans.pluri.DialogHelper;
+import fr.symphonie.common.core.ICommonService;
 import fr.symphonie.common.util.BudgetHelper;
 import fr.symphonie.common.util.Constant;
 import fr.symphonie.common.util.MsgEntry;
@@ -25,7 +27,7 @@ import fr.symphonie.common.util.Util;
 import fr.symphonie.cpwin.model.Adresse;
 import fr.symphonie.tools.common.DataListBean;
 import fr.symphonie.tools.common.model.ImportPeriod;
-import fr.symphonie.tools.das.ui.DasBean;
+
 import fr.symphonie.tools.gts.model.PeriodeEnum;
 import fr.symphonie.tools.lemans.bt.core.LemansService;
 import fr.symphonie.tools.lemans.bt.model.Client;
@@ -49,14 +51,20 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -2630437756702391656L;
-	private static final Logger logger = LoggerFactory.getLogger(DasBean.class);
+	private static final Logger logger = LoggerFactory.getLogger(ReferentielBean.class);
 	
-	@ManagedProperty (value="#{lemanService}")
+	@ManagedProperty (value="#{lemansService}")
+	@Setter
 	private LemansService service;
-	
+	//@ManagedProperty (value="#{commonService}")
+	//private  ICommonService iCommonService;
+	private String codePeriode;
 	private String codeSpectacle;
 	private String tvaSpectacle;
+	
 	private Integer numPeriode;
+	@Getter
+	@Setter
 	private List<Spectacle> listSpectacles;
 	@Getter
 	@Setter
@@ -76,7 +84,7 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	private boolean updateDetailMode;
 	private List<String> listTvaSpectacle;
 	@Setter
-	private List<String> listNumPeriode;
+	private List<Integer> listNumPeriode;
 	
 	@Getter
 	@Setter
@@ -94,6 +102,9 @@ public class ReferentielBean extends GenericBean implements Serializable{
 		this.listPeriodes	=	null;
 		setListClients(null);
 	}
+	protected ICommonService getCommonService() {
+		return BudgetHelper.getCommonService();
+	}
 
     /**
      * toutes les opération de recherche
@@ -104,7 +115,7 @@ public class ReferentielBean extends GenericBean implements Serializable{
 		Integer resultSize=0;
 		
 		Action action=BudgetHelper.getNavigationBean().getCurrentAction();
-		logger.debug("search for action : {} ",action);
+		logger.debug("search for action : {}, codePeriode={},numperiode={} ",action,getCodePeriode(),getNumPeriode());
 		try {
 		switch(action){
 		case LEMANS_SPECTACLE:
@@ -112,14 +123,22 @@ public class ReferentielBean extends GenericBean implements Serializable{
 			setListSpectacles(service.getSpectacles(searchCondition));
 			resultSize=getListSpectacles().size();
 			break;
-		case LEMANS_PERIODE:			
-		//	setListPeriodes(com.getPeriodes(getExercice(),getNumPeriode(),null));
+		case LEMANS_PERIODE:
+			String codePeriode	=	getNumPeriode()!=null?""+getNumPeriode():null;
+			setListPeriodes(getCommonService().getPeriodList( getExercice(),getCodeBudget(),getModuleName(),codePeriode));
+
 			break;
 		case LEMANS_CLIENT:
 			searchCondition=BudgetHelper.prepareSearchKey(getCodeClient());
 			setListClients(service.getClientLemansList(searchCondition));
 			resultSize=getListClients().size();
 			loadAdressClient();
+			break;
+		case LEMANS_MODE_PAIELMENT:
+			searchCondition=BudgetHelper.prepareSearchKey(getCodePaiement());
+			setListModesP(service.getModPaiementList(searchCondition));
+			resultSize=getListModesP().size();
+			//loadAdressClient();
 			break;
 		default:
 			break;
@@ -170,6 +189,7 @@ public class ReferentielBean extends GenericBean implements Serializable{
 	}
 	
 	public void resetEnteteList() {
+		setListNumPeriode(null);
 	}
 	
 	@Override
@@ -195,12 +215,7 @@ public class ReferentielBean extends GenericBean implements Serializable{
 		this.codeSpectacle = codeSpectacle;
 		resetDynamicList();
 	}
-	public List<Spectacle> getListSpectacles() {
-		return listSpectacles;
-	}
-	public void setListSpectacles(List<Spectacle> listSpectacles) {
-		this.listSpectacles = listSpectacles;
-	}
+	
 	
 	/**
 	 * prération de la mise à jour 
@@ -273,7 +288,7 @@ private <T extends Object> void afterSave(T entity) {
 	case LEMANS_PERIODE:
 		ImportPeriod periode=(ImportPeriod)entity;
 		if(!isUpdateMode())
-		getListNumPeriode().add(periode.getCode());
+		getListNumPeriode().add(periode.getNumero());
 	case LEMANS_CLIENT:
 		loadAdressClient();
 		break;		
@@ -297,6 +312,7 @@ private boolean checkDupicated()
 	case LEMANS_PERIODE:
 		 break;	
 	case LEMANS_CLIENT:
+		logger.info("checkDupicated-service: "+service);
 		Client loadedC=service.getClient(getSelectedClient().getCode().trim());
 		logger.info("loadedC: "+loadedC);
         if(loadedC!=null){
@@ -329,6 +345,8 @@ private boolean checkDupicated()
             }             
              break;
 		case LEMANS_PERIODE:
+			
+			
 			 break;		
 		case LEMANS_CLIENT:
 			   if(!getSelectedClient().checkRequired()){
@@ -452,16 +470,16 @@ private boolean checkDupicated()
 
 	private void positionnerTvaSpectacle() {
 		float tva = 0f;
-		SpectacleDetails detailArtic = getSelectedDetailSpec();
-		tva = detailArtic == null ? 0f : detailArtic.getTva();
-		if (getListTvaArtcile().contains(Float.toString(tva))) {
+		SpectacleDetails detailSpec = getSelectedDetailSpec();
+		tva = detailSpec == null ? 0f : detailSpec.getTva();
+		if (getListTvaSpectacle().contains(Float.toString(tva))) {
 			setTvaSpectacle(Float.toString(tva));
 		} else
 			setTvaSpectacle(AUTRE);
 	}
 	
-	public void setSelectedDetailSpec(SpectacleDetails selectedDetailArtc) {
-		this.selectedDetailSpec = selectedDetailArtc;
+	public void setSelectedDetailSpec(SpectacleDetails selectedDetailSpec) {
+		this.selectedDetailSpec = selectedDetailSpec;
 		refreshDataListValues(this.selectedDetailSpec);
 		positionnerTvaSpectacle();
 		
@@ -537,9 +555,9 @@ private boolean checkDupicated()
 		detail.setCompteClient(compteImput[0]);
 		//detail.setImputTva(compteImput[1]);
 	}
-	public void setService(LemansService service) {
-		this.service = service;
-	}
+//	public void setService(LemansService service) {
+//		this.service = service;
+//	}
 
 	public String getTvaSpectacle() {
 		float tva=getSelectedDetailSpec().getTva();
@@ -579,12 +597,12 @@ private boolean checkDupicated()
 		this.numPeriode = numPeriode;
 		resetDynamicList();
 	}
-//	public List<Period> getListPeriodes() {
-//		return listPeriodes;
-//	}
-//	public void setListPeriodes(List<Period> listPeriodes) {
-//		this.listPeriodes = listPeriodes;
-//	}
+	//public List<ImportPeriod> getListPeriodes() {
+		//return listPeriodes;
+	//}
+	//public void setListPeriodes(List<ImportPeriod> listPeriodes) {
+		//this.listPeriodes = listPeriodes;
+	//}
 	/**
 	 * prération de la mise à jour 
 	 * d'une période
@@ -595,12 +613,13 @@ private boolean checkDupicated()
 		DialogHelper.openPeriodeLemansDialog();
 	}
 	
-//	public Period getSelectedPeriode() {
-//		return selectedPeriode;
-//	}
-//	public void setSelectedPeriode(Period selectedPeriode) {
-//		this.selectedPeriode = selectedPeriode;
-//	}
+	//public ImportPeriod getSelectedPeriode() {
+		//return selectedPeriode;
+	//}
+	//public void setSelectedPeriode(ImportPeriod selectedPeriode) {
+		//this.selectedPeriode = selectedPeriode;
+	//}
+	
 	public String getCodeClient() {
 		return codeClient;
 	}
@@ -661,18 +680,23 @@ private boolean checkDupicated()
 	{
 		setUpdateMode(false);
 		getDataListBean().reset();
-		ImportPeriod periode=new ImportPeriod();
-		periode.setEtat(PeriodeEnum.OUVERT);
-		periode.setTrace(Helper.createTrace());
-		periode.setExercice(getExercice());
+		ImportPeriod periode=ImportPeriod.builder()
+		.etat(PeriodeEnum.OUVERT.getStatus())
+		.trace(Helper.createTrace())
+		.exercice(getExercice())
+		.budget(getCodeBudget())
+		.module(getModuleName())
+		.build();
 		Integer maxNumero=0;
-		for(String num:getListNumPeriode()){
-		//	if(num.compareTo(maxNumero)>0)maxNumero=num;
+		for(Integer num:getListNumPeriode()){
+			if(num.compareTo(maxNumero)>0)maxNumero=num;
 		}
 		periode.setCode(""+(maxNumero.intValue()+1));
 		setSelectedPeriode(periode);	
 		DialogHelper.openPeriodeLemansDialog();
+		
 	}
+	
 	public boolean isUpdateMode() {
 		return updateMode;
 	}
@@ -730,7 +754,7 @@ private boolean checkDupicated()
 	/***
 	 *  mise à jour des valeurs 
 	 *  pour le bean DataListBean
-	 *  à partir de l'objet SpectacleDetails
+	 *  à partir de l'objet SpectacleDetails 
 	 * @param detail
 	 */
 	private void refreshDataListValues(SpectacleDetails detail) {
@@ -754,7 +778,7 @@ private boolean checkDupicated()
 			  if(isWithChild()) return;
 			  if(isUsedByImport(entity)) return;
 			try {	
-				  // service.remove(entity);
+				   service.remove(entity);
 					afterDelete(entity);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -770,20 +794,16 @@ private boolean checkDupicated()
 		
 	}
 
-
 	public void deleteSpectacleDetail(){
-		Spectacle loaded=null;
+		//Spectacle loaded=null;
 		logger.info("deleteSpectacleDetail()--start");
 			SpectacleDetails detail=getSelectedDetailSpec();
 			if(isUsedByImport(detail)) return;
 			try {	
-				   
-				loaded=service.removeSpectacleDetail(detail);
-				setSelectedSpectacle(loaded);
 		
-				getListSpectacles().set(getListSpectacles().indexOf(getListSpectacles()), loaded);
-				 getSelectedSpectacle().getDetails().remove(detail);
-				   logger.info(" getSelectedSpectacle().getDetails(): {}", getSelectedSpectacle().getDetails().size());
+			 getSelectedSpectacle().getDetails().remove(detail);
+			 service.save( getSelectedSpectacle());
+			
 			} catch (Exception e) {
 				e.printStackTrace();
 				HandlerJSFMessage.addErrorMessage(Util.getErrorMessageFromException(MsgEntry.FAILED, e));
@@ -793,6 +813,7 @@ private boolean checkDupicated()
 		
 			
 		}
+
 	private boolean isUsedByImport(Object entity) {
 //		List<ImportedData> list=null;
 //		
@@ -830,7 +851,7 @@ private boolean checkDupicated()
 		return false;
 	}
 
-	public List<String> getListTvaArtcile() {
+	public List<String> getListTvaSpectacle() {
 		if(listTvaSpectacle==null)
 		{
 			listTvaSpectacle= new ArrayList<>();
@@ -884,14 +905,18 @@ private boolean checkDupicated()
 			return true;
 		}
 }
-	public List<String> getListNumPeriode() {
-		if(listNumPeriode==null){
-			if(getExercice()!=null) {
-				//setListNumPeriode(service.getListNumPeriode(getExercice()));
-			}
+
+public List<Integer> getListNumPeriode() {
+	logger.info("getListNumPeriode() --start");
+	if (listNumPeriode == null) {
+		if (getExercice() != null) {
+
+			listNumPeriode = getAllListPeriodes().stream().map(p -> p.getNumero()).collect(Collectors.toList());
+			logger.info(" getListNumPeriode() {}", listNumPeriode.size());
 		}
-		return listNumPeriode;
 	}
+	return listNumPeriode;
+}
 public void gotoAddModPaiment(){
 		
 		setUpdateMode(false);
@@ -901,5 +926,35 @@ public void gotoAddModPaiment(){
 		setSelectedModPaiment(mp);
 		DialogHelper.openModPDialog();
 	}
+private String getModuleName() {
+	return "LEMANS_BT";
+}
+public void gotoUpdateModPaiment()
+{
+	setUpdateMode(true);
+	DialogHelper.openModPDialog();
+}
+
+/*public List<ImportPeriod> getAllListPeriodes() {
+	if (!isRequiredDataDone())
+		return new ArrayList<ImportPeriod>();
+	return getCommonService().getPeriodList(getExercice(), getCodeBudget(), getModuleName());
+
+}*/
+public List<ImportPeriod> getAllListPeriodes() {
+	logger.info("getAllListPeriodes() --start");
+	if (!isRequiredDataDone()) 
+		return new ArrayList<ImportPeriod>();
 	
+	 List<ImportPeriod> periodList = getCommonService().getPeriodList(getExercice(), getCodeBudget(), getModuleName(),getCodePeriode());
+	if(periodList!=null)
+	 logger.info(" getAllListPeriodes(): {} -->  End",periodList.stream().map(p -> p.getCode()).collect(Collectors.toList()));
+	return periodList;
+	
+
+}
+private String getCodePeriode() {
+	return codePeriode;
+}
+
 }
