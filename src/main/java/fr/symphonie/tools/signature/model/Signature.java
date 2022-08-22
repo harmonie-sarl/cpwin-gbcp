@@ -1,5 +1,6 @@
 package fr.symphonie.tools.signature.model;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -23,7 +24,99 @@ public class Signature {
 	private boolean dv;
 	private boolean lrec;
 	private boolean ar;
+	private boolean da;
+	private boolean liq;
+	private boolean liqOr;
+	private boolean ej;
+	private boolean vsf;
+	private boolean op;
+	private boolean asf;
 	
+	private BigDecimal seuilLrec;
+	private BigDecimal seuilAr;
+	private BigDecimal seuilDa;
+	private BigDecimal seuilEj;
+	private BigDecimal seuilAsf;
+	private BigDecimal seuilVsf;
+	private BigDecimal seuilLiq;
+	private BigDecimal seuilOr;
+	private BigDecimal seuilOp;
+	
+	
+	
+	
+	public BigDecimal getSeuilLrec() {
+		return seuilLrec;
+	}
+
+	public void setSeuilLrec(BigDecimal seuilLrec) {
+		this.seuilLrec = seuilLrec;
+	}
+
+	public BigDecimal getSeuilAr() {
+		return seuilAr;
+	}
+
+	public void setSeuilAr(BigDecimal seuilAr) {
+		this.seuilAr = seuilAr;
+	}
+
+	public BigDecimal getSeuilDa() {
+		return seuilDa;
+	}
+
+	public void setSeuilDa(BigDecimal seuilDa) {
+		this.seuilDa = seuilDa;
+	}
+
+	public BigDecimal getSeuilEj() {
+		return seuilEj;
+	}
+
+	public void setSeuilEj(BigDecimal seuilEj) {
+		this.seuilEj = seuilEj;
+	}
+
+	public BigDecimal getSeuilAsf() {
+		return seuilAsf;
+	}
+
+	public void setSeuilAsf(BigDecimal seuilAsf) {
+		this.seuilAsf = seuilAsf;
+	}
+
+	public BigDecimal getSeuilVsf() {
+		return seuilVsf;
+	}
+
+	public void setSeuilVsf(BigDecimal seuilVsf) {
+		this.seuilVsf = seuilVsf;
+	}
+
+	public BigDecimal getSeuilLiq() {
+		return seuilLiq;
+	}
+
+	public void setSeuilLiq(BigDecimal seuilLiq) {
+		this.seuilLiq = seuilLiq;
+	}
+
+	public BigDecimal getSeuilOr() {
+		return seuilOr;
+	}
+
+	public void setSeuilOr(BigDecimal seuilOr) {
+		this.seuilOr = seuilOr;
+	}
+
+	public BigDecimal getSeuilOp() {
+		return seuilOp;
+	}
+
+	public void setSeuilOp(BigDecimal seuilOp) {
+		this.seuilOp = seuilOp;
+	}
+
 	private Trace trace;
 	@Transient
 	private boolean updated;
@@ -124,7 +217,7 @@ public class Signature {
 	}
 
 	public boolean isAr() {
-		return ar;
+		return ar; 
 	}
 
 	public void setAr(boolean ar) {
@@ -171,6 +264,68 @@ public class Signature {
 		if(oldValue==null && newValue!=null) setUpdated(true);		
 		else if(!oldValue.equals(newValue)) setUpdated(true);
 		
+	}
+
+	public boolean isDa() {
+		return da;
+	}
+
+	public void setDa(boolean da) {
+		executeUpdate(this.da,da);
+		this.da = da;
+	}
+	public boolean isLiq() {
+		return liq;
+	}
+
+	public void setLiq(boolean liq) {
+		executeUpdate(this.liq,liq);
+		this.liq = liq;
+	}
+
+	public boolean isEj() {
+		return ej;
+	}
+
+	public void setEj(boolean ej) {
+		executeUpdate(this.ej,ej);
+		this.ej = ej;
+	}
+
+	public boolean isVsf() {
+		return vsf;
+	}
+
+	public void setVsf(boolean vsf) {
+		executeUpdate(this.vsf,vsf);
+		this.vsf = vsf;
+	}
+
+	public boolean isOp() {
+		return op;
+	}
+
+	public void setOp(boolean op) {
+		executeUpdate(this.op,op);
+		this.op = op;
+	}
+
+	public boolean isAsf() {
+		return asf;
+	}
+
+	public void setAsf(boolean asf) {
+		executeUpdate(this.asf,asf);
+		this.asf = asf;
+	}
+
+	public boolean isLiqOr() {
+		return liqOr;
+	}
+
+	public void setLiqOr(boolean liqOr) {
+		executeUpdate(this.liqOr,liqOr);
+		this.liqOr = liqOr;
 	}
 
 }

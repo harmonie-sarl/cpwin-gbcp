@@ -43,8 +43,56 @@
 			<basic name="lrec">
 				<column name="valid_lrec"></column>
 			</basic>
+			<basic name="seuilLrec">
+				<column name="seuil_lrec" column-definition="money default 0"></column>
+			</basic>
 			<basic name="ar">
 				<column name="valid_ar"></column>
+			</basic>
+			<basic name="seuilAr">
+				<column name="seuil_ar" column-definition="money default 0"></column>
+			</basic>
+			<basic name="da">
+				<column name="valid_da"></column>
+			</basic>
+			<basic name="seuilDa">
+				<column name="seuil_da" column-definition="money default 0"></column>
+			</basic>
+			<basic name="ej">
+				<column name="valid_ej"></column>
+			</basic>
+			<basic name="seuilEj">
+				<column name="seuil_ej" column-definition="money default 0"></column>
+			</basic>
+			<basic name="asf">
+				<column name="valid_asf"></column>
+			</basic>
+				<basic name="seuilAsf">
+				<column name="seuil_asf" column-definition="money default 0"></column>
+			</basic>
+			<basic name="vsf">
+				<column name="valid_vsf"></column>
+			</basic>
+			<basic name="seuilVsf">
+				<column name="seuil_vsf" column-definition="money default 0"></column>
+			</basic>
+			<basic name="liq">
+				<column name="valid_liq"></column>
+			</basic>
+			<basic name="seuilLiq">
+				<column name="seuil_liq" column-definition="money default 0"></column>
+			</basic>
+			<basic name="liqOr">
+				<column name="valid_or"></column>
+			</basic>
+		   <basic name="seuilOr">
+				<column name="seuil_or" column-definition="money default 0"></column>
+			</basic>
+			<basic name="op">
+				<column name="valid_op"></column>
+			</basic>		
+			<basic name="seuilOp">
+				<column name="seuil_op" column-definition="money default 0"></column>
 			</basic>
 			<embedded name="trace">
 			</embedded>

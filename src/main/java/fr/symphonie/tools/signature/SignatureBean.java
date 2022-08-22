@@ -380,6 +380,27 @@ public class SignatureBean extends CommonToolsBean implements Serializable{
 			return tasks;
 		}	
 		
+		public String findUserName(String codeUtil) {
+			return getUserByLogin(codeUtil).getLastName();
+			
+		}
+		public boolean isAutorisedParam(String param) {	
+			String value=null;
+				try {
+					value=getCommonService().getConfigParam(param,null);
+				} catch (MissingConfiguration e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				logger.info("isAutorisedParam: param : value {}",param ,value);
+				return value.equals("0")? false : value.equals("1");
+			//return BudgetHelper.getBooleanConfigParam(value);
+			//String nomEtabl=getCommonService().getConfigParam("fSignature_da",null);
+			//return BudgetHelper.getBooleanConfigParam("fSignature_da");
+		}
+	
+
+		
 	
 }
 

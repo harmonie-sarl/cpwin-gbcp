@@ -28,75 +28,81 @@
 				style="width:100%;text-align:center" rowIndexVar="creditIndex"
 				emptyMessage="#{msgs['datatable.empty']}"
 				value="#{signatBean.signatureList}" paginator="true" rows="15">
-				<p:columnGroup type="header">
-				<p:row>
-				<p:column headerText="Id" style="text-align:center" rowspan="2" />
-				<p:column headerText="#{msgs['codeSignataire']}" style="text-align:center" rowspan="2" />
-				<p:column headerText="#{msgs['stardate']}" style="text-align:center" rowspan="2" />
-				<p:column headerText="#{msgs['endDate']}" style="text-align:center" rowspan="2" />
-				<p:column headerText="#{msgs['function']}" style="text-align:center" rowspan="2" />
-				<p:column headerText="#{msgs['autorite']}" style="text-align:center" colspan="7" />
-				<p:column headerText="#{msgs['btn.consulter']}" style="text-align:center" rowspan="2" />
-				<p:column headerText="#{msgs['btn.modifier']}" style="text-align:center" rowspan="2" />
-				</p:row>
-						<p:row>
-						<p:column headerText="#{msgs['sf']}" style="text-align:center"  />
-						<p:column headerText="#{msgs['dp']}" style="text-align:center"  />
-						<p:column headerText="#{msgs['dr']}" style="text-align:center"  />
-						<p:column headerText="#{msgs['dv']}" style="text-align:center"  />
-						<p:column headerText="#{msgs['lrec']}" style="text-align:center"  />
-						<p:column headerText="#{msgs['ar']}" style="text-align:center"  />
-						<p:column headerText="#{msgs['actif']}" style="text-align:center"  />
-						</p:row>
-						</p:columnGroup>
-						<p:column>
+				
+						<p:column  headerText="Id" style="text-align:center" >
                               <h:outputText value="#{sign.id}"/>                                
                           </p:column>
-						 <p:column>
+						 <p:column headerText="#{msgs['codeSignataire']}" style="text-align:center">
                               <h:outputText value="#{sign.codeUtil}"/>                                
                           </p:column>
-				           <p:column>
-                              <h:outputText value="#{sign.startDate}">  
+                           <p:column headerText="#{msgs['login.username']}" style="text-align:center">
+                              <h:outputText value="#{signatBean.findUserName(sign.codeUtil)}"/>                                
+                          </p:column>
+				           <p:column headerText="#{msgs['stardate']}" style="text-align:center">
+                              <h:outputText  value="#{sign.startDate}">  
                               <f:convertDateTime pattern="dd/MM/yyyy" type="date" timeZone="Europe/Paris" />
                               </h:outputText>
                           </p:column>
-				           <p:column>
-                              <h:outputText value="#{sign.endDate}">  
+				           <p:column headerText="#{msgs['endDate']}" style="text-align:center">
+                              <h:outputText value="#{sign.endDate}" >  
                               <f:convertDateTime pattern="dd/MM/yyyy" type="date" timeZone="Europe/Paris" />
                               </h:outputText>
                           </p:column>
-			               <p:column>
+			               <p:column headerText="#{msgs['function']}" style="text-align:center">
                               <h:outputText value="#{sign.function}" />  
                           </p:column>
-				           <p:column>
+                            <p:column headerText="#{msgs['sf']}" style="text-align:center" rendered="#{signatBean.isAutorisedParam('fSignature_sf')}">
                                <h:outputText value="#{sign.sf?'Oui':'Non'}" /> 
                           </p:column>
-						   <p:column>
-                             <h:outputText value="#{sign.dp?'Oui':'Non'}" /> 
+                            <p:column headerText="#{msgs['dp']}" style="text-align:center" rendered="#{signatBean.isAutorisedParam('fSignature_dp')}">
+                               <h:outputText value="#{sign.dp?'Oui':'Non'}"  /> 
                           </p:column>
-						   <p:column>
-                               <h:outputText value="#{sign.dr?'Oui':'Non'}" /> 
+                            <p:column headerText="#{msgs['dr']}" style="text-align:center" rendered="#{signatBean.isAutorisedParam('fSignature_dr')}">
+                               <h:outputText value="#{sign.dr?'Oui':'Non'}"  /> 
                           </p:column>
-				           <p:column>
-                               <h:outputText value="#{sign.dv?'Oui':'Non'}" /> 
+                            <p:column headerText="#{msgs['dv']}" style="text-align:center" rendered="#{signatBean.isAutorisedParam('fSignature_dv')}">
+                               <h:outputText value="#{sign.dv?'Oui':'Non'}"  /> 
                           </p:column>
-			                 <p:column>
+				           <p:column headerText="#{msgs['da']}" style="text-align:center" rendered="#{signatBean.isAutorisedParam('fSignature_da')}">
+                               <h:outputText value="#{sign.da?'Oui':'Non'}"  /> 
+                          </p:column>
+                            <p:column headerText="#{msgs['ej']}" style="text-align:center" rendered="#{signatBean.isAutorisedParam('fSignature_ej')}">
+                               <h:outputText value="#{sign.ej?'Oui':'Non'}" /> 
+                          </p:column>
+                            <p:column headerText="#{msgs['asf']}" style="text-align:center" rendered="#{signatBean.isAutorisedParam('fSignature_asf')}">
+                               <h:outputText value="#{sign.asf?'Oui':'Non'}" /> 
+                          </p:column>
+                            <p:column headerText="#{msgs['vsf']}" style="text-align:center" rendered="#{signatBean.isAutorisedParam('fSignature_vsf')}">
+                               <h:outputText value="#{sign.vsf?'Oui':'Non'}" /> 
+                          </p:column>
+						   <p:column headerText="#{msgs['liq.dep']}" style="text-align:center" rendered="#{signatBean.isAutorisedParam('fSignature_liq')}">
+                             <h:outputText  value="#{sign.liq?'Oui':'Non'}" /> 
+                          </p:column>
+						   <p:column headerText="#{msgs['liq.or']}" rendered="#{signatBean.isAutorisedParam('fSignature_or')}">
+                             <h:outputText value="#{sign.liqOr?'Oui':'Non'}" /> 
+                          </p:column>
+				         
+			               
+						  <p:column headerText="#{msgs['op']}" style="text-align:center" rendered="#{signatBean.isAutorisedParam('fSignature_op')}" >
+                               <h:outputText value="#{sign.op?'Oui':'Non'}" /> 
+                          </p:column>
+                            <p:column  headerText="#{msgs['lrec']}" style="text-align:center" rendered="#{signatBean.isAutorisedParam('fSignature_lrec')}">
                                <h:outputText value="#{sign.lrec?'Oui':'Non'}" /> 
                           </p:column>
-						  <p:column>
+                           <p:column headerText="#{msgs['liq.ar']}" style="text-align:center" rendered="#{signatBean.isAutorisedParam('fSignature_ar')}">
                                <h:outputText value="#{sign.ar?'Oui':'Non'}" /> 
                           </p:column>
-                           <p:column>
+                           <p:column headerText="#{msgs['actif']}" style="text-align:center" >
                                <h:outputText value="#{sign.actif?'Oui':'Non'}" /> 
                           </p:column>
-						    <p:column>
+						    <p:column headerText="#{msgs['btn.consulter']}" style="text-align:center">
                             <p:commandButton value="#{msgs['telech']}"   oncomplete="PF('dlgpdf').show()"  update="detailsForm:dlgpdf"  icon="searchIcon" title=" " > 
                            <f:setPropertyActionListener value="#{sign}" target="#{signatBean.selectedSignature}"></f:setPropertyActionListener>
            
                            </p:commandButton>
                               </p:column>
 
-				<p:column>
+				<p:column headerText="#{msgs['btn.modifier']}" style="text-align:center">
 
 					<p:commandButton 
 						title="#{msgs['editer']}" icon="updateIcon" 
