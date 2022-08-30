@@ -78,6 +78,7 @@ public class SignatureBean extends CommonToolsBean implements Serializable{
 		String message=getEmailMessage();
 		String from=AppCfgConfig.getInstance().getMailPropertiesFrom();
 		String to=AppCfgConfig.getInstance().getSignatureEmailTo();
+		
 				
 		Thread sendEmailsThread = new Thread(() -> {			
 			
@@ -394,9 +395,13 @@ public class SignatureBean extends CommonToolsBean implements Serializable{
 				}
 				logger.info("isAutorisedParam: param : value {}",param ,value);
 				return value.equals("0")? false : value.equals("1");
-			//return BudgetHelper.getBooleanConfigParam(value);
-			//String nomEtabl=getCommonService().getConfigParam("fSignature_da",null);
-			//return BudgetHelper.getBooleanConfigParam("fSignature_da");
+		
+		}
+		
+		public void onSelectEj() {
+			
+				getSelectedSignature().setSeuilEj(null);
+			
 		}
 	
 

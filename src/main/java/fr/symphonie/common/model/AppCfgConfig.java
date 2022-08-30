@@ -99,8 +99,39 @@ public class AppCfgConfig {
 	 * Signature Module
 	 */
 	private ConfigParam signatureLicence=new ConfigParam("fsignature") ;
+	private ConfigParam sfSignatLicence=new ConfigParam("fsignature_sf") ;
+	private ConfigParam dpSignatLicence=new ConfigParam("fsignature_dp") ;
+	private ConfigParam drSignatLicence=new ConfigParam("fsignature_dr") ;
+	private ConfigParam dvSignatLicence=new ConfigParam("fsignature_dv") ;
+	private ConfigParam daSignatLicence=new ConfigParam("fsignature_da") ;
+	private ConfigParam ejSignatLicence=new ConfigParam("fsignature_ej") ;
+	private ConfigParam arSignatLicence=new ConfigParam("fsignature_ar") ;
+	private ConfigParam asfSignatLicence=new ConfigParam("fsignature_asf") ;
+	private ConfigParam vsfSignatLicence=new ConfigParam("fsignature_vsf") ;
+	private ConfigParam liqSignatLicence=new ConfigParam("fsignature_liq") ;
+	private ConfigParam orSignatLicence=new ConfigParam("fsignature_or") ;
+	private ConfigParam opSignatLicence=new ConfigParam("fsignature_op") ;
+	private ConfigParam lrecSignatLicence=new ConfigParam("fsignature_lrec") ;
+	/**
+	 * Signature required Params
+	 */
+	private ConfigParam daSignatRequised=new ConfigParam("fSignature_da_requise") ;
+	private ConfigParam ejSignatRequised=new ConfigParam("fSignature_ej_requise") ;
+	private ConfigParam liqSignatRequised=new ConfigParam("fSignature_liq_requise");
+	private ConfigParam asfSignatRequised=new ConfigParam("fSignature_asf_requise");
+	private ConfigParam vsfSignatRequised=new ConfigParam("fSignature_vsf_requise");
+	private ConfigParam orSignatRequised=new ConfigParam("fSignature_or_requise");
+	private ConfigParam opSignatRequised=new ConfigParam("fSignature_op_requise");
+	private ConfigParam lrecSignatRequised=new ConfigParam("fSignature_lrec_requise");
+	private ConfigParam arSignatRequised=new ConfigParam("fSignature_ar_requise");
+	
+	
+	
+	
 	
 	private ConfigParam dpGenerationLicence=new ConfigParam("fdpGeneration") ;
+	
+
 	
 	/**
 	 * Déclaration des properties config
@@ -307,5 +338,73 @@ public class AppCfgConfig {
 	
 		return Boolean.valueOf(configuredValue);
 	}
+	public String getSfSignatLicence() throws MissingConfiguration{
+		return getDbConfigValue(sfSignatLicence);
+	}
+	public String getDpSignatLicence() throws MissingConfiguration{
+		return getDbConfigValue(dpSignatLicence);
+	}
+	public String getDrSignatLicence() throws MissingConfiguration{
+		return getDbConfigValue(drSignatLicence);
+	}
+	public String getDvSignatLicence() throws MissingConfiguration{
+		return getDbConfigValue(dvSignatLicence);
+	}
+	public String getDaSignatLicence() throws MissingConfiguration{
+		return getDbConfigValue(daSignatLicence);
+	}
+	public String getEjSignatLicence() throws MissingConfiguration{
+		return getDbConfigValue(ejSignatLicence);
+	}
+	public String getArSignatLicence() throws MissingConfiguration{
+		return getDbConfigValue(arSignatLicence);
+	}
+	public String getAsfSignatLicence() throws MissingConfiguration{
+		return getDbConfigValue(asfSignatLicence);
+	}
+	public String getVsfSignatLicence() throws MissingConfiguration{
+		return getDbConfigValue(vsfSignatLicence);
+	}
+	public String getLiqSignatLicence() throws MissingConfiguration{
+		return getDbConfigValue(liqSignatLicence);
+	}
+	public String getOrSignatLicence() throws MissingConfiguration{
+		return getDbConfigValue(orSignatLicence);
+	}
+	public String getOpSignatLicence() throws MissingConfiguration{
+		return getDbConfigValue(opSignatLicence);
+	}
+	public String getLrecSignatLicence() throws MissingConfiguration{
+		return getDbConfigValue(lrecSignatLicence);
+	}
+	public String getDaSignatRequise() throws MissingConfiguration{
+		return getDbConfigValue(daSignatRequised);
+	}
+	public String getEjSignatRequise() throws MissingConfiguration{
+		return getDbConfigValue(ejSignatRequised);
+	}
+	public String getLiqSignatRequise() throws MissingConfiguration{
+		return getDbConfigValue(liqSignatRequised);
+	}
+	public String getAsfSignatRequise() throws MissingConfiguration{
+		return getDbConfigValue(asfSignatRequised);
+	}
+	public String getVsfSignatRequise() throws MissingConfiguration{
+		return getDbConfigValue(vsfSignatRequised);
+	}
+	public String getOrSignatRequise() throws MissingConfiguration{
+		return getDbConfigValue(orSignatRequised);
+	}
+	public String getOpSignatRequise() throws MissingConfiguration{
+		return getDbConfigValue(opSignatRequised);
+	}
+	public String getLrecSignatRequise() throws MissingConfiguration{
+		return getDbConfigValue(lrecSignatRequised);
+	}
+	public String getArSignatRequise() throws MissingConfiguration{
+		return getDbConfigValue(arSignatRequised);
+	}
+	
+
 	
 }

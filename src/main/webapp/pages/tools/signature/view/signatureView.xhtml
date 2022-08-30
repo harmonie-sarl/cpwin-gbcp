@@ -81,92 +81,102 @@
 				</h:panelGrid>
 				<br />
 				<p:panel id="autoritePanel" style="width:100%;" header="#{msgs['autorite']}" rendered="#{(signatBean.selectedUser!=null) || (signatBean.updateMode)}" >
+				
 				<h:panelGrid columns="3" style="width:100%;vertical-align:top;align: left;"  >
-				<h:panelGrid columns="4" cellspacing="3" >
-	            <h:outputLabel value="#{msgs['da']}" style="font-weight:bold" for="da"	 />
-				<h:selectBooleanCheckbox id="da" value="#{signatBean.selectedSignature.da}" style="display:block;width:100px">
+				<h:panelGrid columns="4"  cellspacing="3" cellpadding="3" >
+					<h:selectBooleanCheckbox id="da" value="#{signatBean.selectedSignature.da}" >
 				 <p:ajax event="change" update="autoritePanel" /> 
 				</h:selectBooleanCheckbox>
+	            <h:outputLabel value="#{msgs['da']}" style="font-weight:bold" for="da"	 />
+			
 				<h:outputLabel value="#{msgs['seuil']}" for="seuilDa" rendered="#{signatBean.selectedSignature.da}"	 /> 
 				
 				
 				<p:inputNumber id="seuilDa" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilDa}" rendered="#{signatBean.selectedSignature.da}" > </p:inputNumber>
 				</h:panelGrid>
-				<h:panelGrid columns="4" cellspacing="3">
-				<h:outputLabel style="font-weight:bold" value="#{msgs['ej']}" for="ej"	 />
-				<h:selectBooleanCheckbox id="ej" value="#{signatBean.selectedSignature.ej}" style="display:block;width:90px">
+				<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+				<h:selectBooleanCheckbox id="ej" value="#{signatBean.selectedSignature.ej}" >
 				 <p:ajax event="change" update="autoritePanel" /> 
 				</h:selectBooleanCheckbox>
+				<h:outputLabel style="font-weight:bold" value="#{msgs['ej']}" for="ej"	 />
+				
 				<h:outputLabel value="#{msgs['seuil']}" for="seuilEj" rendered="#{signatBean.selectedSignature.ej}"	 />
 				
 				
 				
 				<p:inputNumber id="seuilEj" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilEj}" rendered="#{signatBean.selectedSignature.ej}"> </p:inputNumber>
 				</h:panelGrid>
-				<h:panelGrid columns="4" cellspacing="3">
-				<h:outputLabel style="font-weight:bold" value="#{msgs['asf']}" for="asf"	 />
-				<h:selectBooleanCheckbox id="asf" value="#{signatBean.selectedSignature.asf}" style="display:block;width:100px">
+				<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+					<h:selectBooleanCheckbox id="asf" value="#{signatBean.selectedSignature.asf}" >
 				 <p:ajax event="change" update="autoritePanel" /> 
 				</h:selectBooleanCheckbox>
+				<h:outputLabel style="font-weight:bold" value="#{msgs['asf']}" for="asf"	 />
+			
 				<h:outputLabel value="#{msgs['seuil']}" for="seuilAsf"	rendered="#{signatBean.selectedSignature.asf}" />
 			
 				<p:inputNumber id="seuilAsf" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilAsf}" rendered="#{signatBean.selectedSignature.asf}" > </p:inputNumber>
 				</h:panelGrid>
-				<h:panelGrid columns="4" cellspacing="3">
-				<h:outputLabel style="font-weight:bold" value="#{msgs['vsf']}" for="vsf"	 />
-				<h:selectBooleanCheckbox id="vsf" value="#{signatBean.selectedSignature.vsf}">
+				<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+					<h:selectBooleanCheckbox id="vsf" value="#{signatBean.selectedSignature.vsf}">
 				 <p:ajax event="change" update="autoritePanel" /> 
 				</h:selectBooleanCheckbox>
+				<h:outputLabel style="font-weight:bold" value="#{msgs['vsf']}" for="vsf"	 />
+			
 				<h:outputLabel value="#{msgs['seuil']}" for="seuilVsf" rendered="#{signatBean.selectedSignature.vsf}"	 />
 				
 				
 				<p:inputNumber id="seuilVsf" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilVsf}" rendered="#{signatBean.selectedSignature.vsf}"> </p:inputNumber>
 				</h:panelGrid>
-				<h:panelGrid columns="4" cellspacing="3">
-				<h:outputLabel style="font-weight:bold" value="#{msgs['liq.dep']}" for="liq"	 />
-				<h:selectBooleanCheckbox id="liq" value="#{signatBean.selectedSignature.liq}">
-				 <p:ajax event="change" update="autoritePanel" /> 
+				<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+				<h:selectBooleanCheckbox  id="liq" value="#{signatBean.selectedSignature.liq}">
+				 <p:ajax event="change"  update="autoritePanel" /> 
 				</h:selectBooleanCheckbox>
+				<h:outputLabel style="font-weight:bold" value="#{msgs['liq.dep']}" for="liq"	 />
+				
 					<h:outputLabel value="#{msgs['seuil']}" for="seuilLiq" rendered="#{signatBean.selectedSignature.liq}"	 />
 			
 			
 				<p:inputNumber id="seuilLiq" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilLiq}" rendered="#{signatBean.selectedSignature.liq}" > </p:inputNumber>
 				</h:panelGrid>
-					<h:panelGrid columns="4" cellspacing="3">
-				<h:outputLabel style="font-weight:bold" value="#{msgs['liq.or']}" for="liqOr"	 />
-				<h:selectBooleanCheckbox id="liqOr" value="#{signatBean.selectedSignature.liqOr}">
+					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+						<h:selectBooleanCheckbox id="liqOr" value="#{signatBean.selectedSignature.liqOr}">
 				 <p:ajax event="change" update="autoritePanel" /> 
 				</h:selectBooleanCheckbox>
+				<h:outputLabel style="font-weight:bold" value="#{msgs['liq.or']}" for="liqOr"	 />
+			
 					<h:outputLabel value="#{msgs['seuil']}" for="seuilOr"	rendered="#{signatBean.selectedSignature.liqOr}" />
 			
 				
 				<p:inputNumber id="seuilOr"  size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilOr}" rendered="#{signatBean.selectedSignature.liqOr}" > </p:inputNumber>
 				</h:panelGrid>
-					<h:panelGrid columns="4" cellspacing="3">
-				<h:outputLabel style="font-weight:bold" value="#{msgs['op']}" for="op"	 />
-				<h:selectBooleanCheckbox id="op" value="#{signatBean.selectedSignature.op}">
+					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+						<h:selectBooleanCheckbox id="op" value="#{signatBean.selectedSignature.op}">
 				 <p:ajax event="change" update="autoritePanel" /> 
 				</h:selectBooleanCheckbox>
+				<h:outputLabel style="font-weight:bold" value="#{msgs['op']}" for="op"	 />
+			
 					<h:outputLabel value="#{msgs['seuil']}" for="seuilOp"	rendered="#{ signatBean.selectedSignature.op}" />
 				
 			
 				<p:inputNumber id="seuilOp" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilOp}" rendered="#{ signatBean.selectedSignature.op}" > </p:inputNumber>
 				</h:panelGrid>
-				<h:panelGrid columns="4" cellspacing="3">
-				<h:outputLabel style="font-weight:bold" value="#{msgs['lrec']}" for="lrec"	 />
-				<h:selectBooleanCheckbox id="lrec" value="#{signatBean.selectedSignature.lrec}">
+				<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+					<h:selectBooleanCheckbox id="lrec" value="#{signatBean.selectedSignature.lrec}">
 				 <p:ajax event="change" update="autoritePanel" /> 
 				</h:selectBooleanCheckbox>
+				<h:outputLabel style="font-weight:bold" value="#{msgs['lrec']}" for="lrec"	 />
+			
 				<h:outputLabel value="#{msgs['seuil']}" for="seuilLrec"	rendered="#{ signatBean.selectedSignature.lrec}" />
 			
 				
 				<p:inputNumber id="seuilLrec" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilLrec}" rendered="#{ signatBean.selectedSignature.lrec}" > </p:inputNumber>
 				</h:panelGrid>
-				<h:panelGrid columns="4" cellspacing="3">
-				<h:outputLabel style="font-weight:bold" value="#{msgs['ar']}" for="ar"	 />
-				<h:selectBooleanCheckbox id="ar" value="#{signatBean.selectedSignature.ar}">
+				<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+					<h:selectBooleanCheckbox id="ar" value="#{signatBean.selectedSignature.ar}">
 				 <p:ajax event="change" update="autoritePanel" /> 
 				</h:selectBooleanCheckbox>
+				<h:outputLabel style="font-weight:bold" value="#{msgs['ar']}" for="ar"	 />
+			
 				<h:outputLabel value="#{msgs['seuil']}" for="seuilAr"	rendered="#{signatBean.selectedSignature.ar}" />
 				
 				
