@@ -10,7 +10,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.logging.log4j.util.Strings;
+//import org.apache.logging.log4j.util.Strings;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -229,7 +230,7 @@ public class DasHelper {
 			tiersDas.setRs(cpwinTiers.getNom());			
 			break;
 		case NP:
-			if((Strings.isBlank(cpwinTiers.getNomPersonne()))&&(Strings.isBlank(cpwinTiers.getPrenom())))
+			if((StringUtils.isBlank(cpwinTiers.getNomPersonne()))&&(StringUtils.isBlank(cpwinTiers.getPrenom())))
 			{			
 				try
 				{
@@ -242,7 +243,7 @@ public class DasHelper {
 			}
 			else
 			{
-			nom=Strings.isBlank(cpwinTiers.getNomPersonne())?cpwinTiers.getNom():cpwinTiers.getNomPersonne();
+			nom=StringUtils.isBlank(cpwinTiers.getNomPersonne())?cpwinTiers.getNom():cpwinTiers.getNomPersonne();
 			tiersDas.setNom(nom);			
 			tiersDas.setPrenom(cpwinTiers.getPrenom());	
 			}

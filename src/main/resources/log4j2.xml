@@ -1,190 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
     <Configuration name="tn.ha.Log4j2">
     <Properties>
-    <Property name="logs_path">${sys:catalina.base}/logs</Property>
-    <Property name="budget_filename">${logs_path}/budget.log </Property>
-	<Property name="pesv2_filename">${logs_path}/pesv2.log </Property>
-     <Property name="fwk_filename">${logs_path}/framworks.log </Property>
-     <Property name="autre_filename">${logs_path}/autres.log </Property>
-     <Property name="GTS_filename">${logs_path}/GTS.log </Property>
+    <Property name="logs_path">${logs_path}</Property>
+<!-- <Property name="logs_path">c:\logs\PESV2</Property> -->
+<!--     <Property name="budget_filename">${logs_path}/budget.log </Property> -->
+<!-- 	<Property name="pesv2_filename">${logs_path}/pesv2.log </Property> -->
+<!--      <Property name="fwk_filename">${logs_path}/framworks.log </Property> -->
+<!--      <Property name="autre_filename">${logs_path}/autres.log </Property> -->
+     <Property name="Pattern_format">%d{dd-MM-yyyy - HH:mm:ss} %p %c{3} - %m%n</Property>
   </Properties>
       <Appenders>
-          <RollingFile name="budget" fileName="${budget_filename}" append="true" immediateFlush="true"
-          filePattern="${logs_path}/$${date:yyyy-MM}/budget-$${date:yyyy-MM-dd}-%i.log.zip">
-      <PatternLayout pattern="%d{dd-MM-yyyy - HH:mm:ss} %p %c{2} - %m%n"/>
-      <Policies>
-      <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
-      <SizeBasedTriggeringPolicy size="20 MB" />
-      </Policies>
-       <DefaultRolloverStrategy max="10"/>
-    </RollingFile>
-	 <RollingFile name="Pesv2" fileName="${pesv2_filename}" append="true" immediateFlush="true"
-          filePattern="${logs_path}/$${date:yyyy-MM}/Pesv2-$${date:yyyy-MM-dd}-%i.log.gz">
-      <PatternLayout pattern="%d{dd-MM-yyyy - HH:mm:ss} %p %c{2} - %m%n"/>
-      <Policies>
-      <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
-      <SizeBasedTriggeringPolicy size="20 MB" />
-      </Policies>
-       <DefaultRolloverStrategy max="10"/>
-    </RollingFile>
-    
-     <RollingFile name="gts" fileName="${GTS_filename}" append="true" immediateFlush="true"
-          filePattern="${logs_path}/$${date:yyyy-MM}/GTS-$${date:yyyy-MM-dd}-%i.log.gz">
-      <PatternLayout pattern="%d{dd-MM-yyyy - HH:mm:ss} %p %c{2} - %m%n"/>
-      <Policies>
-      <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
-      <SizeBasedTriggeringPolicy size="20 MB" />
-      </Policies>
-       <DefaultRolloverStrategy max="10"/>
-    </RollingFile>
-     <File name="common" fileName="${logs_path}/common.log" append="true" immediateFlush="true">
-           <PatternLayout pattern="%d{dd-MM-yyyy - HH:mm:ss} %p %c{2} - %m%n"/>
-     </File>
+<!--        <appender name="Console" -->
+<!--         class="ch.qos.logback.core.ConsoleAppender"> -->
+<!--         <layout class="ch.qos.logback.classic.PatternLayout"> -->
+<!--             <Pattern> -->
+<!--                 %black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable -->
+<!--             </Pattern> -->
+<!--         </layout> -->
+<!--     </appender> -->
+<!--           <RollingFile name="budget" fileName="${budget_filename}" append="true" immediateFlush="true" -->
+<!--           filePattern="${logs_path}/$${date:yyyy-MM}/budget-$${date:yyyy-MM-dd}-%i.log.zip"> -->
+<!--       <PatternLayout pattern="${Pattern_format}"/> -->
+<!--       <Policies> -->
+<!--       <CronTriggeringPolicy schedule="0 0 0 * * ?"/> -->
+<!--       <SizeBasedTriggeringPolicy size="20 MB" /> -->
+<!--       </Policies> -->
+<!--        <DefaultRolloverStrategy max="10"/> -->
+<!--     </RollingFile> -->
+<!-- 	 <RollingFile name="Pesv2" fileName="${pesv2_filename}" append="true" immediateFlush="true" -->
+<!--           filePattern="${logs_path}/$${date:yyyy-MM}/Pesv2-$${date:yyyy-MM-dd}-%i.log.gz"> -->
+<!--       <PatternLayout pattern="${Pattern_format}"/> -->
+<!--       <Policies> -->
+<!--       <CronTriggeringPolicy schedule="0 0 0 * * ?"/> -->
+<!--       <SizeBasedTriggeringPolicy size="20 MB" /> -->
+<!--       </Policies> -->
+<!--        <DefaultRolloverStrategy max="10"/> -->
+<!--     </RollingFile> -->
    
-     <File name="das" fileName="${logs_path}/tools-das.log" append="true" immediateFlush="true">
-           <PatternLayout pattern="%d{dd-MM-yyyy - HH:mm:ss} %p %c{2} - %m%n"/>
-     </File>
-     <File name="recette" fileName="${logs_path}/tools-recette.log" append="true" immediateFlush="true">
-           <PatternLayout pattern="%d{dd-MM-yyyy - HH:mm:ss} %p %c{2} - %m%n"/>
-     </File>
-     <File name="sct" fileName="${logs_path}/tools-sct.log" append="true" immediateFlush="true">
-           <PatternLayout pattern="%d{dd-MM-yyyy - HH:mm:ss} %p %c{2} - %m%n"/>
-     </File>
-     <File name="meta4dai" fileName="${logs_path}/tools-meta4dai.log" append="true" immediateFlush="true">
-           <PatternLayout pattern="%d{dd-MM-yyyy - HH:mm:ss} %p %c{2} - %m%n"/>
-     </File>
-     <File name="etudiant" fileName="${logs_path}/tools-nantes-etudiant.log" append="true" immediateFlush="true">
-           <PatternLayout pattern="%d{dd-MM-yyyy - HH:mm:ss} %t %p %c{2} - %m%n"/>
-     </File>
-     <File name="crc" fileName="${logs_path}/tools-crc.log" append="true" immediateFlush="true">
-           <PatternLayout pattern="%d{dd-MM-yyyy - HH:mm:ss} %t %p %c{2} - %m%n"/>
-     </File>
-      <File name="signature" fileName="${logs_path}/tools-signature.log" append="true" immediateFlush="true">
-           <PatternLayout pattern="%d{dd-MM-yyyy - HH:mm:ss} %t %p %c{2} - %m%n"/>
-     </File>
-     <File name="initialisation" fileName="${logs_path}/initialisation.log" append="true" immediateFlush="true">
-           <PatternLayout pattern="%d{dd-MM-yyyy - HH:mm:ss} %t %p %c{2} - %m%n"/>
-     </File>
-      <File name="dp" fileName="${logs_path}/tools-dp.log" append="true" immediateFlush="true">
-           <PatternLayout pattern="%d{dd-MM-yyyy - HH:mm:ss} %t %p %c{2} - %m%n"/>
-     </File>
-   
-        <File name="fwk" fileName="${fwk_filename}" append="true" immediateFlush="true">
-          <PatternLayout pattern="%d %p %c - %m%n"/>
-        </File>
-        <File name="autre" fileName="${autre_filename}" append="true" immediateFlush="false">
-          <PatternLayout pattern="%d %p %c{2} - %m%n"/>
-        </File>
+<!--         <File name="fwk" fileName="${fwk_filename}" append="true" immediateFlush="true"> -->
+<!--           <PatternLayout pattern="${Pattern_format}"/> -->
+<!--         </File> -->
+<!--         <File name="autre" fileName="${autre_filename}" append="true" immediateFlush="false"> -->
+<!--          <PatternLayout pattern="${Pattern_format}"/> -->
+<!--         </File> -->
         
         <Console name="Console" target="SYSTEM_OUT">
       <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
     </Console>
       </Appenders>
-      <Loggers>
+<!--       <Loggers> -->
+<!--       <Logger name="fr.symphonie.budget" level="debug" additivity="false"> -->
+<!--       <AppenderRef ref="budget" level="debug"> -->
+<!--       </AppenderRef> -->
+<!--     </Logger> -->
+<!-- 	 <Logger name="fr.symphonie.pesv2" level="debug" additivity="false"> -->
+<!--       <AppenderRef ref="Pesv2" level="debug"> -->
+<!--       </AppenderRef> -->
+<!--     </Logger> -->
+<!--     <Logger name="fr.symphonie.xml" level="debug" additivity="false"> -->
+<!--       <AppenderRef ref="Pesv2" level="debug"> -->
+<!--       </AppenderRef> -->
+<!--     </Logger> -->
+<!-- 	 <Logger name="fr.gouv" level="debug" additivity="false"> -->
+<!--       <AppenderRef ref="Pesv2" level="debug"> -->
+<!--       </AppenderRef> -->
+<!--     </Logger> -->
+<!--    <Logger name="fr.symphonie.cpwin" level="debug" additivity="false"> -->
+<!--       <AppenderRef ref="autre" level="debug"> -->
+<!--       </AppenderRef> -->
+<!--     </Logger> -->
+<!--      <Logger name="fr.symphonie.util" level="debug" additivity="false"> -->
+<!--       <AppenderRef ref="autre" level="debug"> -->
+<!--       </AppenderRef> -->
+<!--     </Logger> -->
+<!--      <Logger name="org.springframework"  additivity="false"> -->
+<!--       <AppenderRef ref="fwk" level="info"/> -->
+<!--       <AppenderRef ref="Console" level="error"/> -->
+<!--     </Logger> -->
+<!--   <Logger name="org.hibernate"  additivity="false"> -->
+<!--       <AppenderRef ref="fwk" level="info"/> -->
+<!--       <AppenderRef ref="Console" level="error"/> -->
+<!--     </Logger> -->
+<!--     <Logger name="org.springframework.security.config"  additivity="false" level="off"> -->
+<!--       <AppenderRef ref="fwk" /> -->
+<!--     </Logger> -->
+<!--       <Logger name="org.hibernate.jpa.internal.metamodel"  additivity="false" level="off"> -->
+<!--       <AppenderRef ref="fwk" /> -->
+<!--     </Logger> -->
+<!--        <Logger name="org.hibernate.engine.jdbc.spi" level="off" additivity="false"> -->
+<!--         <AppenderRef ref="fwk"/> -->
+<!--       </Logger> -->
       
-      <Logger name="fr.symphonie.budget" level="debug" additivity="false">
-      <AppenderRef ref="budget" level="debug">
-      </AppenderRef>
-    </Logger>
-     <Logger name="fr.symphonie.common" level="debug" additivity="false">
-      <AppenderRef ref="common" level="debug">
-      </AppenderRef>
-    </Logger>
-     <Logger name="fr.symphonie.common.util" level="debug" additivity="false">
-      <AppenderRef ref="common" level="debug">
-      </AppenderRef>
-    </Logger>
-     <Logger name="fr.symphonie.tools.common" level="debug" additivity="false">
-      <AppenderRef ref="common" level="debug">
-      </AppenderRef>
-    </Logger>
-     <Logger name="fr.symphonie.tools.das" level="debug" additivity="false">
-      <AppenderRef ref="das" level="debug">
-      </AppenderRef>
-    </Logger>
-     <Logger name="fr.symphonie.tools.gts" level="debug" additivity="false">
-      <AppenderRef ref="gts" level="debug">
-      </AppenderRef>
-    </Logger>
-     <Logger name="fr.symphonie.tools.recette" level="debug" additivity="false">
-      <AppenderRef ref="recette" level="debug">
-      </AppenderRef>
-    </Logger>
-    <Logger name="fr.symphonie.tools.sct" level="debug" additivity="false">
-      <AppenderRef ref="sct" level="debug">
-      </AppenderRef>
-    </Logger>
-     <Logger name="fr.symphonie.tools.meta4dai" level="debug" additivity="false">
-      <AppenderRef ref="meta4dai" level="debug">
-      </AppenderRef>
-    </Logger>
-    <Logger name="fr.symphonie.tools.nantes" level="debug" additivity="false">
-      <AppenderRef ref="etudiant" level="debug">
-      </AppenderRef>
-    </Logger>
-     <Logger name="fr.symphonie.tools.crc" level="debug" additivity="false">
-      <AppenderRef ref="crc" level="debug">
-      </AppenderRef>
-    </Logger>
-     <Logger name="signature-tools" level="debug" additivity="false">
-      <AppenderRef ref="signature" level="debug">
-      </AppenderRef>
-    </Logger>
-     <Logger name="dp-tools" level="debug" additivity="false">
-      <AppenderRef ref="dp" level="debug">
-      </AppenderRef>
-    </Logger>
-    <Logger name="initialisation" level="debug" additivity="false">
-      <AppenderRef ref="initialisation" level="debug">
-      </AppenderRef>
-    </Logger>
-    
-	 <Logger name="fr.symphonie.pesv2" level="debug" additivity="false">
-      <AppenderRef ref="Pesv2" level="debug">
-      </AppenderRef>
-    </Logger>
-    <Logger name="fr.symphonie.xml" level="debug" additivity="false">
-      <AppenderRef ref="Pesv2" level="debug">
-      </AppenderRef>
-    </Logger>
-	 <Logger name="fr.gouv" level="debug" additivity="false">
-      <AppenderRef ref="Pesv2" level="debug">
-      </AppenderRef>
-    </Logger>
-   <Logger name="fr.symphonie.cpwin" level="debug" additivity="false">
-      <AppenderRef ref="common" level="debug">
-      </AppenderRef>
-    </Logger>
-     <Logger name="fr.symphonie.util" level="debug" additivity="false">
-      <AppenderRef ref="common" level="debug">
-      </AppenderRef>
-    </Logger>
-     <Logger name="fr.symphonie.web" level="debug" additivity="false">
-      <AppenderRef ref="common" level="debug">
-      </AppenderRef>
-    </Logger>
-      <Logger name="fr.symphonie.excel" level="debug" additivity="false">
-      <AppenderRef ref="common" level="debug">
-      </AppenderRef>
-    </Logger>
-   
-     <Logger name="org.springframework"  additivity="false">
-      <AppenderRef ref="fwk" level="debug"/>
-      <AppenderRef ref="Console" level="error"/>
-    </Logger>
-  <Logger name="org.hibernate"  additivity="false">
-      <AppenderRef ref="fwk" level="info"/>
-      <AppenderRef ref="Console" level="error"/>
-    </Logger>
-    <Logger name="org.springframework.security.config"  additivity="false" level="off">
-      <AppenderRef ref="fwk" />
-    </Logger>
-      <Logger name="org.hibernate.jpa.internal.metamodel"  additivity="false" level="off">
-      <AppenderRef ref="fwk" />
-    </Logger>
-       <Logger name="org.hibernate.engine.jdbc.spi" level="off" additivity="false">
-        <AppenderRef ref="fwk"/>
-      </Logger>
-      
-      </Loggers>
+<!--       </Loggers> -->
     </Configuration>

@@ -3,8 +3,11 @@ package fr.symphonie.budget.ui.beans;
 import java.io.File;
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.annotation.ManagedBean;
+
+//import javax.faces.bean.ManagedBean;
+//import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 
 import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
@@ -22,7 +25,7 @@ import fr.symphonie.util.Helper;
 
 
 
-@ManagedBean(name="commonBean")
+@ManagedBean(value="commonBean")
 @SessionScoped 
 public class CommonBean implements Serializable {
 	

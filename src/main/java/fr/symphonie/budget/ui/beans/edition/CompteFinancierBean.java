@@ -11,14 +11,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.annotation.ManagedBean;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.annotation.ManagedProperty;
+
+//import javax.faces.bean.ManagedBean;
+//import javax.faces.bean.ManagedProperty;
+//import javax.faces.bean.SessionScoped;
 
 import org.primefaces.event.TabChangeEvent;
 import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import fr.symphonie.budget.core.model.cf.CfGenericDemat;
 import fr.symphonie.budget.core.model.cf.CfParam;
@@ -58,7 +63,7 @@ import fr.symphonie.util.Helper;
 import fr.symphonie.util.model.SimpleEntity;
 import fr.symphonie.util.model.Trace;
 
-@ManagedBean(name = "cfBean")
+@ManagedBean(value = "cfBean")
 @SessionScoped
 public class CompteFinancierBean extends GenericBean implements Serializable {
 	/**
@@ -1194,7 +1199,7 @@ public class CompteFinancierBean extends GenericBean implements Serializable {
 
 	}
 	/***
-	 * Permet d'enregistrer les données valideées par la saisie CF, afin de générer les fichers demat 06-annuel defiitif
+	 * Permet d'enregistrer les donnï¿½es valideï¿½es par la saisie CF, afin de gï¿½nï¿½rer les fichers demat 06-annuel defiitif
 	 */
 	public void saveCfDataForDemat() {
 		logger.debug("saveCfDataForDemat: start");

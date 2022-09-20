@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
-import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -156,13 +156,13 @@ public class Util {
 	
 	private static Map<String,String> getSpecialCaracteres(){
 		Map<String,String> CARACTERES_SPECIAL=new Hashtable<String, String>();
-		CARACTERES_SPECIAL.put("ö", "o");CARACTERES_SPECIAL.put("ô", "o");
-		CARACTERES_SPECIAL.put("é", "e");CARACTERES_SPECIAL.put("è", "e");
-		CARACTERES_SPECIAL.put("ê", "e");
-		CARACTERES_SPECIAL.put("ä", "a");CARACTERES_SPECIAL.put("â", "a");CARACTERES_SPECIAL.put("à", "a");
-		CARACTERES_SPECIAL.put("ß", "s");
-		CARACTERES_SPECIAL.put("û", "u");CARACTERES_SPECIAL.put("ü", "u");
-		CARACTERES_SPECIAL.put("ç", "c");
+		CARACTERES_SPECIAL.put("ï¿½", "o");CARACTERES_SPECIAL.put("ï¿½", "o");
+		CARACTERES_SPECIAL.put("ï¿½", "e");CARACTERES_SPECIAL.put("ï¿½", "e");
+		CARACTERES_SPECIAL.put("ï¿½", "e");
+		CARACTERES_SPECIAL.put("ï¿½", "a");CARACTERES_SPECIAL.put("ï¿½", "a");CARACTERES_SPECIAL.put("ï¿½", "a");
+		CARACTERES_SPECIAL.put("ï¿½", "s");
+		CARACTERES_SPECIAL.put("ï¿½", "u");CARACTERES_SPECIAL.put("ï¿½", "u");
+		CARACTERES_SPECIAL.put("ï¿½", "c");
 		return CARACTERES_SPECIAL;
 		
 	}

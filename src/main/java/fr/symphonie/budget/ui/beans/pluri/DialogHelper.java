@@ -3,13 +3,17 @@ package fr.symphonie.budget.ui.beans.pluri;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.primefaces.context.RequestContext;
+import org.joinfaces.autoconfigure.butterfaces.ButterfacesProperties.Integration.Primefaces;
+import org.primefaces.PrimeFaces;
+
+//import org.primefaces.context.RequestContext;
 
 public class DialogHelper {
 	//private static final Logger logger = LoggerFactory.getLogger(DialogHelper.class);
 	
 	private static void openDialog(String sourceName, Map<String,Object> options) {
-        RequestContext.getCurrentInstance().openDialog(sourceName, options, null);
+		PrimeFaces.current().dialog().openDynamic(sourceName, options, null);
+      //  RequestContext.getCurrentInstance().openDialog(sourceName, options, null);
 
     }
 	private static Map<String,Object> defaultOptions(){
@@ -37,7 +41,8 @@ public class DialogHelper {
 		openDialog(sourceName, options);
 	}
 	public static void closeDialog(Object returnedObj){
-		   RequestContext.getCurrentInstance().closeDialog(returnedObj);
+		 //  RequestContext.getCurrentInstance().closeDialog(returnedObj);
+		   PrimeFaces.current().dialog().closeDynamic(returnedObj);
 	}
 	
 	private static Map<String,Object> initOptions(boolean modal, boolean draggable,boolean resizable,int contentHeight,int contentWidth){

@@ -24,9 +24,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+
+//import javax.faces.bean.ManagedBean;
+//import javax.faces.bean.ManagedProperty;
+//import javax.faces.bean.SessionScoped;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -58,7 +62,7 @@ import fr.symphonie.util.HandlerJSFMessage;
 import fr.symphonie.util.Helper;
 
 
-@ManagedBean (name="dematBean")
+@Named (value="dematBean")
 @SessionScoped
 public class DematBean extends GenericBean implements Serializable{
 
@@ -67,7 +71,8 @@ public class DematBean extends GenericBean implements Serializable{
 	 * Logger for this class
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(DematBean.class);
-	@ManagedProperty(value = "#{dematService}")
+//	@ManagedProperty(value = "#{dematService}")
+	@Named(value = "#{dematService}")
 	private DematService service;
 
 	/**
@@ -194,8 +199,8 @@ public class DematBean extends GenericBean implements Serializable{
 		// TODO Auto-generated method stub		
 	}
 	/**
-	 * Elle définit la période du plan trésorerie à charger
-	 * Pour l'info centre, on charge la période en ajustement donc explicement +1
+	 * Elle dï¿½finit la pï¿½riode du plan trï¿½sorerie ï¿½ charger
+	 * Pour l'info centre, on charge la pï¿½riode en ajustement donc explicement +1
 	 */
 	@Override
 	protected Integer getPeriode() {
@@ -312,11 +317,11 @@ public class DematBean extends GenericBean implements Serializable{
 		    stream = new FileInputStream(zipFilePath);			
 			content =  new DefaultStreamedContent(stream, "application/zip", zipFileName,"UTF-8");
 			
-			logger.info("Téléchargement des fichiers de demat effectué avec succés");
+			logger.info("Tï¿½lï¿½chargement des fichiers de demat effectuï¿½ avec succï¿½s");
 		} 
 		
 		catch (Exception  e) {
-			logger.error("Le fichier n'a pas été trouvé");
+			logger.error("Le fichier n'a pas ï¿½tï¿½ trouvï¿½");
 			e.printStackTrace();
 			content = Helper.getStreamedContentFile(Helper.getFileNotFound());
 		}

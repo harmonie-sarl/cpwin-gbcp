@@ -1,6 +1,6 @@
 package fr.symphonie.budget.ui.beans.converter;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 
 import java.math.BigDecimal;
@@ -14,6 +14,8 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import fr.symphonie.common.util.MsgEntry;
 import fr.symphonie.util.HandlerJSFMessage;
 
@@ -22,7 +24,7 @@ public class DecimalMntWithNullConverter implements Converter{
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger.getLogger(DecimalMntWithNullConverter.class);
+	private static final Logger logger = LoggerFactory.getLogger(DecimalMntWithNullConverter.class);
 
 	/**
 	 * Logger for this class

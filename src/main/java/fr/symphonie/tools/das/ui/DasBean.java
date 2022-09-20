@@ -18,9 +18,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.annotation.ManagedBean;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.annotation.ManagedProperty;
+
+//import javax.faces.bean.ManagedBean;
+//import javax.faces.bean.ManagedProperty;
+//import javax.faces.bean.SessionScoped;
 
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.StreamedContent;
@@ -250,7 +254,7 @@ public class DasBean extends ExcelFileImportor implements Serializable {
 			    getErrorReport().add(s);
 			else getNouveauList().add(DasHelper.convert(cpwinTiers,TypeDasEnum.parse(s.getDesignation())));
 		}
-		logger.debug("rapprochement: Fin: Existant: {}, Nouveau: {}, code erroné: {}",getExistantList().size(),getNouveauList().size(),getErrorReport().size());
+		logger.debug("rapprochement: Fin: Existant: {}, Nouveau: {}, code erronï¿½: {}",getExistantList().size(),getNouveauList().size(),getErrorReport().size());
 	}
 	private Tiers searchCpwinTiers(String code) {
 		Tiers t=tiersService.getTiersWoIban(code);
@@ -532,9 +536,9 @@ public class DasBean extends ExcelFileImportor implements Serializable {
 				
 			content =  Helper.getStreamedContentFile(new File(filePath));
 			
-			logger.info("Téléchargement du fichier DAS2 effectué avec succés");
+			logger.info("Tï¿½lï¿½chargement du fichier DAS2 effectuï¿½ avec succï¿½s");
 		} catch (Exception e) {
-			logger.error("Le fichier n'a pas été trouvé");
+			logger.error("Le fichier n'a pas ï¿½tï¿½ trouvï¿½");
 			e.printStackTrace();
 			content = Helper.getStreamedContentFile(Helper.getFileNotFound());
 		}
@@ -674,7 +678,7 @@ public class DasBean extends ExcelFileImportor implements Serializable {
 		
 		if (logger.isDebugEnabled()) {
 		
-	logger.debug("###### Auto Complete Tiers prefix="+ prefix+ ", "+ tiersList.size()+ " éléments trouvés - end");
+	logger.debug("###### Auto Complete Tiers prefix="+ prefix+ ", "+ tiersList.size()+ " ï¿½lï¿½ments trouvï¿½s - end");
 		}
 		return tiersList;
 	}

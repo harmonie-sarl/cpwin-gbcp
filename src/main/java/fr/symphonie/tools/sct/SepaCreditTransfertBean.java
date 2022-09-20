@@ -23,7 +23,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.event.ValueChangeEvent;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.iban4j.IbanUtil;
 import org.primefaces.event.FileUploadEvent;
@@ -106,7 +106,7 @@ public class SepaCreditTransfertBean extends GenericExcelImportor<RefundsItem> i
 	
 	
 	public void importer() {
-		logger.info("importer : Début file={}",getImportFileUploadEvent().getFile().getFileName());
+		logger.info("importer : Dï¿½but file={}",getImportFileUploadEvent().getFile().getFileName());
 		try {
 			List<RefundsItem> importedData=super.importFile(0, RefundsItem.class);
 			processData(importedData);
@@ -119,7 +119,7 @@ public class SepaCreditTransfertBean extends GenericExcelImportor<RefundsItem> i
 	}
 	
 	private void processData(List<RefundsItem> importedData) throws MissingConfiguration {
-		logger.info("processData : Début ");
+		logger.info("processData : Dï¿½but ");
 		fillCompletData(importedData);
 		checkData(importedData);
 		
@@ -139,7 +139,7 @@ public class SepaCreditTransfertBean extends GenericExcelImportor<RefundsItem> i
 	}
 
 	private void checkData(List<RefundsItem> importedData) {
-		logger.info("checkData : Début ");
+		logger.info("checkData : Dï¿½but ");
 		SimpleEntity s=null;
 		String name=null, bic=null, iban=null, objet=null;
 		BigDecimal amount=null;
@@ -161,7 +161,7 @@ public class SepaCreditTransfertBean extends GenericExcelImportor<RefundsItem> i
 				{
 					bic=getBIC(iban);
 					if(StringUtils.isBlank(bic)) {
-						s=new SimpleEntity(String.format("%s - %s",name,iban),String.format("ligne [%d] - [%s] : %s : BIC non trouvé",index,name,iban));
+						s=new SimpleEntity(String.format("%s - %s",name,iban),String.format("ligne [%d] - [%s] : %s : BIC non trouvï¿½",index,name,iban));
 						getErrorReport().add(s);
 					}
 					else {
@@ -183,7 +183,7 @@ public class SepaCreditTransfertBean extends GenericExcelImportor<RefundsItem> i
 				getErrorReport().add(s);
 			}
 			if(StringUtils.isBlank(objet)) {
-				s=new SimpleEntity(index+"-"+name,String.format("ligne [%d] - [%s] : %s : Objet non renseigné",index,name,objet));
+				s=new SimpleEntity(index+"-"+name,String.format("ligne [%d] - [%s] : %s : Objet non renseignï¿½",index,name,objet));
 				getErrorReport().add(s);
 			}
 
@@ -710,7 +710,7 @@ public void setCommonService(ICommonService commonService) {
 		if (logger.isDebugEnabled()) {
 
 			logger.debug("###### Auto Complete Tiers prefix=" + prefix + ", " +((tiersList!=null)? tiersList.size():0)
-					+ " éléments trouvés - end");
+					+ " ï¿½lï¿½ments trouvï¿½s - end");
 		}
 		return tiersList;
 	}
@@ -789,7 +789,7 @@ public void setCommonService(ICommonService commonService) {
 	}
 	public void genererRMH()
 	{
-		logger.debug("genererRMH: Début");
+		logger.debug("genererRMH: Dï¿½but");
 		List<RefundsItem> transfertList=new ArrayList<RefundsItem>();
 		try {
 			transfertList.addAll(getSepaFrPaymentList());
@@ -871,9 +871,9 @@ public void setCommonService(ICommonService commonService) {
 			String filePath=PAYMEN_SEPA_993_FileModel.getTargetFile(Constant.getPAYMENRootPath());
 			content =  Helper.getStreamedContentFile(new File(filePath));
 			
-			logger.info("Téléchargement du fichier RMH DDFiP effectué avec succés");
+			logger.info("Tï¿½lï¿½chargement du fichier RMH DDFiP effectuï¿½ avec succï¿½s");
 		} catch (Exception e) {
-			logger.error("Le fichier n'a pas été trouvé");
+			logger.error("Le fichier n'a pas ï¿½tï¿½ trouvï¿½");
 			e.printStackTrace();
 			content = Helper.getStreamedContentFile(Helper.getFileNotFound());
 		}

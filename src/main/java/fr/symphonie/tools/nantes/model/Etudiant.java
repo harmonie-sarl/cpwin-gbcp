@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.persistence.Transient;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import fr.symphonie.common.util.BudgetHelper;
 import fr.symphonie.common.util.SepaHelper;

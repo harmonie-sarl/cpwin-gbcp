@@ -37,7 +37,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 
-import org.apache.logging.log4j.util.Strings;
+//import org.apache.logging.log4j.util.Strings;
+import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RowEditEvent;
@@ -149,7 +150,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 	 */
 	private List<CpGestionnaire> listCpGestionnaire = null;
 	/**
-	 * gére les listes des CpGestionnaire par nature de groupe
+	 * gï¿½re les listes des CpGestionnaire par nature de groupe
 	 */
 	private Map<String, List<CpGestionnaire>> deploiementData = null;
 	private String objetModification;
@@ -372,7 +373,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 			setBudget(budgetPluriService.searchBudgetForSaisi(exercice, codeBudget));
 			loadLibellesBudget();
 			if (getBudget() != null)
-				logger.info("Recherche du budget terminée: budget.getCodeBudget()=" + getBudget().getCodeBudget()
+				logger.info("Recherche du budget terminï¿½e: budget.getCodeBudget()=" + getBudget().getCodeBudget()
 						+ "......................");
 		} catch (Exception e) {
 			HandlerJSFMessage.addErrorMessage(getErrorMessageFromException(MsgEntry.FAILED, e));
@@ -1099,7 +1100,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 
 		try {
 			resetImport();
-			file = event.getFile().getInputstream();
+			file = event.getFile().getInputStream();
 			setImportFile(file);
 			importVentilationByService(file);
 			controlImportEnvelop();
@@ -1807,7 +1808,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 			String groupNat = getCodeGroupNat(getGroupDestNatCp());
 			currentList = getDeploiementData().get(groupNat);
 			if (currentList == null) {
-				logger.info("searchDeploiement  Récuperer CpGestionnaireList pour groupNat {}", groupNat);
+				logger.info("searchDeploiement  Rï¿½cuperer CpGestionnaireList pour groupNat {}", groupNat);
 				currentList = budgetPluriService.getCpGestionnaireList(exerciceCp, codeBudget, groupNat);
 				completeData(currentList);
 				loadlibelleGestionnaire(currentList);
@@ -2025,7 +2026,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 	}
 
 	/**
-	 * Permet d'enregistrer les modifications de la répartition des CP par
+	 * Permet d'enregistrer les modifications de la rï¿½partition des CP par
 	 * gestionnaire ainsi qu'une trace des modifications.
 	 */
 	public void saveDeploiement() {
@@ -2086,7 +2087,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 			throws MissingConfiguration {
 		CpModification modification = new CpModification();
 		Integer numSeq = null;
-		// TODO Récuperer un numéro seq / exercice
+		// TODO Rï¿½cuperer un numï¿½ro seq / exercice
 		numSeq = BudgetHelper.getCommonService().getNumSeq(exercice, null, Constant.NO_VIR_CP_COMPTEUR_NAME);
 
 		modification.setNumero(numSeq);
@@ -2275,7 +2276,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 	/**
 	 * Permet de saisir un budget rectuficatif sur le budget initiale: 1-
 	 * Chargement de la ventillation initiale pour le gestionnaire unique (si
-	 * non RESERVE) (budgcpgest) ainsi que les br précédants
+	 * non RESERVE) (budgcpgest) ainsi que les br prï¿½cï¿½dants
 	 * (budgmodificationcpligne) 2- saisir les br par envelop (nat_grp) 3-
 	 * Acomplir la ventillation par destination
 	 */
@@ -3414,7 +3415,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 		switch (action) {
 		case VENTIL_DEST_BR:
 		case VENTIL_GEST_BR:
-			if (Strings.isBlank(groupNat))
+			if (StringUtils.isBlank(groupNat))
 				return false;
 			if (br == null)
 				return false;
@@ -3424,7 +3425,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 				return false;
 			break;
 		case MODIF_DEPOIEMENT:
-			if (Strings.isBlank(groupNat))
+			if (StringUtils.isBlank(groupNat))
 				return false;
 			break;
 		case CONSULT_DEPOIEMENT:
@@ -3444,11 +3445,11 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 		switch (action) {
 
 		case MODIF_DEPOIEMENT:
-			if (Strings.isBlank(getObjetModification()))
+			if (StringUtils.isBlank(getObjetModification()))
 				return false;
 			break;
 		case SUIVI_AE:
-			if (Strings.isBlank(getSearchBean().getCodeNatureGrp()))
+			if (StringUtils.isBlank(getSearchBean().getCodeNatureGrp()))
 				return false;
 		default:
 			break;
@@ -3600,7 +3601,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 	}
 
 	/**
-	 * Trouver si une ventilation à été déjà saisi Initialiser la valeure de
+	 * Trouver si une ventilation ï¿½ ï¿½tï¿½ dï¿½jï¿½ saisi Initialiser la valeure de
 	 * depNivDest si elle exsite
 	 */
 	public void positionnerDepNivDest() {
@@ -3827,7 +3828,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 			int exerciceCp = getExercice();
 			String codeBudget = getSearchBean().getCodeBudget();
 			Integer modification = getSelectedModifCP().getNumero();
-			logger.info("consultDeploiement  Récuperer cpItemModifList pour budgModifCp {}", modification);
+			logger.info("consultDeploiement  Rï¿½cuperer cpItemModifList pour budgModifCp {}", modification);
 			currentList = budgetPluriService.getItemscpModifsList(exerciceCp, codeBudget, modification);
 
 			completeCpModificationItem(currentList);
@@ -3898,7 +3899,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 	}
 
 	/**
-	 * Retourne la taille du champ destination pour le premier élement de la
+	 * Retourne la taille du champ destination pour le premier ï¿½lement de la
 	 * liste ListBudgetCpDest
 	 * 
 	 * @return
@@ -3944,8 +3945,8 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 
 	/**
 	 * 
-	 * @return true si une ventilation CP par destination a déja été saisi pour
-	 *         l'enveloppe budgétaire selectionnée
+	 * @return true si une ventilation CP par destination a dï¿½ja ï¿½tï¿½ saisi pour
+	 *         l'enveloppe budgï¿½taire selectionnï¿½e
 	 */
 	public boolean isDepNivDestEdited() {
 		return depNivDestEdited;
@@ -4176,7 +4177,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 		Tiers result = null;
 		String codeCpwin = data.getCodeTiers();
 		boolean contains = false;
-		if (Strings.isBlank(codeCpwin))
+		if (StringUtils.isBlank(codeCpwin))
 			return;
 
 		contains = tiersCach.contains(data.getTiers());
@@ -4305,7 +4306,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 
 	private void loadLibSuiviRecetData(Object data, String codeData, SimpleEntity SuiviItem,
 			List<SimpleEntity> listDataSuiviRecet) {
-		if (Strings.isBlank(codeData))
+		if (StringUtils.isBlank(codeData))
 			return;
 		SuiviItem.setDesignation(BudgetHelper.getlib(codeData, listDataSuiviRecet));
 

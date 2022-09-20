@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
@@ -60,7 +60,7 @@ public class SignatureBean extends CommonToolsBean implements Serializable{
 			if(!isUpdateMode()) 
 			{
 			getSignatureList().add(sign);
-			logger.debug("executeAddOrUpdate: élément added to list");
+			logger.debug("executeAddOrUpdate: ï¿½lï¿½ment added to list");
 			}	
 
 		} catch (Exception e) {
@@ -264,8 +264,8 @@ public class SignatureBean extends CommonToolsBean implements Serializable{
 		logger.debug("fileUploadHandler: file name={}",event.getFile().getFileName());
 		try {
 			
-			if(checkSignature(event.getFile().getInputstream())) {
-				getSelectedSignature().setSignatureData(encryptData(event.getFile().getContents()));
+			if(checkSignature(event.getFile().getInputStream())) {
+				getSelectedSignature().setSignatureData(encryptData(event.getFile().getContent()));
 				setImportFileUploadEvent(event);
 			}
 			
@@ -311,7 +311,7 @@ public class SignatureBean extends CommonToolsBean implements Serializable{
 			DialogHelper.closeDialog(null);		
 		}
 		/**
-		 * prération de la mise à jour 
+		 * prï¿½ration de la mise ï¿½ jour 
 		 * d'une signature
 		 */
 		public void goToUpdateSignature()
@@ -408,4 +408,3 @@ public class SignatureBean extends CommonToolsBean implements Serializable{
 		
 	
 }
-

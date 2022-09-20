@@ -13,8 +13,9 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.logging.log4j.util.Strings;
+import org.apache.commons.lang3.StringUtils;
+//import org.apache.commons.lang3.StringUtils;
+//import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -1287,11 +1288,11 @@ public Map<String, Double> getAeEngage(Integer exercice, Date dateFin, String ti
 	String shortDate=null;
 	if(dateFin!=null)	shortDate=Helper.toSimpleFormat2(dateFin);
 	Object[] params=new Object[] { exercice};;
-	if((!Strings.isBlank(tiersNeutralise))&&(dateFin!=null)){
+	if((!StringUtils.isBlank(tiersNeutralise))&&(dateFin!=null)){
 		params=new Object[] { exercice,shortDate,tiersNeutralise};
 	}
 	else{
-		if(!Strings.isBlank(tiersNeutralise))params=new Object[] { exercice,tiersNeutralise};
+		if(!StringUtils.isBlank(tiersNeutralise))params=new Object[] { exercice,tiersNeutralise};
 		if(dateFin!=null)params=new Object[] { exercice,shortDate};
 	}
 	logger.debug("getAeEngage : {} avant {}, tiersNeutralise {}",exercice,shortDate,tiersNeutralise);
@@ -1302,7 +1303,7 @@ public Map<String, Double> getAeEngage(Integer exercice, Date dateFin, String ti
 	if(dateFin!=null){
 		sqlQuery+=" and j.date_resp<convert(datetime,?,103) ";
 	}
-	if(!Strings.isBlank(tiersNeutralise))
+	if(!StringUtils.isBlank(tiersNeutralise))
 	{
 		sqlQuery+=" and j.code_tiers <> ? ";
 
@@ -1461,17 +1462,17 @@ public List<SimpleEntity> getCompteProduitList(Integer exercice, String codeDest
 	int i=1;
 	String requete = "select distinct i.imput_htd from budginterneenveloppe e, budgenveloppeimput i where e.no_env=i.no_env and e.num_exec=i.num_exec "+
 			"and e.num_exec=? ";
-	if(!Strings.isBlank(codeDest)){
+	if(!StringUtils.isBlank(codeDest)){
 		requete+="and e.code_dest=? ";
 		params[i]=codeDest;
 		i++;
 	}
-	if(!Strings.isBlank(codeNature)){
+	if(!StringUtils.isBlank(codeNature)){
 		requete+="and e.code_nature=? ";
 		params[i]=codeNature;
 		i++;
 	}
-	if(!Strings.isBlank(codeProg)){
+	if(!StringUtils.isBlank(codeProg)){
 		requete+="and e.code_prog=? ";
 		params[i]=codeProg;
 		i++;
@@ -1837,11 +1838,11 @@ public  Double getAeEngage(Integer exercice,Integer noLtr, Date dateFin, String 
 	String shortDate=null;
 	if(dateFin!=null)	shortDate=Helper.toSimpleFormat2(dateFin);
 	Object[] params=new Object[] { exercice,noLtr};;
-	if((!Strings.isBlank(tiersNeutralise))&&(dateFin!=null)){
+	if((!StringUtils.isBlank(tiersNeutralise))&&(dateFin!=null)){
 		params=new Object[] { exercice,noLtr,shortDate,tiersNeutralise};
 	}
 	else{
-		if(!Strings.isBlank(tiersNeutralise))params=new Object[] { exercice,noLtr,tiersNeutralise};
+		if(!StringUtils.isBlank(tiersNeutralise))params=new Object[] { exercice,noLtr,tiersNeutralise};
 		if(dateFin!=null)params=new Object[] { exercice,noLtr,shortDate};
 	}
 	logger.debug("getAeEngage : {} avant {}, tiersNeutralise {}",exercice,shortDate,tiersNeutralise);
@@ -1853,7 +1854,7 @@ public  Double getAeEngage(Integer exercice,Integer noLtr, Date dateFin, String 
 	if(dateFin!=null){
 		sqlQuery+=" and j.date_resp<convert(datetime,?,103) ";
 	}
-	if(!Strings.isBlank(tiersNeutralise))
+	if(!StringUtils.isBlank(tiersNeutralise))
 	{
 		sqlQuery+=" and j.code_tiers <> ? ";
 

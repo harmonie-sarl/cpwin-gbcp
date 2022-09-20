@@ -13,7 +13,8 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.apache.logging.log4j.util.Strings;
+//import org.apache.logging.log4j.util.Strings;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -190,7 +191,7 @@ public class PlanTresorerieDao implements IPlanTresorerieDao {
 		Predicate p = cb.conjunction();
 		p = cb.and(p, cb.equal(root.get("exercice"), exercice));
 		Expression<String> codeExp=root.get("code");
-		if(!Strings.isBlank(searchCondition))
+		if(!StringUtils.isBlank(searchCondition))
 		p = cb.and(p, cb.like(codeExp, searchCondition));
 		
 		cq.where(p);

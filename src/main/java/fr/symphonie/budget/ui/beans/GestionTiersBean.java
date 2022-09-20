@@ -14,15 +14,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.activation.MimetypesFileTypeMap;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.annotation.ManagedBean;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.annotation.ManagedProperty;
+//import javax.faces.bean.ManagedBean;
+//import javax.faces.bean.ManagedProperty;
+//import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 
-import org.primefaces.context.RequestContext;
+import org.primefaces.context.PrimeRequestContext;
+//import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
@@ -52,6 +56,7 @@ import fr.symphonie.util.HandlerJSFMessage;
 import fr.symphonie.util.Helper;
 import fr.symphonie.util.model.AdresseEnum;
 import fr.symphonie.util.model.SimpleEntity;
+
 
 /**
  * @author JEDIDI SOUHAIB (HARMONIE)
@@ -104,7 +109,7 @@ public class GestionTiersBean implements Serializable {
 	private TreeNode documentTree;
 	
 	/**
-	 * Enumération des actions de chargement des listes
+	 * Enumï¿½ration des actions de chargement des listes
 	 */
 	enum AVAction{
 		DOCUMENT,ETAT_TIERS,TYPE_ADRESSE, FORME_SOCIALE,MODE_PAIEMENT
@@ -139,12 +144,12 @@ public class GestionTiersBean implements Serializable {
 		case FORME_SOCIALE:
 			logger.info("Chargement de la liste des formes sociales .........");
 			formeSocialeList=gestionTiersService.getListFormeSocial();
-			if(formeSocialeList!=null)logger.info("nombre des éléménts chargés: "+formeSocialeList.size());
+			if(formeSocialeList!=null)logger.info("nombre des ï¿½lï¿½mï¿½nts chargï¿½s: "+formeSocialeList.size());
 			break;
 		case MODE_PAIEMENT:
 			logger.info("Chargement de la liste des modes de paiements .........");
             modePaiementList=gestionTiersService.getAllModePaiement();
-        	if(modePaiementList!=null)logger.info("nombre des éléménts chargés: "+modePaiementList.size());
+        	if(modePaiementList!=null)logger.info("nombre des ï¿½lï¿½mï¿½nts chargï¿½s: "+modePaiementList.size());
 			break;
 		default:
 			break;
@@ -153,7 +158,7 @@ public class GestionTiersBean implements Serializable {
 	}
 
 	/**
-	 * Chercher les documents du tiers sélectionné
+	 * Chercher les documents du tiers sï¿½lectionnï¿½
 	 */
 	public void searchTiers() {
 		try {
@@ -171,7 +176,7 @@ public class GestionTiersBean implements Serializable {
 	}
 
 	/**
-	 * Vérifier la date
+	 * Vï¿½rifier la date
 	 * @return
 	 */
 	private boolean checkDate() {
@@ -200,7 +205,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * Consulter le tiers sélectionné
+	 * Consulter le tiers sï¿½lectionnï¿½
 	 */
 	public void consultTiers() {
 		if (logger.isDebugEnabled()) {
@@ -224,7 +229,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * Consulter le tiers sélectionné avec redirection
+	 * Consulter le tiers sï¿½lectionnï¿½ avec redirection
 	 * @return
 	 */
 	public String consultTiersWPage() {
@@ -242,7 +247,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * Récupérer le tiers sélectionné
+	 * Rï¿½cupï¿½rer le tiers sï¿½lectionnï¿½
 	 * @throws MissingConfiguration 
 	 */
 	private void getSelectedTiers() throws MissingConfiguration{
@@ -317,7 +322,7 @@ public class GestionTiersBean implements Serializable {
 	}
 
 	/**
-	 * Préparer la mise à jour du tiers
+	 * Prï¿½parer la mise ï¿½ jour du tiers
 	 */
 	public void updateTiers() {
 		try {
@@ -331,7 +336,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * Mettre à jour le tiers avec redirection
+	 * Mettre ï¿½ jour le tiers avec redirection
 	 * @return
 	 */
 	public String updateTiersWPage(){
@@ -341,7 +346,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * Préparer l'ajout d'un tiers
+	 * Prï¿½parer l'ajout d'un tiers
 	 */
 	public void addTiers(){
 		this.tiers=new Tiers();
@@ -353,7 +358,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * Préparer l'ajout d'un tiers avec redirection
+	 * Prï¿½parer l'ajout d'un tiers avec redirection
 	 */
 	public String addTiersWPage(){
 		this.setPageTitle(HandlerJSFMessage.getMessage(NavigationBean.Action.SAISI_TIERS.getMsgKey()));
@@ -362,7 +367,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * Ajouter ou mettre à jour un tiers
+	 * Ajouter ou mettre ï¿½ jour un tiers
 	 */
 	public void updateTiersActionListener(){
 		updateTiersOperation();
@@ -371,7 +376,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * Mettre à jour un tiers
+	 * Mettre ï¿½ jour un tiers
 	 */
 	private boolean updateTiersOperation(){
 		boolean valid=true;
@@ -409,7 +414,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * Mettre à jour un tiers
+	 * Mettre ï¿½ jour un tiers
 	 */
 	public String updateTiersAction(){
 		if(updateTiersOperation()) return fermer();
@@ -417,7 +422,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * Vérifier l'ajout du tiers à la liste de recherche
+	 * Vï¿½rifier l'ajout du tiers ï¿½ la liste de recherche
 	 * @return
 	 */
 	private boolean addToListRecherche() {
@@ -541,7 +546,7 @@ public class GestionTiersBean implements Serializable {
 	public void addDocument() {	
 		
 		boolean valid=false;
-		RequestContext requestContext = RequestContext.getCurrentInstance();
+		PrimeRequestContext requestContext = PrimeRequestContext.getCurrentInstance();
 		valid=checkDocFields();
 		if (!valid){
 			return;
@@ -553,9 +558,9 @@ public class GestionTiersBean implements Serializable {
 			setFileUploadEvent(null);
 			setDocumentTree(null);
 
-			requestContext.addCallbackParam("isValid", true);
+			requestContext.getCallbackParams().put("isValid", true);
 			}
-			else requestContext.addCallbackParam("isValid", false);
+			else requestContext.getCallbackParams().put("isValid", false);
 		} catch (MissingConfiguration e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -607,7 +612,7 @@ public class GestionTiersBean implements Serializable {
 			byte[] buffer = new byte[BUFFER_SIZE];
 			int bulk;
 			InputStream inputStream = getFileUploadEvent().getFile()
-					.getInputstream();
+					.getInputStream();
 			while (true) {
 				bulk = inputStream.read(buffer);
 				if (bulk < 0) {
@@ -636,7 +641,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * Supprimer les documents non sauvegardés du tiers
+	 * Supprimer les documents non sauvegardï¿½s du tiers
 	 */
 	public void deleteUnsavedDocs(){
 		File file;
@@ -656,7 +661,7 @@ public class GestionTiersBean implements Serializable {
 		}
 	}
 	/**
-	 * Supprimer les documents non sauvegardés du tiers avec redirection
+	 * Supprimer les documents non sauvegardï¿½s du tiers avec redirection
 	 */
 	public String deleteUnsavedDocsWPage(){
 		deleteUnsavedDocs();
@@ -687,7 +692,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * Récupérer le nom du document de type <<AUTRE>>
+	 * Rï¿½cupï¿½rer le nom du document de type <<AUTRE>>
 	 * @param sourceDirPath
 	 * @param ordre
 	 * @return
@@ -745,7 +750,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * Listener lors du changement du critère de recherche
+	 * Listener lors du changement du critï¿½re de recherche
 	 * @param action
 	 */
 	public void onSearchTiersChange(ActionEvent action){
@@ -761,7 +766,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * Listener lors du changement du critère de recherche date début modification
+	 * Listener lors du changement du critï¿½re de recherche date dï¿½but modification
 	 * @param event
 	 */
 	public void onDateDebChange(AjaxBehaviorEvent event){
@@ -771,7 +776,7 @@ public class GestionTiersBean implements Serializable {
 	
 	
 	/**
-	 * Listener lors du changement du critère de recherche date fin modification
+	 * Listener lors du changement du critï¿½re de recherche date fin modification
 	 * @param event
 	 */
 	public void onDateFinChange(AjaxBehaviorEvent event){
@@ -807,7 +812,7 @@ public class GestionTiersBean implements Serializable {
 	
 	
 	/**
-	 * declanché en cas de déselection d'un élémént de la liste des ibans
+	 * declanchï¿½ en cas de dï¿½selection d'un ï¿½lï¿½mï¿½nt de la liste des ibans
 	 * 
 	 * @param event
 	 */
@@ -825,7 +830,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * declanché en cas de selection d'un élémént de la liste des ibans
+	 * declanchï¿½ en cas de selection d'un ï¿½lï¿½mï¿½nt de la liste des ibans
 	 * 
 	 * @param event
 	 */
@@ -846,7 +851,7 @@ public class GestionTiersBean implements Serializable {
 	}
 	
 	/**
-	 * préparation de l'ajout d'un nouveau iban au tiers en cours
+	 * prï¿½paration de l'ajout d'un nouveau iban au tiers en cours
 	 */
 	public void prepareAddIban() {
 		if(this.getTiers().getCode()==null){
@@ -856,7 +861,7 @@ public class GestionTiersBean implements Serializable {
 		try {
 			this.iban = getTiers().addNewIban();
 			iban.setBanque("");
-			logger.info("Préparation, de l'ajout d'un nouveau iban: code tiers="
+			logger.info("Prï¿½paration, de l'ajout d'un nouveau iban: code tiers="
 					+ this.getTiers().getCode() + ", taille de la liste des ibans="
 					+ getTiers().getIbans().size());
 		} catch (Exception e) {
@@ -887,11 +892,11 @@ public class GestionTiersBean implements Serializable {
 		List<Service> retour=gestionTiersService.getService(formatedPrefix, searchAtBegin);
 		if (logger.isInfoEnabled())  {
 			if(retour!=null)
-			logger.info("###### Auto Complete Service prefix="+prefix+", "+retour.size()+" éléments trouvés - end");
+			logger.info("###### Auto Complete Service prefix="+prefix+", "+retour.size()+" ï¿½lï¿½ments trouvï¿½s - end");
 			}
 		if (logger.isInfoEnabled())  {
 			if(retour==null)
-			logger.info("###### Auto Complete Service prefix="+prefix+", aucun élément trouvé - end");
+			logger.info("###### Auto Complete Service prefix="+prefix+", aucun ï¿½lï¿½ment trouvï¿½ - end");
 		}
 		return retour;
 	}
@@ -1349,7 +1354,7 @@ public class GestionTiersBean implements Serializable {
 			
 			if (logger.isDebugEnabled()) {
 			
-		logger.debug("###### Auto Complete Tiers prefix="+ prefix+ ", "+ tiersList.size()+ " éléments trouvés - end");
+		logger.debug("###### Auto Complete Tiers prefix="+ prefix+ ", "+ tiersList.size()+ " ï¿½lï¿½ments trouvï¿½s - end");
 			}
 			return tiersList;
 		}
