@@ -1,7 +1,10 @@
 package fr.symphonie.tools.lemans.bt.ui;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -46,7 +49,6 @@ public class BilletterieBean extends CommonToolsBean {
 	@Setter
 	private String codePeriod;
 	private List<ImportPeriod> periodList;
-	//private List<String> periodExerciseList;
 	
 	/**
 	 * For controle
@@ -122,7 +124,10 @@ public class BilletterieBean extends CommonToolsBean {
 	}
 
 	private void checkData() {
-		// TODO Auto-generated method stub
+		List<Integer> duplicates =checkDuplicatesVente(getVentes());
+		if(!CollectionUtils.isEmpty(duplicates)) {
+			getErrorReport().add(new SimpleEntity("duplicates", "Duplication des 'Num Encaiss' non acceptée: "+duplicates));
+		}
 		
 	}
 
@@ -367,6 +372,19 @@ private ImportPeriod getPeriod(int numero) {
 	}
 	public String getSourceFileName() {
 		return (getImportFileUploadEvent()!=null ?getImportFileUploadEvent().getFile().getFileName():"");
+	}
+
+	private List<Integer> checkDuplicatesVente(List<Vente> importedData) {
+		log.debug("checkDuplicatesVente: start");
+		List<Integer> duplicates =importedData.stream().map(d -> d.getNumEncaiss())		
+				.collect( Collectors.groupingBy( Function.identity(), Collectors.counting() ) )
+				.entrySet()
+				.stream()
+				.filter( p -> p.getValue()>1)
+				.map( Map.Entry::getKey )
+			    .collect( Collectors.toList() );
+		log.debug("checkDuplicatesVente: size= {}: end ",duplicates.size());
+		return duplicates;
 	}
 
 }

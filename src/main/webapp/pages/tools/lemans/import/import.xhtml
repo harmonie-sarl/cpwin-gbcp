@@ -22,7 +22,7 @@
 	<ui:define name="details">
 	<p:panel id="importPanel" style="width:100%;">
 	<div align="center" >
-		<p:commandButton immediate="true" title="" value="#{msgs['btn.enregistrer']}" rendered="#{ btBean.importedDataVisible}"
+		<p:commandButton immediate="true" title="" value="#{msgs['btn.enregistrer']}" rendered="#{ btBean.importedDataVisible}" disabled="#{btBean.errorReportVisible}"
 				id="save_btn" update="globalMessage,:detailsForm:importPanel,enteteForm"
 				actionListener="#{btBean.executeSaveData}">
 			</p:commandButton>
