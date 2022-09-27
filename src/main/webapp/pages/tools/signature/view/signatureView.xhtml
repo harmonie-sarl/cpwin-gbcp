@@ -9,9 +9,6 @@
 <h:head>
 	<title>#{msgs['ajout.modif.signat']}</title>
 	<style type="text/css">
-
-
-
 </style>
 </h:head>
 
@@ -21,204 +18,296 @@
 			styleClass="error" globalOnly="true" />
 
 
-				
-			<p:panel  style="width:100%;">
 
-             <h:panelGrid columns="2" rendered="#{!signatBean.updateMode}">
-			<h:outputLabel styleClass="espace_entre_label_value" style="display:block;width:80px" rendered="#{!signatBean.updateMode}"
-						 value="#{msgs['signataire']}" />
-		<h:panelGroup rendered="#{!signatBean.updateMode}">
-					<p:autoComplete id="userList" size="100" 
+		<p:panel style="width:100%;">
+
+			<h:panelGrid columns="2" rendered="#{!signatBean.updateMode}">
+				<h:outputLabel styleClass="espace_entre_label_value"
+					style="display:block;width:80px"
+					rendered="#{!signatBean.updateMode}" value="#{msgs['signataire']}" />
+				<h:panelGroup rendered="#{!signatBean.updateMode}">
+					<p:autoComplete id="userList" size="100"
 						value="#{signatBean.selectedUser}" required="false"
-					    requiredMessage="#{msgs['cpwin.required']}"
-					rendered="#{!signatBean.updateMode}"
-						completeMethod="#{signatBean.autoCompleteUser}" var="user" converter="convert.user"
+						requiredMessage="#{msgs['cpwin.required']}"
+						rendered="#{!signatBean.updateMode}"
+						completeMethod="#{signatBean.autoCompleteUser}" var="user"
+						converter="convert.user"
 						itemLabel="#{(user.login==null?'':user.login)}#{((user.login==null)||(user.login==' ')?'':'-')}#{(user.login==null?'':user.lastName)}"
-						 itemValue="#{user}" emptyMessage="#{msgs['datatable.empty']}" 
-						minQueryLength="2"
-						maxResults="#{commonBean.maxAjaxResult}">
-						
-							<p:ajax event="itemSelect" process="@form" 
-							listener="#{signatBean.onUserSelected}"		
-							update="signatureForm,selectedSignData"/>
-							
-							
+						itemValue="#{user}" emptyMessage="#{msgs['datatable.empty']}"
+						minQueryLength="2" maxResults="#{commonBean.maxAjaxResult}">
+
+						<p:ajax event="itemSelect" process="@form"
+							listener="#{signatBean.onUserSelected}"
+							update="signatureForm,selectedSignData" />
+
+
 
 					</p:autoComplete>
 					<p:message for="userList" styleClass="error" />
 				</h:panelGroup>
-				
-				  </h:panelGrid>
-				  	<br />
-			<h:panelGrid id="selectedSignData" columns="4" width="100%" style="text-align: center;"  rendered="#{(signatBean.selectedUser!=null) || (signatBean.updateMode)}">
-					
-					<h:outputLabel value="#{msgs['codeSignataire']}"  style="font-weight:bold" />
-					
-					  <h:outputText  value="#{signatBean.selectedSignature.codeUtil}"   />
-					
-					  <h:outputLabel value="#{msgs['function']}" style="font-weight:bold"  />
-					  <p:inputText value="#{signatBean.selectedSignature.function}"> </p:inputText>
-					   <h:outputLabel value="#{msgs['stardate']}" style="font-weight:bold" />
-					   	<h:panelGroup>
-		<p:calendar id="dateDebut" pattern="dd/MM/yyyy" navigator="true" locale="fr" onSelectUpdate="dateFin"
-			 value="#{signatBean.selectedSignature.startDate}" readonlyInput="true"
-			converterMessage="#{errorMsgs['date.format.invalide']}"
-			validator="validator.format.date">
-			<p:ajax event="dateSelect"   update="dateFin">
-				</p:ajax>
-		</p:calendar>
-		<p:message showSummary="false" for="dateFin" />
-	</h:panelGroup>
-					 
-					   <h:outputLabel value="#{msgs['endDate']}" style="font-weight:bold" />
-					 	<p:calendar id="dateFin" pattern="dd/MM/yyyy" navigator="true" locale="fr" disabled="#{signatBean.selectedSignature.startDate==null}"
-			 value="#{signatBean.selectedSignature.endDate}" readonlyInput="true" mindate="#{signatBean.selectedSignature.startDate}"
-			converterMessage="#{errorMsgs['date.format.invalide']}"
-			validator="validator.format.date">
-			
-		</p:calendar>
-					 	 
-				</h:panelGrid>
-				<br />
-				<p:panel id="autoritePanel" style="width:100%;" header="#{msgs['autorite']}" rendered="#{(signatBean.selectedUser!=null) || (signatBean.updateMode)}" >
-				
-				<h:panelGrid columns="3" style="width:100%;vertical-align:top;align: left;"  >
-				<h:panelGrid columns="4"  cellspacing="3" cellpadding="3" >
-					<h:selectBooleanCheckbox id="da" value="#{signatBean.selectedSignature.da}" >
-				 <p:ajax event="change" update="autoritePanel" /> 
-				</h:selectBooleanCheckbox>
-	            <h:outputLabel value="#{msgs['da']}" style="font-weight:bold" for="da"	 />
-			
-				<h:outputLabel value="#{msgs['seuil']}" for="seuilDa" rendered="#{signatBean.selectedSignature.da}"	 /> 
-				
-				
-				<p:inputNumber id="seuilDa" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilDa}" rendered="#{signatBean.selectedSignature.da}" > </p:inputNumber>
-				</h:panelGrid>
-				<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
-				<h:selectBooleanCheckbox id="ej" value="#{signatBean.selectedSignature.ej}" >
-				 <p:ajax event="change" update="autoritePanel" /> 
-				</h:selectBooleanCheckbox>
-				<h:outputLabel style="font-weight:bold" value="#{msgs['ej']}" for="ej"	 />
-				
-				<h:outputLabel value="#{msgs['seuil']}" for="seuilEj" rendered="#{signatBean.selectedSignature.ej}"	 />
-				
-				
-				
-				<p:inputNumber id="seuilEj" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilEj}" rendered="#{signatBean.selectedSignature.ej}"> </p:inputNumber>
-				</h:panelGrid>
-				<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
-					<h:selectBooleanCheckbox id="asf" value="#{signatBean.selectedSignature.asf}" >
-				 <p:ajax event="change" update="autoritePanel" /> 
-				</h:selectBooleanCheckbox>
-				<h:outputLabel style="font-weight:bold" value="#{msgs['asf']}" for="asf"	 />
-			
-				<h:outputLabel value="#{msgs['seuil']}" for="seuilAsf"	rendered="#{signatBean.selectedSignature.asf}" />
-			
-				<p:inputNumber id="seuilAsf" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilAsf}" rendered="#{signatBean.selectedSignature.asf}" > </p:inputNumber>
-				</h:panelGrid>
-				<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
-					<h:selectBooleanCheckbox id="vsf" value="#{signatBean.selectedSignature.vsf}">
-				 <p:ajax event="change" update="autoritePanel" /> 
-				</h:selectBooleanCheckbox>
-				<h:outputLabel style="font-weight:bold" value="#{msgs['vsf']}" for="vsf"	 />
-			
-				<h:outputLabel value="#{msgs['seuil']}" for="seuilVsf" rendered="#{signatBean.selectedSignature.vsf}"	 />
-				
-				
-				<p:inputNumber id="seuilVsf" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilVsf}" rendered="#{signatBean.selectedSignature.vsf}"> </p:inputNumber>
-				</h:panelGrid>
-				<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
-				<h:selectBooleanCheckbox  id="liq" value="#{signatBean.selectedSignature.liq}">
-				 <p:ajax event="change"  update="autoritePanel" /> 
-				</h:selectBooleanCheckbox>
-				<h:outputLabel style="font-weight:bold" value="#{msgs['liq.dep']}" for="liq"	 />
-				
-					<h:outputLabel value="#{msgs['seuil']}" for="seuilLiq" rendered="#{signatBean.selectedSignature.liq}"	 />
-			
-			
-				<p:inputNumber id="seuilLiq" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilLiq}" rendered="#{signatBean.selectedSignature.liq}" > </p:inputNumber>
-				</h:panelGrid>
-					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
-						<h:selectBooleanCheckbox id="liqOr" value="#{signatBean.selectedSignature.liqOr}">
-				 <p:ajax event="change" update="autoritePanel" /> 
-				</h:selectBooleanCheckbox>
-				<h:outputLabel style="font-weight:bold" value="#{msgs['liq.or']}" for="liqOr"	 />
-			
-					<h:outputLabel value="#{msgs['seuil']}" for="seuilOr"	rendered="#{signatBean.selectedSignature.liqOr}" />
-			
-				
-				<p:inputNumber id="seuilOr"  size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilOr}" rendered="#{signatBean.selectedSignature.liqOr}" > </p:inputNumber>
-				</h:panelGrid>
-					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
-						<h:selectBooleanCheckbox id="op" value="#{signatBean.selectedSignature.op}">
-				 <p:ajax event="change" update="autoritePanel" /> 
-				</h:selectBooleanCheckbox>
-				<h:outputLabel style="font-weight:bold" value="#{msgs['op']}" for="op"	 />
-			
-					<h:outputLabel value="#{msgs['seuil']}" for="seuilOp"	rendered="#{ signatBean.selectedSignature.op}" />
-				
-			
-				<p:inputNumber id="seuilOp" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilOp}" rendered="#{ signatBean.selectedSignature.op}" > </p:inputNumber>
-				</h:panelGrid>
-				<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
-					<h:selectBooleanCheckbox id="lrec" value="#{signatBean.selectedSignature.lrec}">
-				 <p:ajax event="change" update="autoritePanel" /> 
-				</h:selectBooleanCheckbox>
-				<h:outputLabel style="font-weight:bold" value="#{msgs['lrec']}" for="lrec"	 />
-			
-				<h:outputLabel value="#{msgs['seuil']}" for="seuilLrec"	rendered="#{ signatBean.selectedSignature.lrec}" />
-			
-				
-				<p:inputNumber id="seuilLrec" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilLrec}" rendered="#{ signatBean.selectedSignature.lrec}" > </p:inputNumber>
-				</h:panelGrid>
-				<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
-					<h:selectBooleanCheckbox id="ar" value="#{signatBean.selectedSignature.ar}">
-				 <p:ajax event="change" update="autoritePanel" /> 
-				</h:selectBooleanCheckbox>
-				<h:outputLabel style="font-weight:bold" value="#{msgs['ar']}" for="ar"	 />
-			
-				<h:outputLabel value="#{msgs['seuil']}" for="seuilAr"	rendered="#{signatBean.selectedSignature.ar}" />
-				
-				
-				<p:inputNumber id="seuilAr" size="12" inputStyle="text-align: center" value="#{signatBean.selectedSignature.seuilAr}" rendered="#{signatBean.selectedSignature.ar}"> </p:inputNumber>
-			
-				</h:panelGrid>
-				
-				
-			
-				
-				
-				
-				</h:panelGrid>
-				</p:panel>
-			<br />
-				<h:panelGrid columns="2"  rendered="#{(signatBean.selectedUser!=null) and (!signatBean.updateMode)}">
-			<h:outputText value="#{msgs['selectionner.fichier']}"  />
-				<h:panelGroup id="addDocPG" >
-				<p:fileUpload label="#{msgs['parcourir']}" skinSimple="true" 
-					invalidFileMessage="#{errorMsgs['invalid.file']}" id="fileUp"
-					fileUploadListener="#{signatBean.fileUploadHandler}" auto="true"
-					image="/images/browse.png" mode="advanced" dragDropSupport="false"
-					multiple="false" height="48" width="48" 
-					
-					allowTypes="/(\.|\/)(png)$/" event="click"
-					update="signatMsg,nameImage,fileUpMsg,valid_btn">
-				</p:fileUpload>
-				<p:message id="fileUpMsg" for="fileUp" styleClass="error" />
-			</h:panelGroup>
+
 			</h:panelGrid>
-			<h:outputLabel id="nameImage"  value="#{signatBean.sourceFileName}"/>
-			
-		<div align="center" style="width: 100%;">
-					<p:commandButton id="valid_btn" value="#{msgs['btn.valider']}" disabled="#{!signatBean.validationAutorized}"
-				   actionListener="#{signatBean.executeAddOrUpdate}" />
-					<p:commandButton value="#{msgs['btn.fermer']}" 	actionListener="#{signatBean.closeCurrentDialog}" immediate="true" />	
-				</div>
-</p:panel>
-		
+			<br />
+			<h:panelGrid id="selectedSignData" columns="4" width="100%"
+				style="text-align: center;"
+				rendered="#{(signatBean.selectedUser!=null) || (signatBean.updateMode)}">
+
+				<h:outputLabel value="#{msgs['codeSignataire']}"
+					style="font-weight:bold" />
+
+				<h:outputText value="#{signatBean.selectedSignature.codeUtil}" />
+
+				<h:outputLabel value="#{msgs['function']}" style="font-weight:bold" />
+				<p:inputText value="#{signatBean.selectedSignature.function}">
+				</p:inputText>
+				<h:outputLabel value="#{msgs['stardate']}" style="font-weight:bold" />
+				<h:panelGroup>
+					<p:calendar id="dateDebut" pattern="dd/MM/yyyy" navigator="true"
+						locale="fr" onSelectUpdate="dateFin"
+						value="#{signatBean.selectedSignature.startDate}"
+						readonlyInput="true"
+						converterMessage="#{errorMsgs['date.format.invalide']}"
+						validator="validator.format.date">
+						<p:ajax event="dateSelect" update="dateFin">
+						</p:ajax>
+					</p:calendar>
+					<p:message showSummary="false" for="dateFin" />
+				</h:panelGroup>
+
+				<h:outputLabel value="#{msgs['endDate']}" style="font-weight:bold" />
+				<h:panelGroup>
+					<p:calendar id="dateFin" pattern="dd/MM/yyyy" navigator="true"
+						locale="fr"
+						disabled="#{signatBean.selectedSignature.startDate==null}"
+						value="#{signatBean.selectedSignature.endDate}"
+						readonlyInput="true"
+						mindate="#{signatBean.selectedSignature.startDate}"
+						converterMessage="#{errorMsgs['date.format.invalide']}"
+						validator="validator.format.date">
+
+					</p:calendar>
+				</h:panelGroup>
+			</h:panelGrid>
+			<br />
+			<p:panel id="autoritePanel" style="width:100%;"
+				header="#{msgs['autorite']}"
+				rendered="#{(signatBean.selectedUser!=null) || (signatBean.updateMode)}">
+
+				<h:panelGrid columns="3"
+					style="width:100%;vertical-align:top;align: left;">
+					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+						<h:selectBooleanCheckbox id="da"
+							value="#{signatBean.selectedSignature.da}">
+							<p:ajax event="change" listener="#{signatBean.onSelectDa}"
+								process="@form" update="signatureForm" />
+						</h:selectBooleanCheckbox>
+						<h:outputLabel value="#{msgs['da']}" style="font-weight:bold"
+							for="da" />
+
+						<h:outputLabel value="#{msgs['seuil']}" for="seuilDa"
+							rendered="#{signatBean.selectedSignature.da}" />
 
 
-	
+						<p:inputNumber id="seuilDa" size="12"
+							inputStyle="text-align: center"
+							value="#{signatBean.selectedSignature.seuilDa}"
+							rendered="#{signatBean.selectedSignature.da}">
+						</p:inputNumber>
+					</h:panelGrid>
+					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+						<h:selectBooleanCheckbox id="liqOr"
+							value="#{signatBean.selectedSignature.liqOr}">
+							<p:ajax event="change" listener="#{signatBean.onSelectOr}"
+								process="@form" update="signatureForm" />
+						</h:selectBooleanCheckbox>
+						<h:outputLabel style="font-weight:bold" value="#{msgs['liq.or']}&#160;"
+							for="liqOr" />
+
+						<h:outputLabel value="#{msgs['seuil']}" for="seuilOr"
+							rendered="#{signatBean.selectedSignature.liqOr}" />
+
+
+						<p:inputNumber id="seuilOr" size="12"
+							inputStyle="text-align: center"
+							value="#{signatBean.selectedSignature.seuilOr}"
+							rendered="#{signatBean.selectedSignature.liqOr}">
+						</p:inputNumber>
+					</h:panelGrid>
+					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+						<h:selectBooleanCheckbox id="asf"
+							value="#{signatBean.selectedSignature.asf}">
+							<p:ajax event="change" listener="#{signatBean.onSelectAsf}"
+								process="@form" update="signatureForm" />
+						</h:selectBooleanCheckbox>
+						<h:outputLabel style="font-weight:bold" value="#{msgs['asf']}"
+							for="asf" />
+
+						<h:outputLabel value="#{msgs['seuil']}" for="seuilAsf"
+							rendered="#{signatBean.selectedSignature.asf}" />
+
+						<p:inputNumber id="seuilAsf" size="12"
+							inputStyle="text-align: center"
+							value="#{signatBean.selectedSignature.seuilAsf}"
+							rendered="#{signatBean.selectedSignature.asf}">
+						</p:inputNumber>
+					</h:panelGrid>
+					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+						<h:selectBooleanCheckbox id="ar"
+							value="#{signatBean.selectedSignature.ar}">
+							<p:ajax event="change" listener="#{signatBean.onSelectAr}"
+								process="@form" update="signatureForm" />
+						</h:selectBooleanCheckbox>
+						<h:outputLabel style="font-weight:bold" value="#{msgs['ar']}"
+							for="ar" />
+
+						<h:outputLabel value="#{msgs['seuil']}" for="seuilAr"
+							rendered="#{signatBean.selectedSignature.ar}" />
+
+
+						<p:inputNumber id="seuilAr" size="12"
+							inputStyle="text-align: center"
+							value="#{signatBean.selectedSignature.seuilAr}"
+							rendered="#{signatBean.selectedSignature.ar}">
+						</p:inputNumber>
+
+					</h:panelGrid>
+
+					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+						<h:selectBooleanCheckbox id="liq"
+							value="#{signatBean.selectedSignature.liq}">
+							<p:ajax event="change" listener="#{signatBean.onSelectLiq}"
+								process="@form" update="signatureForm" />
+						</h:selectBooleanCheckbox>
+						<h:outputLabel style="font-weight:bold" value="#{msgs['liq.dep']}"
+							for="liq" />
+
+						<h:outputLabel value="#{msgs['seuil']}" for="seuilLiq"
+							rendered="#{signatBean.selectedSignature.liq}" />
+
+
+						<p:inputNumber id="seuilLiq" size="12"
+							inputStyle="text-align: center"
+							value="#{signatBean.selectedSignature.seuilLiq}"
+							rendered="#{signatBean.selectedSignature.liq}">
+						</p:inputNumber>
+					</h:panelGrid>
+					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+						<h:selectBooleanCheckbox id="ej"
+							value="#{signatBean.selectedSignature.ej}">
+							<p:ajax event="change" listener="#{signatBean.onSelectEj}"
+								process="@form" update="signatureForm" />
+						</h:selectBooleanCheckbox>
+						<h:outputLabel style="font-weight:bold" value="EJ&#160;&#160;&#160;"
+							for="ej" />
+
+						<h:outputLabel value="#{msgs['seuil']}" for="seuilEj"
+							rendered="#{signatBean.selectedSignature.ej}" />
+
+
+
+						<p:inputNumber id="seuilEj" size="12"
+							inputStyle="text-align: center"
+							value="#{signatBean.selectedSignature.seuilEj}"
+							rendered="#{signatBean.selectedSignature.ej}">
+						</p:inputNumber>
+					</h:panelGrid>
+
+					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+						<h:selectBooleanCheckbox id="op"
+							value="#{signatBean.selectedSignature.op}">
+							<p:ajax event="change" listener="#{signatBean.onSelectOp}"
+								process="@form" update="signatureForm" />
+						</h:selectBooleanCheckbox>
+						<h:outputLabel style="font-weight:bold" value="#{msgs['op']}"
+							for="op" />
+
+						<h:outputLabel value="#{msgs['seuil']}" for="seuilOp"
+							rendered="#{ signatBean.selectedSignature.op}" />
+
+
+						<p:inputNumber id="seuilOp" size="12"
+							inputStyle="text-align: center"
+							value="#{signatBean.selectedSignature.seuilOp}"
+							rendered="#{ signatBean.selectedSignature.op}">
+						</p:inputNumber>
+					</h:panelGrid>
+					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+						<h:selectBooleanCheckbox id="lrec"
+							value="#{signatBean.selectedSignature.lrec}">
+							<p:ajax event="change" listener="#{signatBean.onSelectLrec}"
+								process="@form" update="signatureForm" />
+						</h:selectBooleanCheckbox>
+						<h:outputLabel style="font-weight:bold" value="#{msgs['lrec']}&#160;"
+							for="lrec" />
+
+						<h:outputLabel value="#{msgs['seuil']}" for="seuilLrec"
+							rendered="#{ signatBean.selectedSignature.lrec}" />
+
+
+						<p:inputNumber id="seuilLrec" size="12"
+							inputStyle="text-align: center"
+							value="#{signatBean.selectedSignature.seuilLrec}"
+							rendered="#{ signatBean.selectedSignature.lrec}">
+						</p:inputNumber>
+					</h:panelGrid>
+					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+						<h:selectBooleanCheckbox id="vsf"
+							value="#{signatBean.selectedSignature.vsf}">
+							<p:ajax event="change" listener="#{signatBean.onSelectVsf}"
+								process="@form" update="autoritePanel,signatureForm" />
+						</h:selectBooleanCheckbox>
+						<h:outputLabel style="font-weight:bold" value="#{msgs['vsf']}"
+							for="vsf" />
+
+						<h:outputLabel value="#{msgs['seuil']}" for="seuilVsf"
+							rendered="#{signatBean.selectedSignature.vsf}" />
+
+
+						<p:inputNumber id="seuilVsf" size="12"
+							inputStyle="text-align: center"
+							value="#{signatBean.selectedSignature.seuilVsf}"
+							rendered="#{signatBean.selectedSignature.vsf}">
+						</p:inputNumber>
+					</h:panelGrid>
+
+
+
+
+
+
+
+				</h:panelGrid>
+			</p:panel>
+			<br />
+			<h:panelGrid id="pjSignatPanel" columns="2"
+				rendered="#{signatBean.visiblePj}">
+				<h:outputText value="#{msgs['selectionner.fichier']}" />
+				<h:panelGroup id="addDocPG">
+					<p:fileUpload label="#{msgs['parcourir']}" skinSimple="true"
+						invalidFileMessage="#{errorMsgs['invalid.file']}" id="fileUp"
+						fileUploadListener="#{signatBean.fileUploadHandler}" auto="true"
+						image="/images/browse.png" mode="advanced" dragDropSupport="false"
+						multiple="false" height="48" width="48"
+						allowTypes="/(\.|\/)(png)$/" event="click"
+						update="signatMsg,nameImage,fileUpMsg,valid_btn">
+					</p:fileUpload>
+					<p:message id="fileUpMsg" for="fileUp" styleClass="error" />
+				</h:panelGroup>
+			</h:panelGrid>
+			<h:outputLabel id="nameImage" value="#{signatBean.sourceFileName}" />
+
+			<div align="center" style="width: 100%;">
+				<p:commandButton id="valid_btn" value="#{msgs['btn.valider']}"
+					disabled="#{(!signatBean.validationAutorized) || (!signatBean.oneActSelected)}"
+					actionListener="#{signatBean.executeAddOrUpdate}" />
+				<p:commandButton value="#{msgs['btn.fermer']}"
+					actionListener="#{signatBean.closeCurrentDialog}" immediate="true" />
+			</div>
+		</p:panel>
+
+
+
+
 	</h:form>
 </h:body>
 

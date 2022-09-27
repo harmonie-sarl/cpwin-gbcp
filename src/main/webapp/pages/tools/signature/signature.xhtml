@@ -51,45 +51,45 @@
 			               <p:column headerText="#{msgs['function']}" style="text-align:center">
                               <h:outputText value="#{sign.function}" />  
                           </p:column>
-                            <p:column headerText="#{msgs['sf']}" style="text-align:center" rendered="#{navigationBean.sfSignAuthorized}">
+                            <p:column headerText="#{msgs['sf']}" style="text-align:center" rendered="#{signatBean.sfSignAuthorized}">
                                <h:outputText value="#{sign.sf?'Oui':'Non'}" /> 
                           </p:column>
-                            <p:column headerText="#{msgs['dp']}" style="text-align:center" rendered="#{navigationBean.dpSignAuthorized}">
+                            <p:column headerText="#{msgs['dp']}" style="text-align:center" rendered="#{signatBeanBean.dpSignAuthorized}">
                                <h:outputText value="#{sign.dp?'Oui':'Non'}"  /> 
                           </p:column>
-                            <p:column headerText="#{msgs['dr']}" style="text-align:center" rendered="#{navigationBean.drSignAuthorized}">
+                            <p:column headerText="#{msgs['dr']}" style="text-align:center" rendered="#{signatBeanBean.drSignAuthorized}">
                                <h:outputText value="#{sign.dr?'Oui':'Non'}"  /> 
                           </p:column>
-                            <p:column headerText="#{msgs['dv']}" style="text-align:center" rendered="#{navigationBean.dvSignAuthorized}">
+                            <p:column headerText="#{msgs['dv']}" style="text-align:center" rendered="#{signatBean.dvSignAuthorized}">
                                <h:outputText value="#{sign.dv?'Oui':'Non'}"  /> 
                           </p:column>
-				           <p:column headerText="#{msgs['da']}" style="text-align:center" rendered="#{navigationBean.daSignAuthorized}">
+				           <p:column headerText="#{msgs['da']}" style="text-align:center" rendered="#{signatBean.daSignAuthorized}">
                                <h:outputText value="#{sign.da?'Oui':'Non'}"  /> 
                           </p:column>
-                            <p:column headerText="#{msgs['ej']}" style="text-align:center" rendered="#{navigationBean.ejSignAuthorized}">
+                            <p:column headerText="#{msgs['ej']}" style="text-align:center" rendered="#{signatBean.ejSignAuthorized}">
                                <h:outputText value="#{sign.ej?'Oui':'Non'}" /> 
                           </p:column>
-                            <p:column headerText="#{msgs['asf']}" style="text-align:center" rendered="#{navigationBean.asfSignAuthorized}">
+                            <p:column headerText="#{msgs['asf']}" style="text-align:center" rendered="#{signatBean.asfSignAuthorized}">
                                <h:outputText value="#{sign.asf?'Oui':'Non'}" /> 
                           </p:column>
-                            <p:column headerText="#{msgs['vsf']}" style="text-align:center" rendered="#{navigationBean.vsfSignAuthorized}">
+                            <p:column headerText="#{msgs['vsf']}" style="text-align:center" rendered="#{signatBean.vsfSignAuthorized}">
                                <h:outputText value="#{sign.vsf?'Oui':'Non'}" /> 
                           </p:column>
-						   <p:column headerText="#{msgs['liq.dep']}" style="text-align:center" rendered="#{navigationBean.liqSignAuthorized}">
+						   <p:column headerText="#{msgs['liq.dep']}" style="text-align:center" rendered="#{signatBean.liqSignAuthorized}">
                              <h:outputText  value="#{sign.liq?'Oui':'Non'}" /> 
                           </p:column>
-						   <p:column headerText="#{msgs['liq.or']}" rendered="#{navigationBean.orSignAuthorized}">
-                             <h:outputText value="#{sign.liqOr?'Oui':'Non'}" /> 
+						   <p:column headerText="#{msgs['liq.or']}" rendered="#{signatBean.orSignAuthorized}">
+                             <h:outputText value="#{sign.liqOr?'Oui':'Non'}" />  
                           </p:column>
 				         
 			               
-						  <p:column headerText="#{msgs['op']}" style="text-align:center" rendered="#{navigationBean.opSignAuthorized}" >
+						  <p:column headerText="#{msgs['op']}" style="text-align:center" rendered="#{signatBean.opSignAuthorized}" >
                                <h:outputText value="#{sign.op?'Oui':'Non'}" /> 
                           </p:column>
-                            <p:column  headerText="#{msgs['lrec']}" style="text-align:center" rendered="#{navigationBean.lrecSignAuthorized}">
+                            <p:column  headerText="#{msgs['lrec']}" style="text-align:center" rendered="#{signatBean.lrecSignAuthorized}">
                                <h:outputText value="#{sign.lrec?'Oui':'Non'}" /> 
                           </p:column>
-                           <p:column headerText="#{msgs['liq.ar']}" style="text-align:center" rendered="#{navigationBean.arSignAuthorized}">
+                           <p:column headerText="#{msgs['liq.ar']}" style="text-align:center" rendered="#{signatBean.arSignAuthorized}">
                                <h:outputText value="#{sign.ar?'Oui':'Non'}" /> 
                           </p:column>
                            <p:column headerText="#{msgs['actif']}" style="text-align:center" >

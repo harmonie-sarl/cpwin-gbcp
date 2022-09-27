@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -17,6 +18,7 @@ import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.symphonie.budget.ui.beans.NavigationBean.Licence;
 import fr.symphonie.budget.ui.beans.pluri.DialogHelper;
 import fr.symphonie.common.model.AppCfgConfig;
 import fr.symphonie.common.util.BudgetHelper;
@@ -325,7 +327,11 @@ public class SignatureBean extends CommonToolsBean implements Serializable{
 			if(!isRequirmentsStatus())return false;
 			if(getSelectedSignature()==null)return false;
 			if(StringUtils.isBlank(getSelectedSignature().getCodeUtil())) return false;
-			if((!isUpdateMode()) && getImportFileUploadEvent()==null)return false;
+//			if((!isUpdateMode()) && getImportFileUploadEvent()==null)return false;
+//			if(!isUpdateMode() && !isRequiredSignaturePJ()) return false;
+			if(!isUpdateMode() && isRequiredSignaturePJ()&& getImportFileUploadEvent()==null)return false;
+			if(isUpdateMode() && isVisiblePj() && getImportFileUploadEvent()==null) return false;
+		
 			
 			return true;
 		}
@@ -398,14 +404,261 @@ public class SignatureBean extends CommonToolsBean implements Serializable{
 		
 		}
 		
-		public void onSelectEj() {
+	public void onSelectEj() {
+
+		getSelectedSignature().setSeuilEj(BigDecimal.ZERO);
+
+	}
+
+	public void onSelectDa() {
+
+		getSelectedSignature().setSeuilDa(BigDecimal.ZERO);
+
+	}
+
+	public void onSelectOp() {
+
+		getSelectedSignature().setSeuilOp(BigDecimal.ZERO);
+
+	}
+
+	public void onSelectAr() {
+
+		getSelectedSignature().setSeuilAr(BigDecimal.ZERO);
+
+	}
+
+	public void onSelectLiq() {
+
+		getSelectedSignature().setSeuilLiq(BigDecimal.ZERO);
+
+	}
+
+	public void onSelectLrec() {
+
+		getSelectedSignature().setSeuilLrec(BigDecimal.ZERO);
+
+	}
+
+	public void onSelectVsf() {
+
+		getSelectedSignature().setSeuilVsf(BigDecimal.ZERO);
+
+	}
+
+	public void onSelectAsf() {
+
+		getSelectedSignature().setSeuilAsf(BigDecimal.ZERO);
+
+	}
+
+	public void onSelectOr() {
+
+		getSelectedSignature().setSeuilOr(BigDecimal.ZERO);
+
+	}
+	public boolean isOneActSelected() {
+		logger.debug("isRequiredSignaturePJ: isDaSignatureRequired()+getSelectedSignature().isDa(): {} -> {}",isDaSignatureRequired(),getSelectedSignature().isDa());
+		if  (getSelectedSignature().isDa())
+			return true;
+		if (getSelectedSignature().isEj())
+			return true;
+		if (getSelectedSignature().isAsf())
+			return true;
+		if (getSelectedSignature().isVsf())
+			return true;
+		if  (getSelectedSignature().isOp())
+			return true;
+		if (getSelectedSignature().isAr())
+			return true;
+		if (getSelectedSignature().isLiq())
+			return true;
+		if (getSelectedSignature().isLrec())
+			return true;
+		if (getSelectedSignature().isLiqOr())
+			return true;
+		return false;
+	}
+	
+		private boolean checkRequiseSignature( Licence licence) {
+			String configuredValue="0";
+			try {
+			switch(licence) {
+			case SIGNATURE_SF:
+				configuredValue=AppCfgConfig.getInstance().getSfSignatLicence();
+				break;
+			case SIGNATURE_DP:
+				configuredValue=AppCfgConfig.getInstance().getDpSignatLicence();
+				break;
+			case SIGNATURE_DR:
+				configuredValue=AppCfgConfig.getInstance().getDrSignatLicence();
+				break;
+			case SIGNATURE_DV:
+				configuredValue=AppCfgConfig.getInstance().getDvSignatLicence();
+				break;
+			case SIGNATURE_DA:
+				configuredValue=AppCfgConfig.getInstance().getDaSignatLicence();
+				break;
+			case SIGNATURE_EJ:
+				configuredValue=AppCfgConfig.getInstance().getEjSignatLicence();
+				break;
+			case SIGNATURE_ASF:
+				configuredValue=AppCfgConfig.getInstance().getAsfSignatLicence();
+				break;
+			case SIGNATURE_VSF:
+				configuredValue=AppCfgConfig.getInstance().getVsfSignatLicence();
+				break;
+			case SIGNATURE_LIQ:
+				configuredValue=AppCfgConfig.getInstance().getLiqSignatLicence();
+				break;
+			case SIGNATURE_OR:
+				configuredValue=AppCfgConfig.getInstance().getOrSignatLicence();
+				break;
+			case SIGNATURE_OP:
+				configuredValue=AppCfgConfig.getInstance().getOpSignatLicence();
+				break;
+			case SIGNATURE_LREC:
+				configuredValue=AppCfgConfig.getInstance().getLrecSignatLicence();
+				break;
+			case SIGNATURE_AR:
+				configuredValue=AppCfgConfig.getInstance().getArSignatLicence();
+				break;
+			case SIGNATURE_DA_REQUISE:
+				configuredValue=AppCfgConfig.getInstance().getDaSignatRequise();
+				break;
+			case SIGNATURE_EJ_REQUISE:
+				configuredValue=AppCfgConfig.getInstance().getEjSignatRequise();
+				break;
+			case SIGNATURE_ASF_REQUISE:
+				configuredValue=AppCfgConfig.getInstance().getAsfSignatRequise();
+				break;
+			case SIGNATURE_VSF_REQUISE:
+				configuredValue=AppCfgConfig.getInstance().getVsfSignatRequise();
+				break;
+			case SIGNATURE_LIQ_REQUISE:
+				configuredValue=AppCfgConfig.getInstance().getLiqSignatRequise();
+				break;
+			case SIGNATURE_OR_REQUISE:
+				configuredValue=AppCfgConfig.getInstance().getOrSignatRequise();
+				break;
+			case SIGNATURE_OP_REQUISE:
+				configuredValue=AppCfgConfig.getInstance().getOpSignatRequise();
+				break;
+			case SIGNATURE_LREC_REQUISE:
+				configuredValue=AppCfgConfig.getInstance().getLrecSignatRequise();
+				break;
+			case SIGNATURE_AR_REQUISE:
+				configuredValue=AppCfgConfig.getInstance().getArSignatRequise();
+				break;
 			
-				getSelectedSignature().setSeuilEj(null);
+			default:
+				break;
+			}
+			}
+			catch(MissingConfiguration e) {
+				//logger.error(e.getMessage());
+			}
 			
+			return configuredValue==null ? false : configuredValue.equals("1");
 		}
 	
-
+		public boolean isSfSignAuthorized() {
+			return checkRequiseSignature(Licence.SIGNATURE_SF);
+		}
+		public boolean isDpSignAuthorized() {
+			return checkRequiseSignature(Licence.SIGNATURE_DP);
+		}
+		public boolean isDrSignAuthorized() {
+			return checkRequiseSignature(Licence.SIGNATURE_DR);
+		}
+		public boolean isDvSignAuthorized() {
+			return checkRequiseSignature(Licence.SIGNATURE_DV);
+		}
 		
-	
+		public boolean isDaSignAuthorized() {
+			return checkRequiseSignature(Licence.SIGNATURE_DA);
+		}
+		public boolean isEjSignAuthorized() {
+			return checkRequiseSignature(Licence.SIGNATURE_EJ);
+		}
+		public boolean isAsfSignAuthorized() {
+			return checkRequiseSignature(Licence.SIGNATURE_ASF);
+		}
+		public boolean isVsfSignAuthorized() {
+			return checkRequiseSignature(Licence.SIGNATURE_VSF);
+		}
+		public boolean isLiqSignAuthorized() {
+			return checkRequiseSignature(Licence.SIGNATURE_LIQ);
+		}
+		public boolean isOrSignAuthorized() {
+			return checkRequiseSignature(Licence.SIGNATURE_OR);
+		}
+		public boolean isOpSignAuthorized() {
+			return checkRequiseSignature(Licence.SIGNATURE_OP);
+		}
+		public boolean isLrecSignAuthorized() {
+			return checkRequiseSignature(Licence.SIGNATURE_LREC);
+		}
+		public boolean isArSignAuthorized() {
+			return checkRequiseSignature(Licence.SIGNATURE_AR);
+		}
+		public boolean isDaSignatureRequired() {
+			return checkRequiseSignature(Licence.SIGNATURE_DA_REQUISE);
+		}
+		public boolean isEjSignatureRequired() {
+			return checkRequiseSignature(Licence.SIGNATURE_EJ_REQUISE);
+		}
+		public boolean isAsfSignatureRequired() {
+			return checkRequiseSignature(Licence.SIGNATURE_ASF_REQUISE);
+		}
+		public boolean isVsfSignatureRequired() {
+			return checkRequiseSignature(Licence.SIGNATURE_VSF_REQUISE);
+		}
+		public boolean isLiqSignatureRequired() {
+			return checkRequiseSignature(Licence.SIGNATURE_LIQ_REQUISE);
+		}
+		public boolean isOrSignatureRequired() {
+			return checkRequiseSignature(Licence.SIGNATURE_OR_REQUISE);
+		}
+		public boolean isOpSignatureRequired() {
+			return checkRequiseSignature(Licence.SIGNATURE_OP_REQUISE);
+		}
+		public boolean isLrecSignatureRequired() {
+			return checkRequiseSignature(Licence.SIGNATURE_LREC_REQUISE);
+		}
+		public boolean isArSignatureRequired() {
+			return checkRequiseSignature(Licence.SIGNATURE_AR_REQUISE);
+		}
+		
+	public boolean isRequiredSignaturePJ() {
+		logger.debug("isRequiredSignaturePJ: isDaSignatureRequired()+getSelectedSignature().isDa(): {} -> {}",isDaSignatureRequired(),getSelectedSignature().isDa());
+		if (isDaSignatureRequired() && (getSelectedSignature().isDa()))
+			return true;
+		if (isEjSignatureRequired() && (getSelectedSignature().isEj()))
+			return true;
+		if (isAsfSignatureRequired() && (getSelectedSignature().isAsf()))
+			return true;
+		if (isVsfSignatureRequired() && (getSelectedSignature().isVsf()))
+			return true;
+		if (isOpSignatureRequired() && (getSelectedSignature().isOp()))
+			return true;
+		if (isArSignatureRequired() && (getSelectedSignature().isAr()))
+			return true;
+		if (isLiqSignatureRequired() && (getSelectedSignature().isLiq()))
+			return true;
+		if (isLrecSignatureRequired() && (getSelectedSignature().isLrec()))
+			return true;
+		if (isOrSignatureRequired() && (getSelectedSignature().isLiqOr()))
+			return true;
+		return false;
+		
+			
+	}
+	public boolean isVisiblePj() {
+		if(isUpdateMode() && isRequiredSignaturePJ() && getSourceFileName()==null) return true;
+		if(!isUpdateMode()&& getSelectedUser()!=null && isRequiredSignaturePJ()) return true;
+		return false;
+		
+	}
 }
 

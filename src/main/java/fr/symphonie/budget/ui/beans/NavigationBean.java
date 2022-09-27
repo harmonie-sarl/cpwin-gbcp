@@ -1048,73 +1048,7 @@ private void deploiement() {
 	public boolean isDpGenerationAuthorized() {
 		return checkLicence(Licence.DP_GENERATION);
 	}
-	public boolean isSfSignAuthorized() {
-		return checkLicence(Licence.SIGNATURE_SF);
-	}
-	public boolean isDpSignAuthorized() {
-		return checkLicence(Licence.SIGNATURE_DP);
-	}
-	public boolean isDrSignAuthorized() {
-		return checkLicence(Licence.SIGNATURE_DR);
-	}
-	public boolean isDvSignAuthorized() {
-		return checkLicence(Licence.SIGNATURE_DV);
-	}
 	
-	public boolean isDaSignAuthorized() {
-		return checkLicence(Licence.SIGNATURE_DA);
-	}
-	public boolean isEjSignAuthorized() {
-		return checkLicence(Licence.SIGNATURE_EJ);
-	}
-	public boolean isAsfSignAuthorized() {
-		return checkLicence(Licence.SIGNATURE_ASF);
-	}
-	public boolean isVsfSignAuthorized() {
-		return checkLicence(Licence.SIGNATURE_VSF);
-	}
-	public boolean isLiqSignAuthorized() {
-		return checkLicence(Licence.SIGNATURE_LIQ);
-	}
-	public boolean isOrSignAuthorized() {
-		return checkLicence(Licence.SIGNATURE_OR);
-	}
-	public boolean isOpSignAuthorized() {
-		return checkLicence(Licence.SIGNATURE_OP);
-	}
-	public boolean isLrecSignAuthorized() {
-		return checkLicence(Licence.SIGNATURE_LREC);
-	}
-	public boolean isArSignAuthorized() {
-		return checkLicence(Licence.SIGNATURE_AR);
-	}
-	public boolean isDaSignatureRequired() {
-		return checkLicence(Licence.SIGNATURE_DA_REQUISE);
-	}
-	public boolean isEjSignatureRequired() {
-		return checkLicence(Licence.SIGNATURE_EJ_REQUISE);
-	}
-	public boolean isAsfSignatureRequired() {
-		return checkLicence(Licence.SIGNATURE_ASF_REQUISE);
-	}
-	public boolean isVsfSignatureRequired() {
-		return checkLicence(Licence.SIGNATURE_VSF_REQUISE);
-	}
-	public boolean isLiqSignatureRequired() {
-		return checkLicence(Licence.SIGNATURE_LIQ_REQUISE);
-	}
-	public boolean isOrSignatureRequired() {
-		return checkLicence(Licence.SIGNATURE_OR_REQUISE);
-	}
-	public boolean isOpSignatureRequired() {
-		return checkLicence(Licence.SIGNATURE_OP_REQUISE);
-	}
-	public boolean isLrecSignatureRequired() {
-		return checkLicence(Licence.SIGNATURE_LREC_REQUISE);
-	}
-	public boolean isArSignatureRequired() {
-		return checkLicence(Licence.SIGNATURE_AR_REQUISE);
-	}
 	private boolean checkLicence( Licence licence) {
 		String configuredValue="0";
 		try {
@@ -1157,60 +1091,6 @@ private void deploiement() {
 			break;
 		case SIGNATURE:
 			configuredValue=AppCfgConfig.getInstance().getSignatureLicence();
-			break;
-		case SIGNATURE_DA:
-			configuredValue=AppCfgConfig.getInstance().getDaSignatLicence();
-			break;
-		case SIGNATURE_EJ:
-			configuredValue=AppCfgConfig.getInstance().getEjSignatLicence();
-			break;
-		case SIGNATURE_ASF:
-			configuredValue=AppCfgConfig.getInstance().getAsfSignatLicence();
-			break;
-		case SIGNATURE_VSF:
-			configuredValue=AppCfgConfig.getInstance().getVsfSignatLicence();
-			break;
-		case SIGNATURE_LIQ:
-			configuredValue=AppCfgConfig.getInstance().getLiqSignatLicence();
-			break;
-		case SIGNATURE_OR:
-			configuredValue=AppCfgConfig.getInstance().getOrSignatLicence();
-			break;
-		case SIGNATURE_OP:
-			configuredValue=AppCfgConfig.getInstance().getOpSignatLicence();
-			break;
-		case SIGNATURE_LREC:
-			configuredValue=AppCfgConfig.getInstance().getLrecSignatLicence();
-			break;
-		case SIGNATURE_AR:
-			configuredValue=AppCfgConfig.getInstance().getArSignatLicence();
-			break;
-		case SIGNATURE_DA_REQUISE:
-			configuredValue=AppCfgConfig.getInstance().getDaSignatRequise();
-			break;
-		case SIGNATURE_EJ_REQUISE:
-			configuredValue=AppCfgConfig.getInstance().getEjSignatRequise();
-			break;
-		case SIGNATURE_ASF_REQUISE:
-			configuredValue=AppCfgConfig.getInstance().getAsfSignatRequise();
-			break;
-		case SIGNATURE_VSF_REQUISE:
-			configuredValue=AppCfgConfig.getInstance().getVsfSignatRequise();
-			break;
-		case SIGNATURE_LIQ_REQUISE:
-			configuredValue=AppCfgConfig.getInstance().getLiqSignatRequise();
-			break;
-		case SIGNATURE_OR_REQUISE:
-			configuredValue=AppCfgConfig.getInstance().getOrSignatRequise();
-			break;
-		case SIGNATURE_OP_REQUISE:
-			configuredValue=AppCfgConfig.getInstance().getOpSignatRequise();
-			break;
-		case SIGNATURE_LREC_REQUISE:
-			configuredValue=AppCfgConfig.getInstance().getLrecSignatRequise();
-			break;
-		case SIGNATURE_AR_REQUISE:
-			configuredValue=AppCfgConfig.getInstance().getArSignatRequise();
 			break;
 		case DP_GENERATION:
 			configuredValue=AppCfgConfig.getInstance().getDpSignatLicence();
@@ -1366,12 +1246,13 @@ private void deploiement() {
 		IBasicBean bean = BudgetHelper.getDpBean();
 		return prepare(Action.DP_GENERATION,bean);
 	}
-	public boolean checkRequiredSignature() {
-		if(isDaSignatureRequired()||isEjSignatureRequired()||isLiqSignatureRequired()||isAsfSignatureRequired()||isVsfSignatureRequired()||isOpSignatureRequired()||isOrSignatureRequired()
-				||isLrecSignatureRequired()||isArSignatureRequired())
-		return true;
-		return false;
-	}
+//	public boolean checkRequiredSignature() {
+//		if(isDaSignatureRequired()||isEjSignatureRequired()||isLiqSignatureRequired()||isAsfSignatureRequired()||isVsfSignatureRequired()||isOpSignatureRequired()||isOrSignatureRequired()
+//				||isLrecSignatureRequired()||isArSignatureRequired())
+//		return true;
+//		return false;
+//	}
+	
 	
 	
 	

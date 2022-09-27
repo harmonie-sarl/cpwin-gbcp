@@ -143,7 +143,7 @@ public class DialogHelper {
 	}
 	public static void openSignatureDialog(){
 		String sourceName="signatureView";
-		Map<String, Object> options=initOptions(true, true, false, 550, 1300);
+		Map<String, Object> options=initOptions(true, true, false, 650, 1150);
 		openDialog(sourceName, options);
 	}
 }
