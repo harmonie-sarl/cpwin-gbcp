@@ -1,3 +1,8 @@
 /target/
+<<<<<<< HEAD
 /.classpath
 /.project
+=======
+/.project
+/.classpath
+>>>>>>> branch 'signature' of https://github.com/harmonie-sarl/cpwin-gbcp.git
