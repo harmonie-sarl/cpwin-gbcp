@@ -31,6 +31,8 @@ public class Signature {
 	private boolean vsf;
 	private boolean op;
 	private boolean asf;
+	private boolean mdt;
+	private boolean tr;
 	
 	private BigDecimal seuilLrec;
 	private BigDecimal seuilAr;
@@ -41,8 +43,8 @@ public class Signature {
 	private BigDecimal seuilLiq;
 	private BigDecimal seuilOr;
 	private BigDecimal seuilOp;
-	
-	
+	private BigDecimal seuilMdt;
+	private BigDecimal seuilTr;
 	
 	
 	public BigDecimal getSeuilLrec() {
@@ -50,6 +52,7 @@ public class Signature {
 	}
 
 	public void setSeuilLrec(BigDecimal seuilLrec) {
+		executeUpdate(this.seuilLrec,seuilLrec);
 		this.seuilLrec = seuilLrec;
 	}
 
@@ -58,6 +61,7 @@ public class Signature {
 	}
 
 	public void setSeuilAr(BigDecimal seuilAr) {
+		executeUpdate(this.seuilAr,seuilAr);
 		this.seuilAr = seuilAr;
 	}
 
@@ -66,6 +70,7 @@ public class Signature {
 	}
 
 	public void setSeuilDa(BigDecimal seuilDa) {
+		executeUpdate(this.seuilDa,seuilDa);
 		this.seuilDa = seuilDa;
 	}
 
@@ -74,6 +79,7 @@ public class Signature {
 	}
 
 	public void setSeuilEj(BigDecimal seuilEj) {
+		executeUpdate(this.seuilEj,seuilEj);
 		this.seuilEj = seuilEj;
 	}
 
@@ -82,6 +88,7 @@ public class Signature {
 	}
 
 	public void setSeuilAsf(BigDecimal seuilAsf) {
+		executeUpdate(this.seuilAsf,seuilAsf);
 		this.seuilAsf = seuilAsf;
 	}
 
@@ -90,6 +97,7 @@ public class Signature {
 	}
 
 	public void setSeuilVsf(BigDecimal seuilVsf) {
+		executeUpdate(this.seuilVsf,seuilVsf);
 		this.seuilVsf = seuilVsf;
 	}
 
@@ -98,6 +106,7 @@ public class Signature {
 	}
 
 	public void setSeuilLiq(BigDecimal seuilLiq) {
+		executeUpdate(this.seuilLiq,seuilLiq);
 		this.seuilLiq = seuilLiq;
 	}
 
@@ -106,6 +115,7 @@ public class Signature {
 	}
 
 	public void setSeuilOr(BigDecimal seuilOr) {
+		executeUpdate(this.seuilOr,seuilOr);
 		this.seuilOr = seuilOr;
 	}
 
@@ -114,6 +124,7 @@ public class Signature {
 	}
 
 	public void setSeuilOp(BigDecimal seuilOp) {
+		executeUpdate(this.seuilOp,seuilOp);
 		this.seuilOp = seuilOp;
 	}
 
@@ -327,5 +338,44 @@ public class Signature {
 		executeUpdate(this.liqOr,liqOr);
 		this.liqOr = liqOr;
 	}
+
+	
+	
+	public boolean isMdt() {
+		return mdt;
+	}
+
+	public void setMdt(boolean mdt) {
+		executeUpdate(this.mdt,mdt);
+		this.mdt = mdt;
+	}
+
+	public boolean isTr() {
+		return tr;
+	}
+
+	public void setTr(boolean tr) {
+		executeUpdate(this.tr,tr);
+		this.tr = tr;
+	}
+
+	public BigDecimal getSeuilMdt() {
+		return seuilMdt;
+	}
+
+	public void setSeuilMdt(BigDecimal seuilMdt) {
+		executeUpdate(this.seuilMdt,seuilMdt);
+		this.seuilMdt = seuilMdt;
+	}
+
+	public BigDecimal getSeuilTr() {
+		return seuilTr;
+	}
+
+	public void setSeuilTr(BigDecimal seuilTr) {
+		executeUpdate(this.seuilTr,seuilTr);
+		this.seuilTr = seuilTr;
+	}
+
 
 }

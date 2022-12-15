@@ -94,6 +94,18 @@
 			<basic name="seuilOp">
 				<column name="seuil_op" column-definition="money default 0"></column>
 			</basic>
+			<basic name="mdt">
+				<column name="emis_mdt"></column>
+			</basic>		
+			<basic name="seuilMdt">
+				<column name="seuil_mdt" column-definition="money default 0"></column>
+			</basic>
+			<basic name="tr">
+				<column name="emis_tr"></column>
+			</basic>		
+			<basic name="seuilTr">
+				<column name="seuil_tr" column-definition="money default 0"></column>
+			</basic>
 			<embedded name="trace">
 			</embedded>
 		</attributes>

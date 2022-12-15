@@ -254,7 +254,7 @@
 						<h:selectBooleanCheckbox id="vsf"
 							value="#{signatBean.selectedSignature.vsf}">
 							<p:ajax event="change" listener="#{signatBean.onSelectVsf}"
-								process="@form" update="autoritePanel,signatureForm" />
+								process="@form" update="signatureForm" />
 						</h:selectBooleanCheckbox>
 						<h:outputLabel style="font-weight:bold" value="#{msgs['vsf']}"
 							for="vsf" />
@@ -269,6 +269,46 @@
 							rendered="#{signatBean.selectedSignature.vsf}">
 						</p:inputNumber>
 					</h:panelGrid>
+					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+						<h:selectBooleanCheckbox id="tr"
+							value="#{signatBean.selectedSignature.tr}">
+							<p:ajax event="change" listener="#{signatBean.onSelectTr}"
+								process="@form" update="signatureForm" />
+						</h:selectBooleanCheckbox>
+						<h:outputLabel style="font-weight:bold" value="#{msgs['tr']}"
+							for="tr" />
+
+						<h:outputLabel value="#{msgs['seuil']}" for="seuilTr"
+							rendered="#{signatBean.selectedSignature.tr}" />
+
+
+						<p:inputNumber id="seuilTr" size="12"
+							inputStyle="text-align: center"
+							value="#{signatBean.selectedSignature.seuilTr}"
+							rendered="#{signatBean.selectedSignature.tr}">
+						</p:inputNumber>
+					</h:panelGrid>
+					<h:panelGrid columns="4" cellspacing="3" cellpadding="3">
+						<h:selectBooleanCheckbox id="mdt"
+							value="#{signatBean.selectedSignature.mdt}">
+							<p:ajax event="change" listener="#{signatBean.onSelectMdt}"
+								process="@form" update="signatureForm" />
+						</h:selectBooleanCheckbox>
+						<h:outputLabel style="font-weight:bold" value="MDT&#160;&#160;&#160;&#160;"
+							for="mdt" />
+
+						<h:outputLabel value="#{msgs['seuil']}" for="seuilMdt"
+							rendered="#{signatBean.selectedSignature.mdt}" />
+
+
+						<p:inputNumber id="seuilMdt" size="12"
+							inputStyle="text-align: center"
+							value="#{signatBean.selectedSignature.seuilMdt}"
+							rendered="#{signatBean.selectedSignature.mdt}">
+						</p:inputNumber>
+					</h:panelGrid>
+					
+					
 
 
 

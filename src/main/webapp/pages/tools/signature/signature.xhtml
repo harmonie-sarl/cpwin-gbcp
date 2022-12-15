@@ -92,6 +92,12 @@
                            <p:column headerText="#{msgs['liq.ar']}" style="text-align:center" rendered="#{signatBean.arSignAuthorized}">
                                <h:outputText value="#{sign.ar?'Oui':'Non'}" /> 
                           </p:column>
+                           <p:column headerText="#{msgs['mdt']}" style="text-align:center" rendered="#{signatBean.mdtSignAuthorized}">
+                               <h:outputText value="#{sign.mdt?'Oui':'Non'}" /> 
+                          </p:column>
+                           <p:column headerText="#{msgs['tr']}" style="text-align:center" rendered="#{signatBean.trSignAuthorized}">
+                               <h:outputText value="#{sign.tr?'Oui':'Non'}" /> 
+                          </p:column>
                            <p:column headerText="#{msgs['actif']}" style="text-align:center" >
                                <h:outputText value="#{sign.actif?'Oui':'Non'}" /> 
                           </p:column>
