@@ -35,6 +35,8 @@ import fr.symphonie.cpwin.model.sepa.Actor;
 import fr.symphonie.cpwin.model.sepa.Bic;
 import fr.symphonie.cpwin.model.sepa.Protocol;
 import fr.symphonie.exception.MissingConfiguration;
+import fr.symphonie.tools.common.model.FileImportTrace;
+import fr.symphonie.tools.common.model.ImportPeriod;
 import fr.symphonie.tools.meta4dai.DisplayStruct;
 import fr.symphonie.tools.meta4dai.model.LbData;
 import fr.symphonie.tools.meta4dai.model.PaymentItem;
@@ -218,7 +220,8 @@ private ICommonDao commonDao;
 	@Override
 	@Transactional
 	public <T> void saveList(List<T> list) {
-		for(T item:list) commonDao.insert(item);
+		//for(T item:list) commonDao.insert(item);
+		commonDao.saveList(list);
 		
 	}
 	@Override
@@ -390,5 +393,24 @@ private ICommonDao commonDao;
 	public List<Integer> getMeta4DaiExercices() {
 		return commonDao.getMeta4DaiExercices();
 	}
+	@Override
+	public List<FileImportTrace> getImportHistoryList(Integer exercice, String moduleName, long crc32) {
+		return commonDao.getImportHistoryList(exercice,moduleName,crc32);
+	}
+	@Override
+	@Transactional
+	public void saveImportTrace(FileImportTrace vague) {
+		commonDao.insert(vague);	
+		
+	}
+	@Override
+	public List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName) {
+		return commonDao.getPeriodList(exercice,codeBudget,moduleName);
+	}
+	@Override
+	public List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName,String code) {
+		return commonDao.getPeriodList(exercice,codeBudget,moduleName,code);
+	}
+	
 	
 }

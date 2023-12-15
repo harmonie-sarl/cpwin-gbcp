@@ -473,6 +473,16 @@ public class MsgEntry {
 	public static final String SIGNATURE_MAIL_MESSAGE="signature.mail.message";
 	public static final String SIGNATURE_DUPLICAT="signature.duplicat";
 	
+	/** Pour module billetterie lemans**/
+	public static final String MENU_LEMANS_BILLETTERIE = "billetterie.lemans";
+	public static final String MENU_SPECTACLE = "spectacle";
+	public static final String DUPLICATE_SPECTACLE_DETAIL_MSG = "spectacle.detail.existe";
+	public static final String SUPPR_DETAIL_SPECTACLE = "suppression.spectacle";
+	public static final String DUPLICATE_SPECTACLE_MSG = "spectacle.existe";
+	public static final String DUPLICAT_CRC_MSG ="rembours.import.crc";
+	public static final String DUPLICATE_CLIENT_LEMANS_MSG = "client.lemans.existe";
+	
+	
 	
 	
 	

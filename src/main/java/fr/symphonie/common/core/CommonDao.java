@@ -28,6 +28,8 @@ import fr.symphonie.cpwin.model.pk.SepaBicPK;
 import fr.symphonie.cpwin.model.sepa.Actor;
 import fr.symphonie.cpwin.model.sepa.Bic;
 import fr.symphonie.cpwin.model.sepa.Protocol;
+import fr.symphonie.tools.common.model.FileImportTrace;
+import fr.symphonie.tools.common.model.ImportPeriod;
 import fr.symphonie.tools.meta4dai.model.PaymentItem;
 import fr.symphonie.tools.meta4dai.model.Period;
 import fr.symphonie.tools.nantes.model.Etudiant;
@@ -355,5 +357,91 @@ public class CommonDao implements fr.symphonie.common.core.ICommonDao{
 		logger.debug("findTiersList: size={}",listTiers.size());
 		return listTiers;
 	}
+
+	@Override
+	public List<FileImportTrace> getImportHistoryList(Integer exercice, String moduleName, long crc32) {
+		List<FileImportTrace> result = null;
+		
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<FileImportTrace> cq = cb.createQuery(FileImportTrace.class);
+		Root<FileImportTrace> root = cq.from(FileImportTrace.class);
+		cq.select(root);
+		Predicate p = cb.conjunction();
+		
+			p = cb.and(p, cb.equal(root.get("exercice"), exercice));
+			p = cb.and(p, cb.equal(root.get("crc32"), crc32));
+			p = cb.and(p, cb.equal(root.get("module"), moduleName));
+			
+			cq.where(p);
+			TypedQuery<FileImportTrace> query = em.createQuery(cq);
+			result = query.getResultList();
+
+		return result;
+	}
+
+	@Override
+	public List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName) {
+		List<ImportPeriod> result = null;
+		
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<ImportPeriod> cq = cb.createQuery(ImportPeriod.class);
+		Root<ImportPeriod> root = cq.from(ImportPeriod.class);
+		cq.select(root);
+		Predicate p = cb.conjunction();
+		
+			p = cb.and(p, cb.equal(root.get("exercice"), exercice));
+			if(StringUtils.isNotBlank(codeBudget))
+			p = cb.and(p, cb.equal(root.get("budget"), codeBudget));
+			if(StringUtils.isNotBlank(moduleName))
+			p = cb.and(p, cb.equal(root.get("module"), moduleName));
+			
+			cq.where(p);
+			TypedQuery<ImportPeriod> query = em.createQuery(cq);
+			result = query.getResultList();
+
+		return result;
+	}
+	@Override
+	public <T> void saveList(List<T> list) {
+		int batchSize=Constant.batch_size;
+		logger.info("saveList: batchSize={}, list size={}",batchSize,list.size());
+		int i = 0;
+		for(T obj:list){
+			em.persist(obj);
+            i++;            
+			if (i % batchSize == 0) {
+                em.flush();
+                em.clear();
+            }           
+        }
+        em.flush();
+        em.clear();
+	}
+
+
+@Override
+public List<ImportPeriod> getPeriodList(Integer exercice, String codeBudget, String moduleName,String code) {
+	List<ImportPeriod> result = null;
+	logger.debug("getPeriodList: code={}",code);
+	CriteriaBuilder cb = em.getCriteriaBuilder();
+	CriteriaQuery<ImportPeriod> cq = cb.createQuery(ImportPeriod.class);
+	Root<ImportPeriod> root = cq.from(ImportPeriod.class);
+	cq.select(root);
+	Predicate p = cb.conjunction();
+	
+		p = cb.and(p, cb.equal(root.get("exercice"), exercice));
+		if(StringUtils.isNotBlank(codeBudget))
+		p = cb.and(p, cb.equal(root.get("budget"), codeBudget));
+		if(StringUtils.isNotBlank(moduleName))
+		p = cb.and(p, cb.equal(root.get("module"), moduleName));
+		if(StringUtils.isNotBlank(code))
+			p = cb.and(p, cb.equal(root.get("code"),code ));
+		
+		cq.where(p);
+		TypedQuery<ImportPeriod> query = em.createQuery(cq);
+		result = query.getResultList();
+
+	return result;
+}
 
 }

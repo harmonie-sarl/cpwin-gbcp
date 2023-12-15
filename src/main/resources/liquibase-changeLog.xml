@@ -1,0 +1,172 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="wedevzone" id="1653063145486-1">
+        <createTable tableName="import_periode">
+            <column autoIncrement="true" name="id" type="NUMBER">
+                <constraints primaryKey="true" primaryKeyName="import_periodePK"/>
+            </column>
+            <column name="code_budg" type="VARCHAR(1)"/>
+            <column name="closed" type="BOOLEAN" defaultValueBoolean="false">
+             <constraints nullable="false" />
+            </column>
+            <column name="code" type="VARCHAR(3)"/>
+            <column name="etat" type="VARCHAR(20)"/>
+            <column name="num_exec" type="INT"/>
+            <column name="module" type="VARCHAR(20)"/>
+            <column name="object" type="VARCHAR(50)"/>
+            <column name="aut_crea" type="VARCHAR(10)"/>
+            <column name="aut_maj" type="VARCHAR(10)"/>
+            <column name="date_crea" type="datetime"/>
+            <column name="dateMaj" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="wedevzone" id="1653063145486-2">
+        <createTable tableName="import_vague">
+            <column autoIncrement="true" name="id" type="NUMBER">
+                <constraints primaryKey="true" primaryKeyName="import_vaguePK"/>
+            </column>
+            <column name="crc32" type="NUMBER(19, 0)"/>
+            <column name="num_exec" type="INT"/>
+            <column name="fileName" type="VARCHAR(50)"/>
+            <column name="module" type="VARCHAR(20)"/>
+           <column name="aut_crea" type="VARCHAR(10)"/>
+            <column name="aut_maj" type="VARCHAR(10)"/>
+            <column name="date_crea" type="datetime"/>
+            <column name="dateMaj" type="datetime"/>
+        </createTable>
+    </changeSet>
+     <changeSet author="wedevzone" id="1653317115459-1">
+        <createTable tableName="bt_client">
+            <column name="code" type="VARCHAR(10)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="bt_clientPK"/>
+            </column>
+            <column name="code_cpwin" type="VARCHAR(10)"/>
+            <column name="no_adr" type="INT"/>
+            <column name="nom" type="VARCHAR(50)"/>
+            <column name="est_regisseur" type="BIT" defaultValueBoolean="false">
+              <constraints nullable="false" />
+            </column>
+            <column name="aut_crea" type="VARCHAR(10)"/>
+            <column name="aut_maj" type="VARCHAR(10)"/>
+            <column name="date_crea" type="datetime"/>
+            <column name="dateMaj" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="wedevzone" id="1653317115459-2">
+        <createTable tableName="bt_detailSpectacle">
+            <column name="code_spectacle" type="VARCHAR(10)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="bt_detailSpectaclePK"/>
+            </column>
+            <column name="num_exec" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="bt_detailSpectaclePK"/>
+            </column>
+            <column name="cpt_tiers" type="VARCHAR(10)"/>
+            <column name="cpt_produit" type="VARCHAR(10)"/>
+            <column name="code_dest" type="VARCHAR(10)"/>
+            <column name="code_nature" type="VARCHAR(10)"/>
+            <column name="no_lbi" type="INT"/>
+            <column name="code_prog" type="VARCHAR(10)"/>
+            <column name="code_service" type="VARCHAR(10)"/>
+            <column name="taux_tva" type="FLOAT"/>
+           <column name="aut_crea" type="VARCHAR(10)"/>
+            <column name="aut_maj" type="VARCHAR(10)"/>
+            <column name="date_crea" type="datetime"/>
+            <column name="dateMaj" type="datetime"/>
+          
+        </createTable>
+    </changeSet>
+    <changeSet author="wedevzone" id="1653317115459-3">
+        <createTable tableName="bt_spectacle">
+            <column name="code" type="VARCHAR(10)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="bt_spectaclePK"/>
+            </column>
+            <column name="libelle" type="VARCHAR(50)"/>
+            <column name="aut_crea" type="VARCHAR(10)"/>
+            <column name="aut_maj" type="VARCHAR(10)"/>
+            <column name="date_crea" type="datetime"/>
+            <column name="dateMaj" type="datetime"/>
+        </createTable>
+    </changeSet>
+     <changeSet author="wedevzone" id="rename-columns-dateMaj">
+     <renameColumn tableName="import_periode" oldColumnName="dateMaj" newColumnName="date_maj"/>
+      <renameColumn tableName="import_vague" oldColumnName="dateMaj" newColumnName="date_maj"/>
+       <renameColumn tableName="bt_client" oldColumnName="dateMaj" newColumnName="date_maj"/>
+        <renameColumn tableName="bt_spectacle" oldColumnName="dateMaj" newColumnName="date_maj"/>
+         <renameColumn tableName="bt_detailSpectacle" oldColumnName="dateMaj" newColumnName="date_maj"/>
+      
+    </changeSet>
+    <changeSet author="wedevzone" id="initialisation-periode-BT">
+    <insert tableName="import_periode" dbms="sybase"  >
+   			<column name="code_budg" value="A"/>
+            <column name="closed" valueBoolean="false" />
+            <column name="code" value="1"/>
+            <column name="etat" value="OUVERT"/>
+            <column name="num_exec" valueNumeric="2020"/>
+            <column name="module" value="LEMANS_BT"/>
+            <column name="object" value="PERIODE 1 POUR TEST"/>
+            <column name="aut_crea" value="CBS"/>
+            <column name="aut_maj" value="CBS"/>
+            <column name="date_crea" valueDate="getdate()"/>
+            <column name="date_maj" valueDate="getdate()"/>
+   
+    </insert>    
+    </changeSet>
+     <changeSet author="wedevzone" id="1653571295794-2">
+        <createTable tableName="bt_vente">
+            <column name="num_encaiss" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="bt_ventePK"/>
+            </column>           
+            <column name="num_exec" type="INT"/>
+            <column name="code_budg" type="VARCHAR(1)"/>
+            <column name="periode" type="VARCHAR(3)"/>
+            <column name="date_encaiss" type="datetime"/>
+            <column name="mode_paie" type="VARCHAR(10)"/>
+            <column name="montant" type="numeric(19, 2)"/>
+            <column name="nomPayeur" type="VARCHAR(50)"/>            
+            <column name="aut_crea" type="VARCHAR(10)"/>
+            <column name="aut_maj" type="VARCHAR(10)"/>
+            <column name="date_crea" type="datetime"/>
+            <column name="date_Maj" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="wedevzone" id="1653571295794-3">
+        <createTable tableName="tb_detailsVente">
+            <column autoIncrement="true" name="id" type="numeric">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tb_detailsVentePK"/>
+            </column>           
+            <column name="num_exec" type="INT"/>
+            <column name="code_budg" type="VARCHAR(1)"/>
+            <column name="periode" type="VARCHAR(3)"/>
+            <column name="dateRep" type="datetime"/>
+            <column name="montant" type="numeric(19, 2)"/>
+            <column name="num_encaiss" type="INT"/>
+            <column name="code_spectacle" type="VARCHAR(10)"/>
+            <column name="objet" type="VARCHAR(50)"/>            
+            <column name="aut_crea" type="VARCHAR(10)"/>
+            <column name="aut_maj" type="VARCHAR(10)"/>
+            <column name="date_crea" type="datetime"/>
+            <column name="date_Maj" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="wedevzone" id="1653571295794-4">
+    <renameTable newTableName="bt_detailsVente" oldTableName="tb_detailsVente"/>
+    </changeSet>
+    
+     <changeSet author="wedevzone" id="1653576675001-2">
+        <createTable tableName="bt_modpaie">
+            <column name="Code" type="VARCHAR(10)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="bt_modpaiePK"/>
+            </column>
+            <column name="designation" type="VARCHAR(50)"/>
+            <column name="avec_frais" type="BIT" defaultValueBoolean="false">
+             <constraints nullable="false" />
+            </column>
+            <column name="est_regisseur" type="BIT" defaultValueBoolean="false">
+             <constraints nullable="false" />
+            </column>
+            <column name="aut_crea" type="VARCHAR(10)"/>
+            <column name="aut_maj" type="VARCHAR(10)"/>
+            <column name="date_crea" type="datetime"/>
+            <column name="date_Maj" type="datetime"/>
+        </createTable>
+    </changeSet>
+    </databaseChangeLog>
