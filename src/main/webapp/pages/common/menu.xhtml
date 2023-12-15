@@ -141,6 +141,18 @@
  			<p:menuitem value="#{msgs['generation']}" action="#{navigationBean.goToRemboursGeneration}" ajax="false" rendered="#{p:ifAnyGranted('remb_generation') and (navigationBean.rembSaisieAuthorized )}"/>
  			<p:menuitem value="#{msgs['menu.consult']}" action="#{navigationBean.goToRemboursConsult}" ajax="false" rendered="#{p:ifAnyGranted('remb_consult') and (navigationBean.rembConsultAuthorized)}"/>
  			</p:submenu>
+ 			<p:submenu label="#{msgs['billetterie.lemans']}" rendered="true">
+				<p:menuitem value="#{msgs['menu.initialisation']}" action="#{navigationBean.goToInitGTS}" ajax="false" disabled="false"  />	
+					<p:submenu label="#{msgs['referentiel']}">
+						<p:menuitem value="#{msgs['spectacle']}" ajax="false"	action="#{navigationBean.goToLemansSpectacle}" />
+						<p:menuitem value="#{msgs['periode']}" ajax="false"	action="#{navigationBean.goToLemansPeriode}" />
+						<p:menuitem value="#{msgs['clients']}" ajax="false" action="#{navigationBean.goToLemansClient}"  />
+							<p:menuitem value="#{msgs['mode.paiement']}" ajax="false" action="#{navigationBean.goToLemansModePaiment}"  />
+					</p:submenu>
+					<p:menuitem value="#{msgs['importVentilation']}" action="#{navigationBean.goToLemansImport}" ajax="false" />
+					<p:menuitem value="#{msgs['generation']}" action="#{navigationBean.goToGtsGeneration}" 	ajax="false" />
+					<p:menuitem value="#{msgs['menu.consult']}"	action="#{navigationBean.goToGtsConsultation}" ajax="false" />
+				</p:submenu>
  			
  			<p:submenu label="#{msgs['menu.meta4Dai']}" rendered="#{navigationBean.meta4daiAuthorized}">
  			<p:menuitem value="#{msgs['menu.initialisation']}" action="#{navigationBean.goToInitMeta4Dai}" ajax="false" disabled="false"  />	

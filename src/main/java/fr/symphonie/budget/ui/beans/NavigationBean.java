@@ -25,6 +25,7 @@ import fr.symphonie.tools.common.DataListBean;
 import fr.symphonie.tools.crc.CrcBean;
 import fr.symphonie.tools.das.ui.DasBean;
 import fr.symphonie.tools.gts.ui.GtsBean;
+import fr.symphonie.tools.lemans.bt.ui.BilletterieBean;
 import fr.symphonie.tools.meta4dai.DaiInterfaceBean;
 import fr.symphonie.tools.nantes.StudentBean;
 import fr.symphonie.tools.recette.ImportRecetteBean;
@@ -118,6 +119,15 @@ public class NavigationBean implements Serializable {
 //    private static final String  META4DAI_PERIODE_OUTCOME="meta4dai_periode";
 //    private static final String  META4DAI_LBC_OUTCOME="meta4dai_lbc";
     private static final String  GENERATION_DP_OUTCOME="generation_dp";
+    private static final String  LEMANS_SPECTACLE_OUTCOME="lemans_ref_spectacle";
+    private static final String  LEMANS_PERIODE_OUTCOME="lemans_ref_periode";
+    private static final String  LEMANS_CLIENT_OUTCOME="lemans_ref_client";
+    private static final String  LEMANS_IMPORT_OUTCOME="lemans_import";
+    private static final String  LEMANS_MPAIEMENT_OUTCOME="lemans_ref_modPaiement";
+    
+    
+    
+    
     
     
     
@@ -247,6 +257,7 @@ public class NavigationBean implements Serializable {
 		CRC,
 		SIGNATURE,SIGNATURE_SF,SIGNATURE_DP,SIGNATURE_DR,SIGNATURE_DV,SIGNATURE_DA,SIGNATURE_EJ,SIGNATURE_ASF,SIGNATURE_VSF,SIGNATURE_LIQ,SIGNATURE_OR,SIGNATURE_OP,SIGNATURE_LREC,SIGNATURE_AR,SIGNATURE_MDT,SIGNATURE_TR,
 		DP_GENERATION,SIGNATURE_DA_REQUISE,SIGNATURE_EJ_REQUISE,SIGNATURE_ASF_REQUISE,SIGNATURE_VSF_REQUISE,SIGNATURE_LIQ_REQUISE,SIGNATURE_OR_REQUISE,SIGNATURE_OP_REQUISE,SIGNATURE_LREC_REQUISE,SIGNATURE_AR_REQUISE,SIGNATURE_MDT_REQUISE,SIGNATURE_TR_REQUISE
+		LEMANS_BILLETTERIE
 	}
 	
 	public enum Action {
@@ -327,6 +338,11 @@ public class NavigationBean implements Serializable {
 		INITIALIZE_META4DAI(META4DAI_INIT_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_META4DAI,MsgEntry.MENU_INITIALISATION),
 		INITIALIZE_GTS(GTS_INIT_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_BILLETTERIE,MsgEntry.MENU_INITIALISATION),
 		DP_GENERATION(GENERATION_DP_OUTCOME,Menu.MENU_TOOLS,MsgEntry.DP_SAISIE),
+		LEMANS_SPECTACLE(LEMANS_SPECTACLE_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.MENU_SPECTACLE),
+		LEMANS_PERIODE(LEMANS_PERIODE_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.MENU_PERIODE),
+		LEMANS_CLIENT(LEMANS_CLIENT_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.MENU_CLIENT),
+		LEMANS_IMPORT(LEMANS_IMPORT_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,MsgEntry.IMPORT),
+		LEMANS_MODE_PAIELMENT(LEMANS_MPAIEMENT_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_LEMANS_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.REMB_MODE_PAIEMENT),
 		;
 		
 		
@@ -643,7 +659,8 @@ public class NavigationBean implements Serializable {
 		MENU_ETUDIANT(MsgEntry.ETUDIANT),
 		MENU_CRC(MsgEntry.CRC),
 		MENU_TOOLS(MsgEntry.MENU_OUTILS),
-		MENU_SIGNATURE(MsgEntry.MENU_SIGNATURE);
+		MENU_SIGNATURE(MsgEntry.MENU_SIGNATURE),
+		MENU_LEMANS_BILLETTERIE(MsgEntry.MENU_LEMANS_BILLETTERIE)
 		;
 		private Libelle libelle;
 		Menu(String msgKey){
@@ -814,6 +831,12 @@ private ImportRecetteBean getImportRecetteBean()
 	}
 private DematBean getDematBean(){
 	return (DematBean)Helper.findBean("dematBean");
+}
+private GenericBean getLemanRefBean(){
+	return (GenericBean)Helper.findBean("lemansRefBean");
+}
+private BilletterieBean getBtBean(){
+	return (BilletterieBean)Helper.findBean("btBean");
 }
 public String goToImportTiersDas()
 {	
@@ -1048,7 +1071,9 @@ private void deploiement() {
 	public boolean isDpGenerationAuthorized() {
 		return checkLicence(Licence.DP_GENERATION);
 	}
-	
+	public boolean isLemansBilletterieAuthorized() {
+		return checkLicence(Licence.LEMANS_BILLETTERIE);
+	}
 	private boolean checkLicence( Licence licence) {
 		String configuredValue="0";
 		try {
@@ -1094,6 +1119,9 @@ private void deploiement() {
 			break;
 		case DP_GENERATION:
 			configuredValue=AppCfgConfig.getInstance().getDpGenerationLicence();
+			break;
+		case LEMANS_BILLETTERIE:
+			configuredValue=AppCfgConfig.getInstance().getLemansBilletterieLicence();
 			break;
 		default:
 			break;
@@ -1246,6 +1274,7 @@ private void deploiement() {
 		IBasicBean bean = BudgetHelper.getDpBean();
 		return prepare(Action.DP_GENERATION,bean);
 	}
+
 //	public boolean checkRequiredSignature() {
 //		if(isDaSignatureRequired()||isEjSignatureRequired()||isLiqSignatureRequired()||isAsfSignatureRequired()||isVsfSignatureRequired()||isOpSignatureRequired()||isOrSignatureRequired()
 //				||isLrecSignatureRequired()||isArSignatureRequired())
@@ -1253,8 +1282,43 @@ private void deploiement() {
 //		return false;
 //	}
 	
+	public String goToLemansSpectacle() {
+		getLemanRefBean().reset();
+		prepare(Action.LEMANS_SPECTACLE);
+		return Action.LEMANS_SPECTACLE.getOutcome();
+	}
+	public String goToLemansPeriode() {
+		getDataListBean().reset();
+		getLemanRefBean().reset();
+		prepare(Action.LEMANS_PERIODE);
+		return Action.LEMANS_PERIODE.getOutcome();
+	}
 	
-	
+	 public String goToLemansClient()
+	 {
+		 getLemanRefBean().reset();
+		 prepare(Action.LEMANS_CLIENT);
+		 return Action.LEMANS_CLIENT.getOutcome();
+	 }
+	 
+	 public String goToLemansImport()
+	 {
+		 getBtBean().reset();	 
+		 prepare(Action.LEMANS_IMPORT);
+		 return Action.LEMANS_IMPORT.getOutcome();
+		 
+	 }
+	 
+	 public String goToLemansModePaiment()
+	 {
+		 getLemanRefBean().reset();	 
+		 prepare(Action.LEMANS_MODE_PAIELMENT);
+		 return Action.LEMANS_MODE_PAIELMENT.getOutcome();
+		 
+	 }
+	 
+	 
+	 
 	
 }
 

@@ -16,10 +16,18 @@
 		<mapping-file>META-INF/orm-meta4dai.xml</mapping-file>
 		<mapping-file>META-INF/etudiant.xml</mapping-file>
 		<mapping-file>META-INF/signature.xml</mapping-file>
-		
+		<!--  
+		<mapping-file>META-INF/lemans-bt.xml</mapping-file>
+		-->
 		<!-- GTS -->
-		 <!--  -->
-		<mapping-file>META-INF/orm-gts.xml</mapping-file>		
+		 <!--  
+		<mapping-file>META-INF/orm-gts.xml</mapping-file>
+		-->
+		<class>fr.symphonie.tools.common.model.FileImportTrace</class>
+		<class>fr.symphonie.tools.common.model.ImportPeriod</class>
+		<class>fr.symphonie.tools.lemans.bt.model.Client</class>
+		<class>fr.symphonie.tools.lemans.bt.model.Spectacle</class>
+		<class>fr.symphonie.tools.lemans.bt.model.SpectacleDetails</class>		
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>

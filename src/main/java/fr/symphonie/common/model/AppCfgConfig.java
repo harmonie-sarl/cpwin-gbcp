@@ -30,7 +30,7 @@ public class AppCfgConfig {
 	}
 	
 /**
- * Déclarations des paramétres CfgConfig
+ * DÃ©clarations des paramÃ©tres CfgConfig
  */
 	private ConfigParam tiersNeutralise=new ConfigParam("tTiersNeutralise") ;
 	private ConfigParam etablisInitiales=new ConfigParam("tEtablisInitiales") ;
@@ -104,11 +104,12 @@ public class AppCfgConfig {
 	
 	
 	private ConfigParam dpGenerationLicence=new ConfigParam("fdpGeneration") ;
+	private ConfigParam leMansBilletterieLicence=new ConfigParam("lemans-bt") ;
 	
 
 	
 	/**
-	 * Déclaration des properties config
+	 * DÃ©claration des properties config
 	 */
 	private ConfigParam mailInfoDisable=new ConfigParam(MsgEntry.MAIL_INFO_DISABLED);
 	private ConfigParam reportingPath=new ConfigParam(MsgEntry.REPORTING_PATH);
@@ -312,5 +313,9 @@ public class AppCfgConfig {
 	
 		return Boolean.valueOf(configuredValue);
 	}
-
+	public String getLemansBilletterieLicence() throws MissingConfiguration{
+		
+		return getDbConfigValue(leMansBilletterieLicence);
+	}
+	
 }

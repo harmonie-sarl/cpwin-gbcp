@@ -750,6 +750,79 @@
 		<to-view-id>/pages/tools/dp/generation.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>lemans_ref_spectacle</from-outcome>
+		<to-view-id>/pages/tools/lemans/referentiel/spectacle/spectacle.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>lemans_ref_periode</from-outcome>
+		<to-view-id>/pages/tools/lemans/referentiel/periode/periode.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>spectacleView</from-outcome>
+		<to-view-id>/pages/tools/lemans/referentiel/spectacle/view/spectacleView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>detailSpectacleView</from-outcome>
+		<to-view-id>/pages/tools/lemans/referentiel/spectacle/view/detailSpectacleView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>lemans_import</from-outcome>
+		<to-view-id>/pages/tools/lemans/import/import.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>lemans_ref_client</from-outcome>
+		<to-view-id>/pages/tools/lemans/referentiel/client/client.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>clientLemansView</from-outcome>
+		<to-view-id>/pages/tools/lemans/referentiel/client/view/clientView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>lemans_ref_modPaiement</from-outcome>
+		<to-view-id>/pages/tools/lemans/referentiel/modePaiement/modePaiement.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>mPaimentLemansView</from-outcome>
+		<to-view-id>/pages/tools/lemans/referentiel/modePaiement/view/modePaiView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>periodeLemansView</from-outcome>
+		<to-view-id>/pages/tools/lemans/referentiel/periode/view/periodeView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+
+
+
 
 
 
