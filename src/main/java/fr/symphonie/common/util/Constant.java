@@ -82,6 +82,20 @@ public class Constant {
 	public static final String RembMatriculeSeq = "CtaRembMatricule";
 	public static final int batch_size=30;
 	
+	//params pour autorisations Signature
+	public static final String SF_PARAM = "fSignature_da";
+	public static final String DP_PARAM = "fSignature_dp";
+	public static final String DR_PARAM = "fSignature_dr";
+	public static final String DV_PARAM = "fSignature_dv";
+	public static final String DA_PARAM = "fSignature_da";
+	public static final String EJ_PARAM = "fSignature_ej";
+	public static final String ASF_PARAM = "fSignature_asf";
+	public static final String VSF_PARAM = "fSignature_vsf";
+	public static final String LIQ_PARAM = "fSignature_liq";
+	public static final String OR_PARAM = "fSignature_or";
+	public static final String OP_PARAM = "fSignature_op";
+	public static final String LREC_PARAM = "fSignature_lrec";
+	public static final String AR_PARAM = "fSignature_ar";
 	public static Path getProjectRepoPath() throws MissingConfiguration{
 		String path=AppCfgConfig.getInstance().getReportingPath();
 		Path root=Paths.get(path).getParent();

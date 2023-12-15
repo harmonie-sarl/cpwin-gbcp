@@ -30,7 +30,7 @@ public class AppCfgConfig {
 	}
 	
 /**
- * Déclarations des paramétres CfgConfig
+ * DÃ©clarations des paramÃ©tres CfgConfig
  */
 	private ConfigParam tiersNeutralise=new ConfigParam("tTiersNeutralise") ;
 	private ConfigParam etablisInitiales=new ConfigParam("tEtablisInitiales") ;
@@ -99,12 +99,17 @@ public class AppCfgConfig {
 	 * Signature Module
 	 */
 	private ConfigParam signatureLicence=new ConfigParam("fsignature") ;
+
+	
+	
 	
 	private ConfigParam dpGenerationLicence=new ConfigParam("fdpGeneration") ;
 	private ConfigParam leMansBilletterieLicence=new ConfigParam("lemans-bt") ;
 	
+
+	
 	/**
-	 * Déclaration des properties config
+	 * DÃ©claration des properties config
 	 */
 	private ConfigParam mailInfoDisable=new ConfigParam(MsgEntry.MAIL_INFO_DISABLED);
 	private ConfigParam reportingPath=new ConfigParam(MsgEntry.REPORTING_PATH);

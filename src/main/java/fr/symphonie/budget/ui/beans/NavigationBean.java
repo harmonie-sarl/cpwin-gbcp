@@ -255,7 +255,8 @@ public class NavigationBean implements Serializable {
 		META4DAI,
 		NantesEtudiant,
 		CRC,
-		SIGNATURE, DP_GENERATION,
+		SIGNATURE,SIGNATURE_SF,SIGNATURE_DP,SIGNATURE_DR,SIGNATURE_DV,SIGNATURE_DA,SIGNATURE_EJ,SIGNATURE_ASF,SIGNATURE_VSF,SIGNATURE_LIQ,SIGNATURE_OR,SIGNATURE_OP,SIGNATURE_LREC,SIGNATURE_AR,SIGNATURE_MDT,SIGNATURE_TR,
+		DP_GENERATION,SIGNATURE_DA_REQUISE,SIGNATURE_EJ_REQUISE,SIGNATURE_ASF_REQUISE,SIGNATURE_VSF_REQUISE,SIGNATURE_LIQ_REQUISE,SIGNATURE_OR_REQUISE,SIGNATURE_OP_REQUISE,SIGNATURE_LREC_REQUISE,SIGNATURE_AR_REQUISE,SIGNATURE_MDT_REQUISE,SIGNATURE_TR_REQUISE
 		LEMANS_BILLETTERIE
 	}
 	
@@ -1273,6 +1274,14 @@ private void deploiement() {
 		IBasicBean bean = BudgetHelper.getDpBean();
 		return prepare(Action.DP_GENERATION,bean);
 	}
+
+//	public boolean checkRequiredSignature() {
+//		if(isDaSignatureRequired()||isEjSignatureRequired()||isLiqSignatureRequired()||isAsfSignatureRequired()||isVsfSignatureRequired()||isOpSignatureRequired()||isOrSignatureRequired()
+//				||isLrecSignatureRequired()||isArSignatureRequired())
+//		return true;
+//		return false;
+//	}
+	
 	public String goToLemansSpectacle() {
 		getLemanRefBean().reset();
 		prepare(Action.LEMANS_SPECTACLE);
