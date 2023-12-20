@@ -12,6 +12,8 @@ public class Recette {
 	private DataItem dataR22;
 	private DataItem dataR24;
 	private DataItem dataR25;
+	private DataItem dataR26;
+	private DataItem dataR27;
 	
 	
 //	private static final Logger logger = LoggerFactory.getLogger(Recette.class);
@@ -28,6 +30,9 @@ public class Recette {
 		dataR22=new DataItem(DataRefEnum.ref_20);
 		dataR24=new DataItem(DataRefEnum.ref_21);
 		dataR25=new DataItem(DataRefEnum.ref_22);
+		dataR26=new DataItem(DataRefEnum.ref_28);
+		dataR27=new DataItem(DataRefEnum.ref_29);
+		
 
 
 	}
@@ -43,8 +48,24 @@ public class Recette {
 		getDataR24().setMontantDouble(r24);
 		getDataR25().setMontantDouble(r25);
 	}
+	public void setMontantsFor2024(double r11, double r12, double r13, double r14, double r15, double r22, double r24, double r25, double r26, double r27) {
+		
+		getDataR11().setMontantDouble(r11);
+		getDataR12().setMontantDouble(r12);
+		getDataR13().setMontantDouble(r13);
+		getDataR14().setMontantDouble(r14);
+		getDataR15().setMontantDouble(r15);
+		getDataR22().setMontantDouble(r22);
+		getDataR24().setMontantDouble(r24);
+		getDataR25().setMontantDouble(r25);
+		getDataR26().setMontantDouble(r26);
+		getDataR27().setMontantDouble(r27);
+	}
 	public void setMontants(double[] montants){
 		setMontants(montants[Constant.R11], montants[Constant.R12], montants[Constant.R13], montants[Constant.R14], montants[Constant.R15], montants[Constant.R22], montants[Constant.R24], montants[Constant.R25]);
+	}
+	public void setMontantsFor2024(double[] montants){
+		setMontantsFor2024(montants[Constant.R11], montants[Constant.R12], montants[Constant.R13], montants[Constant.R14], montants[Constant.R15], montants[Constant.R22], montants[Constant.R24], montants[Constant.R25],montants[Constant.R26],montants[Constant.R27]);
 	}
 
 	public double getR11() {
@@ -76,6 +97,12 @@ public class Recette {
 
 	public double getR25() {
 		return getDataR25().getMontantDouble();
+	}
+	public double getR26() {
+		return getDataR26().getMontantDouble();
+	}
+	public double getR27() {
+		return getDataR27().getMontantDouble();
 	}
 
 	public DataItem getDataR11() {
@@ -195,11 +222,25 @@ public class Recette {
 	}
 
 
-
-
-
 	public void setDataR25(DataItem dataR25) {
 		this.dataR25 = dataR25;
+	}
+	public DataItem getDataR26() {
+		return dataR26;
+	}
+
+
+	public void setDataR26(DataItem dataR26) {
+		this.dataR26 = dataR26;
+	}
+	
+	public DataItem getDataR27() {
+		return dataR27;
+	}
+
+
+	public void setDataR27(DataItem dataR27) {
+		this.dataR27 = dataR27;
 	}
 
 
@@ -209,7 +250,7 @@ public class Recette {
 	@Override
 	public String toString() {
 		return "Recette [r11=" + getR11() + ", r12=" + getR12() + ", r13=" + getR13() + ", r14=" + getR14() + ", r15=" + getR15() + ", r22="
-				+ getR22() + ", r24=" + getR24() + ", r25=" + getR25() + "]";
+				+ getR22() + ", r24=" + getR24() + ", r25=" + getR25() + ", r26=" + getR26() + ", r27=" + getR27() + "]";
 	}
 	
 	

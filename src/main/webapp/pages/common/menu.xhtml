@@ -83,7 +83,8 @@
               </p:submenu>
                
                   <p:menuitem value="#{msgs['menu.interface.minefi']}" action="#{navigationBean.goToInterfaceMinefi}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('AC')  and navigationBean.pltAuthorized}"  />
-         
+                  <p:menuitem value="#{msgs['menu.interface.minefi.2024']}" action="#{navigationBean.goToInterfaceMinefi2024}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('AC')  and navigationBean.pltAuthorized}"  />
+           
             <p:submenu label="#{msgs['menu.compte.financier']}"  rendered="#{p:ifAnyGranted('AC') and navigationBean.cfAuthorized}" >
 				<p:submenu label="#{msgs['bilan']}">
                   <p:menuitem value="#{msgs['menu.parametrage']}" action="#{navigationBean.goToParamBilan}" ajax="false" /> 

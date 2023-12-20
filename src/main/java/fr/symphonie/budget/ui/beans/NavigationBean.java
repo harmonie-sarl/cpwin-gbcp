@@ -68,6 +68,7 @@ public class NavigationBean implements Serializable {
     public static final String SUIVI_AE_OUTCOME = "suivi_ae";
     public static final String SUIVI_RECETTE_OUTCOME = "suivi_rec";
     private static final String INTERFACE_MINEFI_OUTCOME="interface_minefi";
+    private static final String INTERFACE_MINEFI_2024_OUTCOME="interface_minefi_2024";
   //  private static final String COMPTE_FINANCIER_OUTCOME="compte_financier";
     private static final String PARAM_BILAN_OUTCOME="param_bilan";
     private static final String VAL_BILAN_OUTCOME="val_bilan";
@@ -293,6 +294,7 @@ public class NavigationBean implements Serializable {
 		SUIVI_CF(SUIVI_CF_OUTCOME,Menu.BUDGET_PLURI,Menu.SUIVI,MsgEntry.COMPTE_FINANCIER),
 		SUIVI_SF(SUIVI_SF_OUTCOME,Menu.BUDGET_PLURI,Menu.SUIVI,MsgEntry.SUIVI_SF),
 		INTERFACE_MINEFI(INTERFACE_MINEFI_OUTCOME,Menu.BUDGET_PLURI,MsgEntry.INTERFACE_MINEFI),
+		INTERFACE_MINEFI_2024(INTERFACE_MINEFI_2024_OUTCOME,Menu.BUDGET_PLURI,MsgEntry.INTERFACE_MINEFI_2024),
 		PARAM_BILAN(PARAM_BILAN_OUTCOME,Menu.BUDGET_PLURI,Menu.COMPTE_FINANCIER,Menu.CF_BILAN,MsgEntry.MENU_PARAMETRAGE),
 		VAL_BILAN(VAL_BILAN_OUTCOME,Menu.BUDGET_PLURI,Menu.COMPTE_FINANCIER,Menu.CF_BILAN,MsgEntry.VALIDATION),
 		VAL_CR(VAL_CR_OUTCOME,Menu.BUDGET_PLURI,Menu.COMPTE_FINANCIER,Menu.CF_CR,MsgEntry.VALIDATION),		
@@ -732,6 +734,16 @@ public String goToInterfaceMinefi()
 
 	 prepare(Action.INTERFACE_MINEFI);
 	return Action.INTERFACE_MINEFI.getOutcome();
+}
+public String goToInterfaceMinefi2024()
+{
+	
+//	DematBean  dematBean=(DematBean)Helper
+//		.findBean("dematBean");
+	getDematBean().reset();
+
+	 prepare(Action.INTERFACE_MINEFI_2024);
+	return Action.INTERFACE_MINEFI_2024.getOutcome();
 }
 //public String goToCompteFinancier()
 //{

@@ -17,7 +17,9 @@ public enum NatGrpEnum {
 	NAT_GRP_R15("R15","Recettes propres",DepRecEnum.Recette),
 	NAT_GRP_R22("R22","Financements de l'Etat fléchés",DepRecEnum.Recette),
 	NAT_GRP_R24("R24","Autres financements publics fléchés",DepRecEnum.Recette),
-	NAT_GRP_R25("R25","Recettes propres fléchées ",DepRecEnum.Recette);
+	NAT_GRP_R25("R25","Recettes propres fléchées ",DepRecEnum.Recette),
+	NAT_GRP_R26("R26","Subvention pour charges d'investissement ",DepRecEnum.Recette),
+	NAT_GRP_R27("R27","Subvention pour charges d'investissement fléchée ",DepRecEnum.Recette);
 
 	
 	        

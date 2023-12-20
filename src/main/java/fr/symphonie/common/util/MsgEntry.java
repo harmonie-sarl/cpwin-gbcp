@@ -228,6 +228,7 @@ public class MsgEntry {
 	public static final String VENTIL_A_VERIFIER_ERR = "ventil.verifier.err";
 	public static final String BR_OUVERT_ERROR = "br.vant.ouvert.error";
 	public static final String INTERFACE_MINEFI = "menu.interface.minefi";
+	public static final String INTERFACE_MINEFI_2024 = "menu.interface.minefi.2024";
 	public static final String EDITION_REQUIRED_DATA = "gbcp.edition.requiredData.err";
 	public static final String COMPTE_FINANCIER = "menu.compte.financier";
 	public static final String PARAM_BILAN = "menu.param.bilan";

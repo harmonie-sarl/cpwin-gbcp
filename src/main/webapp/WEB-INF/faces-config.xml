@@ -312,6 +312,13 @@
 		<to-view-id>/pages/infocentre/interface_minefi.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>interface_minefi_2024</from-outcome>
+		<to-view-id>/pages/infocentre/interface_minefi_2024.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
 <!--     <factory> -->
 <!--         <exception-handler-factory>org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory</exception-handler-factory> -->
 <!--     </factory> -->

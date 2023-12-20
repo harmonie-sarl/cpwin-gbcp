@@ -43,6 +43,7 @@ import fr.symphonie.budget.core.model.pluri.BudgetCpDest;
 import fr.symphonie.budget.core.model.pluri.EtatEnum;
 import fr.symphonie.budget.core.service.IBudgetPluriannuelService;
 import fr.symphonie.budget.ui.beans.GenericBean;
+import fr.symphonie.budget.ui.beans.NavigationBean.Action;
 import fr.symphonie.budget.ui.beans.pluri.DialogHelper;
 import fr.symphonie.budget.ui.excel.ExcelHandler;
 import fr.symphonie.budget.ui.excel.ExcelModelEnum;
@@ -58,11 +59,12 @@ import fr.symphonie.util.Helper;
 import fr.symphonie.util.model.SimpleEntity;
 import fr.symphonie.util.model.Trace;
 
-@ManagedBean(name = "editionBean")
-@SessionScoped
-public class EditionBean extends GenericBean implements Serializable  {
 
-	private static final String I = "I";
+@ManagedBean(name = "editionBeanv1")
+@SessionScoped
+public class EditionBeanV1 extends GenericBean implements Serializable {
+	
+private static final String I = "I";
 	
 	private static final String R = "R";
 	private static final String D = "D";
@@ -87,7 +89,7 @@ public class EditionBean extends GenericBean implements Serializable  {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = LoggerFactory.getLogger(EditionBean.class);
+	private static final Logger logger = LoggerFactory.getLogger(EditionBeanV1.class);
 	
 
 	public void setBudgetPluriService(IBudgetPluriannuelService budgetPluriService) {
@@ -444,7 +446,7 @@ public class EditionBean extends GenericBean implements Serializable  {
 		double[] RECETTE=extractRecetteByNatGrp(brRecette);
 		logger.debug("loadTab2BR :RECETTE:{},{},{},{},{},{},{},{}",RECETTE[Constant.R11],RECETTE[Constant.R12],RECETTE[Constant.R13],RECETTE[Constant.R14],RECETTE[Constant.R15],RECETTE[Constant.R22],RECETTE[Constant.R24],RECETTE[Constant.R25]);
 		logger.debug("loadTab2BR :e.getTab2().getRecette:{}",e.getTab2().getRecette());
-		e.getTab2().getRecette().setMontants(
+		e.getTab2().getRecette().setMontantsFor2024(
 				RECETTE[Constant.R11],
 				RECETTE[Constant.R12],
 				RECETTE[Constant.R13],
@@ -452,8 +454,9 @@ public class EditionBean extends GenericBean implements Serializable  {
 				RECETTE[Constant.R15],
 				RECETTE[Constant.R22],
 				RECETTE[Constant.R24],
-				RECETTE[Constant.R25]);
-		        
+				RECETTE[Constant.R25],
+				RECETTE[Constant.R26],
+				RECETTE[Constant.R27]);
 	}
 	private void loadDepences(Edition e) {
 		
@@ -498,7 +501,7 @@ public class EditionBean extends GenericBean implements Serializable  {
 		Map<String,Double> bpRect=budgetPluriService.getBpRecetByNatGrp(e.getExercice());
 		double[] RECETTE=extractRecetteByNatGrp(bpRect);
 //		double r11 = budgetPluriService.getRecet(exercice, NatGrpEnum.NAT_GRP_R11.getCode());
-		e.getTab2().getRecette().setMontants(RECETTE[Constant.R11], RECETTE[Constant.R12], RECETTE[Constant.R13], RECETTE[Constant.R14], RECETTE[Constant.R15], RECETTE[Constant.R22], RECETTE[Constant.R24], RECETTE[Constant.R25]);
+		e.getTab2().getRecette().setMontantsFor2024(RECETTE[Constant.R11], RECETTE[Constant.R12], RECETTE[Constant.R13], RECETTE[Constant.R14], RECETTE[Constant.R15], RECETTE[Constant.R22], RECETTE[Constant.R24], RECETTE[Constant.R25],RECETTE[Constant.R26],RECETTE[Constant.R27]);
 	}
 	public static double[] extractRecetteByNatGrp(Map<String,Double> map){
 		double[] montants=new double[8];
@@ -533,6 +536,12 @@ public class EditionBean extends GenericBean implements Serializable  {
 				break;
 			case NAT_GRP_R25:
 				montants[Constant.R25]=mnt;
+				break;
+			case NAT_GRP_R26:
+				montants[Constant.R26]=mnt;
+				break;
+			case NAT_GRP_R27:
+				montants[Constant.R27]=mnt;
 				break;
 			default:
 				break;
@@ -1128,6 +1137,11 @@ private Edition checkEditionData(List<DataItem> list) throws MissingConfiguratio
 		public void setStatusJanvier(EtatPeriodeEnum statusJanvier) {
 			this.statusJanvier = statusJanvier;
 		}	
-		
-		 
+		public boolean isDemat2024(){
+			
+			Action action=BudgetHelper.getNavigationBean().getCurrentAction();
+			
+			return (Action.INTERFACE_MINEFI_2024==action)||((Action.VAL_CF==action));
+		}
+
 }
