@@ -46,6 +46,11 @@ public class VentillationCO extends GenericLigneTresorerie {
 		List<Integer> list=Arrays.asList(LIGNE_WITH_BI);
 		return list.contains(getNumero());
 	}
+	public boolean isBiDisabled2024(){
+		Integer[] LIGNE_WITH_BI={3,4,5,6,7,8,9,10,11,12,23,24,25,26};
+		List<Integer> list=Arrays.asList(LIGNE_WITH_BI);
+		return list.contains(getNumero());
+	}
 	public DetailLigneTresorerie convert(){
 		DetailLigneTresorerie detailLigne=new DetailLigneTresorerie( (GenericLigneTresorerie)this);
 		detailLigne.setExercice(this.getExercice());

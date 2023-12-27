@@ -10,7 +10,7 @@
 					 <p:selectOneMenu  id="exercList"  styleClass="ReadOnlyText" value="#{searchBean.exercice}" >
 					 
 				<f:selectItem itemValue="" itemLabel="-----"  />
-				<f:selectItems value="#{loaderBean.exercicInfoCentreList}" var="exerc" 
+				<f:selectItems value="#{loaderBean.exerciceMin2024List}" var="exerc" 
 				itemLabel="#{exerc}" itemValue="#{exerc}">
 				</f:selectItems>
 				<p:ajax  listener="#{dematBeanv1.onExerciceChange}"  process="@this" update="budgetCodeList,:detailsForm,:enteteForm" />

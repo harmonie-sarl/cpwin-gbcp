@@ -1,0 +1,139 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+.th {
+	color: #383838 !important;
+	background: #D19275 !important;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 13px !important;
+	text-align: center;
+}
+
+.detailTitle {	
+		text-align: left;
+}
+.detailValue {	
+	text-align: center;	
+}
+</style>
+	<p:panel style="width:100%;" id="balancePanel">
+		<f:facet name="header">
+			<h:outputText value="#{msgs['balance']}"
+				style="font-weight: bold; text-align: center;" />
+		</f:facet>
+		<p:dataTable id="balance_dtt" sortBy="#{balanceItem.compte.code}"
+			rendered="#{dematBeanv1.balance!=null}" var="balanceItem"
+			style="width:100%;" rowIndexVar="itemIndex"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{dematBeanv1.balance}">
+			<p:columnGroup type="header">
+				<p:row>	              
+				  <p:column styleClass="th" colspan="1" rowspan="2"
+						style="width:10%;" headerText="#{msgs['compte']}">
+					</p:column>	
+					  <p:column styleClass="th" colspan="1" rowspan="2"
+						style="width:18%;" headerText="#{msgs['libelle']}">
+					</p:column>
+					  <p:column styleClass="th" colspan="3" rowspan="1"
+						style="width:27%;" headerText="#{msgs['debits']}">
+					</p:column>	
+					  <p:column styleClass="th" colspan="3" rowspan="1"
+						style="width:27%;" headerText="#{msgs['credits']}">
+					</p:column>	
+						  <p:column styleClass="th" colspan="2" rowspan="1"
+						style="width:18%;" headerText="#{msgs['soldes']}">
+					</p:column>						
+					        </p:row>
+				<p:row styleClass="th">
+				    	  <p:column styleClass="th" colspan="1" rowspan="1"
+						style="width:9%;" headerText="#{msgs['entree']}">
+					</p:column>	
+					 <p:column styleClass="th" colspan="1" rowspan="1"
+						style="width:9%;" headerText="#{msgs['cpwin.exercice']}">
+					</p:column>	
+					 <p:column styleClass="th" colspan="1" rowspan="1"
+						style="width:9%;" headerText="#{msgs['total']}">
+					</p:column>	
+					 <p:column styleClass="th" colspan="1" rowspan="1"
+						style="width:9%;" headerText="#{msgs['entree']}">
+					</p:column>	
+					 <p:column styleClass="th" colspan="1" rowspan="1"
+						style="width:9%;" headerText="#{msgs['cpwin.exercice']}">
+					</p:column>	
+					 <p:column styleClass="th" colspan="1" rowspan="1"
+						style="width:9%;" headerText="#{msgs['total']}">
+					</p:column>	
+					 <p:column styleClass="th" colspan="1" rowspan="1"
+						style="width:9%;" headerText="#{msgs['debit']}">
+					</p:column>	
+					 <p:column styleClass="th" colspan="1" rowspan="1"
+						style="width:9%;" headerText="#{msgs['credit']}">
+					</p:column>	
+					  </p:row>
+			</p:columnGroup>
+			<p:column      styleClass="detailValue" >
+				<h:outputText style="font-size: 13px"
+					value="#{balanceItem.compte.code}" />
+			</p:column>
+				       <p:column    styleClass="detailTitle" >
+				<h:outputText style="font-size: 13px"
+					value="#{balanceItem.compte.designation}" />
+			</p:column>
+			<p:column styleClass="detailValue"  >
+				<h:outputText value="#{balanceItem.debit.entree}"
+					style="font-size: 13px">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column styleClass="detailValue"  >
+				<h:outputText value="#{balanceItem.debit.montant}"
+					style="font-size: 13px">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column styleClass="detailValue"  >
+				<h:outputText value="#{balanceItem.debit.totale}"
+					style="font-size: 13px">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>	 
+				 	<p:column styleClass="detailValue"  >
+				<h:outputText value="#{balanceItem.credit.entree}"
+					style="font-size: 13px">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column styleClass="detailValue" >
+				<h:outputText value="#{balanceItem.credit.montant}"
+					style="font-size: 13px">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column styleClass="detailValue"  >
+				<h:outputText value="#{balanceItem.credit.totale}"
+					style="font-size: 13px">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>	
+           <p:column styleClass="detailValue" >
+				<h:outputText value="#{balanceItem.solde.debit}"
+					style="font-size: 13px">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column styleClass="detailValue"  >
+				<h:outputText value="#{balanceItem.solde.credit}"
+					style="font-size: 13px">
+					<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+				</h:outputText>
+			</p:column>
+		</p:dataTable>
+		<br />
+		<br />
+	</p:panel>
+</ui:composition>

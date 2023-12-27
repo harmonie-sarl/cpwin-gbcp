@@ -402,6 +402,13 @@
 <navigation-rule>
 	<from-view-id>*</from-view-id>
 	<navigation-case>
+		<from-outcome>ventil_tres_2024</from-outcome>
+		<to-view-id>/pages/tresorerie/ventilation/ventilation2024.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
 		<from-outcome>ecritureView</from-outcome>
 		<to-view-id>/pages/tresorerie/simulation/view/ecritureView.xhtml</to-view-id>
 	</navigation-case>
@@ -425,6 +432,13 @@
 	<navigation-case>
 		<from-outcome>consult_tres</from-outcome>
 		<to-view-id>/pages/tresorerie/consultation/consultation.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>consult_tres_2024</from-outcome>
+		<to-view-id>/pages/tresorerie/consultation/consultation2024.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
 <navigation-rule>
@@ -495,6 +509,13 @@
 	<navigation-case>
 		<from-outcome>init_tres</from-outcome>
 		<to-view-id>/pages/tresorerie/initialisation/initialisation.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>init_tres_2024</from-outcome>
+		<to-view-id>/pages/tresorerie/initialisation/initialisation2024.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
 <navigation-rule>

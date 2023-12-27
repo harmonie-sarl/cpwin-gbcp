@@ -178,7 +178,8 @@ public class DematBeanV1 extends GenericBean implements Serializable{
 
 	 public void reset() {
 		    setEdition(null);
-		    BudgetHelper.getEditionBean().setEditionBi(null);
+		    //BudgetHelper.getEditionBean().setEditionBi(null);
+		    BudgetHelper.getEditionBeanV1().setEditionBi(null);
 			setCodeExport(null);
 			setSaveDematExecuted(false);
 			setExportFileGenerated(false);
@@ -249,8 +250,8 @@ public class DematBeanV1 extends GenericBean implements Serializable{
 		double[] AE=EditionBean.extractDepenseByNatGrp(aeEngage);
 		double[] CP=edition.getPlanTresorerie().getMontantsCpForDepence(periodeRealise);
 		abe.getDepence().setMontants(AE, CP);
-		double recette[]=edition.getPlanTresorerie().getMontantsRecette(periodeRealise);
-		abe.getRecette().setMontants(recette);
+		double recette[]=edition.getPlanTresorerie().getMontantsRecetteFor2024(periodeRealise);
+		abe.getRecette().setMontantsFor2024(recette);
 		
 		abe.setDefaults();
 		
@@ -290,7 +291,7 @@ public class DematBeanV1 extends GenericBean implements Serializable{
 			 excel = new ExcelHandler(ExcelModelEnum.DEMAT_INFOCENTRE_06,null);
 		}
 		else {
-	         excel = new ExcelHandler(ExcelModelEnum.DEMAT_INFOCENTRE,null);}
+	         excel = new ExcelHandler(ExcelModelEnum.DEMAT_INFOCENTRE_2024,null);}
 		returnStreamedContent = excel.getExcelFile();
 		
 		return returnStreamedContent;			

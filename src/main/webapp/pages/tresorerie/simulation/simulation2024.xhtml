@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+	<ui:define name="pageTitle">#{msgs['menu.simulation']}</ui:define>
+	<ui:define name="entetePage">
+		<ui:include src="../common/enteteSimul2024.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="enteteAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}"
+			update="globalMessage,:enteteForm,:detailsForm:simulPanel" immediate="true"
+			actionListener="#{pltBeanV1.search}"
+			disabled="#{!pltBeanV1.requiredDataDone}">
+
+		</p:commandButton>
+		<ui:param name="statusRendered" value="true" />
+	</ui:define>
+
+	<ui:define name="search">
+
+
+	</ui:define>
+
+
+	<ui:define name="details">
+
+
+		<p:panel id="simulPanel" style="width:100%;">
+
+			<div align="center" style="width: 100%;">
+
+				<h:panelGroup  >
+					<p:commandButton id="simulerBtn" title=" " value="#{msgs['btn.simulate']}" disabled="#{!pltBeanV1.activeSimulate}"
+						actionListener="#{pltBeanV1.simuler}" rendered="#{pltBeanV1.plan!=null}" 
+						update="@this,globalMessage,:detailsForm,validerBtn" immediate="true">
+					</p:commandButton>
+						<p:commandButton id="validerBtn" title=" " value="#{msgs['btn.valider.cloturer']}" disabled="#{!pltBeanV1.activeValidateSimulate}"
+						actionListener="#{pltBeanV1.validateSimulation}" rendered="#{pltBeanV1.plan!=null}" 
+						update="@this,globalMessage,:detailsForm,:enteteForm" immediate="true">
+					</p:commandButton>					
+				</h:panelGroup>
+
+			</div>
+			<ui:include src="./simulList.xhtml">
+			</ui:include>
+
+
+
+
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+
+	</ui:define>
+</ui:composition>

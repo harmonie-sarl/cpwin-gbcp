@@ -44,9 +44,9 @@ import fr.symphonie.util.Helper;
 import fr.symphonie.util.model.SimpleEntity;
 import fr.symphonie.util.model.Trace;
 
-@ManagedBean(name = "pltBean")
+@ManagedBean(name = "pltBeanV1")
 @SessionScoped
-public class PlanTresorerieBean extends GenericBean implements Serializable {
+public class PlanTresorerieBeanV1 extends GenericBean implements Serializable {
 	/**
 	 * 
 	 */
@@ -376,10 +376,11 @@ public class PlanTresorerieBean extends GenericBean implements Serializable {
 		case SIMUL_TRESORERIE:
 		case AJUST_TRESORERIE:
 		case CONSULT_TRESORERIE:
-		case INIT_TRESORERIE:case CONCIL_TRESORERIE:
+		case CONSULT_TRESORERIE_2024:
+		case INIT_TRESORERIE_2024:case CONCIL_TRESORERIE:
 			return (isCommonRequiredDone()) && (getPeriode() != null);
 
-		case VENTIL_TRESORERIE:
+		case VENTIL_TRESORERIE_2024:
 			return (isCommonRequiredDone());			
 		case PARAM_TRESORERIE:
 			return (isCommonRequiredDone());

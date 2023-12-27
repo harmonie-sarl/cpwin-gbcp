@@ -90,10 +90,10 @@
 	<h:panelGroup style="width:100%;">
 
 		<p:dataTable sortBy="#{encaiss.ligne.ordre}"
-			rendered="#{pltBean.planVentil!=null}" var="encaiss"
+			rendered="#{pltBeanV1.planVentil!=null}" var="encaiss"
 			style="width:100%;" rowIndexVar="encaissIndex"
 			emptyMessage="#{msgs['datatable.empty']}"
-			value="#{pltBean.planVentil.encaissements}">
+			value="#{pltBeanV1.planVentil.encaissements}">
 			<p:columnGroup type="header">
 				<p:row>
 					
@@ -166,79 +166,79 @@
 			</p:column>
 			<p:column rendered="#{!encaiss.comptable}" 
 				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();"  inputStyleClass="#{encaiss.biDisabled?'':'biInputValue'}" value="#{encaiss.budgetInitiale}"  disabled="#{(encaiss.biDisabled)||(pltBean.janvierClos)}" rendered="#{!encaiss.global}">
+				<p:inputNumber size="8" onfocus="select();"  inputStyleClass="#{encaiss.biDisabled2024?'':'biInputValue'}" value="#{encaiss.budgetInitiale}"  disabled="#{(encaiss.biDisabled2024)||(pltBeanV1.janvierClos)}" rendered="#{!encaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>			
 			<p:column rendered="#{!encaiss.comptable}" 
 				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant01}" disabled="#{!(pltBean.periodEditable(1))}" rendered="#{!encaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant01}" disabled="#{!(pltBeanV1.periodEditable(1))}" rendered="#{!encaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!encaiss.comptable}" 
 				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant02}"  disabled="#{!(pltBean.periodEditable(2))}" rendered="#{!encaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant02}"  disabled="#{!(pltBeanV1.periodEditable(2))}" rendered="#{!encaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!encaiss.comptable}" 
 				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant03}" disabled="#{!(pltBean.periodEditable(3))}" rendered="#{!encaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant03}" disabled="#{!(pltBeanV1.periodEditable(3))}" rendered="#{!encaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!encaiss.comptable}" 
 				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant04}"  disabled="#{!(pltBean.periodEditable(4))}" rendered="#{!encaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant04}"  disabled="#{!(pltBeanV1.periodEditable(4))}" rendered="#{!encaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!encaiss.comptable}" 
 				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant05}"  disabled="#{!(pltBean.periodEditable(5))}" rendered="#{!encaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant05}"  disabled="#{!(pltBeanV1.periodEditable(5))}" rendered="#{!encaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!encaiss.comptable}" 
 				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant06}"  disabled="#{!(pltBean.periodEditable(6))}" rendered="#{!encaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant06}"  disabled="#{!(pltBeanV1.periodEditable(6))}" rendered="#{!encaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!encaiss.comptable}" 
 				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant07}"  disabled="#{!(pltBean.periodEditable(7))}" rendered="#{!encaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant07}"  disabled="#{!(pltBeanV1.periodEditable(7))}" rendered="#{!encaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!encaiss.comptable}" 
 				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant08}"  disabled="#{!(pltBean.periodEditable(8))}" rendered="#{!encaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant08}"  disabled="#{!(pltBeanV1.periodEditable(8))}" rendered="#{!encaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!encaiss.comptable}" 
 				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant09}"  disabled="#{!(pltBean.periodEditable(9))}" rendered="#{!encaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant09}"  disabled="#{!(pltBeanV1.periodEditable(9))}" rendered="#{!encaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!encaiss.comptable}" 
 				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant10}"  disabled="#{!(pltBean.periodEditable(10))}" rendered="#{!encaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant10}"  disabled="#{!(pltBeanV1.periodEditable(10))}" rendered="#{!encaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!encaiss.comptable}" 
 				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant11}"  disabled="#{!(pltBean.periodEditable(11))}" rendered="#{!encaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant11}"  disabled="#{!(pltBeanV1.periodEditable(11))}" rendered="#{!encaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!encaiss.comptable}" 
 				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant12}"  disabled="#{!(pltBean.periodEditable(12))}" rendered="#{!encaiss.global}" >
+				<p:inputNumber size="8" onfocus="select();" value="#{encaiss.montant12}"  disabled="#{!(pltBeanV1.periodEditable(12))}" rendered="#{!encaiss.global}" >
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
@@ -252,9 +252,9 @@
 		
 		<p:dataTable sortBy="#{decaiss.ligne.ordre}" var="decaiss" id="decaiss_dtt"
 			style="width:100%; text-align: center;"
-			rendered="#{pltBean.planVentil!=null}" rowIndexVar="decaissIndex"
+			rendered="#{pltBeanV1.planVentil!=null}" rowIndexVar="decaissIndex"
 			emptyMessage="#{msgs['datatable.empty']}"
-			value="#{pltBean.planVentil.decaissements}">
+			value="#{pltBeanV1.planVentil.decaissements}">
 			<p:columnGroup type="header">        
 					<p:row>
 					
@@ -327,79 +327,79 @@
 			</p:column>
 			<p:column rendered="#{!decaiss.comptable}" 
 				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber  size="8" onfocus="select();" inputStyleClass="#{decaiss.biDisabled?'':'biInputValue'}" value="#{decaiss.budgetInitiale}"   disabled="#{(decaiss.biDisabled)||(pltBean.janvierClos)}"  rendered="#{!decaiss.global}">
-					<p:ajax process="@this" update="detailsForm:decaiss_dtt" global="false" listener="#{pltBean.planVentil.refreshBudgetInitial}"></p:ajax>
+				<p:inputNumber  size="8" onfocus="select();" inputStyleClass="#{decaiss.biDisabled2024?'':'biInputValue'}" value="#{decaiss.budgetInitiale}"   disabled="#{(decaiss.biDisabled2024)||(pltBeanV1.janvierClos)}"  rendered="#{!decaiss.global}">
+					<p:ajax process="@this" update="detailsForm:decaiss_dtt" global="false" listener="#{pltBeanV1.planVentil.refreshBudgetInitial}"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!decaiss.comptable}" 
 				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant01}"  disabled="#{!(pltBean.periodEditable(1))}" rendered="#{!decaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant01}"  disabled="#{!(pltBeanV1.periodEditable(1))}" rendered="#{!decaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!decaiss.comptable}" 
 				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant02}"  disabled="#{!(pltBean.periodEditable(2))}" rendered="#{!decaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant02}"  disabled="#{!(pltBeanV1.periodEditable(2))}" rendered="#{!decaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!decaiss.comptable}" 
 				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant03}"  disabled="#{!(pltBean.periodEditable(3))}" rendered="#{!decaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant03}"  disabled="#{!(pltBeanV1.periodEditable(3))}" rendered="#{!decaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!decaiss.comptable}" 
 				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant04}"  disabled="#{!(pltBean.periodEditable(4))}" rendered="#{!decaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant04}"  disabled="#{!(pltBeanV1.periodEditable(4))}" rendered="#{!decaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!decaiss.comptable}" 
 				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant05}"  disabled="#{!(pltBean.periodEditable(5))}" rendered="#{!decaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant05}"  disabled="#{!(pltBeanV1.periodEditable(5))}" rendered="#{!decaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!decaiss.comptable}" 
 				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant06}"  disabled="#{!(pltBean.periodEditable(6))}" rendered="#{!decaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant06}"  disabled="#{!(pltBeanV1.periodEditable(6))}" rendered="#{!decaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!decaiss.comptable}" 
 				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant07}" disabled="#{!(pltBean.periodEditable(7))}" rendered="#{!decaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant07}" disabled="#{!(pltBeanV1.periodEditable(7))}" rendered="#{!decaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!decaiss.comptable}" 
 				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant08}" disabled="#{!(pltBean.periodEditable(8))}" rendered="#{!decaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant08}" disabled="#{!(pltBeanV1.periodEditable(8))}" rendered="#{!decaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!decaiss.comptable}" 
 				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant09}" disabled="#{!(pltBean.periodEditable(9))}" rendered="#{!decaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant09}" disabled="#{!(pltBeanV1.periodEditable(9))}" rendered="#{!decaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!decaiss.comptable}" 
 				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant10}" disabled="#{!(pltBean.periodEditable(10))}" rendered="#{!decaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant10}" disabled="#{!(pltBeanV1.periodEditable(10))}" rendered="#{!decaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!decaiss.comptable}" 
 				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant11}" disabled="#{!(pltBean.periodEditable(11))}" rendered="#{!decaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant11}" disabled="#{!(pltBeanV1.periodEditable(11))}" rendered="#{!decaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!decaiss.comptable}" 
 				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
-				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant12}" disabled="#{!(pltBean.periodEditable(12))}" rendered="#{!decaiss.global}">
+				<p:inputNumber size="8" onfocus="select();" value="#{decaiss.montant12}" disabled="#{!(pltBeanV1.periodEditable(12))}" rendered="#{!decaiss.global}">
 					<p:ajax event="keyup" process="@this" global="false"></p:ajax>
 				</p:inputNumber>
 			</p:column>

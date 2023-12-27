@@ -347,7 +347,7 @@
              </p:row>
 <p:row>
             <p:column colspan="6" rowspan="1" style="text-align: center;">
-	   <h:outputLabel value="#{msgs['quote.part.subv.invest.exerc']}" />
+	   <h:outputLabel value="#{msgs['quote.part.subv.invest.exerc2024']}" />
 				</p:column>
 				 <p:column   style="text-align: center;">
 					
@@ -470,34 +470,7 @@
 					</h:outputText>
 				</p:column>
         </p:row>
-         <p:row>
-            <p:column colspan="2" rowspan="1"
-					style="text-align: center;">
-					<h:outputLabel value="#{msgs['rembours.cautions']}" />
-				</p:column>
-				<p:column  style=" text-align: center;font-weight: bold;">                       
-						
-						<h:outputText 
-					value="#{editionBeanv1.editionBi.tab6.tfp.rembCautions.montant}"
-						styleClass="montantStyle">
-						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
-					</h:outputText>							
-				</p:column>
-				 <p:column colspan="2" rowspan="1"
-					style="text-align: center;">
-					<h:outputLabel value="#{msgs['cautionnement.recu']}" />
-				</p:column>
-				<p:column 
-                  style=" text-align: center;font-weight: bold;">              
-						
-						
-						<h:outputText 
-					value="#{editionBeanv1.editionBi.tab6.tfp.cautionRecu.montant}"
-						styleClass="montantStyle">
-						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
-					</h:outputText>					
-				</p:column>
-        </p:row>
+        
   <p:row>
             <p:column colspan="2" rowspan="1"
 					style="text-align: center;">

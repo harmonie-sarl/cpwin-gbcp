@@ -71,20 +71,34 @@
                  <p:menuitem value="#{msgs['menu.tabl.bord.comptRenduGestion']}" action="#{navigationBean.goToComptRenduGestion}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo,prod')}" />
                  <p:menuitem value="#{msgs['menu.tabl.bord.suiviAECP']}" action="#{navigationBean.suiviAE}" ajax="false" disabled="false" rendered="#{navigationBean.aeCpAuthorized}" />
             </p:submenu>
-          
-            <p:submenu label="#{msgs['menu.tresorerie']}"  rendered="#{p:ifAnyGranted('AC,ordo,prod') and navigationBean.pltAuthorized}" >                
-                 <p:menuitem value="#{msgs['menu.ventillation']}" action="#{navigationBean.goToVentilTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}"  />
+       
+            <p:submenu label="#{msgs['menu.tresorerie']}"  rendered="#{p:ifAnyGranted('AC,ordo,prod') and navigationBean.pltAuthorized}" >
+				<p:submenu label="#{msgs['menu.2023']}">
+                   <p:menuitem value="#{msgs['menu.ventillation']}" action="#{navigationBean.goToVentilTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}"  />
                  <p:menuitem value="#{msgs['menu.initialisation']}" action="#{navigationBean.goToinitTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}" />
                  <p:menuitem value="#{msgs['menu.simulation']}" action="#{navigationBean.goToSimulTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('AC')}" />
                  <p:menuitem value="#{msgs['menu.ajustement']}" action="#{navigationBean.goToAjustTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}" />
                  <p:menuitem value="#{msgs['menu.conciliation']}" action="#{navigationBean.goToConcilTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}" />
                  <p:menuitem value="#{msgs['menu.consult']}" action="#{navigationBean.goToConsultTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}" />
                  <p:menuitem value="#{msgs['menu.parametrage']}" action="#{navigationBean.goToParamTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}"  />
-              </p:submenu>
-               
-                  <p:menuitem value="#{msgs['menu.interface.minefi']}" action="#{navigationBean.goToInterfaceMinefi}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('AC')  and navigationBean.pltAuthorized}"  />
-                  <p:menuitem value="#{msgs['menu.interface.minefi.2024']}" action="#{navigationBean.goToInterfaceMinefi2024}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('AC')  and navigationBean.pltAuthorized}"  />
+          </p:submenu>
+               <p:submenu label="#{msgs['menu.2024']}">
+                   <p:menuitem value="#{msgs['menu.ventillation']}" action="#{navigationBean.goToVentilTresorerie2024}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}"  />
+                 <p:menuitem value="#{msgs['menu.initialisation']}" action="#{navigationBean.goToinitTresorerie2024}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}" />
+                 <p:menuitem value="#{msgs['menu.simulation']}" action="#{navigationBean.goToSimulTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('AC')}" />
+                 <p:menuitem value="#{msgs['menu.ajustement']}" action="#{navigationBean.goToAjustTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}" />
+                 <p:menuitem value="#{msgs['menu.conciliation']}" action="#{navigationBean.goToConcilTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}" />
+                 <p:menuitem value="#{msgs['menu.consult']}" action="#{navigationBean.goToConsultTresorerie2024}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}" />
+                 <p:menuitem value="#{msgs['menu.parametrage']}" action="#{navigationBean.goToParamTresorerie}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('ordo')}"  />
+          </p:submenu>            
+                
+            </p:submenu>		
            
+                <p:submenu label="#{msgs['menu.interface.minefi']}"  rendered="#{p:ifAnyGranted('AC')  and navigationBean.pltAuthorized}" >                
+                 <p:menuitem value="#{msgs['menu.2023']}" action="#{navigationBean.goToInterfaceMinefi}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('AC')  and navigationBean.pltAuthorized}"  />
+                 <p:menuitem value="#{msgs['menu.2024']}" action="#{navigationBean.goToInterfaceMinefi2024}" ajax="false" disabled="false" rendered="#{p:ifAnyGranted('AC')  and navigationBean.pltAuthorized}" />
+                </p:submenu>
+             
             <p:submenu label="#{msgs['menu.compte.financier']}"  rendered="#{p:ifAnyGranted('AC') and navigationBean.cfAuthorized}" >
 				<p:submenu label="#{msgs['bilan']}">
                   <p:menuitem value="#{msgs['menu.parametrage']}" action="#{navigationBean.goToParamBilan}" ajax="false" /> 

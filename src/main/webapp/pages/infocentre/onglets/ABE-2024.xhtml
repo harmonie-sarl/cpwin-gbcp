@@ -14,7 +14,7 @@
 		</f:facet>
 
 <div align="left">
-			<h:outputText value="#{editionBeanv1v1.nomConfig}"
+			<h:outputText value="#{editionBeanv1.nomConfig}"
 				style="font-weight: bold; text-align: left;" />
 		</div>
 		<div align="center">
@@ -23,7 +23,7 @@
 				
 				<h:outputText value="#{msgs['execution']}"
 				style="font-weight: bold; text-align: center;color:#008000;"
-				rendered="#{editionBeanv1v1.demat}" />
+				rendered="#{editionBeanv1.demat}" />
 		</div>
 		
 
@@ -177,7 +177,28 @@
 					<h:outputLabel value="#{msgs['subvent.charges.serv.pub']}" />
 				</p:column>
              </p:row>
+ <p:row>
+             <p:column  rowspan="1">
 
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBeanv1.editionBi.abe.recette.dataR26.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column  rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['subvent.charges.invest']}" />
+				</p:column>
+           </p:row>
 			<p:row>
             <p:column  rowspan="1">
 
@@ -366,6 +387,29 @@
 				<p:column  rowspan="1"
 					style="text-align: left;font-weight: bold;">
 					<h:outputLabel value="#{msgs['recette.flech']}*" />
+				</p:column>
+             </p:row>
+ <p:row>
+            <p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1"
+					style="text-align: center;font-weight: bold;">
+					<h:outputText value="#{editionBeanv1.editionBi.abe.recette.dataR27.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column  rowspan="1" style="text-align: left;">
+					<h:outputLabel value="#{msgs['subvent.charges.invest.fleche']}" />
 				</p:column>
              </p:row>
 			<p:row>

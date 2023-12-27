@@ -2,6 +2,7 @@ package fr.symphonie.budget.ui.excel;
 
 import fr.symphonie.budget.ui.excel.edition.BiBrExcelData;
 import fr.symphonie.budget.ui.excel.edition.InfocentreExcelData;
+import fr.symphonie.budget.ui.excel.edition.InfocentreExcelData2024;
 import fr.symphonie.budget.ui.excel.tb.TBComptDepense;
 import fr.symphonie.budget.ui.excel.tb.TBComptRecette;
 import fr.symphonie.budget.ui.excel.tb.TBComptRendGest;
@@ -30,6 +31,7 @@ public enum ExcelModelEnum {
 	RECETTES_PAR_ORIGIN("recettes_par_origin.xls", new RecetByOriginList()),
 	DEMAT_INFOCENTRE_BI("infocentre_periodBi.xls",new InfocentreExcelData()),
 	DEMAT_INFOCENTRE("infocentre.xls",new InfocentreExcelData()),
+	DEMAT_INFOCENTRE_2024("infocentre2024.xls",new InfocentreExcelData2024()),
 	DEMAT_INFOCENTRE_06("infocentre_periode06.xls",new InfocentreExcelData() ),
 	PlAN_TRESORERIE("plan_tresorerie.xls",new TresorerieExcelData() ),
 	SUIVI_HONORAIRES("suivi_honoraires.xls",new HonoraireList()),

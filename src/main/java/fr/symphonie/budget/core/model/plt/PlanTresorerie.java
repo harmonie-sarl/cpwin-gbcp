@@ -497,12 +497,29 @@ public BigDecimal getTotaleEcart(){
 		
 		return montants;
 	}
+	public double[] getMontantsRecetteFor2024(Integer periodeRealise) {
+		double[] montants=new double[10];
+		montants[Constant.R11]=getSomme(periodeRealise,3, null);
+		montants[Constant.R12]=getSomme(periodeRealise,4,null);
+		montants[Constant.R13]=getSomme(periodeRealise,5, null	);
+		montants[Constant.R14]=getSomme(periodeRealise,6, null);
+		montants[Constant.R15]=getSomme(periodeRealise,7, null);
+		
+		montants[Constant.R22]=getSomme(periodeRealise,8, null);
+		montants[Constant.R24]=getSomme(periodeRealise,9,null);
+		montants[Constant.R25]=getSomme(periodeRealise,10, null	);
+		montants[Constant.R26]=getSomme(periodeRealise,11, null	);
+		montants[Constant.R27]=getSomme(periodeRealise,12, null	);
+		
+		return montants;
+	}
 	public static PlanTresorerie<DetailLigneTresorerie> convert(PlanTresorerie<VentillationCO> planVentil){
 		DetailLigneTresorerie d=null;
 		Integer periode=planVentil.getPeriode();
 		PlanTresorerie<DetailLigneTresorerie> result=BudgetHelper.getInstanceOfPlanTresorerie(DetailLigneTresorerie.class);
 		
 		result.setExercice(planVentil.getExercice());
+		logger.debug("convert: exercieplanVentil()={}",result.getExercice());
 		result.setPeriode(periode);
 		result.setNomConfig(planVentil.getNomConfig());
 		for(VentillationCO item: planVentil.getDecaissements()){
@@ -512,6 +529,7 @@ public BigDecimal getTotaleEcart(){
 		for(VentillationCO item: planVentil.getEncaissements()){
 			d=item.convert();d.setPeriode(periode);
 			result.getEncaissements().add(d);
+			logger.debug("convert: encaissements={}",result.getEncaissements().size());
 		}
 		for(VentillationCO item: planVentil.getGlobalDecaiss()){
 			d=item.convert();d.setPeriode(periode);
@@ -520,6 +538,7 @@ public BigDecimal getTotaleEcart(){
 		for(VentillationCO item: planVentil.getGlobalEncaiss()){
 			d=item.convert();d.setPeriode(periode);
 			result.getGlobalEncaiss().add(d);
+			logger.debug("convert: globalEncaissements={}",result.getGlobalEncaiss().size());
 		}
 		return result;
 	}

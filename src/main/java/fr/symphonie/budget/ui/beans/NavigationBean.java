@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import fr.symphonie.budget.core.model.plt.PeriodeEnum;
 import fr.symphonie.budget.ui.beans.edition.CompteFinancierBean;
 import fr.symphonie.budget.ui.beans.edition.DematBean;
+import fr.symphonie.budget.ui.beans.edition.DematBeanV1;
 import fr.symphonie.budget.ui.beans.pluri.BudgetPluriannuelBean;
 import fr.symphonie.budget.ui.excel.ExcelModelEnum;
 import fr.symphonie.common.IBasicBean;
@@ -78,8 +79,10 @@ public class NavigationBean implements Serializable {
     private static final String  AJUST_TRESORERIE_OUTCOME="ajust_tres";
     private static final String  SIMUL_TRESORERIE_OUTCOME="simul_tres";
     private static final String  VENTILL_TRESORERIE_OUTCOME="ventil_tres";
+    private static final String  VENTILL_TRESORERIE_2024_OUTCOME="ventil_tres_2024";
     private static final String  IMPORT_TIERS_OUTCOME   ="importTiers";
     private static final String  CONSULT_TRESORERIE_OUTCOME="consult_tres";
+    private static final String  CONSULT_TRESORERIE_2024_OUTCOME="consult_tres_2024";
     private static final String  IMPORT_HONORAIRE_OUTCOME="import_honoraire";
     private static final String  GENERER_HONORAIRE_OUTCOME="generer_honoraire";
     private static final String  SUIVI_TRS_HONORAIRE_OUTCOME="suivi_tiers_honoraire";
@@ -87,6 +90,7 @@ public class NavigationBean implements Serializable {
     private static final String  MODIF_DEPOIEMENT_OUTCOME   ="modifDeploi";
     private static final String  CONSULT_DEPOIEMENT_OUTCOME   ="consultDeploi";
     private static final String  INIT_TRESORERIE_OUTCOME   ="init_tres";
+    private static final String  INIT_TRESORERIE_OUTCOME_2024   ="init_tres_2024";
     private static final String  GTS_IMPORT_OUTCOME   ="gts_import";
     private static final String  GTS_ARTICLE_OUTCOME="ref_artcile";
      private static final String  GTS_PERIODE_OUTCOME="ref_periode";
@@ -303,9 +307,11 @@ public class NavigationBean implements Serializable {
 		AJUST_TRESORERIE(AJUST_TRESORERIE_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE,MsgEntry.MENU_AJUSTEMENT), 
 		SIMUL_TRESORERIE(SIMUL_TRESORERIE_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE,MsgEntry.MENU_SIMULATION),
 		VENTIL_TRESORERIE(VENTILL_TRESORERIE_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE,MsgEntry.MENU_VENTILATION),
+		VENTIL_TRESORERIE_2024(VENTILL_TRESORERIE_2024_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE_2024,MsgEntry.MENU_VENTILATION),
 		IMPORT_TIERS_DAS(IMPORT_TIERS_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_DAS, Menu.MENU_TIERS,MsgEntry.IMPORT),
 	    GESTION_TIERS(GESTION_TIERS_OUTCOME,Menu.MENU_TOOLS,MsgEntry.MENU_CPWIN),
 		CONSULT_TRESORERIE(CONSULT_TRESORERIE_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE,MsgEntry.MENU_CONSULT) ,
+		CONSULT_TRESORERIE_2024(CONSULT_TRESORERIE_2024_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE_2024,MsgEntry.MENU_CONSULT) ,
 		PARAM_TRESORERIE(PARAM_TRESORERIE_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE,MsgEntry.MENU_PARAM) ,
 		IMPORT_HONORAIRE(IMPORT_HONORAIRE_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_DAS,Menu.MENU_HONORAIRE,MsgEntry.IMPORT),
 		GENERER_HONORAIRE(GENERER_HONORAIRE_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_DAS,Menu.MENU_HONORAIRE,MsgEntry.GENERER),
@@ -314,6 +320,7 @@ public class NavigationBean implements Serializable {
 		MODIF_DEPOIEMENT(MODIF_DEPOIEMENT_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_DEPLOIEMENT,MsgEntry.MENU_SAISI),
 		CONSULT_DEPOIEMENT(CONSULT_DEPOIEMENT_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_DEPLOIEMENT,MsgEntry.CONSULT_DEPLOI),
 		INIT_TRESORERIE(INIT_TRESORERIE_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE,MsgEntry.MENU_INITIALISATION),
+		INIT_TRESORERIE_2024(INIT_TRESORERIE_OUTCOME_2024,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE_2024,MsgEntry.MENU_INITIALISATION),
 		GTS_ARTICLE(GTS_ARTICLE_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.MENU_ARTICLE),
 		GTS_PERIODE(GTS_PERIODE_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.MENU_PERIODE),
 		GTS_CLIENT(GTS_CLIENT_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_BILLETTERIE,Menu.MENU_REFERENTIEL,MsgEntry.MENU_CLIENT),
@@ -644,6 +651,8 @@ public class NavigationBean implements Serializable {
 		CF_CR(MsgEntry.CR),
 		CF_CF(MsgEntry.CF),
 		MENU_TRESORERIE(MsgEntry.MENU_TRESORERIE),
+		MENU_TRESORERIE_2023(MsgEntry.MENU_TRESORERIE_2023),
+		MENU_TRESORERIE_2024(MsgEntry.MENU_TRESORERIE_2024),
 		MENU_DEPLOIEMENT(MsgEntry.MENU_DEPLOIMENT),
 		MENU_SIMULATION(MsgEntry.MENU_SIMULATION),
 		MENU_AJUSTEMENT(MsgEntry.MENU_AJUSTEMENT),
@@ -740,7 +749,7 @@ public String goToInterfaceMinefi2024()
 	
 //	DematBean  dematBean=(DematBean)Helper
 //		.findBean("dematBean");
-	getDematBean().reset();
+	getDematBeanV1().reset();
 
 	 prepare(Action.INTERFACE_MINEFI_2024);
 	return Action.INTERFACE_MINEFI_2024.getOutcome();
@@ -815,12 +824,22 @@ public String goToVentilTresorerie()
 	 prepare(Action.VENTIL_TRESORERIE);
 	return Action.VENTIL_TRESORERIE.getOutcome();
 }
+public String goToVentilTresorerie2024()
+{
+	getPltBeanV1().reset();
+
+	 prepare(Action.VENTIL_TRESORERIE_2024);
+	return Action.VENTIL_TRESORERIE_2024.getOutcome();
+}
 
 private CompteFinancierBean getCfBean(){
 	return (CompteFinancierBean)Helper.findBean("cfBean");
 }
 private GenericBean getPltBean(){
 	return (GenericBean)Helper.findBean("pltBean");
+}
+private GenericBean getPltBeanV1(){
+	return (GenericBean)Helper.findBean("pltBeanV1");
 }
 private DasBean getDasBean(){
 	return (DasBean)Helper.findBean("dasBean");
@@ -844,6 +863,9 @@ private ImportRecetteBean getImportRecetteBean()
 private DematBean getDematBean(){
 	return (DematBean)Helper.findBean("dematBean");
 }
+private DematBeanV1 getDematBeanV1(){
+	return (DematBeanV1)Helper.findBean("dematBeanv1");
+}
 private GenericBean getLemanRefBean(){
 	return (GenericBean)Helper.findBean("lemansRefBean");
 }
@@ -865,6 +887,13 @@ public String goToConsultTresorerie()
 
 	 prepare(Action.CONSULT_TRESORERIE);
 	return Action.CONSULT_TRESORERIE.getOutcome();
+}
+public String goToConsultTresorerie2024()
+{
+	getPltBeanV1().reset();
+
+	 prepare(Action.CONSULT_TRESORERIE_2024);
+	return Action.CONSULT_TRESORERIE_2024.getOutcome();
 }
 public String importHonoraire()
 {
@@ -927,6 +956,12 @@ private void deploiement() {
  	getPltBean().reset();
  	prepare(Action.INIT_TRESORERIE);
  	return Action.INIT_TRESORERIE.getOutcome();
+ }
+ public String goToinitTresorerie2024()
+ {
+ 	getPltBeanV1().reset();
+ 	prepare(Action.INIT_TRESORERIE_2024);
+ 	return Action.INIT_TRESORERIE_2024.getOutcome();
  }
  
 

@@ -89,6 +89,7 @@ import fr.symphonie.budget.ui.beans.edition.EditionBean;
 import fr.symphonie.budget.ui.beans.edition.EditionBeanV1;
 import fr.symphonie.budget.ui.beans.pluri.BudgetPluriannuelBean;
 import fr.symphonie.budget.ui.beans.pluri.PlanTresorerieBean;
+import fr.symphonie.budget.ui.beans.pluri.PlanTresorerieBeanV1;
 import fr.symphonie.common.InitializationBean;
 import fr.symphonie.common.core.ICommonService;
 import fr.symphonie.cpwin.core.demat.IDematService;
@@ -149,6 +150,10 @@ public class BudgetHelper {
 	public static PlanTresorerieBean getPlanTresorerieBean() {
 		String beanName = "pltBean";
 		return (PlanTresorerieBean) Helper.findBean(beanName);
+	}
+	public static PlanTresorerieBeanV1 getPlanTresorerieBeanV1() {
+		String beanName = "pltBeanV1";
+		return (PlanTresorerieBeanV1) Helper.findBean(beanName);
 	}
 
 	public static IPlanTresorerieService getPlanTresorerieService() {
