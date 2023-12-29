@@ -328,7 +328,7 @@
 			<p:column rendered="#{!decaiss.comptable}" 
 				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
 				<p:inputNumber  size="8" onfocus="select();" inputStyleClass="#{decaiss.biDisabled2024?'':'biInputValue'}" value="#{decaiss.budgetInitiale}"   disabled="#{(decaiss.biDisabled2024)||(pltBeanV1.janvierClos)}"  rendered="#{!decaiss.global}">
-					<p:ajax process="@this" update="detailsForm:decaiss_dtt" global="false" listener="#{pltBeanV1.planVentil.refreshBudgetInitial}"></p:ajax>
+					<p:ajax process="@this" update="detailsForm:decaiss_dtt" global="false" listener="#{pltBeanV1.planVentil.refreshBudgetInitial2024}"></p:ajax>
 				</p:inputNumber>
 			</p:column>
 			<p:column rendered="#{!decaiss.comptable}" 

@@ -48,7 +48,7 @@ public class Recette {
 		getDataR24().setMontantDouble(r24);
 		getDataR25().setMontantDouble(r25);
 	}
-	public void setMontantsFor2024(double r11, double r12, double r13, double r14, double r15, double r22, double r24, double r25, double r26, double r27) {
+	public void setMontantsFor2024(double r11, double r12, double r13, double r14, double r15, double r22, double r24, double r25, double r17, double r21) {
 		
 		getDataR11().setMontantDouble(r11);
 		getDataR12().setMontantDouble(r12);
@@ -58,14 +58,14 @@ public class Recette {
 		getDataR22().setMontantDouble(r22);
 		getDataR24().setMontantDouble(r24);
 		getDataR25().setMontantDouble(r25);
-		getDataR26().setMontantDouble(r26);
-		getDataR27().setMontantDouble(r27);
+		getDataR26().setMontantDouble(r17);
+		getDataR27().setMontantDouble(r21);
 	}
 	public void setMontants(double[] montants){
 		setMontants(montants[Constant.R11], montants[Constant.R12], montants[Constant.R13], montants[Constant.R14], montants[Constant.R15], montants[Constant.R22], montants[Constant.R24], montants[Constant.R25]);
 	}
 	public void setMontantsFor2024(double[] montants){
-		setMontantsFor2024(montants[Constant.R11], montants[Constant.R12], montants[Constant.R13], montants[Constant.R14], montants[Constant.R15], montants[Constant.R22], montants[Constant.R24], montants[Constant.R25],montants[Constant.R26],montants[Constant.R27]);
+		setMontantsFor2024(montants[Constant.R11], montants[Constant.R12], montants[Constant.R13], montants[Constant.R14], montants[Constant.R15], montants[Constant.R22], montants[Constant.R24], montants[Constant.R25],montants[Constant.R17],montants[Constant.R21]);
 	}
 
 	public double getR11() {

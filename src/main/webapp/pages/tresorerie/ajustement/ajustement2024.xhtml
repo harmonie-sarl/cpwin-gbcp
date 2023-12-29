@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+	<ui:define name="pageTitle">#{msgs['menu.ajustement']}</ui:define>
+	<ui:define name="entetePage">
+		<ui:include src="../common/entete_ajustement2024.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="enteteAction">
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}"
+			update="globalMessage,:enteteForm,:detailsForm:ajustPanel" immediate="true"
+			actionListener="#{pltBeanV1.searchAjustement}"
+			disabled="#{!pltBeanV1.requiredDataDone}">
+
+		</p:commandButton>
+		<ui:param name="statusRendered" value="true" />
+	</ui:define>
+
+	<ui:define name="search">
+
+
+	</ui:define>
+
+
+	<ui:define name="details">
+
+
+		<p:panel id="ajustPanel" style="width:100%;">
+		<div align="center">
+			 <h:outputText  rendered="#{pltBeanV1.plan!=null}" value="#{pltBeanV1.plan.title}"
+				style="font-weight: bold; text-align: center;color:#008000;" />
+
+		</div>
+		<br />
+			<div align="center" style="width: 100%;">
+
+				<h:panelGroup columns="3" >
+					<p:commandButton id="saveBtn" title=" " value="#{msgs['btn.enregistrer']}" 
+						actionListener="#{pltBeanV1.saveAjustementData}" rendered="#{pltBeanV1.plan!=null}" disabled="#{pltBeanV1.ajustementExecuted}"
+						update="@this,globalMessage,:detailsForm,validerBtn" immediate="true">
+					</p:commandButton>
+						<p:commandButton id="validerBtn" title=" " value="#{msgs['login.btn.valider']}" disabled="#{(!pltBeanV1.plan.activeValidateAdjuste) or (pltBeanV1.ajustementExecuted)}"
+						actionListener="#{pltBeanV1.validateAjustement}" rendered="#{pltBeanV1.plan!=null}" 
+						update="@this,globalMessage,:detailsForm,:enteteForm" immediate="true">
+					</p:commandButton>		
+						<p:commandButton title=" " value="#{msgs['budget.btn.export']}" rendered="#{(pltBeanV1.plan!=null)}" disabled="#{(!pltBeanV1.ajustementExecuted)}"  immediate="true"
+					ajax="false" >
+							<p:fileDownload value="#{pltBeanV1.xlsTresorerie}" />	
+						</p:commandButton>			
+				</h:panelGroup>
+               
+          
+                  
+
+			</div>
+			<ui:include src="./ajustList2024.xhtml">
+			</ui:include>
+
+
+
+
+		</p:panel>
+	</ui:define>
+	<ui:define name="dialogs">
+
+	</ui:define>
+</ui:composition>

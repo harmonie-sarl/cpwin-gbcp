@@ -381,8 +381,22 @@
 <navigation-rule>
 	<from-view-id>*</from-view-id>
 	<navigation-case>
+		<from-outcome>simul_tres_2024</from-outcome>
+		<to-view-id>/pages/tresorerie/simulation/simulation2024.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
 		<from-outcome>ajust_tres</from-outcome>
 		<to-view-id>/pages/tresorerie/ajustement/ajustement.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ajust_tres_2024</from-outcome>
+		<to-view-id>/pages/tresorerie/ajustement/ajustement2024.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
 <navigation-rule>
@@ -562,9 +576,23 @@
 </navigation-rule>
 <navigation-rule>
 	<from-view-id>*</from-view-id>
+		<navigation-case>
+		<from-outcome>param_tres_2024</from-outcome>
+		<to-view-id>/pages/tresorerie/parametrage/parametrage2024.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
 	<navigation-case>
 		<from-outcome>paramView</from-outcome>
 		<to-view-id>/pages/tresorerie/parametrage/view/paramView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>paramView2024</from-outcome>
+		<to-view-id>/pages/tresorerie/parametrage/view/paramView2024.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
 <navigation-rule>
@@ -614,6 +642,13 @@
 	<navigation-case>
 		<from-outcome>concil_tres</from-outcome>
 		<to-view-id>/pages/tresorerie/conciliation/conciliation.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>concil_tres_2024</from-outcome>
+		<to-view-id>/pages/tresorerie/conciliation/conciliation2024.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
 <navigation-rule>

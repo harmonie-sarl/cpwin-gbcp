@@ -10,7 +10,7 @@
 					 <p:selectOneMenu  id="exercList"  styleClass="ReadOnlyText" value="#{searchBean.exercice}" >
 					 
 				<f:selectItem itemValue="" itemLabel="-----"  />
-				<f:selectItems value="#{loaderBean.exercicAeList}" var="exerc" 
+				<f:selectItems value="#{loaderBean.exerciceMax2023List}" var="exerc" 
 				itemLabel="#{exerc}" itemValue="#{exerc}">
 				</f:selectItems>
 				<p:ajax  listener="#{pltBean.onExerciceChange}"  process="@this" update="periodeList,:detailsForm,:enteteForm" />

@@ -77,7 +77,9 @@ public class NavigationBean implements Serializable {
     private static final String VAL_CR_OUTCOME="val_cr";
     private static final String VAL_CF_OUTCOME="val_cf";
     private static final String  AJUST_TRESORERIE_OUTCOME="ajust_tres";
+    private static final String  AJUST_TRESORERIE_2024_OUTCOME="ajust_tres_2024";
     private static final String  SIMUL_TRESORERIE_OUTCOME="simul_tres";
+    private static final String  SIMUL_TRESORERIE_2024_OUTCOME="simul_tres_2024";
     private static final String  VENTILL_TRESORERIE_OUTCOME="ventil_tres";
     private static final String  VENTILL_TRESORERIE_2024_OUTCOME="ventil_tres_2024";
     private static final String  IMPORT_TIERS_OUTCOME   ="importTiers";
@@ -96,10 +98,12 @@ public class NavigationBean implements Serializable {
      private static final String  GTS_PERIODE_OUTCOME="ref_periode";
     private static final String  GTS_CLIENT_OUTCOME="gts_client";
     private static final String  PARAM_TRESORERIE_OUTCOME="param_tres";
+    private static final String  PARAM_TRESORERIE_2024_OUTCOME="param_tres_2024";
     private static final String  GTS_INIT_OUTCOME="gts_init";
     private static final String  GTS_GENERATION_OUTCOME="gts_generation";
     private static final String  GTS_CONSULTATION_OUTCOME="gts_consultataion";
     private static final String  CONCIL_TRESORERIE_OUTCOME="concil_tres";
+    private static final String  CONCIL_TRESORERIE_2024_OUTCOME="concil_tres_2024";
     private static final String  CHARGEMENT_EDITIONS_OUTCOME="chargement_editions";
     private static final String  CHARGEMENT_EDIT_BR_OUTCOME="chargement_edit_br";
     private static final String  SUIVI_CF_OUTCOME="suivi_cf";
@@ -305,7 +309,9 @@ public class NavigationBean implements Serializable {
 		PARAM_CR(PARAM_CR_OUTCOME,Menu.BUDGET_PLURI,Menu.COMPTE_FINANCIER,Menu.CF_CR,MsgEntry.PARAM_CR),
 		VAL_CF(VAL_CF_OUTCOME,Menu.BUDGET_PLURI,Menu.COMPTE_FINANCIER,Menu.CF_CF,MsgEntry.MENU_SAISI),
 		AJUST_TRESORERIE(AJUST_TRESORERIE_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE,MsgEntry.MENU_AJUSTEMENT), 
+		AJUST_TRESORERIE_2024(AJUST_TRESORERIE_2024_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE_2024,MsgEntry.MENU_AJUSTEMENT),
 		SIMUL_TRESORERIE(SIMUL_TRESORERIE_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE,MsgEntry.MENU_SIMULATION),
+		SIMUL_TRESORERIE_2024(SIMUL_TRESORERIE_2024_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE_2024,MsgEntry.MENU_SIMULATION),
 		VENTIL_TRESORERIE(VENTILL_TRESORERIE_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE,MsgEntry.MENU_VENTILATION),
 		VENTIL_TRESORERIE_2024(VENTILL_TRESORERIE_2024_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE_2024,MsgEntry.MENU_VENTILATION),
 		IMPORT_TIERS_DAS(IMPORT_TIERS_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_DAS, Menu.MENU_TIERS,MsgEntry.IMPORT),
@@ -313,6 +319,7 @@ public class NavigationBean implements Serializable {
 		CONSULT_TRESORERIE(CONSULT_TRESORERIE_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE,MsgEntry.MENU_CONSULT) ,
 		CONSULT_TRESORERIE_2024(CONSULT_TRESORERIE_2024_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE_2024,MsgEntry.MENU_CONSULT) ,
 		PARAM_TRESORERIE(PARAM_TRESORERIE_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE,MsgEntry.MENU_PARAM) ,
+		PARAM_TRESORERIE_2024(PARAM_TRESORERIE_2024_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE_2024,MsgEntry.MENU_PARAM) ,
 		IMPORT_HONORAIRE(IMPORT_HONORAIRE_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_DAS,Menu.MENU_HONORAIRE,MsgEntry.IMPORT),
 		GENERER_HONORAIRE(GENERER_HONORAIRE_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_DAS,Menu.MENU_HONORAIRE,MsgEntry.GENERER),
 		SUIVI_HONORAIRE(SUIVI_TRS_HONORAIRE_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_DAS,Menu.MENU_HONORAIRE,MsgEntry.SUIVI_TIERS),
@@ -328,6 +335,7 @@ public class NavigationBean implements Serializable {
 		GTS_GENERATION(GTS_GENERATION_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_BILLETTERIE,MsgEntry.GENERATION),
 		GTS_CONSULTATION(GTS_CONSULTATION_OUTCOME,Menu.MENU_TOOLS,Menu.MENU_BILLETTERIE,MsgEntry.MENU_CONSULT),
 		CONCIL_TRESORERIE(CONCIL_TRESORERIE_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE,MsgEntry.MENU_CONCILIATION),
+		CONCIL_TRESORERIE_2024(CONCIL_TRESORERIE_2024_OUTCOME,Menu.BUDGET_PLURI,Menu.MENU_TRESORERIE_2024,MsgEntry.MENU_CONCILIATION),
 		CHARGEMENT_EDITIONS(CHARGEMENT_EDITIONS_OUTCOME,Menu.BUDGET_PLURI,Menu.BUDGET_INITIAL,Menu.EDITIONS,MsgEntry.CHARGEMENT),
 		CHARGEMENT_EDIT_BR(CHARGEMENT_EDIT_BR_OUTCOME,Menu.BUDGET_PLURI,Menu.BUDGET_RECTIF,Menu.EDITIONS,MsgEntry.CHARGEMENT),
 		IMPORT_RECETTE(IMPORT_RECETTE_OUTCOME,Menu.MENU_TOOLS,MsgEntry.IMPORT_RECETTE),
@@ -809,13 +817,26 @@ public String goToSimulTresorerie()
 	 prepare(Action.SIMUL_TRESORERIE);
 	return Action.SIMUL_TRESORERIE.getOutcome();
 }
+public String goToSimulTresorerie2024()
+{
+	getPltBeanV1().reset();
 
+	 prepare(Action.SIMUL_TRESORERIE_2024);
+	return Action.SIMUL_TRESORERIE_2024.getOutcome();
+}
 public String goToAjustTresorerie()
 {
 	getPltBean().reset();
 
 	 prepare(Action.AJUST_TRESORERIE);
 	return Action.AJUST_TRESORERIE.getOutcome();
+}
+public String goToAjustTresorerie2024()
+{
+	getPltBeanV1().reset();
+
+	 prepare(Action.AJUST_TRESORERIE_2024);
+	return Action.AJUST_TRESORERIE_2024.getOutcome();
 }
 public String goToVentilTresorerie()
 {
@@ -988,6 +1009,15 @@ private void deploiement() {
 			return Action.PARAM_TRESORERIE.getOutcome();
 		
  }
+ public String goToParamTresorerie2024()
+ {
+	 
+			getPltBean().reset();
+
+			 prepare(Action.PARAM_TRESORERIE_2024);
+			return Action.PARAM_TRESORERIE_2024.getOutcome();
+		
+ }
  public String goToRefClient()
  {
 	 getGtsRefBean().reset();
@@ -1025,6 +1055,13 @@ private void deploiement() {
  	prepare(Action.CONCIL_TRESORERIE);
  	return Action.CONCIL_TRESORERIE.getOutcome();
  }
+ public String goToConcilTresorerie2024()
+ {
+ 	getPltBeanV1().reset();
+ 	prepare(Action.CONCIL_TRESORERIE_2024);
+ 	return Action.CONCIL_TRESORERIE_2024.getOutcome();
+ }
+ 
  
 	public String goToChargementEditions()
 	{

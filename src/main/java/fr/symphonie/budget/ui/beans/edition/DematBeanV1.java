@@ -248,7 +248,7 @@ public class DematBeanV1 extends GenericBean implements Serializable{
 		String tiersNeutralise=AppCfgConfig.getInstance().getTiersNeutralise();
 		Map<String,Double> aeEngage=service.getAeEngage(edition.getExercice(),dateFinPeriode,tiersNeutralise);
 		double[] AE=EditionBean.extractDepenseByNatGrp(aeEngage);
-		double[] CP=edition.getPlanTresorerie().getMontantsCpForDepence(periodeRealise);
+		double[] CP=edition.getPlanTresorerie().getMontantsCpForDepence2024(periodeRealise);
 		abe.getDepence().setMontants(AE, CP);
 		double recette[]=edition.getPlanTresorerie().getMontantsRecetteFor2024(periodeRealise);
 		abe.getRecette().setMontantsFor2024(recette);

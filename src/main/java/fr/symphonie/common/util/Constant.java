@@ -61,8 +61,8 @@ public class Constant {
 	public static final int R22 = 5;
 	public static final int R24 = 6;
 	public static final int R25 = 7;
-	public static final int R26 = 8;
-	public static final int R27 = 9;
+	public static final int R17 = 8;
+	public static final int R21 = 9;
 	public static final int NO_TIERS_SHEET = 0;
 	public static final int NO_HONORAIRES_SHEET = 0;
 	

@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.symphonie.budget.core.model.edition.util.NatGrpEnum;
+import fr.symphonie.budget.core.model.edition.util.NatGrpEnum2024;
 import fr.symphonie.common.util.BudgetHelper;
 import fr.symphonie.common.util.Constant;
 import fr.symphonie.util.Helper;
@@ -355,7 +356,116 @@ public BigDecimal getTotaleEcart(){
 		logger.debug("refreshBudgetInitial: ligne21={} ,ligne22={} ,ligne23={} ,ligne24={} , ",ligne21,ligne22,ligne23,ligne24);
 
 	}
+	public void refreshBudgetInitial2024()
+	{
+		logger.debug("refreshBudgetInitial: debut");
+		VentillationCO ligne23=getVentillationCO(23),ligne24=getVentillationCO(24),ligne25=getVentillationCO(25),ligne26=getVentillationCO(26);
+		VentillationCO ligne27=getVentillationCO(27),ligne28=getVentillationCO(28),ligne29=getVentillationCO(29),ligne30=getVentillationCO(30);
+		BigDecimal bpPersonnel=bpMap.get(23),bpFonct=bpMap.get(24),bpInterv=bpMap.get(25),bpInvess=bpMap.get(26);
+		ligne23.setBudgetInitiale(bpPersonnel.subtract(ligne27.getBudgetInitiale()));
+		ligne24.setBudgetInitiale(bpFonct.subtract(ligne28.getBudgetInitiale()));
+		ligne25.setBudgetInitiale(bpInterv.subtract(ligne29.getBudgetInitiale()));
+		ligne26.setBudgetInitiale(bpInvess.subtract(ligne30.getBudgetInitiale()));
+		
+		logger.debug("refreshBudgetInitial2024: ligne23={} ,ligne24={} ,ligne25={} ,ligne26={} , ",ligne23,ligne24,ligne25,ligne26);
 
+	}
+
+	public void prepareVentil2024(Map<String, Double> bpByNatGrp) {
+		BigDecimal bp=null;
+		Double montant=null;
+		NatGrpEnum2024 natGrp=null;
+	//	mapOfLigne=new HashMap<>();
+		bpMap=new HashMap<>();
+		boolean initialMode=getTotaleBp()==0;
+		logger.debug("prepareVentil: isInitialMode={}",initialMode);
+		
+		prepare();
+		for(EncDecEnum typeOp:EncDecEnum.values()){
+			
+			for(T d:getDetailList(typeOp)){
+				natGrp=null;
+				if(d.isGlobal())continue;
+				
+				switch(d.getLigne().getNumero()){
+				case 3:
+					natGrp=NatGrpEnum2024.NAT_GRP_R11;
+					break;
+				case 4:
+					natGrp=NatGrpEnum2024.NAT_GRP_R17;
+					break;
+				case 5:
+					natGrp=NatGrpEnum2024.NAT_GRP_R12;
+					break;
+				case 6:
+					natGrp=NatGrpEnum2024.NAT_GRP_R13;
+					
+					break;
+				case 7:
+					natGrp=NatGrpEnum2024.NAT_GRP_R14;
+					break;
+				case 8:
+					natGrp=NatGrpEnum2024.NAT_GRP_R15;
+					break;
+				case 9:
+					natGrp=NatGrpEnum2024.NAT_GRP_R21;
+					break;
+				case 10:
+					natGrp=NatGrpEnum2024.NAT_GRP_R22;
+					break;
+				case 11:
+					natGrp=NatGrpEnum2024.NAT_GRP_R24;
+					break;
+				case 12:
+					natGrp=NatGrpEnum2024.NAT_GRP_R25;
+					break;
+//				case 21:
+//					natGrp=NatGrpEnum2024.NAT_GRP_1;
+//					//mapOfLigne.put(d.getLigne().getNumero(), d);
+//					break;	
+//				case 22:
+//					natGrp=NatGrpEnum2024.NAT_GRP_2;
+//					//mapOfLigne.put(d.getLigne().getNumero(), d);
+//					break;
+				case 23:
+					natGrp=NatGrpEnum2024.NAT_GRP_1;
+					//mapOfLigne.put(d.getLigne().getNumero(), d);
+					break;		
+				case 24:
+					natGrp=NatGrpEnum2024.NAT_GRP_2;
+					//mapOfLigne.put(d.getLigne().getNumero(), d);
+					break;	
+				case 25:
+					natGrp=NatGrpEnum2024.NAT_GRP_4;
+					//mapOfLigne.put(d.getLigne().getNumero(), d);
+					break;	
+				case 26:
+					natGrp=NatGrpEnum2024.NAT_GRP_3;
+					//mapOfLigne.put(d.getLigne().getNumero(), d);
+					break;	
+				 case 27:case 28:
+					//mapOfLigne.put(d.getLigne().getNumero(), d);
+					break;
+				default:
+					natGrp=null;
+						break;
+				}
+				if(natGrp!=null){
+					montant=bpByNatGrp.get(natGrp.getCode());
+					bp=montant!=null?new BigDecimal(montant):new BigDecimal(0);
+					bpMap.put(d.getLigne().getNumero(), bp);
+					logger.debug("bpMap: bpMap={}",bpMap);
+				}
+				else{
+					bp=new BigDecimal(0);
+				}
+				if(initialMode)
+				((VentillationCO) d).setBudgetInitiale(bp);
+				
+			}
+		}
+		
+	}
 	public void prepareVentil(Map<String, Double> bpByNatGrp) {
 		BigDecimal bp=null;
 		Double montant=null;
@@ -471,6 +581,14 @@ public BigDecimal getTotaleEcart(){
 		montants[Constant.INVESTISSEMENT]=getSomme(periodeRealise,24, 28);
 		return montants;
 	}
+	public double[] getMontantsCpForDepence2024(Integer periodeRealise) {
+		double[] montants=new double[4];
+		montants[Constant.PERSONNEL]=getSomme(periodeRealise,23, 27);
+		montants[Constant.FONCTIONNEMENT]=getSomme(periodeRealise,24,28);
+		montants[Constant.INTERVENTION]=getSomme(periodeRealise,25, 29);
+		montants[Constant.INVESTISSEMENT]=getSomme(periodeRealise,26, 30);
+		return montants;
+	}
 	public double getSomme(Integer periodeRealise,Integer numL1,Integer numL2){
 		double somme=0;
 		DetailLigneTresorerie l1=getDetailLigne(numL1);
@@ -508,8 +626,8 @@ public BigDecimal getTotaleEcart(){
 		montants[Constant.R22]=getSomme(periodeRealise,8, null);
 		montants[Constant.R24]=getSomme(periodeRealise,9,null);
 		montants[Constant.R25]=getSomme(periodeRealise,10, null	);
-		montants[Constant.R26]=getSomme(periodeRealise,11, null	);
-		montants[Constant.R27]=getSomme(periodeRealise,12, null	);
+		montants[Constant.R17]=getSomme(periodeRealise,11, null	);
+		montants[Constant.R21]=getSomme(periodeRealise,12, null	);
 		
 		return montants;
 	}

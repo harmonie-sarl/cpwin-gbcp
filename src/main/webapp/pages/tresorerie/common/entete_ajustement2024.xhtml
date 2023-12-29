@@ -10,10 +10,10 @@
 					 <p:selectOneMenu  id="exercList"  styleClass="ReadOnlyText" value="#{searchBean.exercice}" >
 					 
 				<f:selectItem itemValue="" itemLabel="-----"  />
-				<f:selectItems value="#{loaderBean.exerciceMax2023List}" var="exerc" 
+				<f:selectItems value="#{loaderBean.exerciceMin2024List}" var="exerc" 
 				itemLabel="#{exerc}" itemValue="#{exerc}">
 				</f:selectItems>
-				<p:ajax  listener="#{pltBean.onExerciceChange}"  process="@this" update="periodeList,:detailsForm,:enteteForm" />
+				<p:ajax  listener="#{pltBeanV1.onExerciceChange}"  process="@this" update="periodeList,:detailsForm,:enteteForm" />
 			</p:selectOneMenu>
 				</h:panelGroup> 
 				</h:panelGrid>
@@ -23,12 +23,12 @@
 			style="display:block;width:100px" />
 		<h:panelGroup>
 			<p:selectOneMenu id="periodeList" styleClass="ReadOnlyText"
-				value="#{pltBean.periode}">
+				value="#{pltBeanV1.periode}">
 				<f:selectItem itemValue="" itemLabel="-----" />
-				<f:selectItems value="#{pltBean.simulationPeriodeList}" var="periode"
+				<f:selectItems value="#{pltBeanV1.ajustementPeriodeList}" var="periode"
 					itemLabel="#{periode.libelle}" itemValue="#{periode.value}">
 				</f:selectItems>
-				<p:ajax listener="#{pltBean.resetDynamicList}"  process="@this" update=":detailsForm,:enteteForm" />
+				<p:ajax listener="#{pltBeanV1.resetDynamicList}"  process="@this" update=":detailsForm,:enteteForm" />
 			</p:selectOneMenu>
 
 		</h:panelGroup>

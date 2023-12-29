@@ -1,0 +1,770 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+.noneStyle {
+	color: #000000;
+	background-color: none;
+}
+
+.redStyle {
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+
+.totalTitle {
+	text-align: left;
+	font-weight: bold;
+	background: #feeebd !important;
+	font-size: 9.5px;
+}
+
+.totalFooter {
+	color: #383838 !important;
+	background: #F0E68C !important;
+	border-color: grey !important;
+	font-size: 9.5px;
+	text-align: right;
+}
+
+.totalValue {
+	font-weight: bold;
+	background: #feeebd !important;
+}
+
+.detailTitle {
+	text-align: left;
+}
+
+.detailValue {
+	text-align: center;
+}
+
+
+
+.globalTitle {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+	text-align: left;
+	font-style: italic;
+}
+
+.globalValue {
+	color: #383838 !important;
+	background-color: #F0E68C;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+	text-align: center;
+	font-style: italic;
+}
+
+
+
+.th {
+	color: #383838 !important;
+	background: #D19275 !important;
+	border-color: grey !important;
+	font-weight: bold;
+	font-size: 9.5px;
+}
+
+.td {
+	color: #383838 !important;
+	background: #F0E68C !important;
+	border-color: grey !important;
+	font-size: 9.5px;
+}
+
+.ui-datatable .ui-datatable-data td {
+	font-size: 60% !important;
+}
+
+.ui-datatable thead {
+	font-size: 60% !important;
+}
+</style>
+	<h:panelGroup style="width:150%;">
+	
+		<p:dataTable id="ajust_encaiss_dtt" sortBy="#{encaiss.ligne.ordre}"
+			rendered="#{pltBeanV1.plan!=null}" var="encaiss" style="width:130%;"
+			rowIndexVar="encaissIndex" emptyMessage="#{msgs['datatable.empty']}"
+			value="#{pltBeanV1.encaissements}" selectionMode="single"
+    selection="#{pltBeanV1.selectedLigne}"
+    rowKey="#{encaiss}" groupable="false" sortMode="single"
+    editable="true" editMode="cell" ajax="true">
+			<p:columnGroup type="header">
+			<p:row>
+					
+           	 <p:column
+						colspan="16" headerText="#{msgs['encaissements']}" styleClass="th">
+					</p:column>
+				
+					
+								 
+        </p:row>
+				<p:row styleClass="th" style="font-weight: bold;text-align: center;">	              
+				  <p:column styleClass="th" colspan="1" style="width:14%;">
+					</p:column>			
+				 <p:column styleClass="th" colspan="1" style="text-align: center; width:5%;"
+						headerText="#{msgs['janvier']}">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" style="text-align: center; width:16%;"
+						headerText="#{msgs['fevrier']}">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['mars']}"
+						style="width:16%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['avril']}"
+						style="width:16%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['mai']}"
+						style="width:16%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['juin']}"
+						style="width:16%;">
+					</p:column>
+						<p:column styleClass="th" colspan="1" 	headerText="#{msgs['eart']}"	style="width:9%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['juillet']}" style="width:7%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1" headerText="#{msgs['aout']}"
+						style="width:16%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['septembre']}" style="width:16%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['octobre']}" style="width:16%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['novembre']}" style="width:16%;">
+					</p:column>
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['decembre']}" style="width:16%;">
+					</p:column>
+				
+				 <p:column styleClass="th" colspan="1"
+						headerText="#{msgs['total.majus']} #{msgs['variation.tresorerie.annuelle']}"
+						style="width:5%;">
+
+
+					</p:column>
+					 <p:column styleClass="th" colspan="1" 	headerText="#{msgs['credit.ouverte']}"	style="width:5%;">
+					</p:column>
+					 
+        </p:row>
+          
+			</p:columnGroup>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalTitle':'detailTitle'}" colspan="1">
+
+				<h:outputText value="#{encaiss.ligne.libelle}" />
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+         <p:contextMenu for="janvierInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_encaiss_dtt:janvierInput, :detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(encaiss,1)}"        />
+                          
+                        </p:contextMenu>
+				
+				<p:inputNumber id="janvierInput"  size="12" inputStyle="text-align: left"  value="#{encaiss.montant01}"  onfocus="select();" 
+					rendered="#{(!encaiss.global)and(pltBeanV1.periodEditable('01'))}" >
+				
+					
+				</p:inputNumber>
+				
+				<h:outputText value="#{encaiss.montant01}"
+				rendered="#{(!pltBeanV1.periodEditable('01'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+        
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+            <p:contextMenu for="fevrierInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_encaiss_dtt:fevrierInput, :detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(encaiss,2)}"        />
+                          
+                        </p:contextMenu>
+				
+	          <p:inputNumber id="fevrierInput" size="12"  inputStyle="text-align: left"  value="#{encaiss.montant02}"  onfocus="select();"
+					rendered="#{(!encaiss.global)and(pltBeanV1.periodEditable('02'))}" >
+				
+					<p:ajax  process="@this" global="false" update=":detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber >
+				<h:outputText value="#{encaiss.montant02}"
+					rendered="#{(!pltBeanV1.periodEditable('02'))}">
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+				
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+          <p:contextMenu for="marsInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_encaiss_dtt:marsInput, :detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(encaiss,3)}"        />
+                          
+                        </p:contextMenu>
+	        <p:inputNumber id="marsInput" size="12"  inputStyle="text-align: left"  value="#{encaiss.montant03}"  onfocus="select();"
+					rendered="#{(!encaiss.global)and(pltBeanV1.periodEditable('03'))}" >
+				
+					<p:ajax  process="@this" global="false" update=":detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{encaiss.montant03}"
+					rendered="#{(!pltBeanV1.periodEditable('03'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+				
+
+			
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+   <p:contextMenu for="avrilInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_encaiss_dtt:avrilInput, :detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(encaiss,4)}"        />
+                          
+                        </p:contextMenu>
+
+	  <p:inputNumber id="avrilInput" size="12" inputStyle="text-align: left"  value="#{encaiss.montant04}"  onfocus="select();"
+					rendered="#{(!encaiss.global)and(pltBeanV1.periodEditable('04'))}" >
+				
+					<p:ajax  process="@this" global="false" update=":detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{encaiss.montant04}"
+						rendered="#{(!pltBeanV1.periodEditable('04'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+				
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+<p:contextMenu for="maiInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_encaiss_dtt:maiInput, :detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(encaiss,5)}"        />
+                          
+                        </p:contextMenu>
+	  <p:inputNumber id="maiInput" size="12" inputStyle="text-align: left"  value="#{encaiss.montant05}"  onfocus="select();"
+					rendered="#{(!encaiss.global)and(pltBeanV1.periodEditable('05'))}" >
+				
+				<p:ajax  process="@this" global="false" update=":detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{encaiss.montant05}"
+						rendered="#{(!pltBeanV1.periodEditable('05'))}"   >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+			
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+<p:contextMenu for="juinInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_encaiss_dtt:juinInput, :detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(encaiss,6)}"        />
+                          
+                        </p:contextMenu>
+	  <p:inputNumber id="juinInput" size="12" inputStyle="text-align: left"  value="#{encaiss.montant06}"  onfocus="select();"
+				rendered="#{(!encaiss.global)and(pltBeanV1.periodEditable('06'))}" >
+				
+					<p:ajax  process="@this" global="false" update=":detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{encaiss.montant06}"
+						rendered="#{(!pltBeanV1.periodEditable('06'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+				
+
+			</p:column>
+				<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<h:outputText id="ecart" value="#{encaiss.ecart}" styleClass="#{((!encaiss.ecartNull)and(!encaiss.comptable))?'redStyle':'noneStyle'}" rendered="#{(!encaiss.global)}">
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+
+<p:contextMenu for="juilletInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_encaiss_dtt:juilletInput, :detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(encaiss,7)}"        />
+                          
+                        </p:contextMenu>
+	  <p:inputNumber id="juilletInput" size="12" inputStyle="text-align: left"  value="#{encaiss.montant07}"  onfocus="select();"
+					rendered="#{(!encaiss.global)and(pltBeanV1.periodEditable('07'))}" >
+				
+					<p:ajax  process="@this" global="false" update=":detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{encaiss.montant07}"
+					rendered="#{(!pltBeanV1.periodEditable('07'))}">
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+				
+		
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+<p:contextMenu for="aoutInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_encaiss_dtt:aoutInput, :detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(encaiss,8)}"        />
+                          
+                        </p:contextMenu>
+	  <p:inputNumber id="aoutInput" size="12" inputStyle="text-align: left"  value="#{encaiss.montant08}"  onfocus="select();"
+					rendered="#{(!encaiss.global)and(pltBeanV1.periodEditable('08'))}" >
+				
+					<p:ajax  process="@this" global="false" update=":detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{encaiss.montant08}"
+				rendered="#{(!pltBeanV1.periodEditable('08'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+		
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+<p:contextMenu for="septemberInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_encaiss_dtt:septemberInput, :detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(encaiss,9)}"        />
+                          
+                        </p:contextMenu>
+	  <p:inputNumber id="septemberInput" size="12" inputStyle="text-align: left"  value="#{encaiss.montant09}"  onfocus="select();"
+					rendered="#{(!encaiss.global)and(pltBeanV1.periodEditable('09'))}" >
+				
+					<p:ajax  process="@this" global="false" update=":detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{encaiss.montant09}"
+					rendered="#{(!pltBeanV1.periodEditable('09'))}"   >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+				
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+<p:contextMenu for="octoberInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_encaiss_dtt:octoberInput, :detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(encaiss,10)}"        />
+                          
+                        </p:contextMenu>
+	  <p:inputNumber id="octoberInput" size="12" inputStyle="text-align: left"  value="#{encaiss.montant10}"  onfocus="select();"
+					rendered="#{(!encaiss.global)and(pltBeanV1.periodEditable('10'))}" >
+				
+					<p:ajax  process="@this" global="false" update=":detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{encaiss.montant10}"
+						rendered="#{(!pltBeanV1.periodEditable('10'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+			
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+  <p:contextMenu for="novemberInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_encaiss_dtt:novemberInput, :detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(encaiss,11)}"        />
+                          
+                        </p:contextMenu>
+	  <p:inputNumber id="novemberInput" size="12" inputStyle="text-align: left"  value="#{encaiss.montant11}"  onfocus="select();"
+					rendered="#{(!encaiss.global)and(pltBeanV1.periodEditable('11'))}" >
+				
+					<p:ajax  process="@this" global="false" update=":detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{encaiss.montant11}"
+				rendered="#{(!pltBeanV1.periodEditable('11'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+				
+
+				
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+
+   <p:contextMenu for="decemberInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_encaiss_dtt:decemberInput, :detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(encaiss,12)}"        />
+                          
+                        </p:contextMenu>
+	  <p:inputNumber id="decemberInput" size="12" inputStyle="text-align: left"  value="#{encaiss.montant12}"  onfocus="select();"
+					rendered="#{(!encaiss.global)and(pltBeanV1.periodEditable('12'))}" >
+				
+				<p:ajax  process="@this" global="false" update=":detailsForm:ajust_encaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_encaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{encaiss.montant12}"
+					rendered="#{(!pltBeanV1.periodEditable('12'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+			
+
+
+			</p:column>
+		
+			<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}">
+				<h:outputText id="totalVar" value="#{encaiss.totaleVariationAnnuelle}" rendered="#{(!encaiss.global)}">
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+			</p:column>
+				<p:column
+				styleClass="#{(encaiss.global)?'globalValue':'detailValue'}" >
+				<h:outputText value="#{encaiss.creditOuvert}" rendered="#{(!encaiss.global)}">
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			
+			
+
+
+			
+		</p:dataTable>
+		
+		<p:dataTable id="ajust_decaiss_dtt" sortBy="#{decaiss.ligne.ordre}"
+			var="decaiss" style="width:130%; text-align: center;"
+			rendered="#{pltBeanV1.plan!=null}" rowIndexVar="decaissIndex"
+			emptyMessage="#{msgs['datatable.empty']}"
+			value="#{pltBeanV1.decaissements}" selectionMode="single"
+    selection="#{pltBeanV1.selectedLigne}"
+    rowKey="#{decaiss}" groupable="false" sortMode="single"
+    editable="true" editMode="cell" ajax="true">
+
+			<p:columnGroup type="header">
+					
+        
+					<p:row>
+					
+           	 <p:column
+						colspan="16" headerText="#{msgs['decaissements']}" styleClass="th">
+					</p:column>
+				
+					
+								 
+        </p:row>
+			</p:columnGroup>
+			<p:column style="width:14%;"
+				styleClass="#{(decaiss.global)?'globalTitle':'detailTitle'}" colspan="1">
+
+				<h:outputText value="#{decaiss.ligne.libelle}" />
+
+			</p:column>
+			<p:column 
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+    <p:contextMenu for="janvierInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_decaiss_dtt:janvierInput, :detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(decaiss,1)}"        />
+                          
+                        </p:contextMenu>
+				  <p:inputNumber id="janvierInput" size="12" inputStyle="text-align: left"  value="#{decaiss.montant01}"  onfocus="select();"
+				rendered="#{(!decaiss.global)and(pltBeanV1.periodEditable('01'))}" >
+				
+					<p:ajax  process="@this" global="false" update=":detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{decaiss.montant01}"
+						rendered="#{(!pltBeanV1.periodEditable('01'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+
+
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+ 
+   <p:contextMenu for="fevrierInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_decaiss_dtt:fevrierInput, :detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(decaiss,2)}"        />
+                          
+                        </p:contextMenu>
+	  <p:inputNumber id="fevrierInput" size="12" inputStyle="text-align: left"  value="#{decaiss.montant02}"  onfocus="select();"
+					rendered="#{(!decaiss.global)and(pltBeanV1.periodEditable('02'))}" >
+				
+				<p:ajax  process="@this" global="false" update=":detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{decaiss.montant02}"
+				rendered="#{(!pltBeanV1.periodEditable('02'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+			
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+<p:contextMenu for="marsInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_decaiss_dtt:marsInput, :detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(decaiss,3)}"        />
+                          
+                        </p:contextMenu>
+	 <p:inputNumber id="marsInput" size="12" inputStyle="text-align: left"  value="#{decaiss.montant03}"  onfocus="select();"
+					rendered="#{(!decaiss.global)and(pltBeanV1.periodEditable('03'))}" >
+				
+						<p:ajax  process="@this" global="false" update=":detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{decaiss.montant03}"
+						rendered="#{(!pltBeanV1.periodEditable('03'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+				
+
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+  <p:contextMenu for="avrilInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_decaiss_dtt:avrilInput, :detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(decaiss,4)}"        />
+                          
+                        </p:contextMenu>
+ <p:inputNumber id="avrilInput" size="12" inputStyle="text-align: left"  value="#{decaiss.montant04}"  onfocus="select();"
+					rendered="#{(!decaiss.global)and(pltBeanV1.periodEditable('04'))}" >
+				
+						<p:ajax  process="@this" global="false" update=":detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{decaiss.montant04}"
+						rendered="#{(!pltBeanV1.periodEditable('04'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+		
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+ <p:contextMenu for="maiInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_decaiss_dtt:maiInput, :detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(decaiss,5)}"        />
+                          
+                        </p:contextMenu>
+	<p:inputNumber id="maiInput" size="12" inputStyle="text-align: left"  value="#{decaiss.montant05}"  onfocus="select();"
+					rendered="#{(!decaiss.global)and(pltBeanV1.periodEditable('05'))}" >
+				
+						<p:ajax  process="@this" global="false" update=":detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{decaiss.montant05}"
+					rendered="#{(!pltBeanV1.periodEditable('05'))}"  >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+		
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+
+ <p:contextMenu for="juinInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_decaiss_dtt:juinInput, :detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(decaiss,6)}"        />
+                          
+                        </p:contextMenu>
+	<p:inputNumber id="juinInput" size="12" inputStyle="text-align: left"  value="#{decaiss.montant06}"  onfocus="select();"
+					rendered="#{(!decaiss.global)and(pltBeanV1.periodEditable('06'))}"  >
+				
+						<p:ajax  process="@this" global="false" update=":detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{decaiss.montant06}"
+						rendered="#{(!pltBeanV1.periodEditable('06'))}"  >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+			
+
+
+			</p:column>
+			
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<h:outputText id="ecart" value="#{decaiss.ecart}" styleClass="#{((!decaiss.ecartNull)and(!decaiss.comptable))?'redStyle':'noneStyle'}" rendered="#{(!decaiss.global)}">
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+  <p:contextMenu for="juilletInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_decaiss_dtt:juilletInput, :detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(decaiss,7)}"        />
+                          
+                        </p:contextMenu>
+	<p:inputNumber id="juilletInput" size="12" inputStyle="text-align: left"  value="#{decaiss.montant07}"  onfocus="select();"
+					rendered="#{(!decaiss.global)and(pltBeanV1.periodEditable('07'))}" >
+				
+						<p:ajax  process="@this" global="false" update=":detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{decaiss.montant07}"
+						rendered="#{(!pltBeanV1.periodEditable('07'))}" >
+				<f:convertNumber type="currency" currencySymbol=""   ></f:convertNumber>
+				</h:outputText>
+
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+<p:contextMenu for="aoutInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_decaiss_dtt:aoutInput, :detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(decaiss,8)}"        />
+                          
+                        </p:contextMenu>
+
+				<p:inputNumber id="aoutInput" size="12" inputStyle="text-align: left"  value="#{decaiss.montant08}"  onfocus="select();"
+					rendered="#{(!decaiss.global)and(pltBeanV1.periodEditable('08'))}" >
+				
+						<p:ajax  process="@this" global="false" update=":detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{decaiss.montant08}"
+							rendered="#{(!pltBeanV1.periodEditable('08'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+
+<p:contextMenu for="septemberInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_decaiss_dtt:septemberInput, :detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(decaiss,9)}"        />
+                          
+                        </p:contextMenu>
+			<p:inputNumber id="septemberInput" size="12" inputStyle="text-align: left"  value="#{decaiss.montant09}"  onfocus="select();"
+					rendered="#{(!decaiss.global)and(pltBeanV1.periodEditable('09'))}" >
+				
+						<p:ajax  process="@this" global="false" update=":detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{decaiss.montant09}"
+							rendered="#{(!pltBeanV1.periodEditable('09'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+
+
+<p:contextMenu for="octoberInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_decaiss_dtt:octoberInput, :detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(decaiss,10)}"        />
+                          
+                        </p:contextMenu>
+				<p:inputNumber id="octoberInput" size="12" inputStyle="text-align: left"  value="#{decaiss.montant10}"  onfocus="select();"
+						rendered="#{(!decaiss.global)and(pltBeanV1.periodEditable('10'))}" >
+				
+					<p:ajax  process="@this" global="false" update=":detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{decaiss.montant10}"
+							rendered="#{(!pltBeanV1.periodEditable('10'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+<p:contextMenu for="novemberInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_decaiss_dtt:novemberInput, :detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(decaiss,11)}"        />
+                          
+                        </p:contextMenu>
+
+	<p:inputNumber id="novemberInput" size="12" inputStyle="text-align: left"  value="#{decaiss.montant11}"  onfocus="select();"
+					rendered="#{(!decaiss.global)and(pltBeanV1.periodEditable('11'))}" >
+				
+						<p:ajax  process="@this" global="false" update=":detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{decaiss.montant11}"
+					rendered="#{(!pltBeanV1.periodEditable('11'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+
+			</p:column>
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+<p:contextMenu for="decemberInput" >
+                            <p:menuitem value="#{msgs['ajuster']}" icon="ui-icon-arrowrefresh-1-w" update=":detailsForm:ajust_decaiss_dtt:decemberInput, :detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"
+                                  actionListener="#{pltBeanV1.setMontantMonth(decaiss,12)}"        />
+                          
+                        </p:contextMenu>
+
+
+	<p:inputNumber id="decemberInput"  size="8" inputStyle="text-align: left"  value="#{decaiss.montant12}"  onfocus="select();"
+					rendered="#{(!decaiss.global)and(pltBeanV1.periodEditable('12'))}" >
+				
+						<p:ajax  process="@this" global="false" update=":detailsForm:ajust_decaiss_dtt:ecart, :detailsForm:validerBtn, :detailsForm:ajust_decaiss_dtt:totalVar"></p:ajax>
+				</p:inputNumber>
+				<h:outputText value="#{decaiss.montant12}"
+					rendered="#{(!pltBeanV1.periodEditable('12'))}" >
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+
+
+			</p:column>
+				
+			<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<h:outputText id="totalVar" value="#{decaiss.totaleVariationAnnuelle}" rendered="#{(!decaiss.global)}">
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+					</h:outputText>
+			</p:column>
+		<p:column
+				styleClass="#{(decaiss.global)?'globalValue':'detailValue'}">
+				<h:outputText value="#{decaiss.creditOuvert}" rendered="#{(!decaiss.global)}">
+					<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+				</h:outputText>
+			</p:column>
+		
+
+			
+		</p:dataTable>
+	</h:panelGroup>
+
+
+
+</ui:composition>

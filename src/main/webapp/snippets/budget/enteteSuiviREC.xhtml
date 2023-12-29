@@ -22,7 +22,7 @@
 					itemLabel="#{exerc}" itemValue="#{exerc}">
 				</f:selectItems>
 				
-				<p:ajax process="@this" listener="#{bpBean.onExerciceChange}"
+				<p:ajax process="@this" listener="#{bpBean.onExerciceChangeForSuiuvRecette}"
 					update="tiers,noLtrList,globalMessage,budgetCodeList,directionList,libDirection,serviceList,libService,fongDest,destList,libDestination,progrList,libProgram,natureGroupeList,natureList,libNature,:detailsForm" />
 			</p:selectOneMenu>
 		</h:panelGroup>

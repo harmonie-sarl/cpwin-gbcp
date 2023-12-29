@@ -30,6 +30,7 @@ import fr.symphonie.budget.core.model.edition.util.CAF;
 import fr.symphonie.budget.core.model.edition.util.DataItem;
 import fr.symphonie.budget.core.model.edition.util.DepByDest;
 import fr.symphonie.budget.core.model.edition.util.NatGrpEnum;
+import fr.symphonie.budget.core.model.edition.util.NatGrpEnum2024;
 import fr.symphonie.budget.core.model.edition.util.Operation;
 import fr.symphonie.budget.core.model.edition.util.RecByOrig;
 import fr.symphonie.budget.core.model.plt.DetailLigneTresorerie;
@@ -455,8 +456,8 @@ private static final String I = "I";
 				RECETTE[Constant.R22],
 				RECETTE[Constant.R24],
 				RECETTE[Constant.R25],
-				RECETTE[Constant.R26],
-				RECETTE[Constant.R27]);
+				RECETTE[Constant.R17],
+				RECETTE[Constant.R21]);
 	}
 	private void loadDepences(Edition e) {
 		
@@ -501,7 +502,7 @@ private static final String I = "I";
 		Map<String,Double> bpRect=budgetPluriService.getBpRecetByNatGrp(e.getExercice());
 		double[] RECETTE=extractRecetteByNatGrp(bpRect);
 //		double r11 = budgetPluriService.getRecet(exercice, NatGrpEnum.NAT_GRP_R11.getCode());
-		e.getTab2().getRecette().setMontantsFor2024(RECETTE[Constant.R11], RECETTE[Constant.R12], RECETTE[Constant.R13], RECETTE[Constant.R14], RECETTE[Constant.R15], RECETTE[Constant.R22], RECETTE[Constant.R24], RECETTE[Constant.R25],RECETTE[Constant.R26],RECETTE[Constant.R27]);
+		e.getTab2().getRecette().setMontantsFor2024(RECETTE[Constant.R11], RECETTE[Constant.R12], RECETTE[Constant.R13], RECETTE[Constant.R14], RECETTE[Constant.R15], RECETTE[Constant.R22], RECETTE[Constant.R24], RECETTE[Constant.R25],RECETTE[Constant.R17],RECETTE[Constant.R21]);
 	}
 	public static double[] extractRecetteByNatGrp(Map<String,Double> map){
 		double[] montants=new double[8];
@@ -509,7 +510,7 @@ private static final String I = "I";
 			Double mnt=map.get(key);
 			if(mnt==null)mnt=0d;
 			logger.debug("extractRecetteByNatGrp: key -> {}",key);
-			NatGrpEnum natGrp=NatGrpEnum.parse(key);
+			NatGrpEnum2024 natGrp=NatGrpEnum2024.parse(key);
 			if(natGrp==null) continue;
 			switch(natGrp){
 			
@@ -528,6 +529,12 @@ private static final String I = "I";
 			case NAT_GRP_R15:
 				montants[Constant.R15]=mnt;
 				break;
+			case NAT_GRP_R17:
+				montants[Constant.R17]=mnt;
+				break;
+			case NAT_GRP_R21:
+				montants[Constant.R21]=mnt;
+				break;
 			case NAT_GRP_R22:
 				montants[Constant.R22]=mnt;
 				break;
@@ -536,12 +543,6 @@ private static final String I = "I";
 				break;
 			case NAT_GRP_R25:
 				montants[Constant.R25]=mnt;
-				break;
-			case NAT_GRP_R26:
-				montants[Constant.R26]=mnt;
-				break;
-			case NAT_GRP_R27:
-				montants[Constant.R27]=mnt;
 				break;
 			default:
 				break;

@@ -193,7 +193,7 @@ public class PlanTresorerieBeanV1 extends GenericBean implements Serializable {
 			this.planVentil = loadPlan(getExercice(), null, VentillationCO.class);
 			this.planVentil.sort();
 			Map<String, Double> bpByNatGrp = loadBudgetPrevisionnel(planVentil.getExercice());
-			planVentil.prepareVentil(bpByNatGrp);
+			planVentil.prepareVentil2024(bpByNatGrp);
 		} 
 		 catch (Exception e) {
 			HandlerJSFMessage.addErrorMessage(getErrorMessageFromException(MsgEntry.FAILED, e));
@@ -373,16 +373,18 @@ public class PlanTresorerieBeanV1 extends GenericBean implements Serializable {
 
 	public boolean isRequiredDataDone() {
 		switch (getCurrentAction()) {
-		case SIMUL_TRESORERIE:
-		case AJUST_TRESORERIE:
-		case CONSULT_TRESORERIE:
+	
+	
+		
 		case CONSULT_TRESORERIE_2024:
-		case INIT_TRESORERIE_2024:case CONCIL_TRESORERIE:
+		case INIT_TRESORERIE_2024: case CONCIL_TRESORERIE_2024:
+		case AJUST_TRESORERIE_2024:
+		case SIMUL_TRESORERIE_2024:
 			return (isCommonRequiredDone()) && (getPeriode() != null);
 
 		case VENTIL_TRESORERIE_2024:
 			return (isCommonRequiredDone());			
-		case PARAM_TRESORERIE:
+		case PARAM_TRESORERIE_2024:
 			return (isCommonRequiredDone());
 
 		default:
@@ -879,7 +881,7 @@ public class PlanTresorerieBeanV1 extends GenericBean implements Serializable {
 		
 		logger.debug("editParamCompte : {}",getSelectedParam());
 		
-		DialogHelper.openParamView();
+		DialogHelper.openParamView2024();
 		logger.debug("editParamCompte : Fin");
 	}
 
@@ -978,7 +980,7 @@ public class PlanTresorerieBeanV1 extends GenericBean implements Serializable {
 		compt.setExercice(getExercice());
 		compt.setTrace(Helper.createTrace());
 		setSelectedParam(compt);
-		DialogHelper.openParamView();
+		DialogHelper.openParamView2024();
 		
 		if (logger.isDebugEnabled()) {
 			logger.debug("goToAddParam() - end"); //$NON-NLS-1$

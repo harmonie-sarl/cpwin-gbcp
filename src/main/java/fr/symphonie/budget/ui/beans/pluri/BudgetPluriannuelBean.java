@@ -1454,6 +1454,17 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 		super.onExerciceChange();
 		setImportErrorList(null);
 		setImportList(null);
+//		if(Integer.valueOf(getSearchBean().getExercice())>=2024)
+//			getLoaderBean().setListNoLtr(new ArrayList<String>(Arrays.asList("3","4","5","6","7","8","9","10","11","12")));
+//		else {
+//			getLoaderBean().setListNoLtr(new ArrayList<String>(Arrays.asList("3","4","5","6","7","8","9","10")));
+//		}
+
+	}
+	public void onExerciceChangeForSuiuvRecette() {
+		super.onExerciceChange();
+		setImportErrorList(null);
+		setImportList(null);
 		if(Integer.valueOf(getSearchBean().getExercice())>=2024)
 			getLoaderBean().setListNoLtr(new ArrayList<String>(Arrays.asList("3","4","5","6","7","8","9","10","11","12")));
 		else {
@@ -1461,6 +1472,7 @@ public class BudgetPluriannuelBean extends GenericBean implements Serializable {
 		}
 
 	}
+
 
 	public void validateImport() {
 		List<EnvelopBudg> envList = getBudget().getListEnvBudg();

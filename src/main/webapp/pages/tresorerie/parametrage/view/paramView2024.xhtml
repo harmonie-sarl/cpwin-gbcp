@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>#{msgs['editer.param']}</title>
+		<style type="text/css">
+.redStyle {
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+</style>
+	</h:head>
+
+	<h:body>
+		<h:form id="paramForm">
+			<p:messages id="paramMsg" showDetail="true" autoUpdate="true"
+				styleClass="error" globalOnly="true" />
+				
+			<p:panel id="listParamPanel"  style="width:100%;"	>
+			<div align="center" style="width: 100%;">	
+			<h:panelGrid  id="param_Btn" columns="2">
+										
+						<p:commandButton value="#{msgs['login.btn.valider']}"  
+							actionListener="#{pltBeanV1.addOrUpdateParam}" >
+						</p:commandButton>
+						<p:commandButton value="#{msgs['btn.fermer']}" immediate="true"
+							actionListener="#{pltBeanV1.closeParamDialog}">
+						</p:commandButton>
+				
+				</h:panelGrid>
+					</div>
+
+				<ui:include	src="./detailsParam2024.xhtml"></ui:include>
+				
+			</p:panel>
+
+		</h:form>
+	</h:body>
+</ui:composition>
