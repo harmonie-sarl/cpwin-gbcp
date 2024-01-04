@@ -288,7 +288,10 @@ public class DematBeanV1 extends GenericBean implements Serializable{
 		ExcelHandler excel=null;
 		if(isAnnuelDef())
 		{
-			 excel = new ExcelHandler(ExcelModelEnum.DEMAT_INFOCENTRE_06,null);
+			 excel = new ExcelHandler(ExcelModelEnum.DEMAT_INFOCENTRE_06_2024,null);
+		}
+		else if(isBiPeriod()) {
+			 excel = new ExcelHandler(ExcelModelEnum.DEMAT_INFOCENTRE_BI_2024,null);
 		}
 		else {
 	         excel = new ExcelHandler(ExcelModelEnum.DEMAT_INFOCENTRE_2024,null);}

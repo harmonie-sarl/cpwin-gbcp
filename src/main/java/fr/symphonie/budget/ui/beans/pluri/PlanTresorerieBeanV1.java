@@ -714,10 +714,10 @@ public class PlanTresorerieBeanV1 extends GenericBean implements Serializable {
 		this.ajustementPeriodeList = ajustementPeriodeList;
 	}
 
-	public StreamedContent getXlsTresorerie() {
+	public StreamedContent getXlsTresorerie2024() {
 		logger.debug("getXlsTresorerie: start ");
 		StreamedContent returnStreamedContent = null;
-		ExcelHandler excel = new ExcelHandler(ExcelModelEnum.PlAN_TRESORERIE, null);
+		ExcelHandler excel = new ExcelHandler(ExcelModelEnum.PlAN_TRESORERIE_2024, null);
 		returnStreamedContent = excel.getExcelFile();
 
 		return returnStreamedContent;
