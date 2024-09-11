@@ -224,7 +224,7 @@ public class DematBeanV1 extends GenericBean implements Serializable{
 		}
 		else {
 			edition.setAbe(loadABE(edition,periodeRealise));
-			edition.setEfe(loadEfeFromPLT(edition,periodeRealise));
+			edition.setEfe(loadEfeFromPLT2024(edition,periodeRealise));
 		}
 		
 		return edition;
