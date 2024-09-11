@@ -378,7 +378,7 @@ public BigDecimal getTotaleEcart(){
 	//	mapOfLigne=new HashMap<>();
 		bpMap=new HashMap<>();
 		boolean initialMode=getTotaleBp()==0;
-		logger.debug("prepareVentil: isInitialMode={}",initialMode);
+		logger.debug("prepareVentil2024: isInitialMode={}",initialMode);
 		
 		prepare();
 		for(EncDecEnum typeOp:EncDecEnum.values()){
@@ -618,16 +618,16 @@ public BigDecimal getTotaleEcart(){
 	public double[] getMontantsRecetteFor2024(Integer periodeRealise) {
 		double[] montants=new double[10];
 		montants[Constant.R11]=getSomme(periodeRealise,3, null);
-		montants[Constant.R12]=getSomme(periodeRealise,4,null);
-		montants[Constant.R13]=getSomme(periodeRealise,5, null	);
-		montants[Constant.R14]=getSomme(periodeRealise,6, null);
-		montants[Constant.R15]=getSomme(periodeRealise,7, null);
+		montants[Constant.R12]=getSomme(periodeRealise,5,null);
+		montants[Constant.R13]=getSomme(periodeRealise,6, null	);
+		montants[Constant.R14]=getSomme(periodeRealise,7, null);
+		montants[Constant.R15]=getSomme(periodeRealise,8, null);
 		
-		montants[Constant.R22]=getSomme(periodeRealise,8, null);
-		montants[Constant.R24]=getSomme(periodeRealise,9,null);
-		montants[Constant.R25]=getSomme(periodeRealise,10, null	);
-		montants[Constant.R17]=getSomme(periodeRealise,11, null	);
-		montants[Constant.R21]=getSomme(periodeRealise,12, null	);
+		montants[Constant.R22]=getSomme(periodeRealise,10, null);
+		montants[Constant.R24]=getSomme(periodeRealise,11,null);
+		montants[Constant.R25]=getSomme(periodeRealise,12, null	);
+		montants[Constant.R17]=getSomme(periodeRealise,4, null	);
+		montants[Constant.R21]=getSomme(periodeRealise,9, null	);
 		
 		return montants;
 	}

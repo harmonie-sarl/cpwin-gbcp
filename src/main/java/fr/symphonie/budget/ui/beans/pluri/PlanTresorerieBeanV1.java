@@ -170,7 +170,6 @@ public class PlanTresorerieBeanV1 extends GenericBean implements Serializable {
 
 	private void loadCreditOuvert(PlanTresorerie<DetailLigneTresorerie> p) {
 		Map<Integer, Double> coList = service.getCoTresorerieVentille(p.getExercice(), p.getPeriode());
-		logger.debug("loadCreditOuvert: coList.size={}", coList.size());
 		Double co = null;
 		BigDecimal credit = null;
 		for (EncDecEnum typeOp : EncDecEnum.values()) {
@@ -630,11 +629,11 @@ public class PlanTresorerieBeanV1 extends GenericBean implements Serializable {
 			}
 			period = periodeList.get(position);
 			switch (getCurrentAction()) {
-			case AJUST_TRESORERIE:
+			case AJUST_TRESORERIE_2024:
 				return (period.getEtat() == EtatPeriodeEnum.Previsionnel);
-			case VENTIL_TRESORERIE:
+			case VENTIL_TRESORERIE_2024:
 				return (period.getEtat() != EtatPeriodeEnum.Cloture);
-			case INIT_TRESORERIE:case CONCIL_TRESORERIE:
+			case INIT_TRESORERIE_2024:case CONCIL_TRESORERIE_2024:
 				return true;
 			default:
 				return false;
@@ -643,7 +642,7 @@ public class PlanTresorerieBeanV1 extends GenericBean implements Serializable {
 			return false;
 		}
 	}
-
+	
 	public List<PeriodeEnum> getAjustementPeriodeList() {
 		if ((ajustementPeriodeList == null) && isCommonRequiredDone()) {
 			ajustementPeriodeList = new ArrayList<>();

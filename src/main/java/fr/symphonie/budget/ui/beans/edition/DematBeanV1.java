@@ -253,7 +253,7 @@ public class DematBeanV1 extends GenericBean implements Serializable{
 		double recette[]=edition.getPlanTresorerie().getMontantsRecetteFor2024(periodeRealise);
 		abe.getRecette().setMontantsFor2024(recette);
 		
-		abe.setDefaults();
+		abe.setDefaultsFor2024();
 		
 		return abe;
 	}
