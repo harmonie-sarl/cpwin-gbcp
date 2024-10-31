@@ -251,6 +251,7 @@ public class PlanTresorerieBean extends GenericBean implements Serializable {
 			Class<T> entityType) {
 		logger.debug("addGlobalLignes :  {}", entityType);
 		List<LigneTresorerie> globalList = service.getLigneTresorerie(p.getExercice(), GlobalEnum.Global, type);
+		logger.debug("addGlobalLignes : globalList {}", globalList);
 		T global = null;
 		try {
 			for (LigneTresorerie ligne : globalList) {

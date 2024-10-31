@@ -228,6 +228,7 @@ public class MsgEntry {
 	public static final String VENTIL_A_VERIFIER_ERR = "ventil.verifier.err";
 	public static final String BR_OUVERT_ERROR = "br.vant.ouvert.error";
 	public static final String INTERFACE_MINEFI = "menu.interface.minefi";
+	public static final String INTERFACE_MINEFI_2024 = "menu.interface.minefi.2024";
 	public static final String EDITION_REQUIRED_DATA = "gbcp.edition.requiredData.err";
 	public static final String COMPTE_FINANCIER = "menu.compte.financier";
 	public static final String PARAM_BILAN = "menu.param.bilan";
@@ -237,6 +238,8 @@ public class MsgEntry {
 	public static final String CF = "cf";
 	public static final String VALIDATION = "validation";
 	public static final String MENU_TRESORERIE = "menu.tresorerie";
+	public static final String MENU_TRESORERIE_2023 = "menu.tresorerie.2023";
+	public static final String MENU_TRESORERIE_2024 = "menu.tresorerie.2024";
 	public static final String MENU_SIMULATION = "menu.simulation";
 	public static final String MENU_AJUSTEMENT = "menu.ajustement";
 
@@ -275,6 +278,7 @@ public class MsgEntry {
 	public static final String PREVISION_REALISEE = "plan.tresorerie.initiale.error";
 	public static final String ANNUEL_REALISEE = "plan.tresorerie.annuel.error";
 	public static final String MENU_INITIALISATION = "menu.initialisation";
+	public static final String MENU_INITIALISATION_2024 = "menu.initialisation.2024";
 	public static final String DEPLOI_SUCCES = "deploiement.succes";
 	public static final String MENU_SAISI = "menu.saisi";
 	public static final String BI_CHRG_SUCCESS = "minef.bi.succes";

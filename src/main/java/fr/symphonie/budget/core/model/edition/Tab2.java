@@ -121,7 +121,8 @@ public class Tab2 extends GenericTab {
 				getDepence().getIntervention().getDataAE(),getDepence().getIntervention().getDataCP(),getDepence().getInvestissement().getDataAE(),getDepence().getInvestissement().getDataCP(),
 				getDepence().getContribution().getDataAE(),getDepence().getContribution().getDataCP(),
 				//Rec data
-				getRecette().getDataR11(),getRecette().getDataR12(),getRecette().getDataR13(),getRecette().getDataR14(),getRecette().getDataR15(),getRecette().getDataR22(),getRecette().getDataR24(),getRecette().getDataR25()
+				getRecette().getDataR11(),getRecette().getDataR12(),getRecette().getDataR13(),getRecette().getDataR14(),getRecette().getDataR15(),getRecette().getDataR22(),getRecette().getDataR24(),getRecette().getDataR25(),
+				getRecette().getDataR26(),getRecette().getDataR27(),getRecette().getDataR26()
 				
 		};
 		return Arrays.asList(tab);

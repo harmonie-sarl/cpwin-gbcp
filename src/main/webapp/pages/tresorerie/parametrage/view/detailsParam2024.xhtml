@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+	.col1 {
+	width: 15%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+
+.col2 {
+	width: 10%;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+	vertical-align: top;
+	align: left;
+	margin-left: 0;
+	text-align: left;
+}
+</style>
+	<h:panelGroup style="width:100%;" id="detailsParamPG">
+
+		
+		<h:panelGrid columns="4" cellspacing="30"  style="width:100%; vertical-align:top;"  columnClasses="col1,col2">
+			<h:outputText value="#{msgs['compte']}"  />
+			
+			<p:selectOneMenu styleClass="ReadOnlyText" style="display:block;width:200px" disabled="#{!pltBeanV1.comptAutorized}"
+				value="#{pltBeanV1.selectedParam.code}">
+				<p:ajax process="@this" global="false"></p:ajax>
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{pltBeanV1.paramCompteList}" var="compte"
+					 itemLabel="#{compte.description}"
+					itemValue="#{compte.code}">
+				</f:selectItems>
+				<p:ajax process="@this" global="false"></p:ajax>
+			</p:selectOneMenu>		
+			<h:panelGroup></h:panelGroup>
+				
+			<h:panelGrid columns="2">
+		<h:outputText style="display:block;width:80px"
+			value="#{msgs['tiers']}" />
+
+		<h:panelGroup>
+			<ui:include src="/snippets/autocomplete_tiers.xhtml"></ui:include>
+		</h:panelGroup>
+
+	</h:panelGrid>
+		
+				
+				</h:panelGrid>
+	
+	
+				<h:panelGrid columns="2" cellspacing="20" >
+			
+			<h:outputText value="#{msgs['type.ecrit']}" />
+			<p:selectOneMenu styleClass="ReadOnlyText" 
+				value="#{pltBeanV1.typEcrit}">
+				<p:ajax process="@this" global="false" update="detailsTypEcr"></p:ajax>
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{pltBeanV1.ecritures}" var="type"
+					 itemLabel="#{type}"
+					itemValue="#{type}">
+				</f:selectItems>
+			</p:selectOneMenu>			
+		</h:panelGrid>
+			</h:panelGroup>
+			<h:panelGroup style="width:100%;" id="detailsTypEcr">
+			<h:panelGrid id="encDecPanel" columns="4" cellspacing="20" columnClasses="col1,col2" rendered="#{pltBeanV1.typEcrit!=null}">
+			<h:outputText value="#{msgs['param.ltr.dep']}" />
+			<p:selectOneMenu styleClass="ReadOnlyText" style="display:block;width:200px" disabled="#{pltBeanV1.ecritAutorized}"
+				value="#{pltBeanV1.selectedParam.noLtrDep}">
+				<p:ajax process="@this" global="false"></p:ajax>
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{pltBeanV1.lignesDecais}" var="decaiss"
+					 itemLabel="#{decaiss.designation}"
+					itemValue="#{decaiss.numero}">
+				</f:selectItems>
+			</p:selectOneMenu>			
+			
+			<h:outputText value="#{msgs['param.ltr.rec']}" />
+			<p:selectOneMenu styleClass="ReadOnlyText" style="display:block;width:200px" disabled="#{!pltBeanV1.ecritAutorized}"
+				value="#{pltBeanV1.selectedParam.noLtrRec}">
+				<p:ajax process="@this" global="false"></p:ajax>
+				<f:selectItem itemValue="" itemLabel="-----" />
+				<f:selectItems value="#{pltBeanV1.lignesEncais}" var="encaiss"
+					 itemLabel="#{encaiss.designation}"
+					itemValue="#{encaiss.numero}">
+				</f:selectItems>
+			</p:selectOneMenu>		
+			</h:panelGrid>
+		</h:panelGroup>
+	
+</ui:composition>

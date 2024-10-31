@@ -453,6 +453,7 @@ public class EditionBean extends GenericBean implements Serializable  {
 				RECETTE[Constant.R22],
 				RECETTE[Constant.R24],
 				RECETTE[Constant.R25]);
+		        
 	}
 	private void loadDepences(Edition e) {
 		

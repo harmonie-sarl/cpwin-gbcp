@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-1.0.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.indication1 {
+	font-size: 10px;
+	text-align: left;
+	color: #FF0000;
+}
+</style>
+	</ui:define>
+	<ui:define name="pageTitle">#{msgs['menu.parametrage']}</ui:define>
+	<ui:define name="entetePage">
+	<ui:include src="../common/entete_param2024.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="enteteAction">
+	
+		<p:commandButton title=" " value="#{msgs['cpwin.btn.afficher']}"
+			update="globalMessage,:enteteForm,:detailsForm:paramPanel" immediate="true"
+				actionListener="#{pltBeanV1.searchParam}" rendered="#{pltBeanV1.requiredDataDone}">
+
+		</p:commandButton>
+		<ui:param name="statusRendered" value="true" />
+	</ui:define>
+
+	<ui:define name="search">
+
+
+	</ui:define>
+
+
+	<ui:define name="details">
+
+
+		<p:panel id="paramPanel" style="width:100%;">
+
+			
+			<ui:include src="./paramList2024.xhtml">
+			</ui:include>
+
+			<br/>
+			<h:panelGroup>
+			<p:commandButton title=" " value="#{msgs['btn.add']}"			
+				actionListener="#{pltBeanV1.goToAddParam}"
+			rendered="#{pltBeanV1.requiredDataDone}">
+	            	<p:ajax event="dialogReturn"
+						  update=":detailsForm:paramPanel" />
+			</p:commandButton>
+		</h:panelGroup>
+		</p:panel>
+	</ui:define>
+	
+</ui:composition>

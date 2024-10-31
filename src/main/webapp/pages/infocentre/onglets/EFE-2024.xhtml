@@ -1,0 +1,430 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+
+</style>
+	<p:panel style="width:100%;" id="EFEPanel">
+		<f:facet name="header">
+			<h:outputText value="#{msgs['tableau4']}"
+				style="font-weight: bold; text-align: center;" />
+		</f:facet>
+
+<div align="left">
+			<h:outputText value="#{editionBeanv1.nomConfig}"
+				style="font-weight: bold; text-align: left;" />
+		</div>
+		<div align="center">
+			<h:outputText value="#{msgs['equilibre.financier']} "
+				style="font-weight: bold; text-align: center;color:#008000;" />
+				
+				<h:outputText value="#{msgs['execution']}"
+				style="font-weight: bold; text-align: center;color:#008000;"
+				rendered="#{editionBeanv1.demat2024}" />	
+				
+		</div>
+
+
+
+
+
+
+
+
+
+		<p:panelGrid style="width:100%; vertical-align:top;">	
+		
+		 <p:row>
+            <p:column colspan="6" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #008000;color: #FFFFFF;">
+					<h:outputText value="#{msgs['pour.votre.org.delib']}" />
+				</p:column>
+				
+        </p:row>
+ <p:row>
+          	<p:column colspan="6" rowspan="1">
+
+				</p:column>
+				
+        </p:row>
+
+	 <p:row>
+            <p:column colspan="3" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #D3D3D3;">
+					<h:outputLabel value="#{msgs['besoins']}" />
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				 <p:column colspan="2" rowspan="1"
+					style="font-weight: bold; text-align: center;background-color: #D3D3D3;">
+					<h:outputLabel value="#{msgs['financement']}" />
+				</p:column>
+        </p:row>
+ <p:row>
+            <p:column   colspan="2" rowspan="1">
+
+				</p:column>
+				
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+
+				<p:column  colspan="2"  rowspan="1">
+
+				</p:column>
+             </p:row>
+
+ <p:row>
+            <p:column  colspan="2" rowspan="1" style="text-align: left;">
+         <h:outputLabel value="#{msgs['solde.budg.deficit']}" />   
+				</p:column>
+				<p:column  rowspan="1" style="text-align: center;">
+				 <h:outputText value="#{editionBeanv1.editionBi.efe.soldBudgDeficit.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				
+				<p:column  rowspan="1">
+
+				</p:column>
+			<p:column  rowspan="1" style="text-align: center;">
+				 <h:outputText value="#{editionBeanv1.editionBi.efe.soldBudgExcedent.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+             
+				<p:column colspan="2" rowspan="1" style="text-align: left;">
+         <h:outputLabel value="#{msgs['solde.budg.excedent']}" />   
+				</p:column>
+             </p:row>
+  <p:row>
+            <p:column   colspan="2" rowspan="1">
+
+				</p:column>
+				
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+
+				<p:column  colspan="2"  rowspan="1">
+
+				</p:column>
+             </p:row>
+
+
+ <p:row>
+            <p:column colspan="2"  rowspan="1"
+					style="font-weight: bold;text-align: left;">
+					<h:outputLabel value="#{msgs['rembours.capital']}" />
+				</p:column>
+				<p:column rowspan="1" style="text-align: Center;">
+					
+						<h:outputText id="remboursCapital-bis"  
+							value="#{editionBeanv1.editionBi.efe.b1.montant}" styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+							
+						</h:outputText>
+						
+					
+				</p:column>
+				<p:column  >
+					
+				</p:column>
+
+				<p:column  rowspan="1" style="text-align: Center;">
+                
+						<h:outputText id="nouveauCapital-bis" styleClass="montantStyle"
+							value="#{editionBeanv1.editionBi.efe.b2.montant}">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+						</h:outputText>
+						
+					
+				</p:column>
+				  <p:column colspan="2" rowspan="1"
+					style="font-weight: bold;text-align: left;">
+					<h:outputLabel value="#{msgs['nouveau.capital']}" />
+				</p:column>
+				
+             </p:row>
+
+
+			<p:row>
+            <p:column colspan="2" rowspan="1"
+					style="text-align: left;">
+					<h:outputLabel value="#{msgs['oper.compte.tiers.c1']}" />
+				</p:column>
+			<p:column  rowspan="1" style="text-align: center;">						
+						 <h:outputText value="#{editionBeanv1.editionBi.efe.compteTiersC1.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>	
+										
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1" style="text-align: center;">
+					 <h:outputText value="#{editionBeanv1.editionBi.efe.compteTiersC2.montant}"
+						styleClass="montantStyle" >
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>		
+							
+				</p:column>
+				<p:column colspan="2" rowspan="1"
+					style="text-align: left;font-weight: bold;">
+					<h:outputLabel value="#{msgs['oper.compte.tiers.c2']}" />
+				
+				</p:column>
+
+				
+             </p:row>
+
+			<p:row>
+            <p:column colspan="2" rowspan="1"
+					style="text-align: left;">
+					<h:outputLabel value="#{msgs['decaiss.compte.tiers.e1']}" />
+				</p:column>
+				<p:column  rowspan="1" style="text-align: center;">			
+						
+				 <h:outputText value="#{editionBeanv1.editionBi.efe.e1.montant}"
+						styleClass="montantStyle" >
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>				
+				</p:column>
+					
+					<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1" style="text-align: center;">				 
+						
+				 <h:outputText  value="#{editionBeanv1.editionBi.efe.e2.montant}"
+						styleClass="montantStyle" >
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>			
+						
+				</p:column>
+				
+				<p:column colspan="2" rowspan="1"
+					style="text-align: left;font-weight: bold;">
+					<h:outputLabel value="#{msgs['decaiss.compte.tiers.e2']}" />
+					
+						
+			
+				</p:column>
+
+				
+             </p:row>
+	<p:row>
+            <p:column colspan="2" rowspan="1" 
+					style="text-align: left;font-weight: bold;background-color: #D3D3D3;">
+					<h:outputLabel value="#{msgs['sous.total.operation1']}" />
+				</p:column>
+				<p:column  rowspan="1" style="text-align: center;">
+				 <h:outputText value="#{editionBeanv1.editionBi.efe.sousTotOper1.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1" style="text-align: center;">
+				 <h:outputText value="#{editionBeanv1.editionBi.efe.sousTotOper2.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="2" rowspan="1" 
+					style="text-align: left;font-weight: bold;background-color: #D3D3D3;">
+					<h:outputLabel value="#{msgs['sous.total.operation2']}" />
+						
+				
+				</p:column>
+
+				
+             </p:row>
+      <p:row>
+            <p:column colspan="2"  rowspan="1"
+					style="text-align: left;font-weight: bold;background-color: #D3D3D3;">
+					<h:outputLabel value="#{msgs['abondment.tresorie']}" />
+				</p:column>
+				<p:column  rowspan="1" style="text-align: center;">
+				 <h:outputText value="#{editionBeanv1.editionBi.efe.abondTresorie.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1" style="text-align: center;">
+				 <h:outputText value="#{editionBeanv1.editionBi.efe.prelevTresorie.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column  colspan="2" rowspan="1"
+					style="text-align: left;font-weight: bold;background-color: #D3D3D3;">
+					<h:outputLabel value="#{msgs['prelev.tresorie']}" />
+					
+						
+					
+				</p:column>
+
+				
+             </p:row>
+
+			 <p:row>
+            <p:column colspan="2" rowspan="1"
+					style="text-align: left;">
+					<h:outputLabel value="#{msgs['abondment.tresorie.flech']}" />
+				</p:column>
+				<p:column  rowspan="1" style="text-align: center;">						
+			 <h:outputText 
+			  value="#{editionBeanv1.editionBi.efe.abondTresorieFleche.montant}"
+						styleClass="montantStyle" >
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>		
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+			<p:column  rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{editionBeanv1.editionBi.efe.prelevTresorieFleche.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="2" rowspan="1"
+					style="text-align: left;">
+					<h:outputLabel value="#{msgs['prelev.tresorie.flech']}" />
+						
+			
+				</p:column>
+
+				
+             </p:row>
+ <p:row>
+            <p:column colspan="2" rowspan="1"
+					style="text-align: left;">
+					<h:outputLabel value="#{msgs['abondment.tresorie.non.flech']}" />
+				</p:column>
+					<p:column  rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{editionBeanv1.editionBi.efe.abondTresorieNonFleche.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+
+				</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+				<p:column  rowspan="1" style="text-align: center;">
+					<h:outputText
+						value="#{editionBeanv1.editionBi.efe.prelevTresorieNonFleche.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+				</p:column>
+				<p:column colspan="2" rowspan="1"
+					style="text-align: left;">
+						<h:outputLabel value="#{msgs['prelev.tresorie.non.flech']}" />
+					
+						
+				
+				</p:column>
+
+				
+             </p:row>
+ <p:row>
+            <p:column   colspan="2" rowspan="1">
+
+				</p:column>
+				
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+				<p:column  rowspan="1">
+
+				</p:column>
+
+				<p:column  colspan="2"  rowspan="1">
+
+				</p:column>
+             </p:row>
+<p:row>
+            <p:column colspan="2" rowspan="1"
+					style="text-align: left;font-weight: bold;background-color: #D3D3D3;">
+					<h:outputLabel value="#{msgs['total.besoins']}" />
+				</p:column>
+			<p:column  rowspan="1" style="text-align: center;">
+				 <h:outputText value="#{editionBeanv1.editionBi.efe.totalBesoin.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+					</p:column>
+				<p:column  rowspan="1">
+				</p:column>
+			<p:column  rowspan="1" style="text-align: center;">
+				 <h:outputText value="#{editionBeanv1.editionBi.efe.totalFinanc.montant}"
+						styleClass="montantStyle">
+						<f:convertNumber type="currency" currencySymbol=""></f:convertNumber>
+					</h:outputText>
+					</p:column>
+				<p:column colspan="2" rowspan="1"
+					style="text-align: left;font-weight: bold;background-color: #D3D3D3;">
+					<h:outputLabel value="#{msgs['tatal.financ']}" />
+					
+						
+			
+				</p:column>
+
+				
+             </p:row>
+		
+
+			
+			
+		</p:panelGrid>
+
+		<div align="left">
+			<h:outputText style="text-align: left;color: #2F4F4F;"
+			 value="#{msgs['msg1.tab4']}"
+				styleClass="indication1" />
+				</div>
+				<div align="left">
+				<h:outputText style="text-align: left;color: #2F4F4F;"
+			 value="#{msgs['msg2.tab4']}"
+				styleClass="indication1" />
+				</div>
+				<div align="left">
+				<h:outputText style="text-align: left;color: #2F4F4F;"
+			 value="#{msgs['msg3.tab4']}"
+				styleClass="indication1" />
+		</div>
+
+	</p:panel>
+
+
+
+
+
+</ui:composition>

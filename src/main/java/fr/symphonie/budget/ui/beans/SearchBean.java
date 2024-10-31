@@ -1,6 +1,8 @@
 package fr.symphonie.budget.ui.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
@@ -334,7 +336,7 @@ private String codeBudget;
 	
 	public void execrciceChangeListener()
 	{
-//		setCodeDirection(null);
+		//		setCodeDirection(null);
 //		setCodeService(null);
 		setCodeFongDest(null);
 //		setCodeDest(null);

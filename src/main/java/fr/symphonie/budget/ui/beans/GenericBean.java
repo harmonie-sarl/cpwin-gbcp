@@ -401,6 +401,38 @@ protected EFE loadEfeFromPLT(Edition edition,Integer periodeRealise) {
 	efe.setDefaults();
 	return efe;
 }
+
+protected EFE loadEfeFromPLT2024(Edition edition,Integer periodeRealise) {
+	double b1=0,b2=0,c1=0,c2=0,e1=0,e2=0;
+	
+	EFE efe=edition.getEfe();
+	ABE abe=edition.getAbe();
+//	TFP tfp=edition.getTab6().getTfp();
+	efe.getSoldBudgDeficit().setMontantDouble(abe.getSoldBudgDeficit().getMontantDouble());
+	efe.getSoldBudgExcedent().setMontantDouble(abe.getSoldBudgExcedent().getMontantDouble());
+	PlanTresorerie<DetailLigneTresorerie> plan=edition.getPlanTresorerie();
+	
+//	b1=tfp.getRembCautions().getMontantDouble()+tfp.getRembDettes().getMontantDouble();//data8 + data10
+//	b2=tfp.getCautionRecu().getMontantDouble()+ tfp.getAugDettes().getMontantDouble();//data9+data11
+	b1=plan.getSomme(periodeRealise,36, 37)+plan.getSomme(periodeRealise,38, null);
+	b2=plan.getSomme(periodeRealise,14, 15)+plan.getSomme(periodeRealise,16, null);
+	c1=plan.getSomme(periodeRealise,33, 34);
+	c2=plan.getSomme(periodeRealise,18, 19);
+	e1=plan.getSomme(periodeRealise,35, null);
+	e2=plan.getSomme(periodeRealise,20, null);
+	
+	efe.getB1().setMontantDouble(b1);efe.getB2().setMontantDouble(b2);
+	efe.getCompteTiersC1().setMontantDouble(c1);efe.getCompteTiersC2().setMontantDouble(c2);
+	efe.getE1().setMontantDouble(e1);efe.getE2().setMontantDouble(e2);
+	double m1=0,m2=0,m=0;
+	m1=plan.getSomme(periodeRealise,10, 11)+plan.getSomme(periodeRealise,12, null);
+	m2=plan.getSomme(periodeRealise,27, 28)+plan.getSomme(periodeRealise,29, 30);
+	m=m1-m2;
+	efe.getAbondTresorieFleche().setMontantDouble(m>0?m:0);
+	efe.getPrelevTresorieFleche().setMontantDouble(m<0?Math.abs(m):0);
+	efe.setDefaults();
+	return efe;
+}
 public Periode getPeriodePLT(List<Periode> periodeList,int noPeriode) {
 	Periode period = null;
 	int index = 0;

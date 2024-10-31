@@ -312,6 +312,13 @@
 		<to-view-id>/pages/infocentre/interface_minefi.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>interface_minefi_2024</from-outcome>
+		<to-view-id>/pages/infocentre/interface_minefi_2024.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
 <!--     <factory> -->
 <!--         <exception-handler-factory>org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory</exception-handler-factory> -->
 <!--     </factory> -->
@@ -374,8 +381,22 @@
 <navigation-rule>
 	<from-view-id>*</from-view-id>
 	<navigation-case>
+		<from-outcome>simul_tres_2024</from-outcome>
+		<to-view-id>/pages/tresorerie/simulation/simulation2024.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
 		<from-outcome>ajust_tres</from-outcome>
 		<to-view-id>/pages/tresorerie/ajustement/ajustement.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ajust_tres_2024</from-outcome>
+		<to-view-id>/pages/tresorerie/ajustement/ajustement2024.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
 <navigation-rule>
@@ -390,6 +411,13 @@
 	<navigation-case>
 		<from-outcome>ventil_tres</from-outcome>
 		<to-view-id>/pages/tresorerie/ventilation/ventilation.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>ventil_tres_2024</from-outcome>
+		<to-view-id>/pages/tresorerie/ventilation/ventilation2024.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
 <navigation-rule>
@@ -418,6 +446,13 @@
 	<navigation-case>
 		<from-outcome>consult_tres</from-outcome>
 		<to-view-id>/pages/tresorerie/consultation/consultation.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>consult_tres_2024</from-outcome>
+		<to-view-id>/pages/tresorerie/consultation/consultation2024.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
 <navigation-rule>
@@ -493,6 +528,13 @@
 <navigation-rule>
 	<from-view-id>*</from-view-id>
 	<navigation-case>
+		<from-outcome>init_tres_2024</from-outcome>
+		<to-view-id>/pages/tresorerie/initialisation/initialisation2024.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
 		<from-outcome>gts_import</from-outcome>
 		<to-view-id>/pages/tools/gts/import/import.xhtml</to-view-id>
 	</navigation-case>
@@ -534,9 +576,23 @@
 </navigation-rule>
 <navigation-rule>
 	<from-view-id>*</from-view-id>
+		<navigation-case>
+		<from-outcome>param_tres_2024</from-outcome>
+		<to-view-id>/pages/tresorerie/parametrage/parametrage2024.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
 	<navigation-case>
 		<from-outcome>paramView</from-outcome>
 		<to-view-id>/pages/tresorerie/parametrage/view/paramView.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>paramView2024</from-outcome>
+		<to-view-id>/pages/tresorerie/parametrage/view/paramView2024.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
 <navigation-rule>
@@ -586,6 +642,13 @@
 	<navigation-case>
 		<from-outcome>concil_tres</from-outcome>
 		<to-view-id>/pages/tresorerie/conciliation/conciliation.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-outcome>concil_tres_2024</from-outcome>
+		<to-view-id>/pages/tresorerie/conciliation/conciliation2024.xhtml</to-view-id>
 	</navigation-case>
 </navigation-rule>
 <navigation-rule>

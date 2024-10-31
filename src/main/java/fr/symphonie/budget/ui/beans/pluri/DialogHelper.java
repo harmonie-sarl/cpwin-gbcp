@@ -108,6 +108,11 @@ public class DialogHelper {
 		Map<String, Object> options=initOptions(true, true, false, 450, 900);
 		openDialog(sourceName, options);
 	}
+	public static void openParamView2024(){
+		String sourceName="paramView2024";
+		Map<String, Object> options=initOptions(true, true, false, 450, 900);
+		openDialog(sourceName, options);
+	}
 	
 	
 	public static void openArticleDialog(){

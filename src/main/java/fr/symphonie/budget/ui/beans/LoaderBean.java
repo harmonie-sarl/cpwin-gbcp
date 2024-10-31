@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -64,8 +65,10 @@ public class LoaderBean implements Serializable{
 	private List<SimpleEntity> listGetionnaires=null;
 	private List<String> listNoLtr=new ArrayList<String>(Arrays.asList("3","4","5","6","7","8","9","10"));
 	private List<SimpleEntity> compteProduitList;
+	private List<String> exerciceMin2024List=null;
+	private List<String> exerciceMax2023List=null;
 	final static int ALL = 0,ALL_AEXERCICE=1, ALL_PROGRAMME=2 , ALL_ENVELOPPE=3,ALL_SERVICE=4, ALL_EXERCICE_AE=5, ALL_BUDGET=6, GROUP_DEST=7, ALL_EXERCICE_CP=8, BUDG_CP=9,ENV_BUDG_VENT_ORIGIN=10,
-			EXEC_SUIVI_CP=11, BUDG_SUIVI_CP=12, DIRECTION_SUIVI_CP=13,SERVICE_SUIVI_CP=14,FONG_DEST_SUIVI_CO=15,DESTINATION_SUIVI_CP=16,PROGRAMME_SUIVI_CP=17, NATURE_GRP_SUIVI_CP=18,NATURE_SUIVI_CP=19,NAt_GRP=20,GEST_LIST=21;
+			EXEC_SUIVI_CP=11, BUDG_SUIVI_CP=12, DIRECTION_SUIVI_CP=13,SERVICE_SUIVI_CP=14,FONG_DEST_SUIVI_CO=15,DESTINATION_SUIVI_CP=16,PROGRAMME_SUIVI_CP=17, NATURE_GRP_SUIVI_CP=18,NATURE_SUIVI_CP=19,NAt_GRP=20,GEST_LIST=21,EXERCICE_INFOCENTRE_2023=22,EXERCICE_INFOCENTRE_2024=23;
 
 
 	public void setBudgetPluriService(IBudgetPluriannuelService budgetPluriService) {
@@ -184,6 +187,15 @@ public class LoaderBean implements Serializable{
 			break;
 		case ALL_EXERCICE_AE:
 			setExercicAeList(budgetPluriService.getAllExercieAe());
+			break;
+			
+		case EXERCICE_INFOCENTRE_2023:
+			
+			setExerciceMax2023List((budgetPluriService.getAllExercieAe()).stream() .filter(x->Integer.valueOf(x)<2024).collect(Collectors.toList()));
+			
+			break;
+		case EXERCICE_INFOCENTRE_2024:
+			setExerciceMin2024List((budgetPluriService.getAllExercieAe()).stream() .filter(x->Integer.valueOf(x)>=2024).collect(Collectors.toList()));
 			break;
 		case ALL_EXERCICE_CP:
 			setExercicCpList(budgetPluriService.getAllExercieCp());
@@ -548,6 +560,30 @@ public class LoaderBean implements Serializable{
 
 	public void setWithClosedExercises(List<String> withClosedExercises) {
 		this.withClosedExercises = withClosedExercises;
+	}
+
+
+	public List<String> getExerciceMin2024List() {
+		if(exerciceMin2024List==null)
+			loaderFactory(EXERCICE_INFOCENTRE_2024);
+		return exerciceMin2024List;
+	}
+
+
+	public void setExerciceMin2024List(List<String> exerciceMin2024List) {
+		this.exerciceMin2024List = exerciceMin2024List;
+	}
+
+
+	public List<String> getExerciceMax2023List() {
+		if(exerciceMax2023List==null)
+			loaderFactory(EXERCICE_INFOCENTRE_2023);
+		return exerciceMax2023List;
+	}
+
+
+	public void setExerciceMax2023List(List<String> exerciceMax2023List) {
+		this.exerciceMax2023List = exerciceMax2023List;
 	}
 	
 }

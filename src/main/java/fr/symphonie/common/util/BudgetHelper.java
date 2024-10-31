@@ -84,9 +84,12 @@ import fr.symphonie.budget.ui.beans.NavigationBean;
 import fr.symphonie.budget.ui.beans.SearchBean;
 import fr.symphonie.budget.ui.beans.edition.CompteFinancierBean;
 import fr.symphonie.budget.ui.beans.edition.DematBean;
+import fr.symphonie.budget.ui.beans.edition.DematBeanV1;
 import fr.symphonie.budget.ui.beans.edition.EditionBean;
+import fr.symphonie.budget.ui.beans.edition.EditionBeanV1;
 import fr.symphonie.budget.ui.beans.pluri.BudgetPluriannuelBean;
 import fr.symphonie.budget.ui.beans.pluri.PlanTresorerieBean;
+import fr.symphonie.budget.ui.beans.pluri.PlanTresorerieBeanV1;
 import fr.symphonie.common.InitializationBean;
 import fr.symphonie.common.core.ICommonService;
 import fr.symphonie.cpwin.core.demat.IDematService;
@@ -148,6 +151,10 @@ public class BudgetHelper {
 		String beanName = "pltBean";
 		return (PlanTresorerieBean) Helper.findBean(beanName);
 	}
+	public static PlanTresorerieBeanV1 getPlanTresorerieBeanV1() {
+		String beanName = "pltBeanV1";
+		return (PlanTresorerieBeanV1) Helper.findBean(beanName);
+	}
 
 	public static IPlanTresorerieService getPlanTresorerieService() {
 		String beanName = "pltService";
@@ -208,6 +215,10 @@ public class BudgetHelper {
 		String beanName = "editionBean";
 		return (EditionBean) Helper.findBean(beanName);
 	}
+	public static EditionBeanV1 getEditionBeanV1() {
+		String beanName = "editionBeanv1";
+		return (EditionBeanV1) Helper.findBean(beanName);
+	}
 
 	public static CompteFinancierBean getCompteFinancierBean() {
 		String beanName = "cfBean";
@@ -217,6 +228,10 @@ public class BudgetHelper {
 	public static DematBean getDematBean() {
 		String beanName = "dematBean";
 		return (DematBean) Helper.findBean(beanName);
+	}
+	public static DematBeanV1 getDematBeanV1() {
+		String beanName = "dematBeanv1";
+		return (DematBeanV1) Helper.findBean(beanName);
 	}
 	public static InitializationBean getInitializationBean() {
 		String beanName = "initBean";
